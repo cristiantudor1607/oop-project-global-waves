@@ -1,10 +1,10 @@
 package globalwaves.commands.search.utils;
 
 
+import globalwaves.commands.enums.FilterType;
 import globalwaves.commands.search.utils.filters.Filter;
 import globalwaves.commands.search.utils.filters.NameFilter;
 import globalwaves.commands.search.utils.filters.OwnerFilter;
-import globalwaves.commands.enums.FilterType;
 import globalwaves.player.entities.Podcast;
 import globalwaves.player.entities.library.Library;
 

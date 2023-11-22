@@ -189,8 +189,8 @@
   "user" : "alice22",
   "timestamp" : 1035,
   "stats" : {
-    "name" : "My favourite songs",
-    "remainedTime" : 0,
+    "name" : "99 Problems",
+    "remainedTime" : 227,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -200,8 +200,8 @@
   "user" : "alice22",
   "timestamp" : 1037,
   "stats" : {
-    "name" : "My favourite songs",
-    "remainedTime" : 0,
+    "name" : "99 Problems",
+    "remainedTime" : 224,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -211,8 +211,8 @@
   "user" : "alice22",
   "timestamp" : 2099,
   "stats" : {
-    "name" : "My favourite songs",
-    "remainedTime" : 0,
+    "name" : "Hustle Hard",
+    "remainedTime" : -606,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -222,8 +222,8 @@
   "user" : "alice22",
   "timestamp" : 2101,
   "stats" : {
-    "name" : "My favourite songs",
-    "remainedTime" : 0,
+    "name" : "Moves Like Jagger",
+    "remainedTime" : -218,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -233,8 +233,8 @@
   "user" : "alice22",
   "timestamp" : 2334,
   "stats" : {
-    "name" : "My favourite songs",
-    "remainedTime" : 0,
+    "name" : "Dream Chaser",
+    "remainedTime" : -246,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -244,21 +244,21 @@
   "user" : "alice22",
   "timestamp" : 2336,
   "stats" : {
-    "name" : "My favourite songs",
+    "name" : "",
     "remainedTime" : 0,
     "repeat" : "No Repeat",
     "shuffle" : false,
-    "paused" : false
+    "paused" : true
   }
 }, {
   "command" : "status",
   "user" : "alice22",
   "timestamp" : 3600,
   "stats" : {
-    "name" : "My favourite songs",
+    "name" : "",
     "remainedTime" : 0,
     "repeat" : "No Repeat",
     "shuffle" : false,
-    "paused" : false
+    "paused" : true
   }
 } ]

@@ -2,13 +2,13 @@ package globalwaves.player.entities.library;
 
 import globalwaves.commands.*;
 import globalwaves.commands.enums.*;
-import globalwaves.commands.search.utils.EngineResultsParser;
 import globalwaves.parser.commands.CommandObject;
 import globalwaves.player.entities.*;
 import globalwaves.player.entities.properties.PlayableEntity;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,9 +39,9 @@ public class ActionManager {
     }
 
     public void requestSearchResult(SearchInterrogator executingSearch) {
-        // Reset the player
+        // First stop the player
         Player userPlayer = requestPlayer(executingSearch);
-        userPlayer.resetPlayer();
+        userPlayer.stopPlayer();
 
         searchBar.setResults(executingSearch.getSearchResults());
         searchBar.setUsername(executingSearch.getUsername());
@@ -58,16 +58,8 @@ public class ActionManager {
 
         PlayableEntity entity = searchBar.getResultAtIndex(itemNumber - 1);
         Player userPlayer = players.get(executingSelect.getUsername());
-        /*
-        Set the player state
-         */
-        userPlayer.setSelectedAudio(entity);
-        userPlayer.setState(Player.PlayerStatus.SELECTED);
-        /*
-        Send the entity to the command, so it can generate the output
-         */
+        userPlayer.select(entity);
         executingSelect.setSelectedAudio(entity);
-
         // Reset the Search Bar after selection
         searchBar.reset();
 
@@ -83,11 +75,7 @@ public class ActionManager {
         if (userPlayer.hasEmptySource())
             return LoadExit.code.EMPTY_SOURCE;
 
-        // O sa mai adaug ceva aici cu siguranta
-        userPlayer.setState(Player.PlayerStatus.PLAYING);
-        userPlayer.setRepeat(Player.RepeatValue.NO_REPEAT);
-        userPlayer.setShuffle(false);
-        userPlayer.setRemainedTime(userPlayer.getSelectedAudio().getDuration());
+        userPlayer.load();
 
         return LoadExit.code.LOADED;
     }
@@ -99,11 +87,11 @@ public class ActionManager {
             return PlayPauseExit.code.NO_SOURCE;
 
         if (userPlayer.isPlaying()) {
-            userPlayer.setState(Player.PlayerStatus.PAUSED);
+            userPlayer.pause();
             return PlayPauseExit.code.PAUSED;
         }
 
-        userPlayer.setState(Player.PlayerStatus.PLAYING);
+        userPlayer.play();
 
         return PlayPauseExit.code.RESUMED;
     }
@@ -145,18 +133,18 @@ public class ActionManager {
         if (!ownerPlayer.hasSourceLoaded())
             return  AddRemoveExit.code.NO_SOURCE;
 
-        if (!ownerPlayer.getSelectedAudio().isSong())
+        if (!ownerPlayer.getLoadedFile().canBeLiked())
             return AddRemoveExit.code.NOT_A_SONG;
 
         if (ownerPlaylist == null)
             return AddRemoveExit.code.INVALID_PLAYLIST;
 
-        PlayableEntity selectedSource = ownerPlayer.getSelectedAudio();
-        if (ownerPlaylist.hasSong((Song) selectedSource)) {
-            ownerPlaylist.removeSong((Song) selectedSource);
+        AudioFile selectedSource = ownerPlayer.getLoadedFile();
+        if (ownerPlaylist.hasSong(selectedSource)) {
+            ownerPlaylist.removeSong(selectedSource);
             return AddRemoveExit.code.REMOVED;
         } else {
-            ownerPlaylist.addSong((Song) selectedSource);
+            ownerPlaylist.addSong(selectedSource);
             return AddRemoveExit.code.ADDED;
         }
     }
@@ -175,16 +163,16 @@ public class ActionManager {
         if (!queriedUserPlayer.hasSourceLoaded())
             return LikeExit.code.NO_SOURCE;
 
-        PlayableEntity queriedSong = queriedUserPlayer.getSelectedAudio();
+        AudioFile queriedSong = queriedUserPlayer.getLoadedFile();
 
-        if (!queriedSong.isSong())
+        if (!queriedSong.canBeLiked())
             return LikeExit.code.NOT_A_SONG;
 
-        if (queriedUser.hasLikedSong((Song) queriedSong)) {
-            queriedUser.removeSongFromLikes((Song) queriedSong);
+        if (queriedUser.hasLikedSong(queriedSong)) {
+            queriedUser.removeSongFromLikes(queriedSong);
             return LikeExit.code.UNLIKED;
         } else {
-            queriedUser.addSongToLikes((Song) queriedSong);
+            queriedUser.addSongToLikes(queriedSong);
             return LikeExit.code.LIKED;
         }
     }
@@ -192,9 +180,15 @@ public class ActionManager {
     public List<String> requestLikedSongs(ShowLikesInterrogator execQuery) {
         String username = execQuery.getUsername();
 
-        List<Song> likedSongs = interrogator.getUserLikedSongs(username);
+        List<AudioFile> likedSongs = interrogator.getUserLikedSongs(username);
 
-        return EngineResultsParser.getNamesFromList(likedSongs);
+        List<String> names = new ArrayList<>();
+
+        for (AudioFile song : likedSongs) {
+            names.add(song.getName());
+        }
+
+        return names;
     }
 
     public void updatePlayersData(CommandObject nextToExecuteCommand) {

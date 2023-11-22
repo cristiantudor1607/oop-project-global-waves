@@ -1,7 +1,6 @@
 package globalwaves.commands;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
 import globalwaves.parser.commands.CommandObject;
 import globalwaves.parser.commands.CommandOutputFormatter;

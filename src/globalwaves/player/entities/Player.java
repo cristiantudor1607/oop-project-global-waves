@@ -23,19 +23,19 @@ public class Player {
         REPEAT_ALL,
         REPEAT_CURR,
     }
-    private Map<Podcast, Integer> podcastHistory;
-    // TODO : selectedAudio cu selectedFile trebuie inversate ca nume + schimba numele
-    // in selectedEntity
-    private PlayableEntity selectedAudio;
-    private AudioFile selectedFile;
+
+    private Map<PlayableEntity, HistoryEntry> history;
+    private PlayableEntity selectedEntity;
+    private AudioFile loadedFile;
     private PlayerStatus state;
     private RepeatValue repeat;
     private boolean shuffle;
     private int remainedTime;
 
     public Player() {
-        podcastHistory = new HashMap<>();
-        selectedAudio = null;
+        history = new HashMap<>();
+        selectedEntity = null;
+        loadedFile = null;
         state = PlayerStatus.NOT_IN_USE;
         repeat = RepeatValue.NO_REPEAT;
         shuffle = false;
@@ -43,34 +43,95 @@ public class Player {
     }
 
     public void resetPlayer() {
-        selectedAudio = null;
+        selectedEntity = null;
+        loadedFile = null;
         state = PlayerStatus.NOT_IN_USE;
         repeat = RepeatValue.NO_REPEAT;
         shuffle = false;
         remainedTime = 0;
     }
 
+    public void select(PlayableEntity selectedEntity) {
+        this.selectedEntity = selectedEntity;
+        state = PlayerStatus.SELECTED;
+    }
+
+    public void play() {
+        state = PlayerStatus.PLAYING;
+    }
+
+    public void pause() {
+        state = PlayerStatus.PAUSED;
+    }
+
+    public void stopPlayer() {
+        if (selectedEntity == null)
+            return;
+
+        if (selectedEntity.needsHistoryTrack()) {
+            history.put(selectedEntity, new HistoryEntry(loadedFile, remainedTime));
+        }
+
+        resetPlayer();
+    }
 
     public void updatePlayer(final int timeDifference) {
         if (state == PlayerStatus.PAUSED || state == PlayerStatus.NOT_IN_USE ||
-            state == PlayerStatus.SELECTED || remainedTime == 0)
+            state == PlayerStatus.SELECTED)
             return;
 
         remainedTime -= timeDifference;
+        if (remainedTime <= 0 && selectedEntity.hasNextForPlaying(loadedFile)) {
+            loadedFile = selectedEntity.getNextForPlaying(loadedFile);
+            remainedTime += loadedFile.getDuration();
+            return;
+        }
+
         if (remainedTime <= 0) {
+            removeFromHistory();
             resetPlayer();
         }
     }
 
-    public void selectPlayableEntity(PlayableEntity newLoad) {
-        selectedAudio = newLoad;
-        state = PlayerStatus.SELECTED;
+    public void removeFromHistory() {
+        if (hasHistoryEntry())
+            history.remove(selectedEntity);
+    }
+
+    public boolean hasHistoryEntry() {
+        return history.containsKey(selectedEntity);
+    }
+
+    public void setDefaultLoadOptions() {
+        state = PlayerStatus.PLAYING;
         repeat = RepeatValue.NO_REPEAT;
         shuffle = false;
     }
 
+    private void loadFromHistory() {
+        loadedFile = history.get(selectedEntity).getFile();
+        remainedTime = history.get(selectedEntity).getRemainedTime();
+        setDefaultLoadOptions();
+    }
+
+    public void load() {
+        if (hasHistoryEntry()) {
+            loadFromHistory();
+            return;
+        }
+
+        AudioFile newAudiofile = selectedEntity.getPlayableFile();
+        int duration = newAudiofile.getDuration();
+        if (selectedEntity.needsHistoryTrack())
+            history.put(selectedEntity, new HistoryEntry(newAudiofile, duration));
+
+        loadedFile = newAudiofile;
+        remainedTime = duration;
+        setDefaultLoadOptions();
+    }
+
     public boolean hasEmptySource() {
-        return selectedAudio.isEmptyPlayableFile();
+        return selectedEntity.isEmptyPlayableFile();
     }
 
     public boolean hasSourceSelected() {
@@ -86,10 +147,10 @@ public class Player {
     }
 
     public void printPlayer() {
-        if (selectedAudio == null)
+        if (selectedEntity == null)
             System.out.println("No AudioFile");
         else
-            System.out.println(selectedAudio.getName());
+            System.out.println(selectedEntity.getName());
 
         System.out.println(state);
         System.out.println(repeat);

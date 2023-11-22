@@ -4637,14 +4637,14 @@
   "command" : "like",
   "user" : "alice22",
   "timestamp" : 5500,
-  "message" : "Loaded source is not a song."
+  "message" : "Like registered successfully."
 }, {
   "command" : "status",
   "user" : "alice22",
   "timestamp" : 5500,
   "stats" : {
-    "name" : "Groovy Beats Quest #1",
-    "remainedTime" : 0,
+    "name" : "Black Dog",
+    "remainedTime" : 196,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -4659,8 +4659,8 @@
   "user" : "bob35",
   "timestamp" : 5510,
   "stats" : {
-    "name" : "Dynamic Tracks Trek #2",
-    "remainedTime" : 0,
+    "name" : "Bohemian Rhapsody",
+    "remainedTime" : 257,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -4670,8 +4670,8 @@
   "user" : "carol19",
   "timestamp" : 5520,
   "stats" : {
-    "name" : "Electric Vibes Journey #1",
-    "remainedTime" : 0,
+    "name" : "Shape of You",
+    "remainedTime" : 125,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -4686,8 +4686,8 @@
   "user" : "david27",
   "timestamp" : 5530,
   "stats" : {
-    "name" : "Electric Grooves Dream #1",
-    "remainedTime" : 0,
+    "name" : "Dream On",
+    "remainedTime" : 159,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -4702,8 +4702,8 @@
   "user" : "emily30",
   "timestamp" : 5540,
   "stats" : {
-    "name" : "Electric Bangers Dream #1",
-    "remainedTime" : 0,
+    "name" : "Don't",
+    "remainedTime" : 111,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -4718,8 +4718,8 @@
   "user" : "frank21",
   "timestamp" : 5550,
   "stats" : {
-    "name" : "Breezy Bangers Quest #2",
-    "remainedTime" : 0,
+    "name" : "Castle on the Hill",
+    "remainedTime" : 153,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -4734,8 +4734,8 @@
   "user" : "grace25",
   "timestamp" : 5560,
   "stats" : {
-    "name" : "Classic Tunes Dream #1",
-    "remainedTime" : 0,
+    "name" : "Bohemian Rhapsody",
+    "remainedTime" : 247,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -4750,8 +4750,8 @@
   "user" : "henry26",
   "timestamp" : 5570,
   "stats" : {
-    "name" : "Vibey Tracks Safari #1",
-    "remainedTime" : 0,
+    "name" : "Whatever You Need",
+    "remainedTime" : 102,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -4761,8 +4761,8 @@
   "user" : "irene33",
   "timestamp" : 5580,
   "stats" : {
-    "name" : "Epic Tracks Safari #1",
-    "remainedTime" : 0,
+    "name" : "Blank Space",
+    "remainedTime" : 113,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -4772,8 +4772,8 @@
   "user" : "jack29",
   "timestamp" : 5590,
   "stats" : {
-    "name" : "Mellow Tracks Safari #2",
-    "remainedTime" : 0,
+    "name" : "Gimme Shelter",
+    "remainedTime" : 153,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -4783,8 +4783,8 @@
   "user" : "jack29",
   "timestamp" : 5590,
   "stats" : {
-    "name" : "Mellow Tracks Safari #2",
-    "remainedTime" : 0,
+    "name" : "Gimme Shelter",
+    "remainedTime" : 153,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -4794,8 +4794,8 @@
   "user" : "alice22",
   "timestamp" : 5600,
   "stats" : {
-    "name" : "Groovy Beats Quest #1",
-    "remainedTime" : 0,
+    "name" : "Black Dog",
+    "remainedTime" : 66,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -4805,8 +4805,8 @@
   "user" : "bob35",
   "timestamp" : 5610,
   "stats" : {
-    "name" : "Dynamic Tracks Trek #2",
-    "remainedTime" : 0,
+    "name" : "Bohemian Rhapsody",
+    "remainedTime" : 117,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -4821,8 +4821,8 @@
   "user" : "carol19",
   "timestamp" : 5620,
   "stats" : {
-    "name" : "Electric Vibes Journey #1",
-    "remainedTime" : 0,
+    "name" : "Maps",
+    "remainedTime" : 185,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -4832,8 +4832,8 @@
   "user" : "carol19",
   "timestamp" : 5620,
   "stats" : {
-    "name" : "Electric Vibes Journey #1",
-    "remainedTime" : 0,
+    "name" : "Maps",
+    "remainedTime" : 185,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -4848,8 +4848,8 @@
   "user" : "david27",
   "timestamp" : 5630,
   "stats" : {
-    "name" : "Electric Grooves Dream #1",
-    "remainedTime" : 0,
+    "name" : "Dream On",
+    "remainedTime" : 159,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -4859,8 +4859,8 @@
   "user" : "emily30",
   "timestamp" : 5640,
   "stats" : {
-    "name" : "Electric Bangers Dream #1",
-    "remainedTime" : 0,
+    "name" : "Love Story",
+    "remainedTime" : 197,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -4870,8 +4870,8 @@
   "user" : "frank21",
   "timestamp" : 5650,
   "stats" : {
-    "name" : "Breezy Bangers Quest #2",
-    "remainedTime" : 0,
+    "name" : "Castle on the Hill",
+    "remainedTime" : 153,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -4881,8 +4881,8 @@
   "user" : "grace25",
   "timestamp" : 5660,
   "stats" : {
-    "name" : "Classic Tunes Dream #1",
-    "remainedTime" : 0,
+    "name" : "Bohemian Rhapsody",
+    "remainedTime" : 247,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -4892,8 +4892,8 @@
   "user" : "henry26",
   "timestamp" : 5670,
   "stats" : {
-    "name" : "Vibey Tracks Safari #1",
-    "remainedTime" : 0,
+    "name" : "Whatever You Need",
+    "remainedTime" : 102,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -4908,8 +4908,8 @@
   "user" : "irene33",
   "timestamp" : 5680,
   "stats" : {
-    "name" : "Epic Tracks Safari #1",
-    "remainedTime" : 0,
+    "name" : "Dream On",
+    "remainedTime" : 210,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -4919,8 +4919,8 @@
   "user" : "jack29",
   "timestamp" : 5690,
   "stats" : {
-    "name" : "Mellow Tracks Safari #2",
-    "remainedTime" : 0,
+    "name" : "The Man",
+    "remainedTime" : 173,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -4930,8 +4930,8 @@
   "user" : "jack29",
   "timestamp" : 5690,
   "stats" : {
-    "name" : "Mellow Tracks Safari #2",
-    "remainedTime" : 0,
+    "name" : "The Man",
+    "remainedTime" : 173,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -4940,14 +4940,14 @@
   "command" : "like",
   "user" : "alice22",
   "timestamp" : 5700,
-  "message" : "Loaded source is not a song."
+  "message" : "Like registered successfully."
 }, {
   "command" : "status",
   "user" : "alice22",
   "timestamp" : 5700,
   "stats" : {
-    "name" : "Groovy Beats Quest #1",
-    "remainedTime" : 0,
+    "name" : "Sad But True",
+    "remainedTime" : 230,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -4957,8 +4957,8 @@
   "user" : "bob35",
   "timestamp" : 5710,
   "stats" : {
-    "name" : "Dynamic Tracks Trek #2",
-    "remainedTime" : 0,
+    "name" : "The Unforgiven",
+    "remainedTime" : 343,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -4968,8 +4968,8 @@
   "user" : "carol19",
   "timestamp" : 5720,
   "stats" : {
-    "name" : "Electric Vibes Journey #1",
-    "remainedTime" : 0,
+    "name" : "Maps",
+    "remainedTime" : 15,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -4979,8 +4979,8 @@
   "user" : "david27",
   "timestamp" : 5730,
   "stats" : {
-    "name" : "Electric Grooves Dream #1",
-    "remainedTime" : 0,
+    "name" : "The Man",
+    "remainedTime" : 169,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -4995,8 +4995,8 @@
   "user" : "emily30",
   "timestamp" : 5740,
   "stats" : {
-    "name" : "Electric Bangers Dream #1",
-    "remainedTime" : 0,
+    "name" : "Love Story",
+    "remainedTime" : 37,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5006,8 +5006,8 @@
   "user" : "frank21",
   "timestamp" : 5750,
   "stats" : {
-    "name" : "Breezy Bangers Quest #2",
-    "remainedTime" : 0,
+    "name" : "Castle on the Hill",
+    "remainedTime" : 153,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5017,8 +5017,8 @@
   "user" : "frank21",
   "timestamp" : 5750,
   "stats" : {
-    "name" : "Breezy Bangers Quest #2",
-    "remainedTime" : 0,
+    "name" : "Castle on the Hill",
+    "remainedTime" : 153,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5028,8 +5028,8 @@
   "user" : "grace25",
   "timestamp" : 5760,
   "stats" : {
-    "name" : "Classic Tunes Dream #1",
-    "remainedTime" : 0,
+    "name" : "Bohemian Rhapsody",
+    "remainedTime" : 247,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5039,8 +5039,8 @@
   "user" : "henry26",
   "timestamp" : 5770,
   "stats" : {
-    "name" : "Vibey Tracks Safari #1",
-    "remainedTime" : 0,
+    "name" : "Whatever You Need",
+    "remainedTime" : 102,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5055,8 +5055,8 @@
   "user" : "irene33",
   "timestamp" : 5780,
   "stats" : {
-    "name" : "Epic Tracks Safari #1",
-    "remainedTime" : 0,
+    "name" : "Dream On",
+    "remainedTime" : 210,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5065,14 +5065,14 @@
   "command" : "like",
   "user" : "jack29",
   "timestamp" : 5790,
-  "message" : "Loaded source is not a song."
+  "message" : "Like registered successfully."
 }, {
   "command" : "status",
   "user" : "jack29",
   "timestamp" : 5790,
   "stats" : {
-    "name" : "Mellow Tracks Safari #2",
-    "remainedTime" : 0,
+    "name" : "The Man",
+    "remainedTime" : 13,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -5092,8 +5092,8 @@
   "user" : "alice22",
   "timestamp" : 5800,
   "stats" : {
-    "name" : "Groovy Beats Quest #1",
-    "remainedTime" : 0,
+    "name" : "Sad But True",
+    "remainedTime" : 70,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5103,8 +5103,8 @@
   "user" : "bob35",
   "timestamp" : 5810,
   "stats" : {
-    "name" : "Dynamic Tracks Trek #2",
-    "remainedTime" : 0,
+    "name" : "The Unforgiven",
+    "remainedTime" : 183,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -5119,8 +5119,8 @@
   "user" : "carol19",
   "timestamp" : 5820,
   "stats" : {
-    "name" : "Electric Vibes Journey #1",
-    "remainedTime" : 0,
+    "name" : "Gimme Shelter",
+    "remainedTime" : 136,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5130,8 +5130,8 @@
   "user" : "david27",
   "timestamp" : 5830,
   "stats" : {
-    "name" : "Electric Grooves Dream #1",
-    "remainedTime" : 0,
+    "name" : "The Man",
+    "remainedTime" : 19,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -5145,14 +5145,14 @@
   "command" : "like",
   "user" : "emily30",
   "timestamp" : 5840,
-  "message" : "Loaded source is not a song."
+  "message" : "Like registered successfully."
 }, {
   "command" : "status",
   "user" : "emily30",
   "timestamp" : 5840,
   "stats" : {
-    "name" : "Electric Bangers Dream #1",
-    "remainedTime" : 0,
+    "name" : "Love Story",
+    "remainedTime" : 37,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5162,8 +5162,8 @@
   "user" : "frank21",
   "timestamp" : 5850,
   "stats" : {
-    "name" : "Breezy Bangers Quest #2",
-    "remainedTime" : 0,
+    "name" : "Castle on the Hill",
+    "remainedTime" : 153,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5173,8 +5173,8 @@
   "user" : "frank21",
   "timestamp" : 5850,
   "stats" : {
-    "name" : "Breezy Bangers Quest #2",
-    "remainedTime" : 0,
+    "name" : "Castle on the Hill",
+    "remainedTime" : 153,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5184,8 +5184,8 @@
   "user" : "grace25",
   "timestamp" : 5860,
   "stats" : {
-    "name" : "Classic Tunes Dream #1",
-    "remainedTime" : 0,
+    "name" : "Bohemian Rhapsody",
+    "remainedTime" : 247,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5195,8 +5195,8 @@
   "user" : "grace25",
   "timestamp" : 5860,
   "stats" : {
-    "name" : "Classic Tunes Dream #1",
-    "remainedTime" : 0,
+    "name" : "Bohemian Rhapsody",
+    "remainedTime" : 247,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5206,8 +5206,8 @@
   "user" : "henry26",
   "timestamp" : 5870,
   "stats" : {
-    "name" : "Vibey Tracks Safari #1",
-    "remainedTime" : 0,
+    "name" : "Whatever You Need",
+    "remainedTime" : 102,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5217,8 +5217,8 @@
   "user" : "henry26",
   "timestamp" : 5870,
   "stats" : {
-    "name" : "Vibey Tracks Safari #1",
-    "remainedTime" : 0,
+    "name" : "Whatever You Need",
+    "remainedTime" : 102,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5228,8 +5228,8 @@
   "user" : "irene33",
   "timestamp" : 5880,
   "stats" : {
-    "name" : "Epic Tracks Safari #1",
-    "remainedTime" : 0,
+    "name" : "Dream On",
+    "remainedTime" : 210,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5244,8 +5244,8 @@
   "user" : "jack29",
   "timestamp" : 5890,
   "stats" : {
-    "name" : "Mellow Tracks Safari #2",
-    "remainedTime" : 0,
+    "name" : "Blank Space",
+    "remainedTime" : 114,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -5265,8 +5265,8 @@
   "user" : "alice22",
   "timestamp" : 5900,
   "stats" : {
-    "name" : "Groovy Beats Quest #1",
-    "remainedTime" : 0,
+    "name" : "Sad But True",
+    "remainedTime" : 70,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -5275,14 +5275,14 @@
   "command" : "like",
   "user" : "bob35",
   "timestamp" : 5910,
-  "message" : "Loaded source is not a song."
+  "message" : "Like registered successfully."
 }, {
   "command" : "status",
   "user" : "bob35",
   "timestamp" : 5910,
   "stats" : {
-    "name" : "Dynamic Tracks Trek #2",
-    "remainedTime" : 0,
+    "name" : "The Unforgiven",
+    "remainedTime" : 63,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -5296,14 +5296,14 @@
   "command" : "like",
   "user" : "carol19",
   "timestamp" : 5920,
-  "message" : "Loaded source is not a song."
+  "message" : "Like registered successfully."
 }, {
   "command" : "status",
   "user" : "carol19",
   "timestamp" : 5920,
   "stats" : {
-    "name" : "Electric Vibes Journey #1",
-    "remainedTime" : 0,
+    "name" : "Gimme Shelter",
+    "remainedTime" : 136,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5313,8 +5313,8 @@
   "user" : "david27",
   "timestamp" : 5930,
   "stats" : {
-    "name" : "Electric Grooves Dream #1",
-    "remainedTime" : 0,
+    "name" : "Sad But True",
+    "remainedTime" : 223,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -5324,8 +5324,8 @@
   "user" : "emily30",
   "timestamp" : 5940,
   "stats" : {
-    "name" : "Electric Bangers Dream #1",
-    "remainedTime" : 0,
+    "name" : "Love Story",
+    "remainedTime" : 37,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5335,8 +5335,8 @@
   "user" : "frank21",
   "timestamp" : 5950,
   "stats" : {
-    "name" : "Breezy Bangers Quest #2",
-    "remainedTime" : 0,
+    "name" : "Castle on the Hill",
+    "remainedTime" : 153,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5346,8 +5346,8 @@
   "user" : "grace25",
   "timestamp" : 5960,
   "stats" : {
-    "name" : "Classic Tunes Dream #1",
-    "remainedTime" : 0,
+    "name" : "Bohemian Rhapsody",
+    "remainedTime" : 247,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5362,8 +5362,8 @@
   "user" : "henry26",
   "timestamp" : 5970,
   "stats" : {
-    "name" : "Vibey Tracks Safari #1",
-    "remainedTime" : 0,
+    "name" : "Whatever You Need",
+    "remainedTime" : 102,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -5372,14 +5372,14 @@
   "command" : "like",
   "user" : "irene33",
   "timestamp" : 5980,
-  "message" : "Loaded source is not a song."
+  "message" : "Like registered successfully."
 }, {
   "command" : "status",
   "user" : "irene33",
   "timestamp" : 5980,
   "stats" : {
-    "name" : "Epic Tracks Safari #1",
-    "remainedTime" : 0,
+    "name" : "Dream On",
+    "remainedTime" : 210,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5389,8 +5389,8 @@
   "user" : "jack29",
   "timestamp" : 5990,
   "stats" : {
-    "name" : "Mellow Tracks Safari #2",
-    "remainedTime" : 0,
+    "name" : "Money Trees",
+    "remainedTime" : 361,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -5400,8 +5400,8 @@
   "user" : "jack29",
   "timestamp" : 5990,
   "stats" : {
-    "name" : "Mellow Tracks Safari #2",
-    "remainedTime" : 0,
+    "name" : "Money Trees",
+    "remainedTime" : 361,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -5411,8 +5411,8 @@
   "user" : "alice22",
   "timestamp" : 6000,
   "stats" : {
-    "name" : "Groovy Beats Quest #1",
-    "remainedTime" : 0,
+    "name" : "Delicate",
+    "remainedTime" : 152,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -5422,8 +5422,8 @@
   "user" : "bob35",
   "timestamp" : 6010,
   "stats" : {
-    "name" : "Dynamic Tracks Trek #2",
-    "remainedTime" : 0,
+    "name" : "The Man",
+    "remainedTime" : 93,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -5432,14 +5432,14 @@
   "command" : "like",
   "user" : "carol19",
   "timestamp" : 6020,
-  "message" : "Loaded source is not a song."
+  "message" : "Unlike registered successfully."
 }, {
   "command" : "status",
   "user" : "carol19",
   "timestamp" : 6020,
   "stats" : {
-    "name" : "Electric Vibes Journey #1",
-    "remainedTime" : 0,
+    "name" : "Gimme Shelter",
+    "remainedTime" : 136,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5449,8 +5449,8 @@
   "user" : "david27",
   "timestamp" : 6030,
   "stats" : {
-    "name" : "Electric Grooves Dream #1",
-    "remainedTime" : 0,
+    "name" : "Sad But True",
+    "remainedTime" : 63,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -5460,8 +5460,8 @@
   "user" : "emily30",
   "timestamp" : 6040,
   "stats" : {
-    "name" : "Electric Bangers Dream #1",
-    "remainedTime" : 0,
+    "name" : "Love Story",
+    "remainedTime" : 37,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5471,8 +5471,8 @@
   "user" : "frank21",
   "timestamp" : 6050,
   "stats" : {
-    "name" : "Breezy Bangers Quest #2",
-    "remainedTime" : 0,
+    "name" : "Castle on the Hill",
+    "remainedTime" : 153,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5487,8 +5487,8 @@
   "user" : "grace25",
   "timestamp" : 6060,
   "stats" : {
-    "name" : "Classic Tunes Dream #1",
-    "remainedTime" : 0,
+    "name" : "Bohemian Rhapsody",
+    "remainedTime" : 247,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5503,8 +5503,8 @@
   "user" : "henry26",
   "timestamp" : 6070,
   "stats" : {
-    "name" : "Vibey Tracks Safari #1",
-    "remainedTime" : 0,
+    "name" : "Money Trees",
+    "remainedTime" : 339,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5514,8 +5514,8 @@
   "user" : "irene33",
   "timestamp" : 6080,
   "stats" : {
-    "name" : "Epic Tracks Safari #1",
-    "remainedTime" : 0,
+    "name" : "Dream On",
+    "remainedTime" : 210,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5525,8 +5525,8 @@
   "user" : "jack29",
   "timestamp" : 6090,
   "stats" : {
-    "name" : "Mellow Tracks Safari #2",
-    "remainedTime" : 0,
+    "name" : "Money Trees",
+    "remainedTime" : 191,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -5535,14 +5535,14 @@
   "command" : "like",
   "user" : "alice22",
   "timestamp" : 6100,
-  "message" : "Loaded source is not a song."
+  "message" : "Like registered successfully."
 }, {
   "command" : "status",
   "user" : "alice22",
   "timestamp" : 6100,
   "stats" : {
-    "name" : "Groovy Beats Quest #1",
-    "remainedTime" : 0,
+    "name" : "Bohemian Rhapsody",
+    "remainedTime" : 347,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -5552,8 +5552,8 @@
   "user" : "bob35",
   "timestamp" : 6110,
   "stats" : {
-    "name" : "Dynamic Tracks Trek #2",
-    "remainedTime" : 0,
+    "name" : "Maps",
+    "remainedTime" : 123,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -5568,8 +5568,8 @@
   "user" : "carol19",
   "timestamp" : 6120,
   "stats" : {
-    "name" : "Electric Vibes Journey #1",
-    "remainedTime" : 0,
+    "name" : "Gimme Shelter",
+    "remainedTime" : 136,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -5584,8 +5584,8 @@
   "user" : "david27",
   "timestamp" : 6130,
   "stats" : {
-    "name" : "Electric Grooves Dream #1",
-    "remainedTime" : 0,
+    "name" : "Bohemian Rhapsody",
+    "remainedTime" : 268,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5595,8 +5595,8 @@
   "user" : "emily30",
   "timestamp" : 6140,
   "stats" : {
-    "name" : "Electric Bangers Dream #1",
-    "remainedTime" : 0,
+    "name" : "Love Story",
+    "remainedTime" : 37,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5611,8 +5611,8 @@
   "user" : "frank21",
   "timestamp" : 6150,
   "stats" : {
-    "name" : "Breezy Bangers Quest #2",
-    "remainedTime" : 0,
+    "name" : "Castle on the Hill",
+    "remainedTime" : 153,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5622,8 +5622,8 @@
   "user" : "grace25",
   "timestamp" : 6160,
   "stats" : {
-    "name" : "Classic Tunes Dream #1",
-    "remainedTime" : 0,
+    "name" : "Bohemian Rhapsody",
+    "remainedTime" : 247,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5633,8 +5633,8 @@
   "user" : "henry26",
   "timestamp" : 6170,
   "stats" : {
-    "name" : "Vibey Tracks Safari #1",
-    "remainedTime" : 0,
+    "name" : "Money Trees",
+    "remainedTime" : 339,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5649,8 +5649,8 @@
   "user" : "irene33",
   "timestamp" : 6180,
   "stats" : {
-    "name" : "Epic Tracks Safari #1",
-    "remainedTime" : 0,
+    "name" : "Dream On",
+    "remainedTime" : 210,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5660,8 +5660,8 @@
   "user" : "irene33",
   "timestamp" : 6180,
   "stats" : {
-    "name" : "Epic Tracks Safari #1",
-    "remainedTime" : 0,
+    "name" : "Dream On",
+    "remainedTime" : 210,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5676,8 +5676,8 @@
   "user" : "jack29",
   "timestamp" : 6190,
   "stats" : {
-    "name" : "Mellow Tracks Safari #2",
-    "remainedTime" : 0,
+    "name" : "Money Trees",
+    "remainedTime" : 51,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -5697,8 +5697,8 @@
   "user" : "alice22",
   "timestamp" : 6200,
   "stats" : {
-    "name" : "Groovy Beats Quest #1",
-    "remainedTime" : 0,
+    "name" : "Bohemian Rhapsody",
+    "remainedTime" : 207,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5707,14 +5707,14 @@
   "command" : "like",
   "user" : "bob35",
   "timestamp" : 6210,
-  "message" : "Loaded source is not a song."
+  "message" : "Like registered successfully."
 }, {
   "command" : "status",
   "user" : "bob35",
   "timestamp" : 6210,
   "stats" : {
-    "name" : "Dynamic Tracks Trek #2",
-    "remainedTime" : 0,
+    "name" : "Begin Again",
+    "remainedTime" : 231,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -5729,8 +5729,8 @@
   "user" : "carol19",
   "timestamp" : 6220,
   "stats" : {
-    "name" : "Electric Vibes Journey #1",
-    "remainedTime" : 0,
+    "name" : "Gimme Shelter",
+    "remainedTime" : 6,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5745,8 +5745,8 @@
   "user" : "david27",
   "timestamp" : 6230,
   "stats" : {
-    "name" : "Electric Grooves Dream #1",
-    "remainedTime" : 0,
+    "name" : "Bohemian Rhapsody",
+    "remainedTime" : 268,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5756,8 +5756,8 @@
   "user" : "emily30",
   "timestamp" : 6240,
   "stats" : {
-    "name" : "Electric Bangers Dream #1",
-    "remainedTime" : 0,
+    "name" : "Love Story",
+    "remainedTime" : 37,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5767,8 +5767,8 @@
   "user" : "frank21",
   "timestamp" : 6250,
   "stats" : {
-    "name" : "Breezy Bangers Quest #2",
-    "remainedTime" : 0,
+    "name" : "Castle on the Hill",
+    "remainedTime" : 153,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5778,8 +5778,8 @@
   "user" : "grace25",
   "timestamp" : 6260,
   "stats" : {
-    "name" : "Classic Tunes Dream #1",
-    "remainedTime" : 0,
+    "name" : "Bohemian Rhapsody",
+    "remainedTime" : 247,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5789,8 +5789,8 @@
   "user" : "henry26",
   "timestamp" : 6270,
   "stats" : {
-    "name" : "Vibey Tracks Safari #1",
-    "remainedTime" : 0,
+    "name" : "Money Trees",
+    "remainedTime" : 339,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5810,8 +5810,8 @@
   "user" : "irene33",
   "timestamp" : 6280,
   "stats" : {
-    "name" : "Epic Tracks Safari #1",
-    "remainedTime" : 0,
+    "name" : "Dream On",
+    "remainedTime" : 210,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -5821,8 +5821,8 @@
   "user" : "jack29",
   "timestamp" : 6290,
   "stats" : {
-    "name" : "Mellow Tracks Safari #2",
-    "remainedTime" : 0,
+    "name" : "Shape of You",
+    "remainedTime" : 134,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -5832,8 +5832,8 @@
   "user" : "jack29",
   "timestamp" : 6290,
   "stats" : {
-    "name" : "Mellow Tracks Safari #2",
-    "remainedTime" : 0,
+    "name" : "Shape of You",
+    "remainedTime" : 134,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -5843,8 +5843,8 @@
   "user" : "alice22",
   "timestamp" : 6300,
   "stats" : {
-    "name" : "Groovy Beats Quest #1",
-    "remainedTime" : 0,
+    "name" : "Bohemian Rhapsody",
+    "remainedTime" : 207,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5854,8 +5854,8 @@
   "user" : "alice22",
   "timestamp" : 6300,
   "stats" : {
-    "name" : "Groovy Beats Quest #1",
-    "remainedTime" : 0,
+    "name" : "Bohemian Rhapsody",
+    "remainedTime" : 207,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5864,14 +5864,14 @@
   "command" : "like",
   "user" : "bob35",
   "timestamp" : 6310,
-  "message" : "Loaded source is not a song."
+  "message" : "Unlike registered successfully."
 }, {
   "command" : "status",
   "user" : "bob35",
   "timestamp" : 6310,
   "stats" : {
-    "name" : "Dynamic Tracks Trek #2",
-    "remainedTime" : 0,
+    "name" : "Begin Again",
+    "remainedTime" : 81,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -5880,14 +5880,14 @@
   "command" : "like",
   "user" : "carol19",
   "timestamp" : 6320,
-  "message" : "Loaded source is not a song."
+  "message" : "Like registered successfully."
 }, {
   "command" : "status",
   "user" : "carol19",
   "timestamp" : 6320,
   "stats" : {
-    "name" : "Electric Vibes Journey #1",
-    "remainedTime" : 0,
+    "name" : "Gimme Shelter",
+    "remainedTime" : 6,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5902,8 +5902,8 @@
   "user" : "david27",
   "timestamp" : 6330,
   "stats" : {
-    "name" : "Electric Grooves Dream #1",
-    "remainedTime" : 0,
+    "name" : "Bohemian Rhapsody",
+    "remainedTime" : 268,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -5913,8 +5913,8 @@
   "user" : "emily30",
   "timestamp" : 6340,
   "stats" : {
-    "name" : "Electric Bangers Dream #1",
-    "remainedTime" : 0,
+    "name" : "Love Story",
+    "remainedTime" : 37,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5924,8 +5924,8 @@
   "user" : "frank21",
   "timestamp" : 6350,
   "stats" : {
-    "name" : "Breezy Bangers Quest #2",
-    "remainedTime" : 0,
+    "name" : "Castle on the Hill",
+    "remainedTime" : 153,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5935,8 +5935,8 @@
   "user" : "grace25",
   "timestamp" : 6360,
   "stats" : {
-    "name" : "Classic Tunes Dream #1",
-    "remainedTime" : 0,
+    "name" : "Bohemian Rhapsody",
+    "remainedTime" : 247,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5946,8 +5946,8 @@
   "user" : "henry26",
   "timestamp" : 6370,
   "stats" : {
-    "name" : "Vibey Tracks Safari #1",
-    "remainedTime" : 0,
+    "name" : "Money Trees",
+    "remainedTime" : 339,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5957,8 +5957,8 @@
   "user" : "henry26",
   "timestamp" : 6370,
   "stats" : {
-    "name" : "Vibey Tracks Safari #1",
-    "remainedTime" : 0,
+    "name" : "Money Trees",
+    "remainedTime" : 339,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5967,14 +5967,14 @@
   "command" : "like",
   "user" : "irene33",
   "timestamp" : 6380,
-  "message" : "Loaded source is not a song."
+  "message" : "Unlike registered successfully."
 }, {
   "command" : "status",
   "user" : "irene33",
   "timestamp" : 6380,
   "stats" : {
-    "name" : "Epic Tracks Safari #1",
-    "remainedTime" : 0,
+    "name" : "Dream On",
+    "remainedTime" : 70,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -5984,8 +5984,8 @@
   "user" : "jack29",
   "timestamp" : 6390,
   "stats" : {
-    "name" : "Mellow Tracks Safari #2",
-    "remainedTime" : 0,
+    "name" : "The Unforgiven",
+    "remainedTime" : 370,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -5994,13 +5994,24 @@
   "command" : "like",
   "user" : "alice22",
   "timestamp" : 6400,
-  "message" : "Loaded source is not a song."
+  "message" : "Unlike registered successfully."
 }, {
   "command" : "status",
   "user" : "alice22",
   "timestamp" : 6400,
   "stats" : {
-    "name" : "Groovy Beats Quest #1",
+    "name" : "Bohemian Rhapsody",
+    "remainedTime" : 207,
+    "repeat" : "No Repeat",
+    "shuffle" : false,
+    "paused" : true
+  }
+}, {
+  "command" : "status",
+  "user" : "bob35",
+  "timestamp" : 6410,
+  "stats" : {
+    "name" : "",
     "remainedTime" : 0,
     "repeat" : "No Repeat",
     "shuffle" : false,
@@ -6011,22 +6022,11 @@
   "user" : "bob35",
   "timestamp" : 6410,
   "stats" : {
-    "name" : "Dynamic Tracks Trek #2",
+    "name" : "",
     "remainedTime" : 0,
     "repeat" : "No Repeat",
     "shuffle" : false,
-    "paused" : false
-  }
-}, {
-  "command" : "status",
-  "user" : "bob35",
-  "timestamp" : 6410,
-  "stats" : {
-    "name" : "Dynamic Tracks Trek #2",
-    "remainedTime" : 0,
-    "repeat" : "No Repeat",
-    "shuffle" : false,
-    "paused" : false
+    "paused" : true
   }
 }, {
   "command" : "switchVisibility",
@@ -6038,8 +6038,8 @@
   "user" : "carol19",
   "timestamp" : 6420,
   "stats" : {
-    "name" : "Electric Vibes Journey #1",
-    "remainedTime" : 0,
+    "name" : "Gimme Shelter",
+    "remainedTime" : 6,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -6049,8 +6049,8 @@
   "user" : "david27",
   "timestamp" : 6430,
   "stats" : {
-    "name" : "Electric Grooves Dream #1",
-    "remainedTime" : 0,
+    "name" : "Bohemian Rhapsody",
+    "remainedTime" : 108,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -6060,8 +6060,8 @@
   "user" : "emily30",
   "timestamp" : 6440,
   "stats" : {
-    "name" : "Electric Bangers Dream #1",
-    "remainedTime" : 0,
+    "name" : "Love Story",
+    "remainedTime" : 37,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -6070,14 +6070,14 @@
   "command" : "like",
   "user" : "frank21",
   "timestamp" : 6450,
-  "message" : "Loaded source is not a song."
+  "message" : "Like registered successfully."
 }, {
   "command" : "status",
   "user" : "frank21",
   "timestamp" : 6450,
   "stats" : {
-    "name" : "Breezy Bangers Quest #2",
-    "remainedTime" : 0,
+    "name" : "Castle on the Hill",
+    "remainedTime" : 153,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -6087,8 +6087,8 @@
   "user" : "grace25",
   "timestamp" : 6460,
   "stats" : {
-    "name" : "Classic Tunes Dream #1",
-    "remainedTime" : 0,
+    "name" : "Bohemian Rhapsody",
+    "remainedTime" : 247,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -6103,8 +6103,8 @@
   "user" : "henry26",
   "timestamp" : 6470,
   "stats" : {
-    "name" : "Vibey Tracks Safari #1",
-    "remainedTime" : 0,
+    "name" : "Money Trees",
+    "remainedTime" : 339,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -6114,8 +6114,8 @@
   "user" : "irene33",
   "timestamp" : 6480,
   "stats" : {
-    "name" : "Epic Tracks Safari #1",
-    "remainedTime" : 0,
+    "name" : "Don't",
+    "remainedTime" : 139,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -6124,14 +6124,14 @@
   "command" : "like",
   "user" : "jack29",
   "timestamp" : 6490,
-  "message" : "Loaded source is not a song."
+  "message" : "Like registered successfully."
 }, {
   "command" : "status",
   "user" : "jack29",
   "timestamp" : 6490,
   "stats" : {
-    "name" : "Mellow Tracks Safari #2",
-    "remainedTime" : 0,
+    "name" : "The Unforgiven",
+    "remainedTime" : 230,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -6146,8 +6146,8 @@
   "user" : "alice22",
   "timestamp" : 6500,
   "stats" : {
-    "name" : "Groovy Beats Quest #1",
-    "remainedTime" : 0,
+    "name" : "Bohemian Rhapsody",
+    "remainedTime" : 207,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -6157,11 +6157,11 @@
   "user" : "bob35",
   "timestamp" : 6510,
   "stats" : {
-    "name" : "Dynamic Tracks Trek #2",
+    "name" : "",
     "remainedTime" : 0,
     "repeat" : "No Repeat",
     "shuffle" : false,
-    "paused" : false
+    "paused" : true
   }
 }, {
   "command" : "switchVisibility",
@@ -6178,8 +6178,8 @@
   "user" : "carol19",
   "timestamp" : 6520,
   "stats" : {
-    "name" : "Electric Vibes Journey #1",
-    "remainedTime" : 0,
+    "name" : "Gimme Shelter",
+    "remainedTime" : 6,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -6194,8 +6194,8 @@
   "user" : "david27",
   "timestamp" : 6530,
   "stats" : {
-    "name" : "Electric Grooves Dream #1",
-    "remainedTime" : 0,
+    "name" : "Under Pressure",
+    "remainedTime" : 212,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -6205,8 +6205,8 @@
   "user" : "emily30",
   "timestamp" : 6540,
   "stats" : {
-    "name" : "Electric Bangers Dream #1",
-    "remainedTime" : 0,
+    "name" : "Love Story",
+    "remainedTime" : 37,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -6215,14 +6215,14 @@
   "command" : "like",
   "user" : "frank21",
   "timestamp" : 6550,
-  "message" : "Loaded source is not a song."
+  "message" : "Unlike registered successfully."
 }, {
   "command" : "status",
   "user" : "frank21",
   "timestamp" : 6550,
   "stats" : {
-    "name" : "Breezy Bangers Quest #2",
-    "remainedTime" : 0,
+    "name" : "Castle on the Hill",
+    "remainedTime" : 153,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -6232,8 +6232,8 @@
   "user" : "grace25",
   "timestamp" : 6560,
   "stats" : {
-    "name" : "Classic Tunes Dream #1",
-    "remainedTime" : 0,
+    "name" : "Bohemian Rhapsody",
+    "remainedTime" : 247,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -6243,8 +6243,8 @@
   "user" : "henry26",
   "timestamp" : 6570,
   "stats" : {
-    "name" : "Vibey Tracks Safari #1",
-    "remainedTime" : 0,
+    "name" : "Money Trees",
+    "remainedTime" : 339,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -6254,8 +6254,8 @@
   "user" : "irene33",
   "timestamp" : 6580,
   "stats" : {
-    "name" : "Epic Tracks Safari #1",
-    "remainedTime" : 0,
+    "name" : "Start Me Up",
+    "remainedTime" : 191,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -6265,8 +6265,8 @@
   "user" : "jack29",
   "timestamp" : 6590,
   "stats" : {
-    "name" : "Mellow Tracks Safari #2",
-    "remainedTime" : 0,
+    "name" : "The Unforgiven",
+    "remainedTime" : 70,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -6276,8 +6276,8 @@
   "user" : "jack29",
   "timestamp" : 6590,
   "stats" : {
-    "name" : "Mellow Tracks Safari #2",
-    "remainedTime" : 0,
+    "name" : "The Unforgiven",
+    "remainedTime" : 70,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -6286,14 +6286,14 @@
   "command" : "like",
   "user" : "alice22",
   "timestamp" : 6600,
-  "message" : "Loaded source is not a song."
+  "message" : "Like registered successfully."
 }, {
   "command" : "status",
   "user" : "alice22",
   "timestamp" : 6600,
   "stats" : {
-    "name" : "Groovy Beats Quest #1",
-    "remainedTime" : 0,
+    "name" : "Bohemian Rhapsody",
+    "remainedTime" : 47,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -6303,11 +6303,11 @@
   "user" : "bob35",
   "timestamp" : 6610,
   "stats" : {
-    "name" : "Dynamic Tracks Trek #2",
+    "name" : "",
     "remainedTime" : 0,
     "repeat" : "No Repeat",
     "shuffle" : false,
-    "paused" : false
+    "paused" : true
   }
 }, {
   "command" : "switchVisibility",
@@ -6319,8 +6319,8 @@
   "user" : "carol19",
   "timestamp" : 6620,
   "stats" : {
-    "name" : "Electric Vibes Journey #1",
-    "remainedTime" : 0,
+    "name" : "Start Me Up",
+    "remainedTime" : 58,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -6329,14 +6329,14 @@
   "command" : "like",
   "user" : "david27",
   "timestamp" : 6630,
-  "message" : "Loaded source is not a song."
+  "message" : "Like registered successfully."
 }, {
   "command" : "status",
   "user" : "david27",
   "timestamp" : 6630,
   "stats" : {
-    "name" : "Electric Grooves Dream #1",
-    "remainedTime" : 0,
+    "name" : "Under Pressure",
+    "remainedTime" : 212,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -6346,8 +6346,8 @@
   "user" : "emily30",
   "timestamp" : 6640,
   "stats" : {
-    "name" : "Electric Bangers Dream #1",
-    "remainedTime" : 0,
+    "name" : "Love Story",
+    "remainedTime" : 37,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -6361,14 +6361,14 @@
   "command" : "like",
   "user" : "frank21",
   "timestamp" : 6650,
-  "message" : "Loaded source is not a song."
+  "message" : "Like registered successfully."
 }, {
   "command" : "status",
   "user" : "frank21",
   "timestamp" : 6650,
   "stats" : {
-    "name" : "Breezy Bangers Quest #2",
-    "remainedTime" : 0,
+    "name" : "Castle on the Hill",
+    "remainedTime" : 153,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -6383,8 +6383,8 @@
   "user" : "grace25",
   "timestamp" : 6660,
   "stats" : {
-    "name" : "Classic Tunes Dream #1",
-    "remainedTime" : 0,
+    "name" : "Bohemian Rhapsody",
+    "remainedTime" : 247,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -6399,8 +6399,8 @@
   "user" : "henry26",
   "timestamp" : 6670,
   "stats" : {
-    "name" : "Vibey Tracks Safari #1",
-    "remainedTime" : 0,
+    "name" : "Money Trees",
+    "remainedTime" : 339,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -6410,8 +6410,8 @@
   "user" : "irene33",
   "timestamp" : 6680,
   "stats" : {
-    "name" : "Epic Tracks Safari #1",
-    "remainedTime" : 0,
+    "name" : "Start Me Up",
+    "remainedTime" : 61,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -6426,8 +6426,8 @@
   "user" : "jack29",
   "timestamp" : 6690,
   "stats" : {
-    "name" : "Mellow Tracks Safari #2",
-    "remainedTime" : 0,
+    "name" : "Big Pimpin'",
+    "remainedTime" : 224,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -6437,8 +6437,8 @@
   "user" : "alice22",
   "timestamp" : 6700,
   "stats" : {
-    "name" : "Groovy Beats Quest #1",
-    "remainedTime" : 0,
+    "name" : "Paint It Black",
+    "remainedTime" : 109,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -6447,25 +6447,25 @@
   "command" : "like",
   "user" : "bob35",
   "timestamp" : 6710,
-  "message" : "Loaded source is not a song."
+  "message" : "Please load a source before liking or unliking."
 }, {
   "command" : "status",
   "user" : "bob35",
   "timestamp" : 6710,
   "stats" : {
-    "name" : "Dynamic Tracks Trek #2",
+    "name" : "",
     "remainedTime" : 0,
     "repeat" : "No Repeat",
     "shuffle" : false,
-    "paused" : false
+    "paused" : true
   }
 }, null, null, {
   "command" : "status",
   "user" : "carol19",
   "timestamp" : 6720,
   "stats" : {
-    "name" : "Electric Vibes Journey #1",
-    "remainedTime" : 0,
+    "name" : "Happier",
+    "remainedTime" : 115,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -6480,8 +6480,8 @@
   "user" : "david27",
   "timestamp" : 6730,
   "stats" : {
-    "name" : "Electric Grooves Dream #1",
-    "remainedTime" : 0,
+    "name" : "Under Pressure",
+    "remainedTime" : 212,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -6491,8 +6491,8 @@
   "user" : "david27",
   "timestamp" : 6730,
   "stats" : {
-    "name" : "Electric Grooves Dream #1",
-    "remainedTime" : 0,
+    "name" : "Under Pressure",
+    "remainedTime" : 212,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -6502,8 +6502,8 @@
   "user" : "emily30",
   "timestamp" : 6740,
   "stats" : {
-    "name" : "Electric Bangers Dream #1",
-    "remainedTime" : 0,
+    "name" : "Love Story",
+    "remainedTime" : 37,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -6513,8 +6513,8 @@
   "user" : "frank21",
   "timestamp" : 6750,
   "stats" : {
-    "name" : "Breezy Bangers Quest #2",
-    "remainedTime" : 0,
+    "name" : "Castle on the Hill",
+    "remainedTime" : 153,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -6529,8 +6529,8 @@
   "user" : "grace25",
   "timestamp" : 6760,
   "stats" : {
-    "name" : "Classic Tunes Dream #1",
-    "remainedTime" : 0,
+    "name" : "Bohemian Rhapsody",
+    "remainedTime" : 87,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -6540,8 +6540,8 @@
   "user" : "henry26",
   "timestamp" : 6770,
   "stats" : {
-    "name" : "Vibey Tracks Safari #1",
-    "remainedTime" : 0,
+    "name" : "Money Trees",
+    "remainedTime" : 169,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -6555,14 +6555,14 @@
   "command" : "like",
   "user" : "irene33",
   "timestamp" : 6780,
-  "message" : "Loaded source is not a song."
+  "message" : "Like registered successfully."
 }, {
   "command" : "status",
   "user" : "irene33",
   "timestamp" : 6780,
   "stats" : {
-    "name" : "Epic Tracks Safari #1",
-    "remainedTime" : 0,
+    "name" : "Under Pressure",
+    "remainedTime" : 145,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -6572,7 +6572,18 @@
   "user" : "jack29",
   "timestamp" : 6790,
   "stats" : {
-    "name" : "Mellow Tracks Safari #2",
+    "name" : "Big Pimpin'",
+    "remainedTime" : 224,
+    "repeat" : "No Repeat",
+    "shuffle" : false,
+    "paused" : true
+  }
+}, {
+  "command" : "status",
+  "user" : "alice22",
+  "timestamp" : 6800,
+  "stats" : {
+    "name" : "",
     "remainedTime" : 0,
     "repeat" : "No Repeat",
     "shuffle" : false,
@@ -6583,41 +6594,30 @@
   "user" : "alice22",
   "timestamp" : 6800,
   "stats" : {
-    "name" : "Groovy Beats Quest #1",
+    "name" : "",
     "remainedTime" : 0,
     "repeat" : "No Repeat",
     "shuffle" : false,
-    "paused" : false
-  }
-}, {
-  "command" : "status",
-  "user" : "alice22",
-  "timestamp" : 6800,
-  "stats" : {
-    "name" : "Groovy Beats Quest #1",
-    "remainedTime" : 0,
-    "repeat" : "No Repeat",
-    "shuffle" : false,
-    "paused" : false
+    "paused" : true
   }
 }, null, null, {
   "command" : "status",
   "user" : "bob35",
   "timestamp" : 6810,
   "stats" : {
-    "name" : "Dynamic Tracks Trek #2",
+    "name" : "",
     "remainedTime" : 0,
     "repeat" : "No Repeat",
     "shuffle" : false,
-    "paused" : false
+    "paused" : true
   }
 }, null, {
   "command" : "status",
   "user" : "carol19",
   "timestamp" : 6820,
   "stats" : {
-    "name" : "Electric Vibes Journey #1",
-    "remainedTime" : 0,
+    "name" : "The Unforgiven",
+    "remainedTime" : 331,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -6626,14 +6626,14 @@
   "command" : "like",
   "user" : "david27",
   "timestamp" : 6830,
-  "message" : "Loaded source is not a song."
+  "message" : "Unlike registered successfully."
 }, {
   "command" : "status",
   "user" : "david27",
   "timestamp" : 6830,
   "stats" : {
-    "name" : "Electric Grooves Dream #1",
-    "remainedTime" : 0,
+    "name" : "Under Pressure",
+    "remainedTime" : 212,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -6648,8 +6648,8 @@
   "user" : "emily30",
   "timestamp" : 6840,
   "stats" : {
-    "name" : "Electric Bangers Dream #1",
-    "remainedTime" : 0,
+    "name" : "Love Story",
+    "remainedTime" : 37,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -6664,8 +6664,8 @@
   "user" : "frank21",
   "timestamp" : 6850,
   "stats" : {
-    "name" : "Breezy Bangers Quest #2",
-    "remainedTime" : 0,
+    "name" : "Castle on the Hill",
+    "remainedTime" : 153,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -6675,8 +6675,8 @@
   "user" : "frank21",
   "timestamp" : 6850,
   "stats" : {
-    "name" : "Breezy Bangers Quest #2",
-    "remainedTime" : 0,
+    "name" : "Castle on the Hill",
+    "remainedTime" : 153,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -6686,8 +6686,8 @@
   "user" : "grace25",
   "timestamp" : 6860,
   "stats" : {
-    "name" : "Classic Tunes Dream #1",
-    "remainedTime" : 0,
+    "name" : "Dream On",
+    "remainedTime" : 194,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -6696,14 +6696,14 @@
   "command" : "like",
   "user" : "henry26",
   "timestamp" : 6870,
-  "message" : "Loaded source is not a song."
+  "message" : "Like registered successfully."
 }, {
   "command" : "status",
   "user" : "henry26",
   "timestamp" : 6870,
   "stats" : {
-    "name" : "Vibey Tracks Safari #1",
-    "remainedTime" : 0,
+    "name" : "Money Trees",
+    "remainedTime" : 19,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -6712,30 +6712,30 @@
   "command" : "like",
   "user" : "irene33",
   "timestamp" : 6880,
-  "message" : "Loaded source is not a song."
+  "message" : "Please load a source before liking or unliking."
 }, {
   "command" : "status",
   "user" : "irene33",
   "timestamp" : 6880,
   "stats" : {
-    "name" : "Epic Tracks Safari #1",
+    "name" : "",
     "remainedTime" : 0,
     "repeat" : "No Repeat",
     "shuffle" : false,
-    "paused" : false
+    "paused" : true
   }
 }, {
   "command" : "like",
   "user" : "jack29",
   "timestamp" : 6890,
-  "message" : "Loaded source is not a song."
+  "message" : "Like registered successfully."
 }, {
   "command" : "status",
   "user" : "jack29",
   "timestamp" : 6890,
   "stats" : {
-    "name" : "Mellow Tracks Safari #2",
-    "remainedTime" : 0,
+    "name" : "Big Pimpin'",
+    "remainedTime" : 224,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -6745,11 +6745,11 @@
   "user" : "alice22",
   "timestamp" : 6900,
   "stats" : {
-    "name" : "Groovy Beats Quest #1",
+    "name" : "",
     "remainedTime" : 0,
     "repeat" : "No Repeat",
     "shuffle" : false,
-    "paused" : false
+    "paused" : true
   }
 }, {
   "command" : "switchVisibility",
@@ -6760,13 +6760,13 @@
   "command" : "playPause",
   "user" : "bob35",
   "timestamp" : 6910,
-  "message" : "Playback paused successfully."
+  "message" : "Please load a source before attempting to pause or resume playback."
 }, {
   "command" : "status",
   "user" : "bob35",
   "timestamp" : 6910,
   "stats" : {
-    "name" : "Dynamic Tracks Trek #2",
+    "name" : "",
     "remainedTime" : 0,
     "repeat" : "No Repeat",
     "shuffle" : false,
@@ -6776,14 +6776,14 @@
   "command" : "like",
   "user" : "carol19",
   "timestamp" : 6920,
-  "message" : "Loaded source is not a song."
+  "message" : "Like registered successfully."
 }, {
   "command" : "status",
   "user" : "carol19",
   "timestamp" : 6920,
   "stats" : {
-    "name" : "Electric Vibes Journey #1",
-    "remainedTime" : 0,
+    "name" : "The Unforgiven",
+    "remainedTime" : 211,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -6798,8 +6798,8 @@
   "user" : "david27",
   "timestamp" : 6930,
   "stats" : {
-    "name" : "Electric Grooves Dream #1",
-    "remainedTime" : 0,
+    "name" : "Under Pressure",
+    "remainedTime" : 212,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -6809,8 +6809,8 @@
   "user" : "david27",
   "timestamp" : 6930,
   "stats" : {
-    "name" : "Electric Grooves Dream #1",
-    "remainedTime" : 0,
+    "name" : "Under Pressure",
+    "remainedTime" : 212,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -6825,8 +6825,8 @@
   "user" : "emily30",
   "timestamp" : 6940,
   "stats" : {
-    "name" : "Electric Bangers Dream #1",
-    "remainedTime" : 0,
+    "name" : "Love Story",
+    "remainedTime" : 37,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -6836,8 +6836,8 @@
   "user" : "frank21",
   "timestamp" : 6950,
   "stats" : {
-    "name" : "Breezy Bangers Quest #2",
-    "remainedTime" : 0,
+    "name" : "Castle on the Hill",
+    "remainedTime" : 153,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -6847,8 +6847,8 @@
   "user" : "grace25",
   "timestamp" : 6960,
   "stats" : {
-    "name" : "Classic Tunes Dream #1",
-    "remainedTime" : 0,
+    "name" : "Dream On",
+    "remainedTime" : 64,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -6868,8 +6868,8 @@
   "user" : "henry26",
   "timestamp" : 6970,
   "stats" : {
-    "name" : "Vibey Tracks Safari #1",
-    "remainedTime" : 0,
+    "name" : "Don't",
+    "remainedTime" : 108,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -6879,11 +6879,11 @@
   "user" : "irene33",
   "timestamp" : 6980,
   "stats" : {
-    "name" : "Epic Tracks Safari #1",
+    "name" : "",
     "remainedTime" : 0,
     "repeat" : "No Repeat",
     "shuffle" : false,
-    "paused" : false
+    "paused" : true
   }
 }, {
   "command" : "switchVisibility",
@@ -6895,8 +6895,8 @@
   "user" : "jack29",
   "timestamp" : 6990,
   "stats" : {
-    "name" : "Mellow Tracks Safari #2",
-    "remainedTime" : 0,
+    "name" : "Big Pimpin'",
+    "remainedTime" : 224,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -8570,7 +8570,7 @@
   "command" : "showPreferredSongs",
   "user" : "alice22",
   "timestamp" : 8490,
-  "result" : [ "Stairway to Heaven" ]
+  "result" : [ "Stairway to Heaven", "Black Dog", "Sad But True", "Bohemian Rhapsody" ]
 }, {
   "command" : "showPlaylists",
   "user" : "bob35",
@@ -8590,7 +8590,7 @@
   "command" : "showPreferredSongs",
   "user" : "bob35",
   "timestamp" : 8500,
-  "result" : [ ]
+  "result" : [ "The Unforgiven" ]
 }, {
   "command" : "showPlaylists",
   "user" : "carol19",
@@ -8610,7 +8610,7 @@
   "command" : "showPreferredSongs",
   "user" : "carol19",
   "timestamp" : 8510,
-  "result" : [ ]
+  "result" : [ "Gimme Shelter", "The Unforgiven" ]
 }, {
   "command" : "showPlaylists",
   "user" : "david27",
@@ -8650,7 +8650,7 @@
   "command" : "showPreferredSongs",
   "user" : "emily30",
   "timestamp" : 8530,
-  "result" : [ ]
+  "result" : [ "Love Story" ]
 }, {
   "command" : "showPlaylists",
   "user" : "frank21",
@@ -8670,7 +8670,7 @@
   "command" : "showPreferredSongs",
   "user" : "frank21",
   "timestamp" : 8540,
-  "result" : [ ]
+  "result" : [ "Castle on the Hill" ]
 }, {
   "command" : "showPlaylists",
   "user" : "grace25",
@@ -8710,7 +8710,7 @@
   "command" : "showPreferredSongs",
   "user" : "henry26",
   "timestamp" : 8560,
-  "result" : [ ]
+  "result" : [ "Money Trees" ]
 }, {
   "command" : "showPlaylists",
   "user" : "irene33",
@@ -8730,7 +8730,7 @@
   "command" : "showPreferredSongs",
   "user" : "irene33",
   "timestamp" : 8570,
-  "result" : [ ]
+  "result" : [ "Under Pressure" ]
 }, {
   "command" : "showPlaylists",
   "user" : "jack29",
@@ -8750,5 +8750,5 @@
   "command" : "showPreferredSongs",
   "user" : "jack29",
   "timestamp" : 8580,
-  "result" : [ ]
+  "result" : [ "The Man", "The Unforgiven", "Big Pimpin'" ]
 }, null, null ]

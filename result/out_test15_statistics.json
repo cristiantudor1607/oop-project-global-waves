@@ -127,7 +127,7 @@
   "command" : "showPreferredSongs",
   "user" : "carol19",
   "timestamp" : 1000,
-  "result" : [ "Freedom", "Bohemian Rhapsody", "Freedom" ]
+  "result" : [ "Gimme Shelter", "The Unforgiven", "Freedom", "Bohemian Rhapsody", "Freedom" ]
 }, {
   "command" : "createPlaylist",
   "user" : "david27",
@@ -184,7 +184,7 @@
   "command" : "showPreferredSongs",
   "user" : "emily30",
   "timestamp" : 2300,
-  "result" : [ ]
+  "result" : [ "Love Story", "Black Dog" ]
 }, {
   "command" : "like",
   "user" : "emily30",
@@ -199,7 +199,7 @@
   "command" : "showPreferredSongs",
   "user" : "emily30",
   "timestamp" : 2400,
-  "result" : [ "Bohemian Rhapsody" ]
+  "result" : [ "Love Story", "Black Dog", "Bohemian Rhapsody" ]
 }, {
   "command" : "search",
   "user" : "emily30",
@@ -237,10 +237,10 @@
   "command" : "showPreferredSongs",
   "user" : "bob35",
   "timestamp" : 3100,
-  "result" : [ "Bohemian Rhapsody" ]
+  "result" : [ "The Unforgiven", "Bohemian Rhapsody" ]
 }, {
   "command" : "showPreferredSongs",
   "user" : "carol19",
   "timestamp" : 3200,
-  "result" : [ "Freedom", "Bohemian Rhapsody", "Freedom" ]
+  "result" : [ "Gimme Shelter", "The Unforgiven", "Freedom", "Bohemian Rhapsody", "Freedom" ]
 }, null ]

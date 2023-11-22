@@ -10,7 +10,7 @@ public class SearchType {
 
     private SearchType() {};
 
-    public static SearchType.type ParseString(final String typeAsString) {
+    public static type ParseString(final String typeAsString) {
         if (typeAsString.equals("song"))
             return type.SONG;
 

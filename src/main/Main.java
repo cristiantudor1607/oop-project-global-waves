@@ -19,7 +19,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * The entry point to this homework. It runs the checker that tests your implentation.
@@ -80,6 +82,7 @@ public final class Main {
 
         ArrayNode outputs = objectMapper.createArrayNode();
         // ----- HERE STARTS -----
+        System.out.println(filePathInput);
         Library database = Library.getInstance();
         database.loadLibraryData(library);
 

@@ -1,8 +1,8 @@
 package globalwaves.commands;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import globalwaves.player.entities.AudioFile;
 import globalwaves.player.entities.Playlist;
-import globalwaves.player.entities.Song;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ public class PlaylistStats {
             visibility = "private";
 
         songNames = new ArrayList<>();
-        for (Song song : playlist.getSongs())
+        for (AudioFile song : playlist.getSongs())
             songNames.add(song.getName());
     }
 }

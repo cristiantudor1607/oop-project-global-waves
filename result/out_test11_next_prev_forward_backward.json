@@ -119,8 +119,8 @@
   "user" : "bob35",
   "timestamp" : 655,
   "stats" : {
-    "name" : "My favourite songs",
-    "remainedTime" : 0,
+    "name" : "Start Me Up",
+    "remainedTime" : 207,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -130,8 +130,8 @@
   "user" : "bob35",
   "timestamp" : 690,
   "stats" : {
-    "name" : "My favourite songs",
-    "remainedTime" : 0,
+    "name" : "Start Me Up",
+    "remainedTime" : 157,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -141,8 +141,8 @@
   "user" : "bob35",
   "timestamp" : 711,
   "stats" : {
-    "name" : "My favourite songs",
-    "remainedTime" : 0,
+    "name" : "Start Me Up",
+    "remainedTime" : 116,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -152,8 +152,8 @@
   "user" : "bob35",
   "timestamp" : 713,
   "stats" : {
-    "name" : "My favourite songs",
-    "remainedTime" : 0,
+    "name" : "Start Me Up",
+    "remainedTime" : 112,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -179,8 +179,8 @@
   "user" : "bob35",
   "timestamp" : 1049,
   "stats" : {
-    "name" : "How I Built This",
-    "remainedTime" : 11913,
+    "name" : "Airbnb: Joe Gebbia",
+    "remainedTime" : 2817,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -190,8 +190,8 @@
   "user" : "bob35",
   "timestamp" : 1051,
   "stats" : {
-    "name" : "How I Built This",
-    "remainedTime" : 11910,
+    "name" : "Airbnb: Joe Gebbia",
+    "remainedTime" : 2814,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -217,8 +217,8 @@
   "user" : "bob35",
   "timestamp" : 1389,
   "stats" : {
-    "name" : "How I Built This",
-    "remainedTime" : 11873,
+    "name" : "Airbnb: Joe Gebbia",
+    "remainedTime" : 2478,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -228,8 +228,8 @@
   "user" : "bob35",
   "timestamp" : 1391,
   "stats" : {
-    "name" : "How I Built This",
-    "remainedTime" : 11870,
+    "name" : "Airbnb: Joe Gebbia",
+    "remainedTime" : 2475,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false

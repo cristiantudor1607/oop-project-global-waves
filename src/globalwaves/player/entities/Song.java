@@ -1,13 +1,14 @@
 package globalwaves.player.entities;
 
 import fileio.input.SongInput;
+import globalwaves.player.entities.properties.PlayableEntity;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
 
 @Getter @Setter
-public class Song extends AudioFile {
+public class Song extends AudioFile implements PlayableEntity {
     private String album;
     private ArrayList<String> tags;
     private String lyrics;
@@ -56,8 +57,33 @@ public class Song extends AudioFile {
     }
 
     @Override
-    public boolean isSong() {
+    public boolean canBeLiked() {
         return true;
+    }
+
+    @Override
+    public boolean isEmptyPlayableFile() {
+        return false;
+    }
+
+    @Override
+    public AudioFile getPlayableFile() {
+        return this;
+    }
+
+    @Override
+    public boolean needsHistoryTrack() {
+        return false;
+    }
+
+    @Override
+    public boolean hasNextForPlaying(AudioFile currentFile) {
+        return false;
+    }
+
+    @Override
+    public AudioFile getNextForPlaying(AudioFile currentFile) {
+        return null;
     }
 
     @Override

@@ -1,7 +1,7 @@
 package globalwaves.commands.search.utils;
 
-import globalwaves.commands.search.utils.filters.*;
 import globalwaves.commands.enums.FilterType;
+import globalwaves.commands.search.utils.filters.*;
 import globalwaves.player.entities.Song;
 import globalwaves.player.entities.library.Library;
 

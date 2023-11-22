@@ -3,8 +3,6 @@ package globalwaves.commands;
 import globalwaves.player.entities.Player;
 import lombok.Getter;
 
-import java.util.Objects;
-
 @Getter
 public class PlayerStats {
     private final String name;
@@ -14,14 +12,14 @@ public class PlayerStats {
     private final boolean paused;
 
     public PlayerStats(Player userPlayer) {
-        if (userPlayer.getSelectedAudio() == null) {
+        if (userPlayer.getSelectedEntity() == null) {
             name = "";
             remainedTime = 0;
             repeat = "No Repeat";
             shuffle = false;
             paused = true;
         } else {
-            name = userPlayer.getSelectedAudio().getName();
+            name = userPlayer.getLoadedFile().getName();
             remainedTime = userPlayer.getRemainedTime();
 
             switch (userPlayer.getRepeat()) {

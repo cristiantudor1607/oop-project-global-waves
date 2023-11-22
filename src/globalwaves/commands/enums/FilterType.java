@@ -14,30 +14,30 @@ public class FilterType {
 
     private FilterType() {}
 
-    public static FilterType.type ParseString(final String filterAsString) {
+    public static type ParseString(final String filterAsString) {
         if (filterAsString.equals("name"))
-            return FilterType.type.NAME;
+            return type.NAME;
 
         if (filterAsString.equals("album"))
-            return FilterType.type.ALBUM;
+            return type.ALBUM;
 
         if (filterAsString.equals("tags"))
-            return FilterType.type.TAGS;
+            return type.TAGS;
 
         if (filterAsString.equals("lyrics"))
-            return FilterType.type.LYRICS;
+            return type.LYRICS;
 
         if (filterAsString.equals("genre"))
-            return FilterType.type.GENRE;
+            return type.GENRE;
 
         if (filterAsString.equals("releaseYear"))
-            return FilterType.type.RELEASE_YEAR;
+            return type.RELEASE_YEAR;
 
         if (filterAsString.equals("artist"))
-            return FilterType.type.ARTIST;
+            return type.ARTIST;
 
         if (filterAsString.equals("owner"))
-            return FilterType.type.OWNER;
+            return type.OWNER;
 
         return null;
     }

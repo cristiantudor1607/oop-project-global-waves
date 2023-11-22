@@ -1,9 +1,8 @@
 package globalwaves.player.entities.library;
 
+import globalwaves.player.entities.AudioFile;
 import globalwaves.player.entities.Playlist;
-import globalwaves.player.entities.Song;
 import globalwaves.player.entities.User;
-import globalwaves.player.entities.properties.PlayableEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,7 +78,7 @@ public class LibraryInterrogator {
         return availablePlaylists;
     }
 
-    public List<Song> getUserLikedSongs(final String username) {
+    public List<AudioFile> getUserLikedSongs(final String username) {
         User queriedUser = getUserByUsername(username);
 
         return queriedUser.getLikes();

@@ -15,7 +15,7 @@ public class Episode extends AudioFile {
     }
 
     @Override
-    public boolean isSong() {
+    public boolean canBeLiked() {
         return false;
     }
 

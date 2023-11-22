@@ -2,10 +2,10 @@ package globalwaves.commands;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonNode;
+import globalwaves.commands.enums.SearchType;
 import globalwaves.commands.search.utils.*;
 import globalwaves.parser.commands.CommandObject;
 import globalwaves.parser.commands.CommandOutputFormatter;
-import globalwaves.commands.enums.SearchType;
 import globalwaves.player.entities.library.ActionManager;
 import globalwaves.player.entities.properties.PlayableEntity;
 import lombok.Getter;

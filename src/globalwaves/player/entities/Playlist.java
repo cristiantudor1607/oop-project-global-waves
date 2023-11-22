@@ -1,8 +1,7 @@
 package globalwaves.player.entities;
 
-import globalwaves.player.entities.properties.PlayableEntity;
 import globalwaves.player.entities.properties.OwnedEntity;
-
+import globalwaves.player.entities.properties.PlayableEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,20 +12,18 @@ import java.util.List;
 public class Playlist implements PlayableEntity, OwnedEntity {
     private String name;
     private String owner;
-    private int duration;
     private int followers;
     private boolean visible;
-    private List<Song> songs;
+    private List<AudioFile> songs;
     private List<Integer> playOrder;
-
 
     public Playlist(String owner, String name) {
         this.name = name;
         this.owner = owner;
-        duration = 0;
         followers = 0;
         visible = true;
         songs = new ArrayList<>();
+        playOrder = getStandardOrder();
     }
 
     public boolean isPublic() {
@@ -41,24 +38,24 @@ public class Playlist implements PlayableEntity, OwnedEntity {
         visible = true;
     }
 
-    public boolean hasSong(Song searchedSong) {
+    public boolean hasSong(AudioFile searchedSong) {
         String searchedSongName = searchedSong.getName();
 
-        for (Song playlistSong : songs)
+        for (AudioFile playlistSong : songs)
            if (playlistSong.getName().equals(searchedSongName))
                return true;
 
         return false;
     }
 
-    public void addSong(Song songToBeAdded) {
+    public void addSong(AudioFile songToBeAdded) {
         songs.add(songToBeAdded);
-        duration += songToBeAdded.getDuration();
+        playOrder = getStandardOrder();
     }
 
-    public void removeSong(Song songToBeRemoved) {
+    public void removeSong(AudioFile songToBeRemoved) {
         songs.remove(songToBeRemoved);
-        duration -= songToBeRemoved.getDuration();
+        playOrder = getStandardOrder();
     }
 
     public List<Integer> getStandardOrder() {
@@ -69,14 +66,14 @@ public class Playlist implements PlayableEntity, OwnedEntity {
         return order;
     }
 
-    public int getSongIndex(Song queriedSong) {
+    public int getSongIndex(AudioFile queriedSong) {
         int index = songs.indexOf(queriedSong);
         return getPlayOrder().indexOf(index);
     }
 
-    public Song getNextSong(Song currentSong) {
+    public AudioFile getNextSong(AudioFile currentSong) {
         int currentSongIndex = getSongIndex(currentSong);
-        if (currentSongIndex >= playOrder.size())
+        if (currentSongIndex + 1 >= playOrder.size())
             return null;
 
         int nextSongIndex = playOrder.get(currentSongIndex + 1);
@@ -89,12 +86,33 @@ public class Playlist implements PlayableEntity, OwnedEntity {
     }
 
     @Override
-    public boolean isPlaylist() {
-        return true;
+    public AudioFile getPlayableFile() {
+        if (songs.isEmpty())
+            return null;
+
+        return songs.get(0);
     }
 
     @Override
-    public boolean isSong() {
+    public int getDuration() {
+        if (songs.isEmpty())
+            return -1;
+
+        return songs.get(0).getDuration();
+    }
+
+    @Override
+    public boolean hasNextForPlaying(AudioFile currentFile) {
+        return getNextSong(currentFile) != null;
+    }
+
+    @Override
+    public AudioFile getNextForPlaying(AudioFile currentFile) {
+        return getNextSong(currentFile);
+    }
+
+    @Override
+    public boolean needsHistoryTrack() {
         return false;
     }
 }

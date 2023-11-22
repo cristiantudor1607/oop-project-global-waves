@@ -2,19 +2,19 @@ package globalwaves.player.entities;
 
 import fileio.input.EpisodeInput;
 import fileio.input.PodcastInput;
-import globalwaves.player.entities.properties.PlayableEntity;
 import globalwaves.player.entities.properties.OwnedEntity;
+import globalwaves.player.entities.properties.PlayableEntity;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Getter @Setter
 public class Podcast implements PlayableEntity, OwnedEntity {
     private String name;
     private String owner;
-    private ArrayList<Episode> episodes;
-    private int duration;
+    private List<AudioFile> episodes;
 
     public Podcast(PodcastInput input) {
         name = input.getName();
@@ -26,15 +26,15 @@ public class Podcast implements PlayableEntity, OwnedEntity {
             episodes.add(myEpisode);
         }
 
-        duration = calculatePodcastDuration();
     }
 
-    public int calculatePodcastDuration() {
-        int sum = 0;
-        for (Episode e  : episodes)
-            sum += e.getDuration();
+    public AudioFile getNextEpisode(AudioFile currentEpisode) {
+        int currentIndex = episodes.indexOf(currentEpisode);
 
-        return sum;
+        if (currentIndex > episodes.size())
+            return null;
+
+        return episodes.get(currentIndex + 1);
     }
 
     @Override
@@ -43,13 +43,28 @@ public class Podcast implements PlayableEntity, OwnedEntity {
     }
 
     @Override
-    public boolean isPlaylist() {
-        return false;
+    public AudioFile getPlayableFile() {
+        return episodes.get(0);
     }
 
     @Override
-    public boolean isSong() {
-        return false;
+    public int getDuration() {
+        return episodes.get(0).getDuration();
+    }
+
+    @Override
+    public boolean needsHistoryTrack() {
+        return true;
+    }
+
+    @Override
+    public boolean hasNextForPlaying(AudioFile currentFile) {
+        return getNextEpisode(currentFile) != null;
+    }
+
+    @Override
+    public AudioFile getNextForPlaying(AudioFile currentFile) {
+        return getNextEpisode(currentFile);
     }
 
     @Override
