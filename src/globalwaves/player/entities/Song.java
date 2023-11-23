@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 @Getter @Setter
 public class Song extends AudioFile implements PlayableEntity {
@@ -78,21 +79,55 @@ public class Song extends AudioFile implements PlayableEntity {
     }
 
     @Override
-    public boolean hasNextForPlaying(AudioFile currentFile) {
-        return false;
+    public boolean hasNextForPlaying(AudioFile currentFile, int repeatValue) {
+        if (repeatValue == 0 || repeatValue == 1)
+            return false;
+
+        return true;
     }
 
     @Override
-    public AudioFile getNextForPlaying(AudioFile currentFile) {
-        return null;
+    public AudioFile getNextForPlaying(AudioFile currentFile, int repeatValue) {
+        if (repeatValue == 0)
+            return null;
+
+        return this;
     }
 
+    @Override
+    public AudioFile getPrevForPlaying(AudioFile currentFile, int repeatValue) {
+        if (repeatValue == 0)
+            return null;
+
+        return this;
+    }
 
     @Override
     public FollowExit.code follow(String username) {
         return FollowExit.code.NOT_A_PLAYLIST;
     }
 
+    @Override
+    public String getRepeatStateName(int repeatValue) {
+        switch (repeatValue) {
+            case 0 -> {
+                return "No Repeat";
+            }
+            case 1 -> {
+                return "Repeat Once";
+            }
+            case 2 -> {
+                return "Repeat Infinite";
+            }
+        }
+
+        return null;
+    }
+
+    @Override
+    public boolean isPartialRepeated(int repeatValue) {
+        return repeatValue == 1;
+    }
 
     @Override
     public String toString() {

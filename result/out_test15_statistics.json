@@ -184,7 +184,7 @@
   "command" : "showPreferredSongs",
   "user" : "emily30",
   "timestamp" : 2300,
-  "result" : [ "Blank Space", "Begin Again" ]
+  "result" : [ "The Man", "Black Dog", "Delicate" ]
 }, {
   "command" : "like",
   "user" : "emily30",
@@ -199,7 +199,7 @@
   "command" : "showPreferredSongs",
   "user" : "emily30",
   "timestamp" : 2400,
-  "result" : [ "Blank Space", "Begin Again", "Bohemian Rhapsody" ]
+  "result" : [ "The Man", "Black Dog", "Delicate", "Bohemian Rhapsody" ]
 }, {
   "command" : "search",
   "user" : "emily30",

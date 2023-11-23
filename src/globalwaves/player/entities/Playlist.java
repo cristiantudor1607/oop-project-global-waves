@@ -26,7 +26,7 @@ public class Playlist implements PlayableEntity, OwnedEntity {
         visible = true;
         songs = new ArrayList<>();
         followers = new ArrayList<>();
-        playOrder = getStandardOrder();
+        playOrder = makeNoShuffle();
     }
 
     public boolean isPublic() {
@@ -42,13 +42,6 @@ public class Playlist implements PlayableEntity, OwnedEntity {
     }
 
     public boolean hasSong(AudioFile searchedSong) {
-//        String searchedSongName = searchedSong.getName();
-//
-//        for (AudioFile playlistSong : songs)
-//           if (playlistSong.getName().equals(searchedSongName))
-//               return true;
-//
-//        return false;
         for (AudioFile playlistSong : songs)
             if (playlistSong == searchedSong)
                 return true;
@@ -58,15 +51,15 @@ public class Playlist implements PlayableEntity, OwnedEntity {
 
     public void addSong(AudioFile songToBeAdded) {
         songs.add(songToBeAdded);
-        playOrder = getStandardOrder();
+        playOrder = makeNoShuffle();
     }
 
     public void removeSong(AudioFile songToBeRemoved) {
         songs.remove(songToBeRemoved);
-        playOrder = getStandardOrder();
+        playOrder = makeNoShuffle();
     }
 
-    public List<Integer> getStandardOrder() {
+    public List<Integer> makeNoShuffle() {
         List<Integer> order = new ArrayList<>();
         for (int i = 0; i < songs.size(); i++)
             order.add(i);
@@ -86,6 +79,15 @@ public class Playlist implements PlayableEntity, OwnedEntity {
 
         int nextSongIndex = playOrder.get(currentSongIndex + 1);
         return songs.get(nextSongIndex);
+    }
+
+    public AudioFile getPrevSong(AudioFile currentSong) {
+        int currentSongIndex = getSongIndex(currentSong);
+        if (currentSongIndex == 0)
+            return null;
+
+        int prevSongIndex = playOrder.get(currentSongIndex - 1);
+        return songs.get(prevSongIndex);
     }
 
     public boolean isFollowedByUser(String username) {
@@ -111,6 +113,56 @@ public class Playlist implements PlayableEntity, OwnedEntity {
     }
 
     @Override
+    public String getRepeatStateName(int repeatValue) {
+        switch (repeatValue) {
+            case 0 -> {
+                return "No Repeat";
+            }
+            case 1 -> {
+                return "Repeat All";
+            }
+            case 2 -> {
+                return "Repeat Current Song";
+            }
+        }
+
+        return null;
+    }
+
+    @Override
+    public boolean hasNextForPlaying(AudioFile currentFile, int repeatValue) {
+        if (repeatValue != 0)
+            return true;
+
+        return getNextSong(currentFile) != null;
+    }
+
+    @Override
+    public AudioFile getNextForPlaying(AudioFile currentFile, int repeatValue) {
+       if (repeatValue == 2)
+           return currentFile;
+
+       AudioFile next = getNextSong(currentFile);
+
+       if (repeatValue == 1 && next == null)
+           return getPlayableFile();
+
+       return next;
+    }
+
+    @Override
+    public AudioFile getPrevForPlaying(AudioFile currentFile, int repeatValue) {
+        if (repeatValue == 2)
+            return currentFile;
+
+        AudioFile prev = getPrevSong(currentFile);
+        if (repeatValue == 1 && prev == null)
+            return songs.get(playOrder.get(playOrder.size() - 1));
+
+        return prev;
+    }
+
+    @Override
     public boolean isEmptyPlayableFile() {
         return songs.isEmpty();
     }
@@ -131,16 +183,6 @@ public class Playlist implements PlayableEntity, OwnedEntity {
         return songs.get(0).getDuration();
     }
 
-    @Override
-    public boolean hasNextForPlaying(AudioFile currentFile) {
-        return getNextSong(currentFile) != null;
-    }
-
-    @Override
-    public AudioFile getNextForPlaying(AudioFile currentFile) {
-        return getNextSong(currentFile);
-    }
-
 
     @Override
     public FollowExit.code follow(String username) {
@@ -154,6 +196,11 @@ public class Playlist implements PlayableEntity, OwnedEntity {
 
         addUserToFollowers(username);
         return FollowExit.code.FOLLOWED;
+    }
+
+    @Override
+    public boolean isPartialRepeated(int repeatValue) {
+        return false;
     }
 
     @Override

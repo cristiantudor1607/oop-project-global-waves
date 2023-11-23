@@ -216,11 +216,11 @@
   "user" : "bob35",
   "timestamp" : 2350,
   "stats" : {
-    "name" : "Begin Again",
-    "remainedTime" : -27,
+    "name" : "",
+    "remainedTime" : 0,
     "repeat" : "No Repeat",
     "shuffle" : false,
-    "paused" : false
+    "paused" : true
   }
 }, {
   "command" : "search",

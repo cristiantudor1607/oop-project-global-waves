@@ -209,6 +209,18 @@ public class ActionManager {
         return userPlayer.getSelectedSource().follow(username);
     }
 
+    public String requestRepeatAction(RepeatInterrogator execQuery) {
+        Player userPlayer = requestPlayer(execQuery);
+
+        if (!userPlayer.hasSourceLoaded() || userPlayer.hasNoSource())
+            return "Please load a source before setting the repeat status.";
+
+        userPlayer.changeRepeatState();
+        int newRepeat = userPlayer.getRepeat();
+        String stateName = userPlayer.getSelectedSource().getRepeatStateName(newRepeat);
+        return "Repeat mode changed to " + stateName.toLowerCase() + ".";
+    }
+
     public void updatePlayersData(CommandObject nextToExecuteCommand) {
         int diff = nextToExecuteCommand.getTimestamp() - lastActionTime;
         for (Map.Entry<String, Player> entry : players.entrySet()) {

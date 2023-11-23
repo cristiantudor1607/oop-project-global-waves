@@ -16,44 +16,89 @@ public class Player {
         NOT_IN_USE,
     }
 
-    public enum RepeatValue {
-        NO_REPEAT,
-        REPEAT_ONCE,
-        REPEAT_INF,
-        REPEAT_ALL,
-        REPEAT_CURR,
-    }
-
     private Map<PlayableEntity, HistoryEntry> history;
     private PlayableEntity selectedSource;
+    private AudioFile prevFile;
     private AudioFile playingFile;
+    private AudioFile nextFile;
     private PlayerStatus state;
-    private RepeatValue repeat;
+    private int repeat;
     private boolean shuffle;
     private int remainedTime;
+    private int replayedTimes;
 
     public Player() {
         history = new HashMap<>();
-        selectedSource = null;
-        playingFile = null;
         state = PlayerStatus.NOT_IN_USE;
-        repeat = RepeatValue.NO_REPEAT;
-        shuffle = false;
-        remainedTime = 0;
     }
 
     public void resetPlayer() {
         selectedSource = null;
+        prevFile = null;
         playingFile = null;
+        nextFile = null;
         state = PlayerStatus.NOT_IN_USE;
-        repeat = RepeatValue.NO_REPEAT;
+        repeat = 0;
         shuffle = false;
         remainedTime = 0;
+        replayedTimes = 0;
+    }
+
+    public void setDefaultLoadOptions() {
+        state = PlayerStatus.PLAYING;
+        repeat =  0;
+        shuffle = false;
+        replayedTimes = 0;
     }
 
     public void select(PlayableEntity selectedEntity) {
         this.selectedSource = selectedEntity;
         state = PlayerStatus.SELECTED;
+    }
+
+    public void changeRepeatState() {
+        repeat = (repeat + 1) % 3;
+        nextFile = selectedSource.getNextForPlaying(playingFile, repeat);
+    }
+
+    public void updateAfterTimeskip(int timeDiff) {
+        if (remainedTime - timeDiff > 0) {
+            remainedTime -= timeDiff;
+            return;
+        }
+
+        remainedTime -= timeDiff;
+        if (remainedTime == 0) {
+            // for songs and podcasts repeat once is temporary
+            if (playingFile == nextFile && repeat == 1)
+                repeat = 0;
+
+            prevFile = playingFile;
+            playingFile = nextFile;
+            if (playingFile == null) {
+                resetPlayer();
+                return;
+            }
+            nextFile = selectedSource.getNextForPlaying(playingFile, repeat);
+            remainedTime = playingFile.getDuration();
+            return;
+        }
+
+        if (remainedTime < 0) {
+            if (playingFile == nextFile && repeat == 1)
+                repeat = 0;
+
+            while (remainedTime < 0) {
+                prevFile = playingFile;
+                playingFile = nextFile;
+                if (playingFile == null) {
+                    resetPlayer();
+                    return;
+                }
+                nextFile = selectedSource.getNextForPlaying(playingFile, repeat);
+                remainedTime += playingFile.getDuration();
+            }
+        }
     }
 
     public void play() {
@@ -80,17 +125,7 @@ public class Player {
             state == PlayerStatus.SELECTED)
             return;
 
-        remainedTime -= timeDifference;
-        if (remainedTime <= 0 && selectedSource.hasNextForPlaying(playingFile)) {
-            playingFile = selectedSource.getNextForPlaying(playingFile);
-            remainedTime += playingFile.getDuration();
-            return;
-        }
-
-        if (remainedTime <= 0) {
-            removeFromHistory();
-            resetPlayer();
-        }
+        updateAfterTimeskip(timeDifference);
     }
 
     public void removeFromHistory() {
@@ -102,15 +137,12 @@ public class Player {
         return history.containsKey(selectedSource);
     }
 
-    public void setDefaultLoadOptions() {
-        state = PlayerStatus.PLAYING;
-        repeat = RepeatValue.NO_REPEAT;
-        shuffle = false;
-    }
-
     private void loadFromHistory() {
         playingFile = history.get(selectedSource).getFile();
+        prevFile = selectedSource.getPrevForPlaying(playingFile, 0);
+        nextFile = selectedSource.getNextForPlaying(playingFile, 0);
         remainedTime = history.get(selectedSource).getRemainedTime();
+        removeFromHistory();
         setDefaultLoadOptions();
     }
 
@@ -122,10 +154,9 @@ public class Player {
 
         AudioFile newAudiofile = selectedSource.getPlayableFile();
         int duration = newAudiofile.getDuration();
-        if (selectedSource.needsHistoryTrack())
-            history.put(selectedSource, new HistoryEntry(newAudiofile, duration));
 
         playingFile = newAudiofile;
+        nextFile = selectedSource.getNextForPlaying(playingFile, 0);
         remainedTime = duration;
         setDefaultLoadOptions();
     }

@@ -3,12 +3,12 @@
   "user" : "alice22",
   "timestamp" : 10,
   "message" : "Search returned 1 results",
-  "results" : [ "TED Radio Hour" ]
+  "results" : [ "Dream Chaser" ]
 }, {
   "command" : "select",
   "user" : "alice22",
   "timestamp" : 15,
-  "message" : "Successfully selected TED Radio Hour."
+  "message" : "Successfully selected Dream Chaser."
 }, {
   "command" : "load",
   "user" : "alice22",
@@ -17,154 +17,265 @@
 }, {
   "command" : "status",
   "user" : "alice22",
-  "timestamp" : 59,
+  "timestamp" : 30,
   "stats" : {
-    "name" : "The Power of Design",
-    "remainedTime" : 3065,
+    "name" : "Dream Chaser",
+    "remainedTime" : 195,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
   }
 }, {
-  "command" : "search",
+  "command" : "repeat",
   "user" : "alice22",
-  "timestamp" : 60,
-  "message" : "Search returned 1 results",
-  "results" : [ "Stairway to Heaven" ]
-}, {
-  "command" : "select",
-  "user" : "alice22",
-  "timestamp" : 65,
-  "message" : "Successfully selected Stairway to Heaven."
-}, {
-  "command" : "load",
-  "user" : "alice22",
-  "timestamp" : 70,
-  "message" : "Playback loaded successfully."
-}, {
-  "command" : "search",
-  "user" : "alice22",
-  "timestamp" : 75,
-  "message" : "Search returned 1 results",
-  "results" : [ "TED Radio Hour" ]
-}, {
-  "command" : "select",
-  "user" : "alice22",
-  "timestamp" : 80,
-  "message" : "Successfully selected TED Radio Hour."
-}, {
-  "command" : "load",
-  "user" : "alice22",
-  "timestamp" : 85,
-  "message" : "Playback loaded successfully."
+  "timestamp" : 31,
+  "message" : "Repeat mode changed to repeat once."
 }, {
   "command" : "status",
   "user" : "alice22",
-  "timestamp" : 86,
+  "timestamp" : 32,
   "stats" : {
-    "name" : "The Power of Design",
-    "remainedTime" : 3063,
-    "repeat" : "No Repeat",
+    "name" : "Dream Chaser",
+    "remainedTime" : 193,
+    "repeat" : "Repeat Once",
     "shuffle" : false,
     "paused" : false
   }
 }, {
-  "command" : "playPause",
-  "user" : "alice22",
-  "timestamp" : 3200,
-  "message" : "Playback paused successfully."
-}, {
   "command" : "status",
   "user" : "alice22",
-  "timestamp" : 3201,
+  "timestamp" : 257,
   "stats" : {
-    "name" : "The Science of Us",
-    "remainedTime" : 3081,
-    "repeat" : "No Repeat",
-    "shuffle" : false,
-    "paused" : true
-  }
-}, {
-  "command" : "createPlaylist",
-  "user" : "alice22",
-  "timestamp" : 3210,
-  "message" : "Playlist created successfully."
-}, {
-  "command" : "search",
-  "user" : "alice22",
-  "timestamp" : 3215,
-  "message" : "Search returned 2 results",
-  "results" : [ "Freedom", "Freedom" ]
-}, {
-  "command" : "select",
-  "user" : "alice22",
-  "timestamp" : 3220,
-  "message" : "Successfully selected Freedom."
-}, {
-  "command" : "load",
-  "user" : "alice22",
-  "timestamp" : 3225,
-  "message" : "Playback loaded successfully."
-}, {
-  "command" : "addRemoveInPlaylist",
-  "user" : "alice22",
-  "timestamp" : 3230,
-  "message" : "Successfully added to playlist."
-}, {
-  "command" : "search",
-  "user" : "alice22",
-  "timestamp" : 3235,
-  "message" : "Search returned 1 results",
-  "results" : [ "Happier" ]
-}, {
-  "command" : "select",
-  "user" : "alice22",
-  "timestamp" : 3240,
-  "message" : "Successfully selected Happier."
-}, {
-  "command" : "load",
-  "user" : "alice22",
-  "timestamp" : 3245,
-  "message" : "Playback loaded successfully."
-}, {
-  "command" : "addRemoveInPlaylist",
-  "user" : "alice22",
-  "timestamp" : 3250,
-  "message" : "Successfully added to playlist."
-}, {
-  "command" : "search",
-  "user" : "alice22",
-  "timestamp" : 3255,
-  "message" : "Search returned 1 results",
-  "results" : [ "2010 hits" ]
-}, {
-  "command" : "select",
-  "user" : "alice22",
-  "timestamp" : 3260,
-  "message" : "Successfully selected 2010 hits."
-}, {
-  "command" : "load",
-  "user" : "alice22",
-  "timestamp" : 3265,
-  "message" : "Playback loaded successfully."
-}, {
-  "command" : "status",
-  "user" : "alice22",
-  "timestamp" : 3270,
-  "stats" : {
-    "name" : "Freedom",
+    "name" : "Dream Chaser",
     "remainedTime" : 173,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
   }
 }, {
+  "command" : "repeat",
+  "user" : "alice22",
+  "timestamp" : 258,
+  "message" : "Repeat mode changed to repeat once."
+}, {
+  "command" : "repeat",
+  "user" : "alice22",
+  "timestamp" : 258,
+  "message" : "Repeat mode changed to repeat infinite."
+}, {
   "command" : "status",
   "user" : "alice22",
-  "timestamp" : 3448,
+  "timestamp" : 1000,
   "stats" : {
-    "name" : "Happier",
-    "remainedTime" : 202,
+    "name" : "Dream Chaser",
+    "remainedTime" : -365,
+    "repeat" : "Repeat Infinite",
+    "shuffle" : false,
+    "paused" : false
+  }
+}, {
+  "command" : "createPlaylist",
+  "user" : "alice22",
+  "timestamp" : 1005,
+  "message" : "Playlist created successfully."
+}, {
+  "command" : "search",
+  "user" : "alice22",
+  "timestamp" : 1006,
+  "message" : "Search returned 1 results",
+  "results" : [ "99 Problems" ]
+}, {
+  "command" : "select",
+  "user" : "alice22",
+  "timestamp" : 1007,
+  "message" : "Successfully selected 99 Problems."
+}, {
+  "command" : "load",
+  "user" : "alice22",
+  "timestamp" : 1008,
+  "message" : "Playback loaded successfully."
+}, {
+  "command" : "addRemoveInPlaylist",
+  "user" : "alice22",
+  "timestamp" : 1009,
+  "message" : "Successfully added to playlist."
+}, {
+  "command" : "search",
+  "user" : "alice22",
+  "timestamp" : 1010,
+  "message" : "Search returned 1 results",
+  "results" : [ "Hustle Hard" ]
+}, {
+  "command" : "select",
+  "user" : "alice22",
+  "timestamp" : 1011,
+  "message" : "Successfully selected Hustle Hard."
+}, {
+  "command" : "load",
+  "user" : "alice22",
+  "timestamp" : 1012,
+  "message" : "Playback loaded successfully."
+}, {
+  "command" : "addRemoveInPlaylist",
+  "user" : "alice22",
+  "timestamp" : 1013,
+  "message" : "Successfully added to playlist."
+}, {
+  "command" : "search",
+  "user" : "alice22",
+  "timestamp" : 1014,
+  "message" : "Search returned 1 results",
+  "results" : [ "Butterfly Effect" ]
+}, {
+  "command" : "select",
+  "user" : "alice22",
+  "timestamp" : 1015,
+  "message" : "Successfully selected Butterfly Effect."
+}, {
+  "command" : "load",
+  "user" : "alice22",
+  "timestamp" : 1016,
+  "message" : "Playback loaded successfully."
+}, {
+  "command" : "addRemoveInPlaylist",
+  "user" : "alice22",
+  "timestamp" : 1017,
+  "message" : "Successfully added to playlist."
+}, {
+  "command" : "search",
+  "user" : "alice22",
+  "timestamp" : 1018,
+  "message" : "Search returned 1 results",
+  "results" : [ "Moves Like Jagger" ]
+}, {
+  "command" : "select",
+  "user" : "alice22",
+  "timestamp" : 1019,
+  "message" : "Successfully selected Moves Like Jagger."
+}, {
+  "command" : "load",
+  "user" : "alice22",
+  "timestamp" : 1020,
+  "message" : "Playback loaded successfully."
+}, {
+  "command" : "addRemoveInPlaylist",
+  "user" : "alice22",
+  "timestamp" : 1021,
+  "message" : "Successfully added to playlist."
+}, {
+  "command" : "search",
+  "user" : "alice22",
+  "timestamp" : 1022,
+  "message" : "Search returned 1 results",
+  "results" : [ "Dream Chaser" ]
+}, {
+  "command" : "select",
+  "user" : "alice22",
+  "timestamp" : 1023,
+  "message" : "Successfully selected Dream Chaser."
+}, {
+  "command" : "load",
+  "user" : "alice22",
+  "timestamp" : 1024,
+  "message" : "Playback loaded successfully."
+}, {
+  "command" : "addRemoveInPlaylist",
+  "user" : "alice22",
+  "timestamp" : 1025,
+  "message" : "Successfully added to playlist."
+}, {
+  "command" : "search",
+  "user" : "alice22",
+  "timestamp" : 1026,
+  "message" : "Search returned 1 results",
+  "results" : [ "My favourite songs" ]
+}, {
+  "command" : "select",
+  "user" : "alice22",
+  "timestamp" : 1027,
+  "message" : "Successfully selected My favourite songs."
+}, {
+  "command" : "load",
+  "user" : "alice22",
+  "timestamp" : 1028,
+  "message" : "Playback loaded successfully."
+}, {
+  "command" : "status",
+  "user" : "alice22",
+  "timestamp" : 1035,
+  "stats" : {
+    "name" : "99 Problems",
+    "remainedTime" : 227,
+    "repeat" : "No Repeat",
+    "shuffle" : false,
+    "paused" : false
+  }
+}, {
+  "command" : "repeat",
+  "user" : "alice22",
+  "timestamp" : 1036,
+  "message" : "Repeat mode changed to repeat all."
+}, {
+  "command" : "status",
+  "user" : "alice22",
+  "timestamp" : 1037,
+  "stats" : {
+    "name" : "99 Problems",
+    "remainedTime" : 225,
+    "repeat" : "Repeat All",
+    "shuffle" : false,
+    "paused" : false
+  }
+}, {
+  "command" : "status",
+  "user" : "alice22",
+  "timestamp" : 2099,
+  "stats" : {
+    "name" : "Hustle Hard",
+    "remainedTime" : -605,
+    "repeat" : "Repeat All",
+    "shuffle" : false,
+    "paused" : false
+  }
+}, {
+  "command" : "repeat",
+  "user" : "alice22",
+  "timestamp" : 2100,
+  "message" : "Repeat mode changed to repeat current song."
+}, {
+  "command" : "status",
+  "user" : "alice22",
+  "timestamp" : 2101,
+  "stats" : {
+    "name" : "Butterfly Effect",
+    "remainedTime" : -227,
+    "repeat" : "Repeat Current Song",
+    "shuffle" : false,
+    "paused" : false
+  }
+}, {
+  "command" : "status",
+  "user" : "alice22",
+  "timestamp" : 2334,
+  "stats" : {
+    "name" : "Butterfly Effect",
+    "remainedTime" : -270,
+    "repeat" : "Repeat Current Song",
+    "shuffle" : false,
+    "paused" : false
+  }
+}, {
+  "command" : "repeat",
+  "user" : "alice22",
+  "timestamp" : 2335,
+  "message" : "Repeat mode changed to no repeat."
+}, {
+  "command" : "status",
+  "user" : "alice22",
+  "timestamp" : 2336,
+  "stats" : {
+    "name" : "Moves Like Jagger",
+    "remainedTime" : 119,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -172,12 +283,12 @@
 }, {
   "command" : "status",
   "user" : "alice22",
-  "timestamp" : 4000,
+  "timestamp" : 3600,
   "stats" : {
-    "name" : "",
-    "remainedTime" : 0,
+    "name" : "Dream Chaser",
+    "remainedTime" : -940,
     "repeat" : "No Repeat",
     "shuffle" : false,
-    "paused" : true
+    "paused" : false
   }
 } ]

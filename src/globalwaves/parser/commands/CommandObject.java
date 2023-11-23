@@ -19,7 +19,7 @@ import java.util.Map;
         @JsonSubTypes.Type(value = SelectInterrogator.class, name = "select"),
         @JsonSubTypes.Type(value = LoadInterrogator.class, name = "load"),
         @JsonSubTypes.Type(value = PlayPauseInterrogator.class, name = "playPause"),
-        @JsonSubTypes.Type(value = NoArgsCommandObject.class, name = "repeat"),
+        @JsonSubTypes.Type(value = RepeatInterrogator.class, name = "repeat"),
         @JsonSubTypes.Type(value = ShuffleCommandObject.class, name = "shuffle"),
         @JsonSubTypes.Type(value = NoArgsCommandObject.class, name = "forward"),
         @JsonSubTypes.Type(value = NoArgsCommandObject.class, name = "backward"),

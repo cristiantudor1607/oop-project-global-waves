@@ -10,6 +10,7 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Getter @Setter
 public class Podcast implements PlayableEntity, OwnedEntity {
@@ -38,6 +39,56 @@ public class Podcast implements PlayableEntity, OwnedEntity {
         return episodes.get(currentIndex + 1);
     }
 
+    public AudioFile getPrevEpisode(AudioFile currentEpisode) {
+        int currentIndex = episodes.indexOf(currentEpisode);
+
+        if (currentIndex == 0)
+            return null;
+
+        return episodes.get(currentIndex - 1);
+    }
+
+    @Override
+    public String getRepeatStateName(int repeatValue) {
+        switch (repeatValue) {
+            case 0 -> {
+                return "No Repeat";
+            }
+            case 1 -> {
+                return "Repeat Once";
+            }
+            case 2 -> {
+                return "Repeat Infinite";
+            }
+        }
+
+        return null;
+    }
+
+    @Override
+    public boolean hasNextForPlaying(AudioFile currentFile, int repeatValue) {
+        if (repeatValue == 2)
+            return true;
+
+        return getNextEpisode(currentFile) != null;
+    }
+
+    @Override
+    public AudioFile getNextForPlaying(AudioFile currentFile, int repeatValue) {
+        if (repeatValue == 2 || repeatValue == 1)
+            return currentFile;
+
+        return  getNextEpisode(currentFile);
+    }
+
+    @Override
+    public AudioFile getPrevForPlaying(AudioFile currentFile, int repeatValue) {
+        if (repeatValue == 2 || repeatValue == 1)
+            return currentFile;
+
+        return getPrevEpisode(currentFile);
+    }
+
     @Override
     public boolean isEmptyPlayableFile() {
         return false;
@@ -58,19 +109,15 @@ public class Podcast implements PlayableEntity, OwnedEntity {
         return true;
     }
 
-    @Override
-    public boolean hasNextForPlaying(AudioFile currentFile) {
-        return getNextEpisode(currentFile) != null;
-    }
-
-    @Override
-    public AudioFile getNextForPlaying(AudioFile currentFile) {
-        return getNextEpisode(currentFile);
-    }
 
     @Override
     public FollowExit.code follow(String username) {
         return FollowExit.code.NOT_A_PLAYLIST;
+    }
+
+    @Override
+    public boolean isPartialRepeated(int repeatValue) {
+        return repeatValue == 1;
     }
 
     @Override
