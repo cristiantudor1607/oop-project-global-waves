@@ -33,6 +33,7 @@ public class Player {
     }
 
     public void resetPlayer() {
+        selectedSource.unshuffle();
         selectedSource = null;
         prevFile = null;
         playingFile = null;
@@ -58,6 +59,11 @@ public class Player {
 
     public void changeRepeatState() {
         repeat = (repeat + 1) % 3;
+        nextFile = selectedSource.getNextForPlaying(playingFile, repeat);
+    }
+
+    public void changeOrderAfterShuffle() {
+        prevFile = selectedSource.getPrevForPlaying(playingFile, repeat);
         nextFile = selectedSource.getNextForPlaying(playingFile, repeat);
     }
 

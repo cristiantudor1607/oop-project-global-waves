@@ -4649,15 +4649,20 @@
     "shuffle" : false,
     "paused" : false
   }
-}, null, {
+}, {
+  "command" : "shuffle",
+  "user" : "bob35",
+  "timestamp" : 5510,
+  "message" : "Shuffle function activated successfully."
+}, {
   "command" : "status",
   "user" : "bob35",
   "timestamp" : 5510,
   "stats" : {
     "name" : "Stairway to Heaven",
-    "remainedTime" : 374,
+    "remainedTime" : 384,
     "repeat" : "No Repeat",
-    "shuffle" : false,
+    "shuffle" : true,
     "paused" : false
   }
 }, {
@@ -4671,7 +4676,7 @@
   "timestamp" : 5520,
   "stats" : {
     "name" : "Love Story",
-    "remainedTime" : 128,
+    "remainedTime" : 138,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -4682,7 +4687,7 @@
   "timestamp" : 5530,
   "stats" : {
     "name" : "Start Me Up",
-    "remainedTime" : 104,
+    "remainedTime" : 114,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -4693,7 +4698,7 @@
   "timestamp" : 5530,
   "stats" : {
     "name" : "Start Me Up",
-    "remainedTime" : 104,
+    "remainedTime" : 114,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -4714,7 +4719,7 @@
   "timestamp" : 5540,
   "stats" : {
     "name" : "Start Me Up",
-    "remainedTime" : 104,
+    "remainedTime" : 114,
     "repeat" : "Repeat All",
     "shuffle" : false,
     "paused" : false
@@ -4725,7 +4730,7 @@
   "timestamp" : 5550,
   "stats" : {
     "name" : "Start Me Up",
-    "remainedTime" : 104,
+    "remainedTime" : 114,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -4736,7 +4741,7 @@
   "timestamp" : 5550,
   "stats" : {
     "name" : "Start Me Up",
-    "remainedTime" : 104,
+    "remainedTime" : 114,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -4752,7 +4757,7 @@
   "timestamp" : 5560,
   "stats" : {
     "name" : "Begin Again",
-    "remainedTime" : 130,
+    "remainedTime" : 140,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -4763,7 +4768,7 @@
   "timestamp" : 5570,
   "stats" : {
     "name" : "Dream On",
-    "remainedTime" : 149,
+    "remainedTime" : 159,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -4774,7 +4779,7 @@
   "timestamp" : 5580,
   "stats" : {
     "name" : "Dream On",
-    "remainedTime" : 149,
+    "remainedTime" : 159,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -4785,7 +4790,7 @@
   "timestamp" : 5580,
   "stats" : {
     "name" : "Dream On",
-    "remainedTime" : 149,
+    "remainedTime" : 159,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -4796,7 +4801,7 @@
   "timestamp" : 5590,
   "stats" : {
     "name" : "Shape of You",
-    "remainedTime" : 115,
+    "remainedTime" : 125,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -4807,7 +4812,7 @@
   "timestamp" : 5590,
   "stats" : {
     "name" : "Shape of You",
-    "remainedTime" : 115,
+    "remainedTime" : 125,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -4818,7 +4823,7 @@
   "timestamp" : 5600,
   "stats" : {
     "name" : "Angie",
-    "remainedTime" : 45,
+    "remainedTime" : 55,
     "repeat" : "Repeat All",
     "shuffle" : false,
     "paused" : false
@@ -4829,9 +4834,9 @@
   "timestamp" : 5610,
   "stats" : {
     "name" : "Stairway to Heaven",
-    "remainedTime" : 234,
+    "remainedTime" : 244,
     "repeat" : "No Repeat",
-    "shuffle" : false,
+    "shuffle" : true,
     "paused" : false
   }
 }, {
@@ -4845,7 +4850,7 @@
   "timestamp" : 5620,
   "stats" : {
     "name" : "Love Story",
-    "remainedTime" : 128,
+    "remainedTime" : 138,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -4861,7 +4866,7 @@
   "timestamp" : 5630,
   "stats" : {
     "name" : "Dream On",
-    "remainedTime" : 231,
+    "remainedTime" : 241,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -4872,7 +4877,7 @@
   "timestamp" : 5640,
   "stats" : {
     "name" : "Shape of You",
-    "remainedTime" : 187,
+    "remainedTime" : 197,
     "repeat" : "Repeat All",
     "shuffle" : false,
     "paused" : false
@@ -4888,7 +4893,7 @@
   "timestamp" : 5650,
   "stats" : {
     "name" : "Whatever You Need",
-    "remainedTime" : 164,
+    "remainedTime" : 174,
     "repeat" : "Repeat All",
     "shuffle" : false,
     "paused" : false
@@ -4899,7 +4904,7 @@
   "timestamp" : 5660,
   "stats" : {
     "name" : "Gimme Shelter",
-    "remainedTime" : 241,
+    "remainedTime" : 251,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -4908,17 +4913,17 @@
   "command" : "repeat",
   "user" : "henry26",
   "timestamp" : 5670,
-  "message" : "Please load a source before setting the repeat status."
+  "message" : "Repeat mode changed to repeat all."
 }, {
   "command" : "status",
   "user" : "henry26",
   "timestamp" : 5670,
   "stats" : {
-    "name" : "",
-    "remainedTime" : 0,
-    "repeat" : "No Repeat",
+    "name" : "Dream On",
+    "remainedTime" : 9,
+    "repeat" : "Repeat All",
     "shuffle" : false,
-    "paused" : true
+    "paused" : false
   }
 }, {
   "command" : "repeat",
@@ -4930,8 +4935,8 @@
   "user" : "irene33",
   "timestamp" : 5680,
   "stats" : {
-    "name" : "Don't",
-    "remainedTime" : 218,
+    "name" : "Dream On",
+    "remainedTime" : 9,
     "repeat" : "Repeat All",
     "shuffle" : false,
     "paused" : false
@@ -4947,7 +4952,7 @@
   "timestamp" : 5690,
   "stats" : {
     "name" : "Money Trees",
-    "remainedTime" : 352,
+    "remainedTime" : 362,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -4958,7 +4963,7 @@
   "timestamp" : 5690,
   "stats" : {
     "name" : "Money Trees",
-    "remainedTime" : 352,
+    "remainedTime" : 362,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -4974,7 +4979,7 @@
   "timestamp" : 5700,
   "stats" : {
     "name" : "Shape of You",
-    "remainedTime" : 138,
+    "remainedTime" : 148,
     "repeat" : "Repeat All",
     "shuffle" : false,
     "paused" : true
@@ -4990,9 +4995,9 @@
   "timestamp" : 5710,
   "stats" : {
     "name" : "Stairway to Heaven",
-    "remainedTime" : 114,
+    "remainedTime" : 124,
     "repeat" : "No Repeat",
-    "shuffle" : false,
+    "shuffle" : true,
     "paused" : true
   }
 }, {
@@ -5006,7 +5011,7 @@
   "timestamp" : 5720,
   "stats" : {
     "name" : "Love Story",
-    "remainedTime" : 128,
+    "remainedTime" : 138,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5027,7 +5032,7 @@
   "timestamp" : 5730,
   "stats" : {
     "name" : "Dream On",
-    "remainedTime" : 111,
+    "remainedTime" : 121,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -5038,7 +5043,7 @@
   "timestamp" : 5740,
   "stats" : {
     "name" : "Shape of You",
-    "remainedTime" : 57,
+    "remainedTime" : 67,
     "repeat" : "Repeat All",
     "shuffle" : false,
     "paused" : false
@@ -5054,7 +5059,7 @@
   "timestamp" : 5750,
   "stats" : {
     "name" : "Whatever You Need",
-    "remainedTime" : 34,
+    "remainedTime" : 44,
     "repeat" : "Repeat Current Song",
     "shuffle" : false,
     "paused" : false
@@ -5070,7 +5075,7 @@
   "timestamp" : 5760,
   "stats" : {
     "name" : "Gimme Shelter",
-    "remainedTime" : 121,
+    "remainedTime" : 131,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -5081,7 +5086,7 @@
   "timestamp" : 5760,
   "stats" : {
     "name" : "Gimme Shelter",
-    "remainedTime" : 121,
+    "remainedTime" : 131,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -5091,11 +5096,11 @@
   "user" : "henry26",
   "timestamp" : 5770,
   "stats" : {
-    "name" : "",
-    "remainedTime" : 0,
+    "name" : "Dream On",
+    "remainedTime" : 146,
     "repeat" : "No Repeat",
     "shuffle" : false,
-    "paused" : true
+    "paused" : false
   }
 }, {
   "command" : "playPause",
@@ -5108,7 +5113,7 @@
   "timestamp" : 5780,
   "stats" : {
     "name" : "Don't",
-    "remainedTime" : 88,
+    "remainedTime" : 98,
     "repeat" : "Repeat All",
     "shuffle" : false,
     "paused" : true
@@ -5124,7 +5129,7 @@
   "timestamp" : 5790,
   "stats" : {
     "name" : "Money Trees",
-    "remainedTime" : 222,
+    "remainedTime" : 232,
     "repeat" : "Repeat All",
     "shuffle" : false,
     "paused" : false
@@ -5135,7 +5140,7 @@
   "timestamp" : 5800,
   "stats" : {
     "name" : "Shape of You",
-    "remainedTime" : 138,
+    "remainedTime" : 148,
     "repeat" : "Repeat All",
     "shuffle" : false,
     "paused" : true
@@ -5151,9 +5156,9 @@
   "timestamp" : 5810,
   "stats" : {
     "name" : "Stairway to Heaven",
-    "remainedTime" : 114,
+    "remainedTime" : 124,
     "repeat" : "No Repeat",
-    "shuffle" : false,
+    "shuffle" : true,
     "paused" : true
   }
 }, null, {
@@ -5162,7 +5167,7 @@
   "timestamp" : 5820,
   "stats" : {
     "name" : "Love Story",
-    "remainedTime" : 128,
+    "remainedTime" : 138,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5173,7 +5178,7 @@
   "timestamp" : 5830,
   "stats" : {
     "name" : "Angie",
-    "remainedTime" : 234,
+    "remainedTime" : 244,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -5184,7 +5189,7 @@
   "timestamp" : 5830,
   "stats" : {
     "name" : "Angie",
-    "remainedTime" : 234,
+    "remainedTime" : 244,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -5205,7 +5210,7 @@
   "timestamp" : 5840,
   "stats" : {
     "name" : "Black Dog",
-    "remainedTime" : 221,
+    "remainedTime" : 231,
     "repeat" : "Repeat Current Song",
     "shuffle" : false,
     "paused" : false
@@ -5221,7 +5226,7 @@
   "timestamp" : 5850,
   "stats" : {
     "name" : "Whatever You Need",
-    "remainedTime" : 114,
+    "remainedTime" : 124,
     "repeat" : "Repeat Current Song",
     "shuffle" : false,
     "paused" : false
@@ -5232,21 +5237,26 @@
   "timestamp" : 5860,
   "stats" : {
     "name" : "Start Me Up",
-    "remainedTime" : 193,
+    "remainedTime" : 203,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
   }
-}, null, {
+}, {
+  "command" : "shuffle",
+  "user" : "henry26",
+  "timestamp" : 5870,
+  "message" : "Shuffle function activated successfully."
+}, {
   "command" : "status",
   "user" : "henry26",
   "timestamp" : 5870,
   "stats" : {
-    "name" : "",
-    "remainedTime" : 0,
+    "name" : "Dream On",
+    "remainedTime" : 16,
     "repeat" : "No Repeat",
-    "shuffle" : false,
-    "paused" : true
+    "shuffle" : true,
+    "paused" : false
   }
 }, {
   "command" : "switchVisibility",
@@ -5264,7 +5274,7 @@
   "timestamp" : 5880,
   "stats" : {
     "name" : "Don't",
-    "remainedTime" : 88,
+    "remainedTime" : 98,
     "repeat" : "Repeat All",
     "shuffle" : false,
     "paused" : true
@@ -5280,20 +5290,25 @@
   "timestamp" : 5890,
   "stats" : {
     "name" : "Money Trees",
-    "remainedTime" : 82,
+    "remainedTime" : 102,
     "repeat" : "Repeat All",
     "shuffle" : false,
     "paused" : false
   }
-}, null, {
+}, {
+  "command" : "shuffle",
+  "user" : "alice22",
+  "timestamp" : 5900,
+  "message" : "Shuffle function activated successfully."
+}, {
   "command" : "status",
   "user" : "alice22",
   "timestamp" : 5900,
   "stats" : {
     "name" : "Shape of You",
-    "remainedTime" : 138,
+    "remainedTime" : 148,
     "repeat" : "Repeat All",
-    "shuffle" : false,
+    "shuffle" : true,
     "paused" : true
   }
 }, null, {
@@ -5302,9 +5317,9 @@
   "timestamp" : 5910,
   "stats" : {
     "name" : "Stairway to Heaven",
-    "remainedTime" : 114,
+    "remainedTime" : 124,
     "repeat" : "No Repeat",
-    "shuffle" : false,
+    "shuffle" : true,
     "paused" : true
   }
 }, {
@@ -5318,7 +5333,7 @@
   "timestamp" : 5920,
   "stats" : {
     "name" : "Love Story",
-    "remainedTime" : 128,
+    "remainedTime" : 138,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5329,7 +5344,7 @@
   "timestamp" : 5920,
   "stats" : {
     "name" : "Love Story",
-    "remainedTime" : 128,
+    "remainedTime" : 138,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5340,7 +5355,7 @@
   "timestamp" : 5930,
   "stats" : {
     "name" : "Angie",
-    "remainedTime" : 74,
+    "remainedTime" : 104,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -5356,7 +5371,7 @@
   "timestamp" : 5940,
   "stats" : {
     "name" : "Black Dog",
-    "remainedTime" : 61,
+    "remainedTime" : 91,
     "repeat" : "Repeat Current Song",
     "shuffle" : false,
     "paused" : false
@@ -5367,7 +5382,7 @@
   "timestamp" : 5950,
   "stats" : {
     "name" : "Whatever You Need",
-    "remainedTime" : 164,
+    "remainedTime" : 194,
     "repeat" : "Repeat Current Song",
     "shuffle" : false,
     "paused" : false
@@ -5378,7 +5393,7 @@
   "timestamp" : 5950,
   "stats" : {
     "name" : "Whatever You Need",
-    "remainedTime" : 164,
+    "remainedTime" : 194,
     "repeat" : "Repeat Current Song",
     "shuffle" : false,
     "paused" : false
@@ -5399,12 +5414,17 @@
   "timestamp" : 5960,
   "stats" : {
     "name" : "Start Me Up",
-    "remainedTime" : 43,
+    "remainedTime" : 73,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
   }
-}, null, {
+}, {
+  "command" : "shuffle",
+  "user" : "henry26",
+  "timestamp" : 5970,
+  "message" : "Please load a source before using the shuffle function."
+}, {
   "command" : "status",
   "user" : "henry26",
   "timestamp" : 5970,
@@ -5415,35 +5435,50 @@
     "shuffle" : false,
     "paused" : true
   }
-}, null, {
+}, {
+  "command" : "shuffle",
+  "user" : "irene33",
+  "timestamp" : 5980,
+  "message" : "Shuffle function activated successfully."
+}, {
   "command" : "status",
   "user" : "irene33",
   "timestamp" : 5980,
   "stats" : {
     "name" : "Don't",
-    "remainedTime" : 88,
+    "remainedTime" : 98,
     "repeat" : "Repeat All",
-    "shuffle" : false,
+    "shuffle" : true,
     "paused" : true
   }
-}, null, {
+}, {
+  "command" : "shuffle",
+  "user" : "jack29",
+  "timestamp" : 5990,
+  "message" : "Shuffle function activated successfully."
+}, {
   "command" : "status",
   "user" : "jack29",
   "timestamp" : 5990,
   "stats" : {
     "name" : "Delicate",
-    "remainedTime" : 144,
+    "remainedTime" : 204,
     "repeat" : "Repeat All",
-    "shuffle" : false,
+    "shuffle" : true,
     "paused" : false
   }
-}, null, {
+}, {
+  "command" : "shuffle",
+  "user" : "alice22",
+  "timestamp" : 6000,
+  "message" : "Shuffle function deactivated successfully."
+}, {
   "command" : "status",
   "user" : "alice22",
   "timestamp" : 6000,
   "stats" : {
     "name" : "Shape of You",
-    "remainedTime" : 138,
+    "remainedTime" : 148,
     "repeat" : "Repeat All",
     "shuffle" : false,
     "paused" : true
@@ -5464,9 +5499,9 @@
   "timestamp" : 6010,
   "stats" : {
     "name" : "Stairway to Heaven",
-    "remainedTime" : 114,
+    "remainedTime" : 124,
     "repeat" : "Repeat All",
-    "shuffle" : false,
+    "shuffle" : true,
     "paused" : true
   }
 }, {
@@ -5480,7 +5515,7 @@
   "timestamp" : 6020,
   "stats" : {
     "name" : "Love Story",
-    "remainedTime" : 128,
+    "remainedTime" : 138,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -5491,7 +5526,7 @@
   "timestamp" : 6030,
   "stats" : {
     "name" : "Gimme Shelter",
-    "remainedTime" : 195,
+    "remainedTime" : 265,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -5507,7 +5542,7 @@
   "timestamp" : 6040,
   "stats" : {
     "name" : "Black Dog",
-    "remainedTime" : 205,
+    "remainedTime" : 275,
     "repeat" : "Repeat Current Song",
     "shuffle" : false,
     "paused" : false
@@ -5518,7 +5553,7 @@
   "timestamp" : 6050,
   "stats" : {
     "name" : "Whatever You Need",
-    "remainedTime" : 14,
+    "remainedTime" : 84,
     "repeat" : "Repeat Current Song",
     "shuffle" : false,
     "paused" : false
@@ -5529,12 +5564,17 @@
   "timestamp" : 6050,
   "stats" : {
     "name" : "Whatever You Need",
-    "remainedTime" : 14,
+    "remainedTime" : 84,
     "repeat" : "Repeat Current Song",
     "shuffle" : false,
     "paused" : false
   }
-}, null, {
+}, {
+  "command" : "shuffle",
+  "user" : "grace25",
+  "timestamp" : 6060,
+  "message" : "Please load a source before using the shuffle function."
+}, {
   "command" : "status",
   "user" : "grace25",
   "timestamp" : 6060,
@@ -5583,9 +5623,9 @@
   "timestamp" : 6080,
   "stats" : {
     "name" : "Don't",
-    "remainedTime" : 88,
+    "remainedTime" : 98,
     "repeat" : "Repeat All",
-    "shuffle" : false,
+    "shuffle" : true,
     "paused" : false
   }
 }, {
@@ -5599,9 +5639,9 @@
   "timestamp" : 6090,
   "stats" : {
     "name" : "Delicate",
-    "remainedTime" : 14,
+    "remainedTime" : 94,
     "repeat" : "Repeat All",
-    "shuffle" : false,
+    "shuffle" : true,
     "paused" : true
   }
 }, {
@@ -5615,18 +5655,23 @@
   "timestamp" : 6100,
   "stats" : {
     "name" : "Shape of You",
-    "remainedTime" : 138,
+    "remainedTime" : 148,
     "repeat" : "Repeat All",
     "shuffle" : false,
     "paused" : false
   }
-}, null, {
+}, {
+  "command" : "shuffle",
+  "user" : "bob35",
+  "timestamp" : 6110,
+  "message" : "Shuffle function deactivated successfully."
+}, {
   "command" : "status",
   "user" : "bob35",
   "timestamp" : 6110,
   "stats" : {
     "name" : "Stairway to Heaven",
-    "remainedTime" : 114,
+    "remainedTime" : 124,
     "repeat" : "Repeat All",
     "shuffle" : false,
     "paused" : true
@@ -5636,15 +5681,20 @@
   "user" : "carol19",
   "timestamp" : 6120,
   "message" : "Visibility status updated successfully to private."
-}, null, {
+}, {
+  "command" : "shuffle",
+  "user" : "carol19",
+  "timestamp" : 6120,
+  "message" : "Shuffle function activated successfully."
+}, {
   "command" : "status",
   "user" : "carol19",
   "timestamp" : 6120,
   "stats" : {
     "name" : "Love Story",
-    "remainedTime" : 128,
+    "remainedTime" : 138,
     "repeat" : "No Repeat",
-    "shuffle" : false,
+    "shuffle" : true,
     "paused" : true
   }
 }, {
@@ -5658,7 +5708,7 @@
   "timestamp" : 6130,
   "stats" : {
     "name" : "Gimme Shelter",
-    "remainedTime" : 75,
+    "remainedTime" : 165,
     "repeat" : "Repeat All",
     "shuffle" : false,
     "paused" : false
@@ -5669,7 +5719,7 @@
   "timestamp" : 6140,
   "stats" : {
     "name" : "Black Dog",
-    "remainedTime" : 75,
+    "remainedTime" : 165,
     "repeat" : "Repeat Current Song",
     "shuffle" : false,
     "paused" : false
@@ -5685,7 +5735,7 @@
   "timestamp" : 6150,
   "stats" : {
     "name" : "Whatever You Need",
-    "remainedTime" : 94,
+    "remainedTime" : 184,
     "repeat" : "Repeat Current Song",
     "shuffle" : false,
     "paused" : false
@@ -5722,10 +5772,10 @@
   "user" : "irene33",
   "timestamp" : 6180,
   "stats" : {
-    "name" : "Thinking Out Loud",
-    "remainedTime" : 229,
+    "name" : "Black Dog",
+    "remainedTime" : 262,
     "repeat" : "Repeat All",
-    "shuffle" : false,
+    "shuffle" : true,
     "paused" : false
   }
 }, {
@@ -5739,9 +5789,9 @@
   "timestamp" : 6190,
   "stats" : {
     "name" : "Delicate",
-    "remainedTime" : 14,
+    "remainedTime" : 94,
     "repeat" : "Repeat All",
-    "shuffle" : false,
+    "shuffle" : true,
     "paused" : false
   }
 }, null, {
@@ -5749,8 +5799,8 @@
   "user" : "alice22",
   "timestamp" : 6200,
   "stats" : {
-    "name" : "Sad But True",
-    "remainedTime" : 312,
+    "name" : "Shape of You",
+    "remainedTime" : 8,
     "repeat" : "Repeat All",
     "shuffle" : false,
     "paused" : false
@@ -5766,7 +5816,7 @@
   "timestamp" : 6210,
   "stats" : {
     "name" : "Stairway to Heaven",
-    "remainedTime" : 114,
+    "remainedTime" : 124,
     "repeat" : "Repeat All",
     "shuffle" : false,
     "paused" : true
@@ -5782,9 +5832,9 @@
   "timestamp" : 6220,
   "stats" : {
     "name" : "Love Story",
-    "remainedTime" : 128,
+    "remainedTime" : 138,
     "repeat" : "Repeat All",
-    "shuffle" : false,
+    "shuffle" : true,
     "paused" : true
   }
 }, {
@@ -5797,8 +5847,8 @@
   "user" : "david27",
   "timestamp" : 6230,
   "stats" : {
-    "name" : "Begin Again",
-    "remainedTime" : 173,
+    "name" : "Gimme Shelter",
+    "remainedTime" : 25,
     "repeat" : "Repeat All",
     "shuffle" : false,
     "paused" : false
@@ -5814,7 +5864,7 @@
   "timestamp" : 6240,
   "stats" : {
     "name" : "Black Dog",
-    "remainedTime" : 239,
+    "remainedTime" : 35,
     "repeat" : "Repeat Current Song",
     "shuffle" : false,
     "paused" : false
@@ -5830,7 +5880,7 @@
   "timestamp" : 6250,
   "stats" : {
     "name" : "Whatever You Need",
-    "remainedTime" : 174,
+    "remainedTime" : 54,
     "repeat" : "Repeat Current Song",
     "shuffle" : false,
     "paused" : false
@@ -5872,10 +5922,10 @@
   "user" : "irene33",
   "timestamp" : 6280,
   "stats" : {
-    "name" : "Thinking Out Loud",
-    "remainedTime" : 109,
+    "name" : "Black Dog",
+    "remainedTime" : 142,
     "repeat" : "Repeat All",
-    "shuffle" : false,
+    "shuffle" : true,
     "paused" : false
   }
 }, null, {
@@ -5883,10 +5933,10 @@
   "user" : "jack29",
   "timestamp" : 6290,
   "stats" : {
-    "name" : "Start Me Up",
-    "remainedTime" : 96,
+    "name" : "Sad But True",
+    "remainedTime" : 288,
     "repeat" : "Repeat All",
-    "shuffle" : false,
+    "shuffle" : true,
     "paused" : false
   }
 }, {
@@ -5905,7 +5955,7 @@
   "timestamp" : 6300,
   "stats" : {
     "name" : "Sad But True",
-    "remainedTime" : 192,
+    "remainedTime" : 212,
     "repeat" : "Repeat Current Song",
     "shuffle" : false,
     "paused" : false
@@ -5916,18 +5966,23 @@
   "timestamp" : 6310,
   "stats" : {
     "name" : "Stairway to Heaven",
-    "remainedTime" : 114,
+    "remainedTime" : 124,
     "repeat" : "Repeat All",
     "shuffle" : false,
     "paused" : true
   }
-}, null, {
+}, {
+  "command" : "shuffle",
+  "user" : "carol19",
+  "timestamp" : 6320,
+  "message" : "Shuffle function deactivated successfully."
+}, {
   "command" : "status",
   "user" : "carol19",
   "timestamp" : 6320,
   "stats" : {
     "name" : "Love Story",
-    "remainedTime" : 128,
+    "remainedTime" : 138,
     "repeat" : "Repeat All",
     "shuffle" : false,
     "paused" : true
@@ -5938,7 +5993,7 @@
   "timestamp" : 6330,
   "stats" : {
     "name" : "Begin Again",
-    "remainedTime" : 33,
+    "remainedTime" : 133,
     "repeat" : "Repeat All",
     "shuffle" : false,
     "paused" : false
@@ -5949,7 +6004,7 @@
   "timestamp" : 6330,
   "stats" : {
     "name" : "Begin Again",
-    "remainedTime" : 33,
+    "remainedTime" : 133,
     "repeat" : "Repeat All",
     "shuffle" : false,
     "paused" : false
@@ -5960,7 +6015,7 @@
   "timestamp" : 6340,
   "stats" : {
     "name" : "Black Dog",
-    "remainedTime" : 89,
+    "remainedTime" : 189,
     "repeat" : "Repeat Current Song",
     "shuffle" : false,
     "paused" : false
@@ -5976,7 +6031,7 @@
   "timestamp" : 6350,
   "stats" : {
     "name" : "Whatever You Need",
-    "remainedTime" : 24,
+    "remainedTime" : 124,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -6035,9 +6090,9 @@
   "timestamp" : 6380,
   "stats" : {
     "name" : "Black Dog",
-    "remainedTime" : 263,
+    "remainedTime" : 12,
     "repeat" : "Repeat All",
-    "shuffle" : false,
+    "shuffle" : true,
     "paused" : false
   }
 }, null, null, {
@@ -6045,21 +6100,26 @@
   "user" : "jack29",
   "timestamp" : 6390,
   "stats" : {
-    "name" : "Blank Space",
-    "remainedTime" : 177,
+    "name" : "Sad But True",
+    "remainedTime" : 148,
     "repeat" : "Repeat All",
-    "shuffle" : false,
+    "shuffle" : true,
     "paused" : false
   }
-}, null, {
+}, {
+  "command" : "shuffle",
+  "user" : "alice22",
+  "timestamp" : 6400,
+  "message" : "Shuffle function activated successfully."
+}, {
   "command" : "status",
   "user" : "alice22",
   "timestamp" : 6400,
   "stats" : {
     "name" : "Sad But True",
-    "remainedTime" : 32,
+    "remainedTime" : 72,
     "repeat" : "Repeat Current Song",
-    "shuffle" : false,
+    "shuffle" : true,
     "paused" : false
   }
 }, null, {
@@ -6068,7 +6128,7 @@
   "timestamp" : 6410,
   "stats" : {
     "name" : "Stairway to Heaven",
-    "remainedTime" : 114,
+    "remainedTime" : 124,
     "repeat" : "Repeat All",
     "shuffle" : false,
     "paused" : true
@@ -6084,7 +6144,7 @@
   "timestamp" : 6420,
   "stats" : {
     "name" : "Love Story",
-    "remainedTime" : 128,
+    "remainedTime" : 138,
     "repeat" : "Repeat All",
     "shuffle" : false,
     "paused" : false
@@ -6100,7 +6160,7 @@
   "timestamp" : 6430,
   "stats" : {
     "name" : "Black Dog",
-    "remainedTime" : 177,
+    "remainedTime" : 287,
     "repeat" : "Repeat All",
     "shuffle" : false,
     "paused" : true
@@ -6111,7 +6171,7 @@
   "timestamp" : 6440,
   "stats" : {
     "name" : "Black Dog",
-    "remainedTime" : 233,
+    "remainedTime" : 49,
     "repeat" : "Repeat Current Song",
     "shuffle" : false,
     "paused" : false
@@ -6127,7 +6187,7 @@
   "timestamp" : 6450,
   "stats" : {
     "name" : "Dream On",
-    "remainedTime" : 141,
+    "remainedTime" : 251,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -6148,7 +6208,12 @@
     "shuffle" : false,
     "paused" : true
   }
-}, null, {
+}, {
+  "command" : "shuffle",
+  "user" : "henry26",
+  "timestamp" : 6470,
+  "message" : "Please load a source before using the shuffle function."
+}, {
   "command" : "status",
   "user" : "henry26",
   "timestamp" : 6470,
@@ -6164,19 +6229,24 @@
   "user" : "irene33",
   "timestamp" : 6480,
   "stats" : {
-    "name" : "Black Dog",
-    "remainedTime" : 93,
+    "name" : "Thinking Out Loud",
+    "remainedTime" : 143,
     "repeat" : "Repeat All",
-    "shuffle" : false,
+    "shuffle" : true,
     "paused" : false
   }
-}, null, {
+}, {
+  "command" : "shuffle",
+  "user" : "jack29",
+  "timestamp" : 6490,
+  "message" : "Shuffle function deactivated successfully."
+}, {
   "command" : "status",
   "user" : "jack29",
   "timestamp" : 6490,
   "stats" : {
-    "name" : "Blank Space",
-    "remainedTime" : 17,
+    "name" : "Sad But True",
+    "remainedTime" : 18,
     "repeat" : "Repeat All",
     "shuffle" : false,
     "paused" : false
@@ -6192,9 +6262,9 @@
   "timestamp" : 6500,
   "stats" : {
     "name" : "Sad But True",
-    "remainedTime" : 206,
+    "remainedTime" : 266,
     "repeat" : "No Repeat",
-    "shuffle" : false,
+    "shuffle" : true,
     "paused" : false
   }
 }, {
@@ -6208,7 +6278,7 @@
   "timestamp" : 6510,
   "stats" : {
     "name" : "Stairway to Heaven",
-    "remainedTime" : 114,
+    "remainedTime" : 124,
     "repeat" : "Repeat All",
     "shuffle" : false,
     "paused" : true
@@ -6219,7 +6289,7 @@
   "timestamp" : 6520,
   "stats" : {
     "name" : "Don't",
-    "remainedTime" : 187,
+    "remainedTime" : 217,
     "repeat" : "Repeat All",
     "shuffle" : false,
     "paused" : false
@@ -6235,7 +6305,7 @@
   "timestamp" : 6530,
   "stats" : {
     "name" : "Black Dog",
-    "remainedTime" : 177,
+    "remainedTime" : 287,
     "repeat" : "Repeat Current Song",
     "shuffle" : false,
     "paused" : true
@@ -6251,7 +6321,7 @@
   "timestamp" : 6540,
   "stats" : {
     "name" : "Black Dog",
-    "remainedTime" : 83,
+    "remainedTime" : 213,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -6261,8 +6331,8 @@
   "user" : "frank21",
   "timestamp" : 6550,
   "stats" : {
-    "name" : "Begin Again",
-    "remainedTime" : 219,
+    "name" : "Dream On",
+    "remainedTime" : 111,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -6315,10 +6385,10 @@
   "user" : "irene33",
   "timestamp" : 6580,
   "stats" : {
-    "name" : "Dream On",
-    "remainedTime" : 220,
+    "name" : "Thinking Out Loud",
+    "remainedTime" : 13,
     "repeat" : "Repeat Current Song",
-    "shuffle" : false,
+    "shuffle" : true,
     "paused" : false
   }
 }, null, {
@@ -6326,8 +6396,8 @@
   "user" : "jack29",
   "timestamp" : 6590,
   "stats" : {
-    "name" : "Begin Again",
-    "remainedTime" : 115,
+    "name" : "Shape of You",
+    "remainedTime" : 111,
     "repeat" : "Repeat All",
     "shuffle" : false,
     "paused" : false
@@ -6343,9 +6413,9 @@
   "timestamp" : 6600,
   "stats" : {
     "name" : "Sad But True",
-    "remainedTime" : 66,
+    "remainedTime" : 126,
     "repeat" : "No Repeat",
-    "shuffle" : false,
+    "shuffle" : true,
     "paused" : false
   }
 }, {
@@ -6359,7 +6429,7 @@
   "timestamp" : 6610,
   "stats" : {
     "name" : "Stairway to Heaven",
-    "remainedTime" : 114,
+    "remainedTime" : 124,
     "repeat" : "Repeat All",
     "shuffle" : false,
     "paused" : true
@@ -6370,7 +6440,7 @@
   "timestamp" : 6620,
   "stats" : {
     "name" : "Don't",
-    "remainedTime" : 67,
+    "remainedTime" : 97,
     "repeat" : "Repeat All",
     "shuffle" : false,
     "paused" : false
@@ -6381,7 +6451,7 @@
   "timestamp" : 6620,
   "stats" : {
     "name" : "Don't",
-    "remainedTime" : 67,
+    "remainedTime" : 97,
     "repeat" : "Repeat All",
     "shuffle" : false,
     "paused" : false
@@ -6397,31 +6467,41 @@
   "timestamp" : 6630,
   "stats" : {
     "name" : "Black Dog",
-    "remainedTime" : 177,
+    "remainedTime" : 287,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
   }
-}, null, {
+}, {
+  "command" : "shuffle",
+  "user" : "emily30",
+  "timestamp" : 6640,
+  "message" : "Shuffle function activated successfully."
+}, {
   "command" : "status",
   "user" : "emily30",
   "timestamp" : 6640,
   "stats" : {
-    "name" : "Begin Again",
-    "remainedTime" : 191,
+    "name" : "Black Dog",
+    "remainedTime" : 93,
     "repeat" : "No Repeat",
-    "shuffle" : false,
+    "shuffle" : true,
     "paused" : false
   }
-}, null, {
+}, {
+  "command" : "shuffle",
+  "user" : "frank21",
+  "timestamp" : 6650,
+  "message" : "Shuffle function activated successfully."
+}, {
   "command" : "status",
   "user" : "frank21",
   "timestamp" : 6650,
   "stats" : {
-    "name" : "Begin Again",
-    "remainedTime" : 89,
+    "name" : "Dream On",
+    "remainedTime" : 1,
     "repeat" : "No Repeat",
-    "shuffle" : false,
+    "shuffle" : true,
     "paused" : false
   }
 }, {
@@ -6440,7 +6520,12 @@
     "shuffle" : false,
     "paused" : true
   }
-}, null, {
+}, {
+  "command" : "shuffle",
+  "user" : "henry26",
+  "timestamp" : 6670,
+  "message" : "Please load a source before using the shuffle function."
+}, {
   "command" : "status",
   "user" : "henry26",
   "timestamp" : 6670,
@@ -6451,13 +6536,18 @@
     "shuffle" : false,
     "paused" : true
   }
-}, null, {
+}, {
+  "command" : "shuffle",
+  "user" : "irene33",
+  "timestamp" : 6680,
+  "message" : "Shuffle function deactivated successfully."
+}, {
   "command" : "status",
   "user" : "irene33",
   "timestamp" : 6680,
   "stats" : {
-    "name" : "Dream On",
-    "remainedTime" : 70,
+    "name" : "Thinking Out Loud",
+    "remainedTime" : 184,
     "repeat" : "Repeat Current Song",
     "shuffle" : false,
     "paused" : false
@@ -6472,19 +6562,24 @@
   "user" : "jack29",
   "timestamp" : 6690,
   "stats" : {
-    "name" : "Sad But True",
-    "remainedTime" : 299,
+    "name" : "Shape of You",
+    "remainedTime" : 11,
     "repeat" : "Repeat All",
     "shuffle" : false,
     "paused" : true
   }
-}, null, {
+}, {
+  "command" : "shuffle",
+  "user" : "alice22",
+  "timestamp" : 6700,
+  "message" : "Shuffle function deactivated successfully."
+}, {
   "command" : "status",
   "user" : "alice22",
   "timestamp" : 6700,
   "stats" : {
-    "name" : "Love Story",
-    "remainedTime" : 152,
+    "name" : "Sad But True",
+    "remainedTime" : 26,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -6505,7 +6600,7 @@
   "timestamp" : 6710,
   "stats" : {
     "name" : "Stairway to Heaven",
-    "remainedTime" : 114,
+    "remainedTime" : 124,
     "repeat" : "Repeat All",
     "shuffle" : false,
     "paused" : false
@@ -6516,7 +6611,7 @@
   "timestamp" : 6720,
   "stats" : {
     "name" : "Money Trees",
-    "remainedTime" : 284,
+    "remainedTime" : 364,
     "repeat" : "Repeat All",
     "shuffle" : false,
     "paused" : false
@@ -6532,7 +6627,7 @@
   "timestamp" : 6730,
   "stats" : {
     "name" : "Black Dog",
-    "remainedTime" : 177,
+    "remainedTime" : 287,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -6543,9 +6638,9 @@
   "timestamp" : 6740,
   "stats" : {
     "name" : "Begin Again",
-    "remainedTime" : 21,
+    "remainedTime" : 201,
     "repeat" : "No Repeat",
-    "shuffle" : false,
+    "shuffle" : true,
     "paused" : false
   }
 }, null, {
@@ -6553,10 +6648,10 @@
   "user" : "frank21",
   "timestamp" : 6750,
   "stats" : {
-    "name" : "Black Dog",
-    "remainedTime" : 213,
+    "name" : "Delicate",
+    "remainedTime" : 93,
     "repeat" : "No Repeat",
-    "shuffle" : false,
+    "shuffle" : true,
     "paused" : false
   }
 }, null, {
@@ -6586,8 +6681,8 @@
   "user" : "irene33",
   "timestamp" : 6780,
   "stats" : {
-    "name" : "Dream On",
-    "remainedTime" : 147,
+    "name" : "Thinking Out Loud",
+    "remainedTime" : 4,
     "repeat" : "Repeat Current Song",
     "shuffle" : false,
     "paused" : false
@@ -6597,8 +6692,8 @@
   "user" : "jack29",
   "timestamp" : 6790,
   "stats" : {
-    "name" : "Sad But True",
-    "remainedTime" : 299,
+    "name" : "Shape of You",
+    "remainedTime" : 11,
     "repeat" : "Repeat All",
     "shuffle" : false,
     "paused" : true
@@ -6613,8 +6708,8 @@
   "user" : "alice22",
   "timestamp" : 6800,
   "stats" : {
-    "name" : "Bohemian Rhapsody",
-    "remainedTime" : 307,
+    "name" : "Love Story",
+    "remainedTime" : 62,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -6625,7 +6720,7 @@
   "timestamp" : 6810,
   "stats" : {
     "name" : "Angie",
-    "remainedTime" : 187,
+    "remainedTime" : 197,
     "repeat" : "Repeat All",
     "shuffle" : false,
     "paused" : false
@@ -6636,20 +6731,25 @@
   "timestamp" : 6810,
   "stats" : {
     "name" : "Angie",
-    "remainedTime" : 187,
+    "remainedTime" : 197,
     "repeat" : "Repeat All",
     "shuffle" : false,
     "paused" : false
   }
-}, null, {
+}, {
+  "command" : "shuffle",
+  "user" : "carol19",
+  "timestamp" : 6820,
+  "message" : "Shuffle function activated successfully."
+}, {
   "command" : "status",
   "user" : "carol19",
   "timestamp" : 6820,
   "stats" : {
     "name" : "Money Trees",
-    "remainedTime" : 94,
+    "remainedTime" : 184,
     "repeat" : "Repeat All",
-    "shuffle" : false,
+    "shuffle" : true,
     "paused" : false
   }
 }, null, null, {
@@ -6658,7 +6758,7 @@
   "timestamp" : 6830,
   "stats" : {
     "name" : "Black Dog",
-    "remainedTime" : 177,
+    "remainedTime" : 287,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -6668,27 +6768,27 @@
   "user" : "emily30",
   "timestamp" : 6840,
   "stats" : {
-    "name" : "Don't",
-    "remainedTime" : 30,
+    "name" : "Begin Again",
+    "remainedTime" : 1,
     "repeat" : "No Repeat",
-    "shuffle" : false,
+    "shuffle" : true,
     "paused" : false
   }
 }, {
   "command" : "repeat",
   "user" : "frank21",
   "timestamp" : 6850,
-  "message" : "Repeat mode changed to repeat all."
+  "message" : "Please load a source before setting the repeat status."
 }, {
   "command" : "status",
   "user" : "frank21",
   "timestamp" : 6850,
   "stats" : {
-    "name" : "Black Dog",
-    "remainedTime" : 13,
-    "repeat" : "Repeat All",
+    "name" : "",
+    "remainedTime" : 0,
+    "repeat" : "No Repeat",
     "shuffle" : false,
-    "paused" : false
+    "paused" : true
   }
 }, {
   "command" : "switchVisibility",
@@ -6748,8 +6848,8 @@
   "user" : "irene33",
   "timestamp" : 6880,
   "stats" : {
-    "name" : "Dream On",
-    "remainedTime" : 254,
+    "name" : "Thinking Out Loud",
+    "remainedTime" : 135,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -6764,8 +6864,8 @@
   "user" : "jack29",
   "timestamp" : 6890,
   "stats" : {
-    "name" : "Sad But True",
-    "remainedTime" : 299,
+    "name" : "Shape of You",
+    "remainedTime" : 11,
     "repeat" : "Repeat All",
     "shuffle" : false,
     "paused" : false
@@ -6776,7 +6876,7 @@
   "timestamp" : 6900,
   "stats" : {
     "name" : "Bohemian Rhapsody",
-    "remainedTime" : 157,
+    "remainedTime" : 277,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -6792,7 +6892,7 @@
   "timestamp" : 6910,
   "stats" : {
     "name" : "Angie",
-    "remainedTime" : 37,
+    "remainedTime" : 57,
     "repeat" : "Repeat Current Song",
     "shuffle" : false,
     "paused" : false
@@ -6802,10 +6902,10 @@
   "user" : "carol19",
   "timestamp" : 6920,
   "stats" : {
-    "name" : "Maps",
-    "remainedTime" : 144,
+    "name" : "Money Trees",
+    "remainedTime" : 44,
     "repeat" : "Repeat All",
-    "shuffle" : false,
+    "shuffle" : true,
     "paused" : false
   }
 }, {
@@ -6813,10 +6913,10 @@
   "user" : "carol19",
   "timestamp" : 6920,
   "stats" : {
-    "name" : "Maps",
-    "remainedTime" : 144,
+    "name" : "Money Trees",
+    "remainedTime" : 44,
     "repeat" : "Repeat All",
-    "shuffle" : false,
+    "shuffle" : true,
     "paused" : false
   }
 }, {
@@ -6830,7 +6930,7 @@
   "timestamp" : 6930,
   "stats" : {
     "name" : "Black Dog",
-    "remainedTime" : 177,
+    "remainedTime" : 287,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : true
@@ -6845,35 +6945,40 @@
   "user" : "emily30",
   "timestamp" : 6940,
   "stats" : {
-    "name" : "Delicate",
-    "remainedTime" : 152,
+    "name" : "Don't",
+    "remainedTime" : 110,
+    "repeat" : "No Repeat",
+    "shuffle" : true,
+    "paused" : false
+  }
+}, {
+  "command" : "status",
+  "user" : "frank21",
+  "timestamp" : 6950,
+  "stats" : {
+    "name" : "",
+    "remainedTime" : 0,
     "repeat" : "No Repeat",
     "shuffle" : false,
-    "paused" : false
+    "paused" : true
   }
 }, {
   "command" : "status",
   "user" : "frank21",
   "timestamp" : 6950,
   "stats" : {
-    "name" : "Shape of You",
-    "remainedTime" : 136,
-    "repeat" : "Repeat All",
+    "name" : "",
+    "remainedTime" : 0,
+    "repeat" : "No Repeat",
     "shuffle" : false,
-    "paused" : false
+    "paused" : true
   }
 }, {
-  "command" : "status",
-  "user" : "frank21",
-  "timestamp" : 6950,
-  "stats" : {
-    "name" : "Shape of You",
-    "remainedTime" : 136,
-    "repeat" : "Repeat All",
-    "shuffle" : false,
-    "paused" : false
-  }
-}, null, {
+  "command" : "shuffle",
+  "user" : "grace25",
+  "timestamp" : 6960,
+  "message" : "Please load a source before using the shuffle function."
+}, {
   "command" : "status",
   "user" : "grace25",
   "timestamp" : 6960,
@@ -6900,26 +7005,36 @@
     "shuffle" : false,
     "paused" : true
   }
-}, null, {
+}, {
+  "command" : "shuffle",
+  "user" : "irene33",
+  "timestamp" : 6980,
+  "message" : "Shuffle function activated successfully."
+}, {
   "command" : "status",
   "user" : "irene33",
   "timestamp" : 6980,
   "stats" : {
-    "name" : "Dream On",
-    "remainedTime" : 124,
+    "name" : "Thinking Out Loud",
+    "remainedTime" : 25,
     "repeat" : "No Repeat",
-    "shuffle" : false,
+    "shuffle" : true,
     "paused" : false
   }
-}, null, {
+}, {
+  "command" : "shuffle",
+  "user" : "jack29",
+  "timestamp" : 6990,
+  "message" : "Shuffle function activated successfully."
+}, {
   "command" : "status",
   "user" : "jack29",
   "timestamp" : 6990,
   "stats" : {
-    "name" : "Sad But True",
-    "remainedTime" : 159,
+    "name" : "Money Trees",
+    "remainedTime" : 288,
     "repeat" : "Repeat All",
-    "shuffle" : false,
+    "shuffle" : true,
     "paused" : false
   }
 }, {
@@ -9341,7 +9456,7 @@
   "command" : "showPreferredSongs",
   "user" : "alice22",
   "timestamp" : 8490,
-  "result" : [ "Stairway to Heaven", "Start Me Up", "Sad But True" ]
+  "result" : [ "Stairway to Heaven", "Paint It Black", "Sad But True" ]
 }, {
   "command" : "showPlaylists",
   "user" : "bob35",
@@ -9361,7 +9476,7 @@
   "command" : "showPreferredSongs",
   "user" : "bob35",
   "timestamp" : 8500,
-  "result" : [ "The Unforgiven" ]
+  "result" : [ ]
 }, {
   "command" : "showPlaylists",
   "user" : "carol19",
@@ -9381,7 +9496,7 @@
   "command" : "showPreferredSongs",
   "user" : "carol19",
   "timestamp" : 8510,
-  "result" : [ "Happier", "Castle on the Hill" ]
+  "result" : [ "Dream On" ]
 }, {
   "command" : "showPlaylists",
   "user" : "david27",
@@ -9401,7 +9516,7 @@
   "command" : "showPreferredSongs",
   "user" : "david27",
   "timestamp" : 8520,
-  "result" : [ "Dream On", "Begin Again", "Black Dog" ]
+  "result" : [ "Dream On", "Gimme Shelter", "Black Dog" ]
 }, {
   "command" : "showPlaylists",
   "user" : "emily30",
@@ -9421,7 +9536,7 @@
   "command" : "showPreferredSongs",
   "user" : "emily30",
   "timestamp" : 8530,
-  "result" : [ "The Man", "Black Dog", "Delicate" ]
+  "result" : [ "The Man", "Black Dog", "Don't" ]
 }, {
   "command" : "showPlaylists",
   "user" : "frank21",
@@ -9501,7 +9616,7 @@
   "command" : "showPreferredSongs",
   "user" : "irene33",
   "timestamp" : 8570,
-  "result" : [ "Don't", "Black Dog" ]
+  "result" : [ "Start Me Up", "Don't", "Black Dog" ]
 }, {
   "command" : "showPlaylists",
   "user" : "jack29",
@@ -9521,5 +9636,5 @@
   "command" : "showPreferredSongs",
   "user" : "jack29",
   "timestamp" : 8580,
-  "result" : [ "Blank Space", "The Unforgiven", "Big Pimpin'" ]
+  "result" : [ "Blank Space", "Love Story", "Shape of You" ]
 }, null, null ]

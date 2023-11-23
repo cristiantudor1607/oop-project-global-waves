@@ -221,6 +221,27 @@ public class ActionManager {
         return "Repeat mode changed to " + stateName.toLowerCase() + ".";
     }
 
+    public ShuffleExit.code requestShuffling(ShuffleInterrogator execQuery) {
+        Player userPlayer = requestPlayer(execQuery);
+        int seed = execQuery.getSeed();
+
+        if (!userPlayer.hasSourceLoaded() || userPlayer.hasNoSource())
+            return ShuffleExit.code.NO_SOURCE_LOADED;
+
+        ShuffleExit.code shuffleExit;
+        if (userPlayer.isShuffle()) {
+            userPlayer.setShuffle(false);
+            shuffleExit = userPlayer.getSelectedSource().unshuffle();
+            userPlayer.changeOrderAfterShuffle();
+        } else {
+            userPlayer.setShuffle(true);
+            shuffleExit = userPlayer.getSelectedSource().shuffle(seed);
+            userPlayer.changeOrderAfterShuffle();
+        }
+
+        return shuffleExit;
+    }
+
     public void updatePlayersData(CommandObject nextToExecuteCommand) {
         int diff = nextToExecuteCommand.getTimestamp() - lastActionTime;
         for (Map.Entry<String, Player> entry : players.entrySet()) {

@@ -3,6 +3,7 @@ package globalwaves.player.entities;
 import fileio.input.EpisodeInput;
 import fileio.input.PodcastInput;
 import globalwaves.commands.enums.FollowExit;
+import globalwaves.commands.enums.ShuffleExit;
 import globalwaves.player.entities.properties.OwnedEntity;
 import globalwaves.player.entities.properties.PlayableEntity;
 import lombok.Getter;
@@ -66,14 +67,6 @@ public class Podcast implements PlayableEntity, OwnedEntity {
     }
 
     @Override
-    public boolean hasNextForPlaying(AudioFile currentFile, int repeatValue) {
-        if (repeatValue == 2)
-            return true;
-
-        return getNextEpisode(currentFile) != null;
-    }
-
-    @Override
     public AudioFile getNextForPlaying(AudioFile currentFile, int repeatValue) {
         if (repeatValue == 2 || repeatValue == 1)
             return currentFile;
@@ -116,8 +109,13 @@ public class Podcast implements PlayableEntity, OwnedEntity {
     }
 
     @Override
-    public boolean isPartialRepeated(int repeatValue) {
-        return repeatValue == 1;
+    public ShuffleExit.code shuffle(int seed) {
+        return ShuffleExit.code.NOT_A_PLAYLIST;
+    }
+
+    @Override
+    public ShuffleExit.code unshuffle() {
+        return ShuffleExit.code.NOT_A_PLAYLIST;
     }
 
     @Override

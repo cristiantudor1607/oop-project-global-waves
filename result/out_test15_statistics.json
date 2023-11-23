@@ -127,7 +127,7 @@
   "command" : "showPreferredSongs",
   "user" : "carol19",
   "timestamp" : 1000,
-  "result" : [ "Happier", "Castle on the Hill", "Bohemian Rhapsody" ]
+  "result" : [ "Dream On", "Bohemian Rhapsody" ]
 }, {
   "command" : "createPlaylist",
   "user" : "david27",
@@ -184,7 +184,7 @@
   "command" : "showPreferredSongs",
   "user" : "emily30",
   "timestamp" : 2300,
-  "result" : [ "The Man", "Black Dog", "Delicate" ]
+  "result" : [ "The Man", "Black Dog", "Don't" ]
 }, {
   "command" : "like",
   "user" : "emily30",
@@ -199,7 +199,7 @@
   "command" : "showPreferredSongs",
   "user" : "emily30",
   "timestamp" : 2400,
-  "result" : [ "The Man", "Black Dog", "Delicate", "Bohemian Rhapsody" ]
+  "result" : [ "The Man", "Black Dog", "Don't", "Bohemian Rhapsody" ]
 }, {
   "command" : "search",
   "user" : "emily30",
@@ -252,10 +252,10 @@
   "command" : "showPreferredSongs",
   "user" : "bob35",
   "timestamp" : 3100,
-  "result" : [ "The Unforgiven", "Bohemian Rhapsody" ]
+  "result" : [ "Bohemian Rhapsody" ]
 }, {
   "command" : "showPreferredSongs",
   "user" : "carol19",
   "timestamp" : 3200,
-  "result" : [ "Happier", "Castle on the Hill", "Bohemian Rhapsody" ]
+  "result" : [ "Dream On", "Bohemian Rhapsody" ]
 }, null ]

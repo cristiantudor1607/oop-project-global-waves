@@ -1,13 +1,16 @@
 package globalwaves.player.entities;
 
 import globalwaves.commands.enums.FollowExit;
+import globalwaves.commands.enums.ShuffleExit;
 import globalwaves.player.entities.properties.OwnedEntity;
 import globalwaves.player.entities.properties.PlayableEntity;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 @Getter @Setter
 public class Playlist implements PlayableEntity, OwnedEntity {
@@ -26,7 +29,7 @@ public class Playlist implements PlayableEntity, OwnedEntity {
         visible = true;
         songs = new ArrayList<>();
         followers = new ArrayList<>();
-        playOrder = makeNoShuffle();
+        playOrder = getNormalDistribution();
     }
 
     public boolean isPublic() {
@@ -51,15 +54,15 @@ public class Playlist implements PlayableEntity, OwnedEntity {
 
     public void addSong(AudioFile songToBeAdded) {
         songs.add(songToBeAdded);
-        playOrder = makeNoShuffle();
+        playOrder = getNormalDistribution();
     }
 
     public void removeSong(AudioFile songToBeRemoved) {
         songs.remove(songToBeRemoved);
-        playOrder = makeNoShuffle();
+        playOrder = getNormalDistribution();
     }
 
-    public List<Integer> makeNoShuffle() {
+    public List<Integer> getNormalDistribution() {
         List<Integer> order = new ArrayList<>();
         for (int i = 0; i < songs.size(); i++)
             order.add(i);
@@ -130,14 +133,6 @@ public class Playlist implements PlayableEntity, OwnedEntity {
     }
 
     @Override
-    public boolean hasNextForPlaying(AudioFile currentFile, int repeatValue) {
-        if (repeatValue != 0)
-            return true;
-
-        return getNextSong(currentFile) != null;
-    }
-
-    @Override
     public AudioFile getNextForPlaying(AudioFile currentFile, int repeatValue) {
        if (repeatValue == 2)
            return currentFile;
@@ -199,8 +194,15 @@ public class Playlist implements PlayableEntity, OwnedEntity {
     }
 
     @Override
-    public boolean isPartialRepeated(int repeatValue) {
-        return false;
+    public ShuffleExit.code shuffle(int seed) {
+        Collections.shuffle(playOrder, new Random(seed));
+        return ShuffleExit.code.ACTIVATED;
+    }
+
+    @Override
+    public ShuffleExit.code unshuffle() {
+        playOrder = getNormalDistribution();
+        return ShuffleExit.code.DEACTIVATED;
     }
 
     @Override
