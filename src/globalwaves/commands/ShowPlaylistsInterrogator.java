@@ -36,6 +36,7 @@ public class ShowPlaylistsInterrogator extends CommandObject {
         userPlaylists = manager.requestOwnerPlaylists(username);
 
         manager.setLastActionTime(timestamp);
+        manager.setLastAction(this);
         return (new ShowPlaylistsOutput(this)).generateOutputNode();
     }
 }

@@ -30,7 +30,7 @@ import java.util.Map;
         @JsonSubTypes.Type(value = StatusInterrogator.class, name = "status"),
         @JsonSubTypes.Type(value = CreatePlaylistInterrogator.class, name = "createPlaylist"),
         @JsonSubTypes.Type(value = SwitchVisibilityInterrogator.class, name = "switchVisibility"),
-        @JsonSubTypes.Type(value = NoArgsCommandObject.class, name = "follow"),
+        @JsonSubTypes.Type(value = FollowInterrogator.class, name = "follow"),
         @JsonSubTypes.Type(value = ShowPlaylistsInterrogator.class, name = "showPlaylists"),
         @JsonSubTypes.Type(value = ShowLikesInterrogator.class, name = "showPreferredSongs"),
         @JsonSubTypes.Type(value = NoArgsCommandObject.class, name = "getTop5Songs"),
@@ -45,6 +45,10 @@ public abstract class CommandObject {
     public JsonNode execute(ActionManager manager) {
         System.out.println("Not implemented yet");
         return null;
+    }
+
+    public boolean isSelectAction() {
+        return false;
     }
 
     public boolean hasFilters() {

@@ -31,6 +31,7 @@ public class ShowLikesInterrogator extends CommandObject {
         songNames = manager.requestLikedSongs(this);
 
         manager.setLastActionTime(timestamp);
+        manager.setLastAction(this);
         return (new ShowLikesOutput(this)).generateOutputNode();
     }
 }

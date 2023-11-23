@@ -1,6 +1,7 @@
 package globalwaves.player.entities;
 
 import fileio.input.UserInput;
+import globalwaves.player.entities.properties.PlayableEntity;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -12,7 +13,6 @@ public class User {
     private int age;
     private String city;
     private List<AudioFile> likes;
-//    private List<Song> likes;
 
     public User(UserInput input) {
         username = input.getUsername();
@@ -32,6 +32,7 @@ public class User {
     public void removeSongFromLikes(AudioFile file) {
         likes.remove(file);
     }
+
 
     @Override
     public String toString() {

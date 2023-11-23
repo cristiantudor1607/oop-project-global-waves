@@ -14,8 +14,8 @@ public class LyricsFilter implements Filter<Song>{
 
     @Override
     public boolean matches(Song MatchingObject) {
-        String songLyrics = MatchingObject.getLyrics();
+        String songLyrics = MatchingObject.getLyrics().toLowerCase();
 
-        return songLyrics.contains(pattern);
+        return songLyrics.contains(pattern.toLowerCase());
     }
 }

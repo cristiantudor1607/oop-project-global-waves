@@ -33,7 +33,7 @@
   "command" : "load",
   "user" : "bob35",
   "timestamp" : 300,
-  "message" : "Playback loaded successfully."
+  "message" : "Please select a source before attempting to load."
 }, {
   "command" : "addRemoveInPlaylist",
   "user" : "bob35",
@@ -144,20 +144,25 @@
   "user" : "carol19",
   "timestamp" : 1010,
   "message" : "Successfully selected My first playlist."
-}, null, {
+}, {
+  "command" : "follow",
+  "user" : "carol19",
+  "timestamp" : 1050,
+  "message" : "Playlist followed successfully."
+}, {
   "command" : "showPlaylists",
   "user" : "bob35",
   "timestamp" : 1060,
   "result" : [ {
     "name" : "My first playlist",
     "visibility" : "public",
-    "followers" : 0,
+    "followers" : 1,
     "songs" : [ "Start Me Up" ]
   }, {
     "name" : "My second playlist",
     "visibility" : "public",
     "followers" : 0,
-    "songs" : [ "Start Me Up" ]
+    "songs" : [ ]
   } ]
 }, {
   "command" : "showPlaylists",
@@ -173,7 +178,7 @@
   "command" : "switchVisibility",
   "user" : "bob35",
   "timestamp" : 1130,
-  "message" : "Visibility status updated successfully to false."
+  "message" : "Visibility status updated successfully to private."
 }, {
   "command" : "showPlaylists",
   "user" : "bob35",
@@ -181,13 +186,13 @@
   "result" : [ {
     "name" : "My first playlist",
     "visibility" : "private",
-    "followers" : 0,
+    "followers" : 1,
     "songs" : [ "Start Me Up" ]
   }, {
     "name" : "My second playlist",
     "visibility" : "public",
     "followers" : 0,
-    "songs" : [ "Start Me Up" ]
+    "songs" : [ ]
   } ]
 }, {
   "command" : "search",
@@ -200,7 +205,12 @@
   "user" : "david27",
   "timestamp" : 1210,
   "message" : "Successfully selected The best."
-}, null, {
+}, {
+  "command" : "follow",
+  "user" : "david27",
+  "timestamp" : 1250,
+  "message" : "Playlist followed successfully."
+}, {
   "command" : "search",
   "user" : "emily30",
   "timestamp" : 1300,
@@ -211,21 +221,26 @@
   "user" : "emily30",
   "timestamp" : 1310,
   "message" : "Successfully selected The best."
-}, null, {
+}, {
+  "command" : "follow",
+  "user" : "emily30",
+  "timestamp" : 1350,
+  "message" : "Playlist followed successfully."
+}, {
   "command" : "showPlaylists",
   "user" : "carol19",
   "timestamp" : 1370,
   "result" : [ {
     "name" : "The best",
     "visibility" : "public",
-    "followers" : 0,
+    "followers" : 2,
     "songs" : [ "Start Me Up" ]
   } ]
 }, {
   "command" : "switchVisibility",
   "user" : "carol19",
   "timestamp" : 1400,
-  "message" : "Visibility status updated successfully to false."
+  "message" : "Visibility status updated successfully to private."
 }, {
   "command" : "showPlaylists",
   "user" : "carol19",
@@ -233,14 +248,14 @@
   "result" : [ {
     "name" : "The best",
     "visibility" : "private",
-    "followers" : 0,
+    "followers" : 2,
     "songs" : [ "Start Me Up" ]
   } ]
 }, {
   "command" : "switchVisibility",
   "user" : "carol19",
   "timestamp" : 1560,
-  "message" : "Visibility status updated successfully to true."
+  "message" : "Visibility status updated successfully to public."
 }, {
   "command" : "showPlaylists",
   "user" : "carol19",
@@ -248,7 +263,7 @@
   "result" : [ {
     "name" : "The best",
     "visibility" : "public",
-    "followers" : 0,
+    "followers" : 2,
     "songs" : [ "Start Me Up" ]
   } ]
 } ]

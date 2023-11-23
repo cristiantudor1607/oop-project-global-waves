@@ -59,6 +59,7 @@ public class SearchInterrogator extends CommandObject {
 
         manager.requestSearchResult(this);
         manager.setLastActionTime(timestamp);
+        manager.setLastAction(this);
 
         return (new SearchOutput(this)).generateOutputNode();
     }

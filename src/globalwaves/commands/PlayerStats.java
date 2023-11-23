@@ -12,14 +12,14 @@ public class PlayerStats {
     private final boolean paused;
 
     public PlayerStats(Player userPlayer) {
-        if (userPlayer.getSelectedEntity() == null) {
+        if (userPlayer.getSelectedSource() == null || userPlayer.getPlayingFile() == null) {
             name = "";
             remainedTime = 0;
             repeat = "No Repeat";
             shuffle = false;
             paused = true;
         } else {
-            name = userPlayer.getLoadedFile().getName();
+            name = userPlayer.getPlayingFile().getName();
             remainedTime = userPlayer.getRemainedTime();
 
             switch (userPlayer.getRepeat()) {

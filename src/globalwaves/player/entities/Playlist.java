@@ -1,5 +1,6 @@
 package globalwaves.player.entities;
 
+import globalwaves.commands.enums.FollowExit;
 import globalwaves.player.entities.properties.OwnedEntity;
 import globalwaves.player.entities.properties.PlayableEntity;
 import lombok.Getter;
@@ -12,17 +13,19 @@ import java.util.List;
 public class Playlist implements PlayableEntity, OwnedEntity {
     private String name;
     private String owner;
-    private int followers;
+    private int followersNumber;
     private boolean visible;
     private List<AudioFile> songs;
     private List<Integer> playOrder;
+    private List<String> followers;
 
     public Playlist(String owner, String name) {
         this.name = name;
         this.owner = owner;
-        followers = 0;
+        followersNumber = 0;
         visible = true;
         songs = new ArrayList<>();
+        followers = new ArrayList<>();
         playOrder = getStandardOrder();
     }
 
@@ -39,11 +42,16 @@ public class Playlist implements PlayableEntity, OwnedEntity {
     }
 
     public boolean hasSong(AudioFile searchedSong) {
-        String searchedSongName = searchedSong.getName();
-
+//        String searchedSongName = searchedSong.getName();
+//
+//        for (AudioFile playlistSong : songs)
+//           if (playlistSong.getName().equals(searchedSongName))
+//               return true;
+//
+//        return false;
         for (AudioFile playlistSong : songs)
-           if (playlistSong.getName().equals(searchedSongName))
-               return true;
+            if (playlistSong == searchedSong)
+                return true;
 
         return false;
     }
@@ -80,6 +88,28 @@ public class Playlist implements PlayableEntity, OwnedEntity {
         return songs.get(nextSongIndex);
     }
 
+    public boolean isFollowedByUser(String username) {
+        for (String name : followers)
+            if (name.equals(username))
+                return true;
+
+        return false;
+    }
+
+    public boolean isOwnedByUser(String username) {
+        return owner.equals(username);
+    }
+
+    public void addUserToFollowers(String username) {
+        followers.add(username);
+        followersNumber++;
+    }
+
+    public void removeUserFromFollowers(String username) {
+        followers.remove(username);
+        followersNumber--;
+    }
+
     @Override
     public boolean isEmptyPlayableFile() {
         return songs.isEmpty();
@@ -109,6 +139,21 @@ public class Playlist implements PlayableEntity, OwnedEntity {
     @Override
     public AudioFile getNextForPlaying(AudioFile currentFile) {
         return getNextSong(currentFile);
+    }
+
+
+    @Override
+    public FollowExit.code follow(String username) {
+        if (isOwnedByUser(username))
+            return FollowExit.code.OWNER;
+
+        if (isFollowedByUser(username)) {
+            removeUserFromFollowers(username);
+            return FollowExit.code.UNFOLLOWED;
+        }
+
+        addUserToFollowers(username);
+        return FollowExit.code.FOLLOWED;
     }
 
     @Override

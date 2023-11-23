@@ -37,6 +37,7 @@ public class LoadInterrogator extends CommandObject {
 
         exitCode = manager.requestLoading(this);
         manager.setLastActionTime(timestamp);
+        manager.setLastAction(this);
 
         return (new LoadOutput(this)).generateOutputNode();
     }

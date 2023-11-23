@@ -122,12 +122,12 @@
   "command" : "like",
   "user" : "carol19",
   "timestamp" : 805,
-  "message" : "Like registered successfully."
+  "message" : "Unlike registered successfully."
 }, {
   "command" : "showPreferredSongs",
   "user" : "carol19",
   "timestamp" : 1000,
-  "result" : [ "Gimme Shelter", "The Unforgiven", "Freedom", "Bohemian Rhapsody", "Freedom" ]
+  "result" : [ "Happier", "Castle on the Hill", "Bohemian Rhapsody" ]
 }, {
   "command" : "createPlaylist",
   "user" : "david27",
@@ -184,7 +184,7 @@
   "command" : "showPreferredSongs",
   "user" : "emily30",
   "timestamp" : 2300,
-  "result" : [ "Love Story", "Black Dog" ]
+  "result" : [ "Blank Space", "Begin Again" ]
 }, {
   "command" : "like",
   "user" : "emily30",
@@ -199,7 +199,7 @@
   "command" : "showPreferredSongs",
   "user" : "emily30",
   "timestamp" : 2400,
-  "result" : [ "Love Story", "Black Dog", "Bohemian Rhapsody" ]
+  "result" : [ "Blank Space", "Begin Again", "Bohemian Rhapsody" ]
 }, {
   "command" : "search",
   "user" : "emily30",
@@ -211,7 +211,12 @@
   "user" : "emily30",
   "timestamp" : 2490,
   "message" : "Successfully selected My first playlist."
-}, null, null, {
+}, {
+  "command" : "follow",
+  "user" : "emily30",
+  "timestamp" : 2520,
+  "message" : "Playlist followed successfully."
+}, null, {
   "command" : "search",
   "user" : "bob35",
   "timestamp" : 2565,
@@ -222,7 +227,12 @@
   "user" : "bob35",
   "timestamp" : 2580,
   "message" : "Successfully selected Just for fun."
-}, null, {
+}, {
+  "command" : "follow",
+  "user" : "bob35",
+  "timestamp" : 2600,
+  "message" : "Playlist followed successfully."
+}, {
   "command" : "search",
   "user" : "david27",
   "timestamp" : 2765,
@@ -233,7 +243,12 @@
   "user" : "david27",
   "timestamp" : 2810,
   "message" : "Successfully selected Just for fun."
-}, null, null, {
+}, {
+  "command" : "follow",
+  "user" : "david27",
+  "timestamp" : 2850,
+  "message" : "Playlist followed successfully."
+}, null, {
   "command" : "showPreferredSongs",
   "user" : "bob35",
   "timestamp" : 3100,
@@ -242,5 +257,5 @@
   "command" : "showPreferredSongs",
   "user" : "carol19",
   "timestamp" : 3200,
-  "result" : [ "Gimme Shelter", "The Unforgiven", "Freedom", "Bohemian Rhapsody", "Freedom" ]
+  "result" : [ "Happier", "Castle on the Hill", "Bohemian Rhapsody" ]
 }, null ]

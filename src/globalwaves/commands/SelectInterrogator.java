@@ -43,7 +43,13 @@ public class SelectInterrogator extends CommandObject {
 
         exitCode = manager.requestItemSelection(this);
         manager.setLastActionTime(timestamp);
+        manager.setLastAction(this);
 
         return (new SelectOutput(this)).generateOutputNode();
+    }
+
+    @Override
+    public boolean isSelectAction() {
+        return exitCode == SelectExit.code.SELECTED;
     }
 }

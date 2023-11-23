@@ -18,7 +18,7 @@ public class PlaylistStats {
 
     public PlaylistStats(Playlist playlist) {
         name = playlist.getName();
-        followers = playlist.getFollowers();
+        followers = playlist.getFollowersNumber();
         if (playlist.isVisible())
             visibility = "public";
         else

@@ -36,8 +36,8 @@ public class LikeInterrogator extends CommandObject {
 
         exitCode = manager.requestLikeAction(this);
 
-        System.out.println(exitCode);
         manager.setLastActionTime(timestamp);
+        manager.setLastAction(this);
         return (new LikeOutput(this)).generateOutputNode();
     }
 }

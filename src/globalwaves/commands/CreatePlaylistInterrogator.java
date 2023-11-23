@@ -33,6 +33,7 @@ public class CreatePlaylistInterrogator extends CommandObject {
 
         exitCode = manager.requestPlaylistCreation(this);
         manager.setLastActionTime(timestamp);
+        manager.setLastAction(this);
         
         return (new CreatePlaylistOutput(this)).generateOutputNode();
     }

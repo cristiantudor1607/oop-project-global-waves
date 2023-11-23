@@ -30,6 +30,7 @@ public class StatusInterrogator extends CommandObject {
         requestedPlayer = manager.requestPlayer(this);
 
         manager.setLastActionTime(timestamp);
+        manager.setLastAction(this);
 
         return (new StatusOutput(this)).generateOutputNode();
     }

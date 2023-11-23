@@ -81,7 +81,7 @@
   "user" : "carol19",
   "timestamp" : 870,
   "message" : "Search returned 5 results",
-  "results" : [ "Shape of You", "Don't", "Money Trees", "Dream On", "The Unforgiven" ]
+  "results" : [ "Shape of You", "Don't", "Stairway to Heaven", "Money Trees", "Under Pressure" ]
 }, {
   "command" : "select",
   "user" : "carol19",
@@ -108,7 +108,12 @@
   "user" : "emily30",
   "timestamp" : 1190,
   "message" : "Successfully selected The Michelle Obama Podcast."
-}, null, {
+}, {
+  "command" : "follow",
+  "user" : "emily30",
+  "timestamp" : 1250,
+  "message" : "The selected source is not a playlist."
+}, {
   "command" : "search",
   "user" : "carol19",
   "timestamp" : 1270,
@@ -119,7 +124,12 @@
   "user" : "carol19",
   "timestamp" : 1290,
   "message" : "Successfully selected The Man."
-}, null, {
+}, {
+  "command" : "follow",
+  "user" : "emily30",
+  "timestamp" : 1350,
+  "message" : "The selected source is not a playlist."
+}, {
   "command" : "search",
   "user" : "carol19",
   "timestamp" : 1400,
@@ -130,7 +140,12 @@
   "user" : "carol19",
   "timestamp" : 1410,
   "message" : "Successfully selected My second playlist."
-}, null, {
+}, {
+  "command" : "follow",
+  "user" : "carol19",
+  "timestamp" : 1450,
+  "message" : "Playlist followed successfully."
+}, {
   "command" : "showPlaylists",
   "user" : "bob35",
   "timestamp" : 1460,
@@ -142,7 +157,7 @@
   }, {
     "name" : "My second playlist",
     "visibility" : "public",
-    "followers" : 0,
+    "followers" : 1,
     "songs" : [ "Shape of You", "Stairway to Heaven" ]
   } ]
 }, {
@@ -159,7 +174,7 @@
   "command" : "switchVisibility",
   "user" : "bob35",
   "timestamp" : 1530,
-  "message" : "Visibility status updated successfully to false."
+  "message" : "Visibility status updated successfully to private."
 }, {
   "command" : "showPlaylists",
   "user" : "bob35",
@@ -172,10 +187,15 @@
   }, {
     "name" : "My second playlist",
     "visibility" : "private",
-    "followers" : 0,
+    "followers" : 1,
     "songs" : [ "Shape of You", "Stairway to Heaven" ]
   } ]
-}, null, {
+}, {
+  "command" : "follow",
+  "user" : "david27",
+  "timestamp" : 1650,
+  "message" : "Please select a source before following or unfollowing."
+}, {
   "command" : "search",
   "user" : "david27",
   "timestamp" : 1680,
@@ -185,12 +205,17 @@
   "command" : "select",
   "user" : "david27",
   "timestamp" : 1710,
-  "message" : "Please conduct a search before making a selection."
-}, null, {
+  "message" : "The selected ID is too high."
+}, {
+  "command" : "follow",
+  "user" : "david27",
+  "timestamp" : 1750,
+  "message" : "Please select a source before following or unfollowing."
+}, {
   "command" : "switchVisibility",
   "user" : "bob35",
   "timestamp" : 1790,
-  "message" : "Visibility status updated successfully to true."
+  "message" : "Visibility status updated successfully to public."
 }, {
   "command" : "search",
   "user" : "david27",
@@ -202,7 +227,12 @@
   "user" : "david27",
   "timestamp" : 1810,
   "message" : "Successfully selected My second playlist."
-}, null, {
+}, {
+  "command" : "follow",
+  "user" : "david27",
+  "timestamp" : 1850,
+  "message" : "Playlist followed successfully."
+}, {
   "command" : "search",
   "user" : "emily30",
   "timestamp" : 1865,
@@ -213,7 +243,12 @@
   "user" : "emily30",
   "timestamp" : 1870,
   "message" : "Successfully selected My second playlist."
-}, null, {
+}, {
+  "command" : "follow",
+  "user" : "emily30",
+  "timestamp" : 1890,
+  "message" : "Playlist followed successfully."
+}, {
   "command" : "showPlaylists",
   "user" : "bob35",
   "timestamp" : 1900,
@@ -225,7 +260,7 @@
   }, {
     "name" : "My second playlist",
     "visibility" : "public",
-    "followers" : 0,
+    "followers" : 3,
     "songs" : [ "Shape of You", "Stairway to Heaven" ]
   } ]
 } ]

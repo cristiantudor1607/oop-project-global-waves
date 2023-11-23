@@ -40,6 +40,7 @@ public class AddRemoveInterrogator extends CommandObject {
 
         exitCode = manager.requestAddRemove(this);
         manager.setLastActionTime(timestamp);
+        manager.setLastAction(this);
 
         return (new AddRemoveOutput(this)).generateOutputNode();
     }

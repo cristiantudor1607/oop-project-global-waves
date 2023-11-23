@@ -2,6 +2,7 @@ package globalwaves.player.entities;
 
 import fileio.input.EpisodeInput;
 import fileio.input.PodcastInput;
+import globalwaves.commands.enums.FollowExit;
 import globalwaves.player.entities.properties.OwnedEntity;
 import globalwaves.player.entities.properties.PlayableEntity;
 import lombok.Getter;
@@ -65,6 +66,11 @@ public class Podcast implements PlayableEntity, OwnedEntity {
     @Override
     public AudioFile getNextForPlaying(AudioFile currentFile) {
         return getNextEpisode(currentFile);
+    }
+
+    @Override
+    public FollowExit.code follow(String username) {
+        return FollowExit.code.NOT_A_PLAYLIST;
     }
 
     @Override

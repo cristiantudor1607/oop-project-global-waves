@@ -1,121 +1,183 @@
 [ {
   "command" : "search",
-  "user" : "emily30",
-  "timestamp" : 5,
-  "message" : "Search returned 5 results",
-  "results" : [ "Money Trees", "Big Pimpin'", "Whatever You Need", "Sicko Mode", "Empire State of Mind" ]
+  "user" : "alice22",
+  "timestamp" : 10,
+  "message" : "Search returned 1 results",
+  "results" : [ "TED Radio Hour" ]
 }, {
   "command" : "select",
-  "user" : "emily30",
-  "timestamp" : 10,
-  "message" : "Successfully selected Big Pimpin'."
+  "user" : "alice22",
+  "timestamp" : 15,
+  "message" : "Successfully selected TED Radio Hour."
 }, {
   "command" : "load",
-  "user" : "emily30",
-  "timestamp" : 15,
+  "user" : "alice22",
+  "timestamp" : 20,
   "message" : "Playback loaded successfully."
 }, {
-  "command" : "addRemoveInPlaylist",
-  "user" : "emily30",
-  "timestamp" : 20,
-  "message" : "The specified playlist does not exist."
+  "command" : "status",
+  "user" : "alice22",
+  "timestamp" : 59,
+  "stats" : {
+    "name" : "The Power of Design",
+    "remainedTime" : 3065,
+    "repeat" : "No Repeat",
+    "shuffle" : false,
+    "paused" : false
+  }
 }, {
   "command" : "search",
-  "user" : "emily30",
-  "timestamp" : 25,
+  "user" : "alice22",
+  "timestamp" : 60,
   "message" : "Search returned 1 results",
-  "results" : [ "The Joe Rogan Experience" ]
+  "results" : [ "Stairway to Heaven" ]
 }, {
   "command" : "select",
-  "user" : "emily30",
-  "timestamp" : 30,
-  "message" : "Successfully selected The Joe Rogan Experience."
+  "user" : "alice22",
+  "timestamp" : 65,
+  "message" : "Successfully selected Stairway to Heaven."
 }, {
   "command" : "load",
-  "user" : "emily30",
-  "timestamp" : 31,
+  "user" : "alice22",
+  "timestamp" : 70,
   "message" : "Playback loaded successfully."
 }, {
+  "command" : "search",
+  "user" : "alice22",
+  "timestamp" : 75,
+  "message" : "Search returned 1 results",
+  "results" : [ "TED Radio Hour" ]
+}, {
+  "command" : "select",
+  "user" : "alice22",
+  "timestamp" : 80,
+  "message" : "Successfully selected TED Radio Hour."
+}, {
+  "command" : "load",
+  "user" : "alice22",
+  "timestamp" : 85,
+  "message" : "Playback loaded successfully."
+}, {
+  "command" : "status",
+  "user" : "alice22",
+  "timestamp" : 86,
+  "stats" : {
+    "name" : "The Power of Design",
+    "remainedTime" : 3063,
+    "repeat" : "No Repeat",
+    "shuffle" : false,
+    "paused" : false
+  }
+}, {
+  "command" : "playPause",
+  "user" : "alice22",
+  "timestamp" : 3200,
+  "message" : "Playback paused successfully."
+}, {
+  "command" : "status",
+  "user" : "alice22",
+  "timestamp" : 3201,
+  "stats" : {
+    "name" : "The Science of Us",
+    "remainedTime" : 3081,
+    "repeat" : "No Repeat",
+    "shuffle" : false,
+    "paused" : true
+  }
+}, {
   "command" : "createPlaylist",
-  "user" : "emily30",
-  "timestamp" : 35,
+  "user" : "alice22",
+  "timestamp" : 3210,
   "message" : "Playlist created successfully."
 }, {
-  "command" : "addRemoveInPlaylist",
-  "user" : "emily30",
-  "timestamp" : 40,
-  "message" : "The loaded source is not a song."
-}, {
   "command" : "search",
-  "user" : "emily30",
-  "timestamp" : 45,
-  "message" : "Search returned 3 results",
-  "results" : [ "Bohemian Rhapsody", "We Will Rock You", "Radio Ga Ga" ]
-}, {
-  "command" : "addRemoveInPlaylist",
-  "user" : "emily30",
-  "timestamp" : 50,
-  "message" : "Please load a source before adding to or removing from the playlist."
-}, {
-  "command" : "createPlaylist",
-  "user" : "emily30",
-  "timestamp" : 55,
-  "message" : "A playlist with the same name already exists."
-}, {
-  "command" : "search",
-  "user" : "emily30",
-  "timestamp" : 60,
-  "message" : "Search returned 4 results",
-  "results" : [ "The Man", "Freedom", "Castle on the Hill", "Get Lucky" ]
+  "user" : "alice22",
+  "timestamp" : 3215,
+  "message" : "Search returned 2 results",
+  "results" : [ "Freedom", "Freedom" ]
 }, {
   "command" : "select",
-  "user" : "emily30",
-  "timestamp" : 70,
-  "message" : "Successfully selected Get Lucky."
+  "user" : "alice22",
+  "timestamp" : 3220,
+  "message" : "Successfully selected Freedom."
 }, {
   "command" : "load",
-  "user" : "emily30",
-  "timestamp" : 71,
+  "user" : "alice22",
+  "timestamp" : 3225,
   "message" : "Playback loaded successfully."
 }, {
   "command" : "addRemoveInPlaylist",
-  "user" : "emily30",
-  "timestamp" : 72,
+  "user" : "alice22",
+  "timestamp" : 3230,
   "message" : "Successfully added to playlist."
 }, {
   "command" : "search",
-  "user" : "emily30",
-  "timestamp" : 75,
+  "user" : "alice22",
+  "timestamp" : 3235,
   "message" : "Search returned 1 results",
-  "results" : [ "Playlist alb pentru zile negre" ]
-}, {
-  "command" : "like",
-  "user" : "emily30",
-  "timestamp" : 80,
-  "message" : "Please load a source before liking or unliking."
+  "results" : [ "Happier" ]
 }, {
   "command" : "select",
-  "user" : "emily30",
-  "timestamp" : 85,
-  "message" : "Successfully selected Playlist alb pentru zile negre."
+  "user" : "alice22",
+  "timestamp" : 3240,
+  "message" : "Successfully selected Happier."
 }, {
   "command" : "load",
-  "user" : "emily30",
-  "timestamp" : 86,
+  "user" : "alice22",
+  "timestamp" : 3245,
   "message" : "Playback loaded successfully."
 }, {
-  "command" : "like",
-  "user" : "emily30",
-  "timestamp" : 90,
-  "message" : "Loaded source is not a song."
+  "command" : "addRemoveInPlaylist",
+  "user" : "alice22",
+  "timestamp" : 3250,
+  "message" : "Successfully added to playlist."
 }, {
-  "command" : "showPlaylists",
-  "user" : "emily30",
-  "timestamp" : 95,
-  "result" : [ {
-    "name" : "Playlist alb pentru zile negre",
-    "visibility" : "public",
-    "followers" : 0,
-    "songs" : [ "Get Lucky" ]
-  } ]
+  "command" : "search",
+  "user" : "alice22",
+  "timestamp" : 3255,
+  "message" : "Search returned 1 results",
+  "results" : [ "2010 hits" ]
+}, {
+  "command" : "select",
+  "user" : "alice22",
+  "timestamp" : 3260,
+  "message" : "Successfully selected 2010 hits."
+}, {
+  "command" : "load",
+  "user" : "alice22",
+  "timestamp" : 3265,
+  "message" : "Playback loaded successfully."
+}, {
+  "command" : "status",
+  "user" : "alice22",
+  "timestamp" : 3270,
+  "stats" : {
+    "name" : "Freedom",
+    "remainedTime" : 173,
+    "repeat" : "No Repeat",
+    "shuffle" : false,
+    "paused" : false
+  }
+}, {
+  "command" : "status",
+  "user" : "alice22",
+  "timestamp" : 3448,
+  "stats" : {
+    "name" : "Happier",
+    "remainedTime" : 202,
+    "repeat" : "No Repeat",
+    "shuffle" : false,
+    "paused" : false
+  }
+}, {
+  "command" : "status",
+  "user" : "alice22",
+  "timestamp" : 4000,
+  "stats" : {
+    "name" : "",
+    "remainedTime" : 0,
+    "repeat" : "No Repeat",
+    "shuffle" : false,
+    "paused" : true
+  }
 } ]

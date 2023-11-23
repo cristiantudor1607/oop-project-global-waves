@@ -18,8 +18,8 @@ public class NameFilter<T extends PlayableEntity> implements Filter <T>{
 
     @Override
     public boolean matches(T MatchingObject) {
-        String objName = MatchingObject.getName();
+        String objName = MatchingObject.getName().toLowerCase();
 
-        return objName.startsWith(prefix);
+        return objName.startsWith(prefix.toLowerCase());
     }
 }

@@ -25,8 +25,8 @@ public class Player {
     }
 
     private Map<PlayableEntity, HistoryEntry> history;
-    private PlayableEntity selectedEntity;
-    private AudioFile loadedFile;
+    private PlayableEntity selectedSource;
+    private AudioFile playingFile;
     private PlayerStatus state;
     private RepeatValue repeat;
     private boolean shuffle;
@@ -34,8 +34,8 @@ public class Player {
 
     public Player() {
         history = new HashMap<>();
-        selectedEntity = null;
-        loadedFile = null;
+        selectedSource = null;
+        playingFile = null;
         state = PlayerStatus.NOT_IN_USE;
         repeat = RepeatValue.NO_REPEAT;
         shuffle = false;
@@ -43,8 +43,8 @@ public class Player {
     }
 
     public void resetPlayer() {
-        selectedEntity = null;
-        loadedFile = null;
+        selectedSource = null;
+        playingFile = null;
         state = PlayerStatus.NOT_IN_USE;
         repeat = RepeatValue.NO_REPEAT;
         shuffle = false;
@@ -52,7 +52,7 @@ public class Player {
     }
 
     public void select(PlayableEntity selectedEntity) {
-        this.selectedEntity = selectedEntity;
+        this.selectedSource = selectedEntity;
         state = PlayerStatus.SELECTED;
     }
 
@@ -65,11 +65,11 @@ public class Player {
     }
 
     public void stopPlayer() {
-        if (selectedEntity == null)
+        if (selectedSource == null)
             return;
 
-        if (selectedEntity.needsHistoryTrack()) {
-            history.put(selectedEntity, new HistoryEntry(loadedFile, remainedTime));
+        if (selectedSource.needsHistoryTrack()) {
+            history.put(selectedSource, new HistoryEntry(playingFile, remainedTime));
         }
 
         resetPlayer();
@@ -81,9 +81,9 @@ public class Player {
             return;
 
         remainedTime -= timeDifference;
-        if (remainedTime <= 0 && selectedEntity.hasNextForPlaying(loadedFile)) {
-            loadedFile = selectedEntity.getNextForPlaying(loadedFile);
-            remainedTime += loadedFile.getDuration();
+        if (remainedTime <= 0 && selectedSource.hasNextForPlaying(playingFile)) {
+            playingFile = selectedSource.getNextForPlaying(playingFile);
+            remainedTime += playingFile.getDuration();
             return;
         }
 
@@ -95,11 +95,11 @@ public class Player {
 
     public void removeFromHistory() {
         if (hasHistoryEntry())
-            history.remove(selectedEntity);
+            history.remove(selectedSource);
     }
 
     public boolean hasHistoryEntry() {
-        return history.containsKey(selectedEntity);
+        return history.containsKey(selectedSource);
     }
 
     public void setDefaultLoadOptions() {
@@ -109,8 +109,8 @@ public class Player {
     }
 
     private void loadFromHistory() {
-        loadedFile = history.get(selectedEntity).getFile();
-        remainedTime = history.get(selectedEntity).getRemainedTime();
+        playingFile = history.get(selectedSource).getFile();
+        remainedTime = history.get(selectedSource).getRemainedTime();
         setDefaultLoadOptions();
     }
 
@@ -120,22 +120,22 @@ public class Player {
             return;
         }
 
-        AudioFile newAudiofile = selectedEntity.getPlayableFile();
+        AudioFile newAudiofile = selectedSource.getPlayableFile();
         int duration = newAudiofile.getDuration();
-        if (selectedEntity.needsHistoryTrack())
-            history.put(selectedEntity, new HistoryEntry(newAudiofile, duration));
+        if (selectedSource.needsHistoryTrack())
+            history.put(selectedSource, new HistoryEntry(newAudiofile, duration));
 
-        loadedFile = newAudiofile;
+        playingFile = newAudiofile;
         remainedTime = duration;
         setDefaultLoadOptions();
     }
 
     public boolean hasEmptySource() {
-        return selectedEntity.isEmptyPlayableFile();
+        return selectedSource.isEmptyPlayableFile();
     }
 
-    public boolean hasSourceSelected() {
-        return !(state == PlayerStatus.NOT_IN_USE);
+    public boolean hasNoSource() {
+        return selectedSource == null;
     }
 
     public boolean hasSourceLoaded() {
@@ -147,10 +147,10 @@ public class Player {
     }
 
     public void printPlayer() {
-        if (selectedEntity == null)
+        if (selectedSource == null)
             System.out.println("No AudioFile");
         else
-            System.out.println(selectedEntity.getName());
+            System.out.println(selectedSource.getName());
 
         System.out.println(state);
         System.out.println(repeat);

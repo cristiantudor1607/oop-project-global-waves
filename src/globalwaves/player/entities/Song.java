@@ -1,6 +1,7 @@
 package globalwaves.player.entities;
 
 import fileio.input.SongInput;
+import globalwaves.commands.enums.FollowExit;
 import globalwaves.player.entities.properties.PlayableEntity;
 import lombok.Getter;
 import lombok.Setter;
@@ -85,6 +86,13 @@ public class Song extends AudioFile implements PlayableEntity {
     public AudioFile getNextForPlaying(AudioFile currentFile) {
         return null;
     }
+
+
+    @Override
+    public FollowExit.code follow(String username) {
+        return FollowExit.code.NOT_A_PLAYLIST;
+    }
+
 
     @Override
     public String toString() {

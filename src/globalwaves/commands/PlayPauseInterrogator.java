@@ -35,6 +35,8 @@ public class PlayPauseInterrogator extends CommandObject {
 
         exitCode = manager.requestUpdateState(this);
         manager.setLastActionTime(timestamp);
+        manager.setLastAction(this);
+
         return (new PlayPauseOutput(this)).generateOutputNode();
     }
 }

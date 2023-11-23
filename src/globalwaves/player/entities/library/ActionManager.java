@@ -20,6 +20,7 @@ public class ActionManager {
     private SearchBar searchBar;
     private Map<String, Player> players;
     private int lastActionTime;
+    private CommandObject lastAction;
 
     public ActionManager() {
         interrogator = new LibraryInterrogator();
@@ -30,6 +31,7 @@ public class ActionManager {
         }
 
         lastActionTime = 0;
+        lastAction = null;
     }
 
     public Player requestPlayer(CommandObject executingQuery) {
@@ -44,22 +46,23 @@ public class ActionManager {
         userPlayer.stopPlayer();
 
         searchBar.setResults(executingSearch.getSearchResults());
-        searchBar.setUsername(executingSearch.getUsername());
+
     }
 
     public SelectExit.code requestItemSelection(SelectInterrogator executingSelect) {
         int itemNumber = executingSelect.getItemNumber();
 
-        if (!searchBar.hasSearchResults())
+        if (searchBar.wasNotInvoked())
             return SelectExit.code.NO_LIST;
 
-        if (!searchBar.invalidItem(itemNumber))
+        if (!searchBar.invalidItem(itemNumber) || searchBar.hasNoSearchResult())
             return SelectExit.code.OUT_OF_BOUNDS;
 
         PlayableEntity entity = searchBar.getResultAtIndex(itemNumber - 1);
         Player userPlayer = players.get(executingSelect.getUsername());
         userPlayer.select(entity);
         executingSelect.setSelectedAudio(entity);
+
         // Reset the Search Bar after selection
         searchBar.reset();
 
@@ -69,7 +72,10 @@ public class ActionManager {
     public LoadExit.code requestLoading(LoadInterrogator executingLoad) {
         Player userPlayer = players.get(executingLoad.getUsername());
 
-        if (!userPlayer.hasSourceSelected())
+        if (!lastAction.isSelectAction())
+            return LoadExit.code.NO_SOURCE_SELECTED;
+
+        if (userPlayer.hasNoSource())
             return LoadExit.code.NO_SOURCE_SELECTED;
 
         if (userPlayer.hasEmptySource())
@@ -83,7 +89,7 @@ public class ActionManager {
     public PlayPauseExit.code requestUpdateState(PlayPauseInterrogator executingQuery) {
         Player userPlayer = players.get(executingQuery.getUsername());
 
-        if (!userPlayer.hasSourceSelected())
+        if (userPlayer.hasNoSource())
             return PlayPauseExit.code.NO_SOURCE;
 
         if (userPlayer.isPlaying()) {
@@ -104,6 +110,7 @@ public class ActionManager {
             return CreationExit.code.ALREADY_EXISTS;
 
         interrogator.createPlaylist(owner, playlistName);
+
         return CreationExit.code.CREATED;
     }
 
@@ -121,6 +128,7 @@ public class ActionManager {
         }
 
         ownerPlaylist.makePublic();
+
         return SwitchVisibilityExit.code.MADE_PUBLIC;
     }
 
@@ -133,13 +141,13 @@ public class ActionManager {
         if (!ownerPlayer.hasSourceLoaded())
             return  AddRemoveExit.code.NO_SOURCE;
 
-        if (!ownerPlayer.getLoadedFile().canBeLiked())
+        if (!ownerPlayer.getPlayingFile().canBeLiked())
             return AddRemoveExit.code.NOT_A_SONG;
 
         if (ownerPlaylist == null)
             return AddRemoveExit.code.INVALID_PLAYLIST;
 
-        AudioFile selectedSource = ownerPlayer.getLoadedFile();
+        AudioFile selectedSource = ownerPlayer.getPlayingFile();
         if (ownerPlaylist.hasSong(selectedSource)) {
             ownerPlaylist.removeSong(selectedSource);
             return AddRemoveExit.code.REMOVED;
@@ -163,7 +171,7 @@ public class ActionManager {
         if (!queriedUserPlayer.hasSourceLoaded())
             return LikeExit.code.NO_SOURCE;
 
-        AudioFile queriedSong = queriedUserPlayer.getLoadedFile();
+        AudioFile queriedSong = queriedUserPlayer.getPlayingFile();
 
         if (!queriedSong.canBeLiked())
             return LikeExit.code.NOT_A_SONG;
@@ -189,6 +197,16 @@ public class ActionManager {
         }
 
         return names;
+    }
+
+    public FollowExit.code requestFollowAction(FollowInterrogator execQuery) {
+        Player userPlayer = requestPlayer(execQuery);
+        String username = execQuery.getUsername();
+
+        if (userPlayer.hasNoSource())
+            return FollowExit.code.NO_SOURCE;
+
+        return userPlayer.getSelectedSource().follow(username);
     }
 
     public void updatePlayersData(CommandObject nextToExecuteCommand) {

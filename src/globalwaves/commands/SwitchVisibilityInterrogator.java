@@ -20,9 +20,9 @@ class SwitchVisibilityOutput extends CommandOutputFormatter {
         switch (executedQuery.getExitCode()) {
             case TOO_HIGH -> message = "The specified playlist ID is too high.";
             case MADE_PRIVATE -> message = "Visibility status updated successfully to " +
-                    "false.";
+                    "private.";
             case MADE_PUBLIC -> message = "Visibility status updated successfully to " +
-                    "true.";
+                    "public.";
         }
     }
 }
@@ -39,6 +39,8 @@ public class SwitchVisibilityInterrogator extends CommandObject {
 
         exitCode = manager.requestSwitch(this);
         manager.setLastActionTime(timestamp);
+        manager.setLastAction(this);
+
         return (new SwitchVisibilityOutput(this)).generateOutputNode();
     }
 }

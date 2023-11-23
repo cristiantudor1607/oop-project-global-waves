@@ -48,10 +48,7 @@ public class SongEngine extends SearchEngine<Song> {
     @Override
     public List<Song> collectResults() {
         Library database = Library.getInstance();
-        List<Song> matchedSongs = new ArrayList<>();
-
-        for (Song s : database.getSongs())
-            matchedSongs.add(new Song(s));
+        List<Song> matchedSongs = database.getSongs();
 
         for (Filter<Song> filter: filters)
             matchedSongs = applyFilter(matchedSongs, filter);
