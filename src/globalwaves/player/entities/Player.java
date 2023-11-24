@@ -44,8 +44,10 @@ public class Player {
     }
 
     public boolean playNext() {
-        if  (nextFile == null)
+        if  (nextFile == null) {
+            resetPlayer();
             return false;
+        }
 
         if (playingFile == nextFile && repeat == 1)
             repeat = 0;
@@ -60,7 +62,6 @@ public class Player {
 
     public void playPrev(int timeDiff) {
         remainedTime -= timeDiff;
-
         if (remainedTime == playingFile.getDuration()) {
             // s-ar putea sa fie nevoie sa resetez repeat-ul aici
 

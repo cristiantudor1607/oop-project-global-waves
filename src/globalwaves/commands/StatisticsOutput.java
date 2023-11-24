@@ -11,14 +11,12 @@ public class StatisticsOutput extends CommandOutputFormatter {
 
     public StatisticsOutput(TopFiveSongsInterrogator executedQuery) {
         command = "getTop5Songs";
-        user = null;
         timestamp = executedQuery.getTimestamp();
         result = executedQuery.getResult();
     }
 
     public StatisticsOutput(TopFivePlaylistsInterrogator executedQuery) {
         command = "getTop5Playlists";
-        user = null;
         timestamp = executedQuery.getTimestamp();
         result = executedQuery.getResult();
     }

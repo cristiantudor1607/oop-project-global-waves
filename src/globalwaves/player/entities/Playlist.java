@@ -16,15 +16,17 @@ import java.util.Random;
 public class Playlist implements PlayableEntity, OwnedEntity {
     private String name;
     private String owner;
+    private int creationTime;
     private int followersNumber;
     private boolean visible;
     private List<AudioFile> songs;
     private List<Integer> playOrder;
     private List<String> followers;
 
-    public Playlist(String owner, String name) {
+    public Playlist(String owner, String name, int creationTime) {
         this.name = name;
         this.owner = owner;
+        this.creationTime = creationTime;
         followersNumber = 0;
         visible = true;
         songs = new ArrayList<>();
@@ -167,7 +169,7 @@ public class Playlist implements PlayableEntity, OwnedEntity {
         if (songs.isEmpty())
             return null;
 
-        return songs.get(0);
+        return songs.get(playOrder.get(0));
     }
 
     @Override

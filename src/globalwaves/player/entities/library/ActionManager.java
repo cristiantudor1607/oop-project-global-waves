@@ -106,11 +106,12 @@ public class ActionManager {
     public CreationExit.code requestPlaylistCreation(CreatePlaylistInterrogator execQuery) {
         String owner = execQuery.getUsername();
         String playlistName = execQuery.getPlaylistName();
+        int timestamp = execQuery.getTimestamp();
 
         if (interrogator.ownerHasPlaylist(owner, playlistName))
             return CreationExit.code.ALREADY_EXISTS;
 
-        interrogator.createPlaylist(owner, playlistName);
+        interrogator.createPlaylist(owner, playlistName, timestamp);
 
         return CreationExit.code.CREATED;
     }
@@ -255,6 +256,9 @@ public class ActionManager {
 
     public String requestPrev(PrevInterrogator execQuery) {
         Player userPlayer = requestPlayer(execQuery);
+
+        if (execQuery.getTimestamp() == 6390)
+            System.out.println("aici pula");
 
         if (userPlayer.hasNoSource() || !userPlayer.hasSourceLoaded())
             return "Please load a source before returning to the previous track.";

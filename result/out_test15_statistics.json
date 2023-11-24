@@ -218,9 +218,8 @@
   "message" : "Playlist followed successfully."
 }, {
   "command" : "getTop5Playlists",
-  "user" : null,
   "timestamp" : 2560,
-  "result" : [ "My first playlist", "Just for fun", "Listen on repeat", "Felt cute might delete later" ]
+  "result" : [ "My first playlist", "Just for fun", "Felt cute might delete later", "Listen on repeat" ]
 }, {
   "command" : "search",
   "user" : "bob35",
@@ -255,9 +254,8 @@
   "message" : "Playlist followed successfully."
 }, {
   "command" : "getTop5Playlists",
-  "user" : null,
   "timestamp" : 3000,
-  "result" : [ "Just for fun", "My first playlist", "Listen on repeat", "Felt cute might delete later" ]
+  "result" : [ "Just for fun", "My first playlist", "Felt cute might delete later", "Listen on repeat" ]
 }, {
   "command" : "showPreferredSongs",
   "user" : "bob35",
@@ -270,7 +268,6 @@
   "result" : [ "Bohemian Rhapsody" ]
 }, {
   "command" : "getTop5Songs",
-  "user" : null,
   "timestamp" : 3300,
-  "result" : [ "Bohemian Rhapsody", "Angie", "Enter Sandman", "I Don't Wanna Live Forever", "Dream Chaser" ]
+  "result" : [ "Bohemian Rhapsody", "Angie", "Shape of You", "Don't", "Stairway to Heaven" ]
 } ]

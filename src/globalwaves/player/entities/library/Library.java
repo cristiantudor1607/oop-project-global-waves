@@ -129,9 +129,6 @@ public class Library {
     }
 
     public void initPlaylists() {
-        if (users.isEmpty())
-            return;
-
         for (User user : users) {
             List<Playlist> userPlaylists = new ArrayList<>();
             String username = user.getUsername();

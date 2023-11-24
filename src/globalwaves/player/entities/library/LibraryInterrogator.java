@@ -5,8 +5,10 @@ import globalwaves.player.entities.Playlist;
 import globalwaves.player.entities.Song;
 import globalwaves.player.entities.User;
 import globalwaves.player.entities.properties.PlayableEntity;
+import globalwaves.player.entities.utilities.SortByCreationTime;
 import globalwaves.player.entities.utilities.SortByFollowers;
 import globalwaves.player.entities.utilities.SortByInteger;
+import globalwaves.player.entities.utilities.SortByLibraryOrder;
 
 import java.util.*;
 
@@ -36,8 +38,8 @@ public class LibraryInterrogator {
         return ownerPlaylists.get(id - 1);
     }
 
-    public void createPlaylist(final String owner, final String playlistName) {
-        Playlist newOwnerPlaylist = new Playlist(owner, playlistName);
+    public void createPlaylist(final String owner, final String playlistName, final int time) {
+        Playlist newOwnerPlaylist = new Playlist(owner, playlistName, time);
         database.addPlaylist(owner, newOwnerPlaylist);
     }
 
@@ -127,10 +129,15 @@ public class LibraryInterrogator {
         unrolledLikes.sort(new SortByInteger());
     }
 
+    public void sortByLibrary(List<Map.Entry<AudioFile, Integer>> sortedLikes) {
+        sortedLikes.sort(new SortByLibraryOrder());
+    }
+
     public List<String> getTopFiveSongs() {
         Map<AudioFile, Integer> mappedLikes = mapLikes();
         List<Map.Entry<AudioFile, Integer>> unrolledLikes = unrollLikes(mappedLikes);
         sortLikes(unrolledLikes);
+        sortByLibrary(unrolledLikes);
         truncateResults(unrolledLikes);
 
         List<String> results = new ArrayList<>();
@@ -160,9 +167,14 @@ public class LibraryInterrogator {
         publicPlaylists.sort(new SortByFollowers());
     }
 
+    public void sortPlaylistsByTime(List<Playlist> publicPlaylists) {
+        publicPlaylists.sort(new SortByCreationTime());
+    }
+
     public List<String> getTopFivePlaylists() {
         List<Playlist> playlists = getPublicPlaylists();
         sortPlaylists(playlists);
+        sortPlaylistsByTime(playlists);
         truncateResults(playlists);
 
         List<String> names = new ArrayList<>();

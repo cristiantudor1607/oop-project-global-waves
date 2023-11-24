@@ -4772,11 +4772,11 @@
   "user" : "henry26",
   "timestamp" : 5570,
   "stats" : {
-    "name" : "Dream On",
-    "remainedTime" : 169,
+    "name" : "",
+    "remainedTime" : 0,
     "repeat" : "No Repeat",
     "shuffle" : false,
-    "paused" : false
+    "paused" : true
   }
 }, {
   "command" : "status",
@@ -4948,17 +4948,17 @@
   "command" : "repeat",
   "user" : "henry26",
   "timestamp" : 5670,
-  "message" : "Repeat mode changed to repeat all."
+  "message" : "Please load a source before setting the repeat status."
 }, {
   "command" : "status",
   "user" : "henry26",
   "timestamp" : 5670,
   "stats" : {
-    "name" : "Dream On",
-    "remainedTime" : 69,
-    "repeat" : "Repeat All",
+    "name" : "",
+    "remainedTime" : 0,
+    "repeat" : "No Repeat",
     "shuffle" : false,
-    "paused" : false
+    "paused" : true
   }
 }, {
   "command" : "repeat",
@@ -5151,11 +5151,11 @@
   "user" : "henry26",
   "timestamp" : 5770,
   "stats" : {
-    "name" : "Dream On",
-    "remainedTime" : 236,
+    "name" : "",
+    "remainedTime" : 0,
     "repeat" : "No Repeat",
     "shuffle" : false,
-    "paused" : false
+    "paused" : true
   }
 }, {
   "command" : "playPause",
@@ -5316,17 +5316,17 @@
   "command" : "shuffle",
   "user" : "henry26",
   "timestamp" : 5870,
-  "message" : "Shuffle function activated successfully."
+  "message" : "Please load a source before using the shuffle function."
 }, {
   "command" : "status",
   "user" : "henry26",
   "timestamp" : 5870,
   "stats" : {
-    "name" : "Dream On",
-    "remainedTime" : 136,
+    "name" : "",
+    "remainedTime" : 0,
     "repeat" : "No Repeat",
-    "shuffle" : true,
-    "paused" : false
+    "shuffle" : false,
+    "paused" : true
   }
 }, {
   "command" : "switchVisibility",
@@ -5518,17 +5518,17 @@
   "command" : "shuffle",
   "user" : "henry26",
   "timestamp" : 5970,
-  "message" : "Shuffle function deactivated successfully."
+  "message" : "Please load a source before using the shuffle function."
 }, {
   "command" : "status",
   "user" : "henry26",
   "timestamp" : 5970,
   "stats" : {
-    "name" : "Dream On",
-    "remainedTime" : 36,
+    "name" : "",
+    "remainedTime" : 0,
     "repeat" : "No Repeat",
     "shuffle" : false,
-    "paused" : false
+    "paused" : true
   }
 }, {
   "command" : "shuffle",
@@ -9934,12 +9934,10 @@
   "result" : [ ]
 }, {
   "command" : "getTop5Playlists",
-  "user" : null,
   "timestamp" : 8580,
-  "result" : [ "Dynamic Tracks Adventure #2", "Chill Melodies Voyage #1", "Stellar Tunes Quest #2", "Groovy Vibes Odyssey #1", "Dynamic Grooves Expedition #1" ]
+  "result" : [ "Chill Melodies Voyage #1", "Dynamic Tracks Adventure #2", "Stellar Tunes Quest #2", "Breezy Rhythms Trek #1", "Chill Sounds Journey #1" ]
 }, {
   "command" : "getTop5Songs",
-  "user" : null,
   "timestamp" : 8580,
-  "result" : [ "Start Me Up", "Love Story", "Gimme Shelter", "Dream On", "Black Dog" ]
+  "result" : [ "Start Me Up", "Love Story", "Gimme Shelter", "Don't", "Money Trees" ]
 } ]
