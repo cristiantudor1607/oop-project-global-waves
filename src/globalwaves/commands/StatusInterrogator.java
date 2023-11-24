@@ -26,7 +26,6 @@ public class StatusInterrogator extends CommandObject {
 
     @Override
     public JsonNode execute(ActionManager manager) {
-        System.out.println("Retrieving stats ...");
         requestedPlayer = manager.requestPlayer(this);
 
         manager.setLastActionTime(timestamp);

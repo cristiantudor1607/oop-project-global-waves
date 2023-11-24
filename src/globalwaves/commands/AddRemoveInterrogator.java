@@ -36,8 +36,6 @@ public class AddRemoveInterrogator extends CommandObject {
 
     @Override
     public JsonNode execute(ActionManager manager) {
-        System.out.println("Adding or removing to playlist ...");
-
         exitCode = manager.requestAddRemove(this);
         manager.setLastActionTime(timestamp);
         manager.setLastAction(this);

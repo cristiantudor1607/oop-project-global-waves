@@ -25,7 +25,6 @@ public class Player {
     private int repeat;
     private boolean shuffle;
     private int remainedTime;
-    private int replayedTimes;
 
     public Player() {
         history = new HashMap<>();
@@ -42,14 +41,85 @@ public class Player {
         repeat = 0;
         shuffle = false;
         remainedTime = 0;
-        replayedTimes = 0;
     }
+
+    public boolean playNext() {
+        if  (nextFile == null)
+            return false;
+
+        if (playingFile == nextFile && repeat == 1)
+            repeat = 0;
+
+        prevFile = playingFile;
+        playingFile = nextFile;
+        nextFile = selectedSource.getNextForPlaying(playingFile, repeat);
+        state = PlayerStatus.PLAYING;
+        remainedTime = playingFile.getDuration();
+        return true;
+    }
+
+    public void playPrev(int timeDiff) {
+        remainedTime -= timeDiff;
+
+        if (remainedTime == playingFile.getDuration()) {
+            // s-ar putea sa fie nevoie sa resetez repeat-ul aici
+
+            if (prevFile == null) {
+                remainedTime = playingFile.getDuration();
+                state = PlayerStatus.PLAYING;
+                return;
+            }
+
+            nextFile = playingFile;
+            playingFile = prevFile;
+            prevFile = selectedSource.getPrevForPlaying(playingFile, repeat);
+            state = PlayerStatus.PLAYING;
+            remainedTime = playingFile.getDuration();
+            return;
+        }
+
+        // If there is more than one second passed
+        if (remainedTime < playingFile.getDuration()) {
+            if (playingFile == nextFile && repeat == 1) {
+                repeat = 0;
+                nextFile = selectedSource.getNextForPlaying(playingFile, repeat);
+            }
+
+            state = PlayerStatus.PLAYING;
+            remainedTime = playingFile.getDuration();
+        }
+    }
+
+    public void skipForward() {
+        // If there are less than 90 seconds remaining, start the next episode
+        if (remainedTime <= 90 ) {
+            prevFile = playingFile;
+            if (playingFile == nextFile && repeat == 1)
+                repeat = 0;
+            else
+                playingFile = nextFile;
+
+            nextFile = selectedSource.getNextForPlaying(playingFile, repeat);
+            state = PlayerStatus.PLAYING;
+            remainedTime = playingFile.getDuration();
+            return;
+        }
+
+        remainedTime -= 90;
+    }
+
+    public void rewoundBackward() {
+        if (playingFile.getDuration() - remainedTime < 90)
+            remainedTime = playingFile.getDuration();
+        else
+            remainedTime += 90;
+    }
+
 
     public void setDefaultLoadOptions() {
         state = PlayerStatus.PLAYING;
         repeat =  0;
         shuffle = false;
-        replayedTimes = 0;
     }
 
     public void select(PlayableEntity selectedEntity) {
@@ -174,6 +244,11 @@ public class Player {
     public boolean hasNoSource() {
         return selectedSource == null;
     }
+
+    public boolean hasSourceSelected() {
+        return state == PlayerStatus.SELECTED;
+    }
+
 
     public boolean hasSourceLoaded() {
         return state == PlayerStatus.PLAYING || state == PlayerStatus.PAUSED;

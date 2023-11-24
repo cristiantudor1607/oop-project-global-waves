@@ -33,8 +33,6 @@ public class LoadInterrogator extends CommandObject {
     @JsonIgnore private LoadExit.code exitCode;
     @Override
     public JsonNode execute(ActionManager manager) {
-        System.out.println("Loading file ...");
-
         exitCode = manager.requestLoading(this);
         manager.setLastActionTime(timestamp);
         manager.setLastAction(this);

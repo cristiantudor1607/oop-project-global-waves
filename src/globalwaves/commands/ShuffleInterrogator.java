@@ -34,8 +34,6 @@ public class ShuffleInterrogator extends CommandObject {
 
     @Override
     public JsonNode execute(ActionManager manager) {
-        System.out.println("Shuffling ...");
-
         exitCode = manager.requestShuffling(this);
         manager.setLastActionTime(timestamp);
         manager.setLastAction(this);

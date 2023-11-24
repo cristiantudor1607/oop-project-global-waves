@@ -35,8 +35,6 @@ public class SwitchVisibilityInterrogator extends CommandObject {
 
     @Override
     public JsonNode execute(ActionManager manager) {
-        System.out.println("Switching Visibility ...");
-
         exitCode = manager.requestSwitch(this);
         manager.setLastActionTime(timestamp);
         manager.setLastAction(this);

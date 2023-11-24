@@ -32,7 +32,6 @@ public class ShowPlaylistsInterrogator extends CommandObject {
 
     @Override
     public JsonNode execute(ActionManager manager) {
-        System.out.println("Getting user playlists ...");
         userPlaylists = manager.requestOwnerPlaylists(username);
 
         manager.setLastActionTime(timestamp);

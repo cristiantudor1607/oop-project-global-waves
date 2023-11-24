@@ -31,8 +31,6 @@ public class PlayPauseInterrogator extends CommandObject {
 
     @Override
     public JsonNode execute(ActionManager manager) {
-        System.out.println("Changing player state ...");
-
         exitCode = manager.requestUpdateState(this);
         manager.setLastActionTime(timestamp);
         manager.setLastAction(this);

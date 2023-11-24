@@ -39,8 +39,6 @@ public class SelectInterrogator extends CommandObject {
 
     @Override
     public JsonNode execute(ActionManager manager) {
-        System.out.println("Selecting...");
-
         exitCode = manager.requestItemSelection(this);
         manager.setLastActionTime(timestamp);
         manager.setLastAction(this);

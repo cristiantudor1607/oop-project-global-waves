@@ -20,6 +20,7 @@ public class ActionManager {
     private SearchBar searchBar;
     private Map<String, Player> players;
     private int lastActionTime;
+    // TODO : Get rid of lastAction field
     private CommandObject lastAction;
 
     public ActionManager() {
@@ -72,7 +73,7 @@ public class ActionManager {
     public LoadExit.code requestLoading(LoadInterrogator executingLoad) {
         Player userPlayer = players.get(executingLoad.getUsername());
 
-        if (!lastAction.isSelectAction())
+        if (!userPlayer.hasSourceSelected())
             return LoadExit.code.NO_SOURCE_SELECTED;
 
         if (userPlayer.hasNoSource())
@@ -162,8 +163,6 @@ public class ActionManager {
     }
 
     public LikeExit.code requestLikeAction(LikeInterrogator execQuery) {
-        // TODO : Add the case when there is a playlist
-
         String username = execQuery.getUsername();
         User queriedUser = interrogator.getUserByUsername(username);
         Player queriedUserPlayer = getPlayers().get(username);
@@ -188,13 +187,11 @@ public class ActionManager {
     public List<String> requestLikedSongs(ShowLikesInterrogator execQuery) {
         String username = execQuery.getUsername();
 
-        List<AudioFile> likedSongs = interrogator.getUserLikedSongs(username);
+        List<AudioFile> songs = interrogator.getUserLikedSongs(username);
 
         List<String> names = new ArrayList<>();
-
-        for (AudioFile song : likedSongs) {
-            names.add(song.getName());
-        }
+        for (AudioFile file : songs)
+            names.add(file.getName());
 
         return names;
     }
@@ -240,6 +237,61 @@ public class ActionManager {
         }
 
         return shuffleExit;
+    }
+
+    public String requestNext(NextInterrogator execQuery) {
+       Player userPlayer = requestPlayer(execQuery);
+
+       if (userPlayer.hasNoSource() || !userPlayer.hasSourceLoaded())
+           return "Please load a source before skipping to the next track.";
+
+       if (userPlayer.playNext()) {
+           String track = userPlayer.getPlayingFile().getName();
+           return "Skipped to next track successfully. The current track is " + track + ".";
+       }
+
+        return "Please load a source before skipping to the next track.";
+    }
+
+    public String requestPrev(PrevInterrogator execQuery) {
+        Player userPlayer = requestPlayer(execQuery);
+
+        if (userPlayer.hasNoSource() || !userPlayer.hasSourceLoaded())
+            return "Please load a source before returning to the previous track.";
+
+        userPlayer.playPrev(execQuery.getTimestamp() - lastActionTime);
+        return "Returned to previous track successfully. The current track is " +
+                userPlayer.getPlayingFile().getName() + ".";
+    }
+
+    public String requestForward(ForwardInterrogator execQuery) {
+        Player userPlayer = requestPlayer(execQuery);
+
+        if (userPlayer.hasNoSource() || !userPlayer.hasSourceLoaded())
+            return "Please load a source before attempting to forward.";
+
+        if (userPlayer.getSelectedSource().cantGoForwardOrBackward())
+            return "The loaded source is not a podcast.";
+
+        userPlayer.skipForward();
+        return "Skipped forward successfully.";
+    }
+
+    public String requestBackward(BackwardInterrogator execQuery) {
+        Player userPlayer = requestPlayer(execQuery);
+
+        if (userPlayer.hasNoSource() || !userPlayer.hasSourceLoaded())
+            return "Please load a source before rewinding.";
+
+        if (userPlayer.getSelectedSource().cantGoForwardOrBackward())
+            return "The loaded source is not a podcast.";
+
+        userPlayer.rewoundBackward();
+        return "Rewound successfully.";
+    }
+
+    public List<String> requestTopFiveSongs() {
+        return interrogator.getTopFiveSongs();
     }
 
     public void updatePlayersData(CommandObject nextToExecuteCommand) {

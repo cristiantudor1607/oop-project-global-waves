@@ -127,7 +127,7 @@
   "command" : "showPreferredSongs",
   "user" : "carol19",
   "timestamp" : 1000,
-  "result" : [ "Dream On", "Bohemian Rhapsody" ]
+  "result" : [ "Bohemian Rhapsody" ]
 }, {
   "command" : "createPlaylist",
   "user" : "david27",
@@ -184,7 +184,7 @@
   "command" : "showPreferredSongs",
   "user" : "emily30",
   "timestamp" : 2300,
-  "result" : [ "The Man", "Black Dog", "Don't" ]
+  "result" : [ ]
 }, {
   "command" : "like",
   "user" : "emily30",
@@ -199,7 +199,7 @@
   "command" : "showPreferredSongs",
   "user" : "emily30",
   "timestamp" : 2400,
-  "result" : [ "The Man", "Black Dog", "Don't", "Bohemian Rhapsody" ]
+  "result" : [ "Bohemian Rhapsody" ]
 }, {
   "command" : "search",
   "user" : "emily30",
@@ -257,5 +257,10 @@
   "command" : "showPreferredSongs",
   "user" : "carol19",
   "timestamp" : 3200,
-  "result" : [ "Dream On", "Bohemian Rhapsody" ]
-}, null ]
+  "result" : [ "Bohemian Rhapsody" ]
+}, {
+  "command" : "getTop5Songs",
+  "user" : null,
+  "timestamp" : 3300,
+  "result" : [ "Bohemian Rhapsody", "Angie", "Radio Ga Ga", "Championships", "Whole Lotta Love" ]
+} ]

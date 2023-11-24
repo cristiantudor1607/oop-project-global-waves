@@ -125,35 +125,55 @@
     "shuffle" : false,
     "paused" : false
   }
-}, null, {
+}, {
+  "command" : "next",
+  "user" : "bob35",
+  "timestamp" : 670,
+  "message" : "Skipped to next track successfully. The current track is Shape of You."
+}, {
   "command" : "status",
   "user" : "bob35",
   "timestamp" : 690,
   "stats" : {
-    "name" : "Start Me Up",
-    "remainedTime" : 157,
+    "name" : "Shape of You",
+    "remainedTime" : 213,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
   }
-}, null, {
+}, {
+  "command" : "prev",
+  "user" : "bob35",
+  "timestamp" : 710,
+  "message" : "Returned to previous track successfully. The current track is Shape of You."
+}, {
   "command" : "status",
   "user" : "bob35",
   "timestamp" : 711,
   "stats" : {
-    "name" : "Start Me Up",
-    "remainedTime" : 116,
+    "name" : "Shape of You",
+    "remainedTime" : 232,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
   }
-}, null, null, {
+}, {
+  "command" : "prev",
+  "user" : "bob35",
+  "timestamp" : 712,
+  "message" : "Returned to previous track successfully. The current track is Shape of You."
+}, {
+  "command" : "prev",
+  "user" : "bob35",
+  "timestamp" : 712,
+  "message" : "Returned to previous track successfully. The current track is Start Me Up."
+}, {
   "command" : "status",
   "user" : "bob35",
   "timestamp" : 713,
   "stats" : {
     "name" : "Start Me Up",
-    "remainedTime" : 112,
+    "remainedTime" : 211,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -185,13 +205,18 @@
     "shuffle" : false,
     "paused" : false
   }
-}, null, {
+}, {
+  "command" : "forward",
+  "user" : "bob35",
+  "timestamp" : 1050,
+  "message" : "Skipped forward successfully."
+}, {
   "command" : "status",
   "user" : "bob35",
   "timestamp" : 1051,
   "stats" : {
     "name" : "Airbnb: Joe Gebbia",
-    "remainedTime" : 2814,
+    "remainedTime" : 2725,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -218,18 +243,23 @@
   "timestamp" : 1389,
   "stats" : {
     "name" : "Airbnb: Joe Gebbia",
-    "remainedTime" : 2478,
+    "remainedTime" : 2389,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
   }
-}, null, {
+}, {
+  "command" : "backward",
+  "user" : "bob35",
+  "timestamp" : 1390,
+  "message" : "Rewound successfully."
+}, {
   "command" : "status",
   "user" : "bob35",
   "timestamp" : 1391,
   "stats" : {
     "name" : "Airbnb: Joe Gebbia",
-    "remainedTime" : 2475,
+    "remainedTime" : 2477,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false

@@ -32,8 +32,6 @@ public class LikeInterrogator extends CommandObject {
 
     @Override
     public JsonNode execute(ActionManager manager) {
-        System.out.println("Liking or unliking ...");
-
         exitCode = manager.requestLikeAction(this);
 
         manager.setLastActionTime(timestamp);

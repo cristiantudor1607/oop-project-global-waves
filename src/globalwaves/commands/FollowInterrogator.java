@@ -33,7 +33,6 @@ public class FollowInterrogator extends CommandObject {
 
     @Override
     public JsonNode execute(ActionManager manager) {
-        System.out.println("Following or unfollowing ...");
 
         exitCode = manager.requestFollowAction(this);
         manager.setLastActionTime(timestamp);

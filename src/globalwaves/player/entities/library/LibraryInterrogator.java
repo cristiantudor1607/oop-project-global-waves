@@ -2,12 +2,15 @@ package globalwaves.player.entities.library;
 
 import globalwaves.player.entities.AudioFile;
 import globalwaves.player.entities.Playlist;
+import globalwaves.player.entities.Song;
 import globalwaves.player.entities.User;
+import globalwaves.player.entities.properties.PlayableEntity;
+import globalwaves.player.entities.utilities.SortByInteger;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class LibraryInterrogator {
+
     private final Library database;
     public LibraryInterrogator() {
         database = Library.getInstance();
@@ -82,6 +85,64 @@ public class LibraryInterrogator {
         User queriedUser = getUserByUsername(username);
 
         return queriedUser.getLikes();
+    }
+
+    public Map<AudioFile, Integer> mapSongs() {
+        Map<AudioFile, Integer> mappedSongs = new HashMap<>();
+
+        for (Song s : database.getSongs())
+            mappedSongs.put(s, 0);
+
+        return mappedSongs;
+    }
+
+    public Map<AudioFile, Integer> mapLikes() {
+        Map<AudioFile, Integer> mappedSongs = mapSongs();
+
+        for (User u : database.getUsers()) {
+            for (AudioFile likedSong : u.getLikes()) {
+               int likes = mappedSongs.get(likedSong);
+               likes++;
+               mappedSongs.put(likedSong, likes);
+            }
+        }
+
+        return mappedSongs;
+    }
+
+    public List<Map.Entry<AudioFile, Integer>> unrollLikes(Map<AudioFile, Integer> mappedLikes) {
+        List<Map.Entry<AudioFile, Integer>> unrolledLikes = new ArrayList<>();
+
+        for (AudioFile key : mappedLikes.keySet()) {
+            Integer value = mappedLikes.get(key);
+            Map.Entry<AudioFile, Integer> newTuple = new AbstractMap.SimpleEntry<>(key, value);
+            unrolledLikes.add(newTuple);
+        }
+
+        return unrolledLikes;
+    }
+
+    public void sortLikes(List<Map.Entry<AudioFile, Integer>> unrolledLikes) {
+        unrolledLikes.sort(new SortByInteger());
+    }
+
+    public void truncateLikes(List<Map.Entry<AudioFile, Integer>> likes) {
+        likes.subList(5, likes.size()).clear();
+    }
+
+    public List<String> getTopFiveSongs() {
+        Map<AudioFile, Integer> mappedLikes = mapLikes();
+        List<Map.Entry<AudioFile, Integer>> unrolledLikes = unrollLikes(mappedLikes);
+        sortLikes(unrolledLikes);
+        truncateLikes(unrolledLikes);
+
+        List<String> results = new ArrayList<>();
+
+        for (Map.Entry<AudioFile, Integer> entry : unrolledLikes) {
+            results.add(entry.getKey().getName());
+        }
+
+        return results;
     }
 
 }

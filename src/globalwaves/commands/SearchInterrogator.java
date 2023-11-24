@@ -52,7 +52,6 @@ public class SearchInterrogator extends CommandObject {
 
     @Override
     public JsonNode execute(ActionManager manager) {
-        System.out.println("Searching ...");
         chooseEngine();
         searchResults = engine.collectResults();
         searchResults = EngineResultsParser.getRelevantResults(searchResults);

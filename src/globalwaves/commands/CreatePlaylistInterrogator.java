@@ -29,8 +29,6 @@ public class CreatePlaylistInterrogator extends CommandObject {
     @JsonIgnore private CreationExit.code exitCode;
     @Override
     public JsonNode execute(ActionManager manager) {
-        System.out.println("Creating playlist ...");
-
         exitCode = manager.requestPlaylistCreation(this);
         manager.setLastActionTime(timestamp);
         manager.setLastAction(this);

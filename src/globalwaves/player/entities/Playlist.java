@@ -209,4 +209,9 @@ public class Playlist implements PlayableEntity, OwnedEntity {
     public boolean needsHistoryTrack() {
         return false;
     }
+
+    @Override
+    public boolean cantGoForwardOrBackward() {
+        return true;
+    }
 }

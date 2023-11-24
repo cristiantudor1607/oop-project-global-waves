@@ -115,8 +115,11 @@ public class Library {
      *                Library Database
      */
     public void loadUsers(LibraryInput library) {
-        if (!users.isEmpty())
+        if (!users.isEmpty()) {
+            for (User user : users)
+                user.getLikes().clear();
             return;
+        }
 
         ArrayList<UserInput> inputs = library.getUsers();
         for (UserInput inputFormatUser: inputs) {

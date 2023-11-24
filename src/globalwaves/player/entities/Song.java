@@ -128,6 +128,11 @@ public class Song extends AudioFile implements PlayableEntity {
     }
 
     @Override
+    public boolean cantGoForwardOrBackward() {
+        return true;
+    }
+
+    @Override
     public String toString() {
         return "Song{" +
                 "\nname='" + name + '\'' +

@@ -8,28 +8,27 @@ import globalwaves.player.entities.library.ActionManager;
 import lombok.Getter;
 
 @Getter
-class RepeatOutput extends CommandOutputFormatter {
-    private final String message;
+class NextOutput extends CommandOutputFormatter {
+    private String message;
 
-    public RepeatOutput(RepeatInterrogator executedQuery) {
-        command = "repeat";
+    public NextOutput(NextInterrogator executedQuery) {
+        command = "next";
         user = executedQuery.getUsername();
         timestamp = executedQuery.getTimestamp();
-        message = executedQuery.getExitMessage();
+        message = executedQuery.getMessage();
     }
 }
 
 @Getter
-public class RepeatInterrogator extends CommandObject {
+public class NextInterrogator extends CommandObject {
     @JsonIgnore
-    private String exitMessage;
+    private String message;
 
     @Override
     public JsonNode execute(ActionManager manager) {
-        exitMessage = manager.requestRepeatAction(this);
+        message = manager.requestNext(this);
         manager.setLastActionTime(timestamp);
         manager.setLastAction(this);
-
-        return (new RepeatOutput(this)).generateOutputNode();
+        return (new NextOutput(this)).generateOutputNode();
     }
 }

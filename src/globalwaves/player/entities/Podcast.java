@@ -119,6 +119,11 @@ public class Podcast implements PlayableEntity, OwnedEntity {
     }
 
     @Override
+    public boolean cantGoForwardOrBackward() {
+        return false;
+    }
+
+    @Override
     public String toString() {
         return "Podcast{" +
                 "\nname='" + name + '\'' +
