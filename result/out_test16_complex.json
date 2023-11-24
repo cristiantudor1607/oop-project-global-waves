@@ -9926,9 +9926,14 @@
   "user" : "jack29",
   "timestamp" : 8580,
   "result" : [ "The Man", "Maps", "Love Story" ]
-}, null, {
+}, {
+  "command" : "getTop5Playlists",
+  "user" : null,
+  "timestamp" : 8580,
+  "result" : [ "Dynamic Tracks Trek #2", "Electric Bangers Dream #1", "Classic Harmonies Quest #1", "Classic Tunes Dream #1", "Electric Beats Escape #2" ]
+}, {
   "command" : "getTop5Songs",
   "user" : null,
   "timestamp" : 8580,
-  "result" : [ "Maps", "Don't", "Blank Space", "Whatever You Need", "The Man" ]
+  "result" : [ "Maps", "Don't", "Happier", "The Man", "Bohemian Rhapsody" ]
 } ]

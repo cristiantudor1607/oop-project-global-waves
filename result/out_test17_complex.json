@@ -9932,9 +9932,14 @@
   "user" : "jack29",
   "timestamp" : 8580,
   "result" : [ ]
-}, null, {
+}, {
+  "command" : "getTop5Playlists",
+  "user" : null,
+  "timestamp" : 8580,
+  "result" : [ "Dynamic Tracks Adventure #2", "Chill Melodies Voyage #1", "Stellar Tunes Quest #2", "Groovy Vibes Odyssey #1", "Dynamic Grooves Expedition #1" ]
+}, {
   "command" : "getTop5Songs",
   "user" : null,
   "timestamp" : 8580,
-  "result" : [ "Gimme Shelter", "Love Story", "Start Me Up", "Don't", "Black Dog" ]
+  "result" : [ "Start Me Up", "Love Story", "Gimme Shelter", "Dream On", "Black Dog" ]
 } ]

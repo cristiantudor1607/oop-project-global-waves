@@ -294,6 +294,10 @@ public class ActionManager {
         return interrogator.getTopFiveSongs();
     }
 
+    public List<String> requestTopFivePlaylists() {
+        return interrogator.getTopFivePlaylists();
+    }
+
     public void updatePlayersData(CommandObject nextToExecuteCommand) {
         int diff = nextToExecuteCommand.getTimestamp() - lastActionTime;
         for (Map.Entry<String, Player> entry : players.entrySet()) {

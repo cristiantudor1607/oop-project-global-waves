@@ -35,7 +35,7 @@ import java.util.Map;
         @JsonSubTypes.Type(value = ShowPlaylistsInterrogator.class, name = "showPlaylists"),
         @JsonSubTypes.Type(value = ShowLikesInterrogator.class, name = "showPreferredSongs"),
         @JsonSubTypes.Type(value = TopFiveSongsInterrogator.class, name = "getTop5Songs"),
-        @JsonSubTypes.Type(value = NoArgsCommandObject.class, name = "getTop5Playlists"),
+        @JsonSubTypes.Type(value = TopFivePlaylistsInterrogator.class, name = "getTop5Playlists"),
 
 })
 @JsonIgnoreProperties(ignoreUnknown = true)

@@ -5,6 +5,7 @@ import globalwaves.player.entities.Playlist;
 import globalwaves.player.entities.Song;
 import globalwaves.player.entities.User;
 import globalwaves.player.entities.properties.PlayableEntity;
+import globalwaves.player.entities.utilities.SortByFollowers;
 import globalwaves.player.entities.utilities.SortByInteger;
 
 import java.util.*;
@@ -126,15 +127,11 @@ public class LibraryInterrogator {
         unrolledLikes.sort(new SortByInteger());
     }
 
-    public void truncateLikes(List<Map.Entry<AudioFile, Integer>> likes) {
-        likes.subList(5, likes.size()).clear();
-    }
-
     public List<String> getTopFiveSongs() {
         Map<AudioFile, Integer> mappedLikes = mapLikes();
         List<Map.Entry<AudioFile, Integer>> unrolledLikes = unrollLikes(mappedLikes);
         sortLikes(unrolledLikes);
-        truncateLikes(unrolledLikes);
+        truncateResults(unrolledLikes);
 
         List<String> results = new ArrayList<>();
 
@@ -145,4 +142,40 @@ public class LibraryInterrogator {
         return results;
     }
 
+    public List<Playlist> getPublicPlaylists() {
+        List<Playlist> publicPlaylists = new ArrayList<>();
+
+        for (String username : database.getPlaylists().keySet()) {
+            List<Playlist> userPlaylists = database.getPlaylists().get(username);
+            for (Playlist p : userPlaylists) {
+                if (p.isPublic())
+                    publicPlaylists.add(p);
+            }
+        }
+
+        return publicPlaylists;
+    }
+
+    public void sortPlaylists(List<Playlist> publicPlaylists) {
+        publicPlaylists.sort(new SortByFollowers());
+    }
+
+    public List<String> getTopFivePlaylists() {
+        List<Playlist> playlists = getPublicPlaylists();
+        sortPlaylists(playlists);
+        truncateResults(playlists);
+
+        List<String> names = new ArrayList<>();
+        for (Playlist p : playlists)
+            names.add(p.getName());
+
+        return names;
+    }
+
+    public <T> void truncateResults(List<T> results) {
+        if (results.size() < 5)
+            return;
+
+        results.subList(5, results.size()).clear();
+    }
 }
