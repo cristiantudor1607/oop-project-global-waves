@@ -1,24 +1,32 @@
 package globalwaves.commands.enums;
 
 
-public class SearchType {
-    public enum type {
+public final class SearchType {
+    public enum Type {
         SONG,
         PODCAST,
         PLAYLIST,
     }
 
-    private SearchType() {};
+    private SearchType() { };
 
-    public static type ParseString(final String typeAsString) {
-        if (typeAsString.equals("song"))
-            return type.SONG;
+    /**
+     * Method that parse a String and generates a Type enum associated.
+     * @param typeAsString The String that should be parsed.
+     * @return a Type enum if the String can be turned into an enum, or null otherwise.
+     */
+    public static Type parseString(final String typeAsString) {
+        if (typeAsString.equals("song")) {
+            return Type.SONG;
+        }
 
-        if (typeAsString.equals("podcast"))
-            return type.PODCAST;
+        if (typeAsString.equals("podcast")) {
+            return Type.PODCAST;
+        }
 
-        if (typeAsString.equals("playlist"))
-            return type.PLAYLIST;
+        if (typeAsString.equals("playlist")) {
+            return Type.PLAYLIST;
+        }
 
         return null;
     }

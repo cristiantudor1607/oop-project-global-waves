@@ -1,7 +1,7 @@
 package globalwaves.player.entities;
 
-import globalwaves.commands.enums.FollowExit;
-import globalwaves.commands.enums.ShuffleExit;
+import globalwaves.commands.enums.exitcodes.FollowExit;
+import globalwaves.commands.enums.exitcodes.ShuffleExit;
 import globalwaves.player.entities.properties.OwnedEntity;
 import globalwaves.player.entities.properties.PlayableEntity;
 import lombok.Getter;
@@ -31,7 +31,7 @@ public class Playlist implements PlayableEntity, OwnedEntity {
         visible = true;
         songs = new ArrayList<>();
         followers = new ArrayList<>();
-        playOrder = getNormalDistribution();
+        playOrder = getNumericalOrder();
     }
 
     public boolean isPublic() {
@@ -56,15 +56,15 @@ public class Playlist implements PlayableEntity, OwnedEntity {
 
     public void addSong(AudioFile songToBeAdded) {
         songs.add(songToBeAdded);
-        playOrder = getNormalDistribution();
+        playOrder = getNumericalOrder();
     }
 
     public void removeSong(AudioFile songToBeRemoved) {
         songs.remove(songToBeRemoved);
-        playOrder = getNormalDistribution();
+        playOrder = getNumericalOrder();
     }
 
-    public List<Integer> getNormalDistribution() {
+    public List<Integer> getNumericalOrder() {
         List<Integer> order = new ArrayList<>();
         for (int i = 0; i < songs.size(); i++)
             order.add(i);
@@ -182,29 +182,29 @@ public class Playlist implements PlayableEntity, OwnedEntity {
 
 
     @Override
-    public FollowExit.code follow(String username) {
+    public FollowExit.Code follow(String username) {
         if (isOwnedByUser(username))
-            return FollowExit.code.OWNER;
+            return FollowExit.Code.OWNER;
 
         if (isFollowedByUser(username)) {
             removeUserFromFollowers(username);
-            return FollowExit.code.UNFOLLOWED;
+            return FollowExit.Code.UNFOLLOWED;
         }
 
         addUserToFollowers(username);
-        return FollowExit.code.FOLLOWED;
+        return FollowExit.Code.FOLLOWED;
     }
 
     @Override
-    public ShuffleExit.code shuffle(int seed) {
+    public ShuffleExit.Code shuffle(int seed) {
         Collections.shuffle(playOrder, new Random(seed));
-        return ShuffleExit.code.ACTIVATED;
+        return ShuffleExit.Code.ACTIVATED;
     }
 
     @Override
-    public ShuffleExit.code unshuffle() {
-        playOrder = getNormalDistribution();
-        return ShuffleExit.code.DEACTIVATED;
+    public ShuffleExit.Code unshuffle() {
+        playOrder = getNumericalOrder();
+        return ShuffleExit.Code.DEACTIVATED;
     }
 
     @Override

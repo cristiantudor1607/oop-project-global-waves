@@ -2,38 +2,28 @@ package globalwaves.commands;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonNode;
-import globalwaves.commands.enums.PlayPauseExit;
-import globalwaves.parser.commands.CommandObject;
-import globalwaves.parser.commands.CommandOutputFormatter;
+import globalwaves.commands.enums.exitcodes.PlayPauseExit;
+import globalwaves.commands.outputs.PlayPauseOutput;
+import globalwaves.parser.templates.CommandObject;
 import globalwaves.player.entities.library.ActionManager;
 import lombok.Getter;
 
 @Getter
-class PlayPauseOutput extends CommandOutputFormatter {
-    private String message;
-
-    public PlayPauseOutput(PlayPauseInterrogator executedQuery) {
-        command = "playPause";
-        user = executedQuery.getUsername();
-        timestamp = executedQuery.getTimestamp();
-        switch (executedQuery.getExitCode()) {
-            case NO_SOURCE -> message = "Please load a source before attempting to " +
-                    "pause or resume playback.";
-            case PAUSED -> message = "Playback paused successfully.";
-            case RESUMED -> message = "Playback resumed successfully.";
-        }
-    }
-}
-
-@Getter
 public class PlayPauseInterrogator extends CommandObject {
-    @JsonIgnore private PlayPauseExit.code exitCode;
+    @JsonIgnore private PlayPauseExit.Code exitCode;
 
+    /**
+     * The method executes the PlayPause Command and returns it's output.
+     * @param manager The ActionManager that manages the players and is able to make changes
+     *                at a specific player, or communicates with the library interrogator to
+     *                retrieve infos from library.
+     * @return The output formatted as JsonNode.
+     */
     @Override
-    public JsonNode execute(ActionManager manager) {
+    public JsonNode execute(final ActionManager manager) {
         exitCode = manager.requestUpdateState(this);
+
         manager.setLastActionTime(timestamp);
-        manager.setLastAction(this);
 
         return (new PlayPauseOutput(this)).generateOutputNode();
     }

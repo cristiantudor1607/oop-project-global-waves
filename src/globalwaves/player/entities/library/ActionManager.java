@@ -1,8 +1,8 @@
 package globalwaves.player.entities.library;
 
 import globalwaves.commands.*;
-import globalwaves.commands.enums.*;
-import globalwaves.parser.commands.CommandObject;
+import globalwaves.commands.enums.exitcodes.*;
+import globalwaves.parser.templates.CommandObject;
 import globalwaves.player.entities.*;
 import globalwaves.player.entities.properties.PlayableEntity;
 import lombok.Getter;
@@ -20,8 +20,6 @@ public class ActionManager {
     private SearchBar searchBar;
     private Map<String, Player> players;
     private int lastActionTime;
-    // TODO : Get rid of lastAction field
-    private CommandObject lastAction;
 
     public ActionManager() {
         interrogator = new LibraryInterrogator();
@@ -32,7 +30,6 @@ public class ActionManager {
         }
 
         lastActionTime = 0;
-        lastAction = null;
     }
 
     public Player requestPlayer(CommandObject executingQuery) {
@@ -50,14 +47,14 @@ public class ActionManager {
 
     }
 
-    public SelectExit.code requestItemSelection(SelectInterrogator executingSelect) {
+    public SelectExit.Code requestItemSelection(SelectInterrogator executingSelect) {
         int itemNumber = executingSelect.getItemNumber();
 
         if (searchBar.wasNotInvoked())
-            return SelectExit.code.NO_LIST;
+            return SelectExit.Code.NO_LIST;
 
         if (!searchBar.invalidItem(itemNumber) || searchBar.hasNoSearchResult())
-            return SelectExit.code.OUT_OF_BOUNDS;
+            return SelectExit.Code.OUT_OF_BOUNDS;
 
         PlayableEntity entity = searchBar.getResultAtIndex(itemNumber - 1);
         Player userPlayer = players.get(executingSelect.getUsername());
@@ -67,95 +64,95 @@ public class ActionManager {
         // Reset the Search Bar after selection
         searchBar.reset();
 
-        return SelectExit.code.SELECTED;
+        return SelectExit.Code.SELECTED;
     }
 
-    public LoadExit.code requestLoading(LoadInterrogator executingLoad) {
+    public LoadExit.Code requestLoading(LoadInterrogator executingLoad) {
         Player userPlayer = players.get(executingLoad.getUsername());
 
         if (!userPlayer.hasSourceSelected())
-            return LoadExit.code.NO_SOURCE_SELECTED;
+            return LoadExit.Code.NO_SOURCE_SELECTED;
 
         if (userPlayer.hasNoSource())
-            return LoadExit.code.NO_SOURCE_SELECTED;
+            return LoadExit.Code.NO_SOURCE_SELECTED;
 
         if (userPlayer.hasEmptySource())
-            return LoadExit.code.EMPTY_SOURCE;
+            return LoadExit.Code.EMPTY_SOURCE;
 
         userPlayer.load();
 
-        return LoadExit.code.LOADED;
+        return LoadExit.Code.LOADED;
     }
 
-    public PlayPauseExit.code requestUpdateState(PlayPauseInterrogator executingQuery) {
+    public PlayPauseExit.Code requestUpdateState(PlayPauseInterrogator executingQuery) {
         Player userPlayer = players.get(executingQuery.getUsername());
 
         if (userPlayer.hasNoSource())
-            return PlayPauseExit.code.NO_SOURCE;
+            return PlayPauseExit.Code.NO_SOURCE;
 
         if (userPlayer.isPlaying()) {
             userPlayer.pause();
-            return PlayPauseExit.code.PAUSED;
+            return PlayPauseExit.Code.PAUSED;
         }
 
         userPlayer.play();
 
-        return PlayPauseExit.code.RESUMED;
+        return PlayPauseExit.Code.RESUMED;
     }
 
-    public CreationExit.code requestPlaylistCreation(CreatePlaylistInterrogator execQuery) {
+    public CreationExit.Code requestPlaylistCreation(CreatePlaylistInterrogator execQuery) {
         String owner = execQuery.getUsername();
         String playlistName = execQuery.getPlaylistName();
         int timestamp = execQuery.getTimestamp();
 
         if (interrogator.ownerHasPlaylist(owner, playlistName))
-            return CreationExit.code.ALREADY_EXISTS;
+            return CreationExit.Code.ALREADY_EXISTS;
 
         interrogator.createPlaylist(owner, playlistName, timestamp);
 
-        return CreationExit.code.CREATED;
+        return CreationExit.Code.CREATED;
     }
 
-    public SwitchVisibilityExit.code requestSwitch(SwitchVisibilityInterrogator execQuery) {
+    public SwitchVisibilityExit.Code requestSwitch(SwitchVisibilityInterrogator execQuery) {
         int id = execQuery.getPlaylistId();
         String owner = execQuery.getUsername();
 
         Playlist ownerPlaylist = interrogator.getOwnerPlaylistById(owner, id);
         if (ownerPlaylist == null)
-            return SwitchVisibilityExit.code.TOO_HIGH;
+            return SwitchVisibilityExit.Code.TOO_HIGH;
 
         if (ownerPlaylist.isPublic()) {
             ownerPlaylist.makePrivate();
-            return SwitchVisibilityExit.code.MADE_PRIVATE;
+            return SwitchVisibilityExit.Code.MADE_PRIVATE;
         }
 
         ownerPlaylist.makePublic();
 
-        return SwitchVisibilityExit.code.MADE_PUBLIC;
+        return SwitchVisibilityExit.Code.MADE_PUBLIC;
     }
 
-    public AddRemoveExit.code requestAddRemove(AddRemoveInterrogator execQuery) {
+    public AddRemoveExit.Code requestAddRemove(AddRemoveInterrogator execQuery) {
         String owner = execQuery.getUsername();
         int id = execQuery.getPlaylistId();
         Playlist ownerPlaylist = interrogator.getOwnerPlaylistById(owner, id);
         Player ownerPlayer = players.get(owner);
 
         if (!ownerPlayer.hasSourceLoaded())
-            return  AddRemoveExit.code.NO_SOURCE;
+            return  AddRemoveExit.Code.NO_SOURCE;
 
         if (!ownerPlayer.getPlayingFile().canBeLiked())
-            return AddRemoveExit.code.NOT_A_SONG;
+            return AddRemoveExit.Code.NOT_A_SONG;
 
         if (ownerPlaylist == null)
-            return AddRemoveExit.code.INVALID_PLAYLIST;
+            return AddRemoveExit.Code.INVALID_PLAYLIST;
 
         AudioFile selectedSource = ownerPlayer.getPlayingFile();
         if (ownerPlaylist.hasSong(selectedSource)) {
             ownerPlaylist.removeSong(selectedSource);
-            return AddRemoveExit.code.REMOVED;
+            return AddRemoveExit.Code.REMOVED;
         } else {
             ownerPlaylist.addSong(selectedSource);
-            return AddRemoveExit.code.ADDED;
+            return AddRemoveExit.Code.ADDED;
         }
     }
 
@@ -163,25 +160,25 @@ public class ActionManager {
         return interrogator.getOwnerPlaylists(owner);
     }
 
-    public LikeExit.code requestLikeAction(LikeInterrogator execQuery) {
+    public LikeExit.Code requestLikeAction(LikeInterrogator execQuery) {
         String username = execQuery.getUsername();
         User queriedUser = interrogator.getUserByUsername(username);
         Player queriedUserPlayer = getPlayers().get(username);
 
         if (!queriedUserPlayer.hasSourceLoaded())
-            return LikeExit.code.NO_SOURCE;
+            return LikeExit.Code.NO_SOURCE;
 
         AudioFile queriedSong = queriedUserPlayer.getPlayingFile();
 
         if (!queriedSong.canBeLiked())
-            return LikeExit.code.NOT_A_SONG;
+            return LikeExit.Code.NOT_A_SONG;
 
         if (queriedUser.hasLikedSong(queriedSong)) {
             queriedUser.removeSongFromLikes(queriedSong);
-            return LikeExit.code.UNLIKED;
+            return LikeExit.Code.UNLIKED;
         } else {
             queriedUser.addSongToLikes(queriedSong);
-            return LikeExit.code.LIKED;
+            return LikeExit.Code.LIKED;
         }
     }
 
@@ -197,12 +194,12 @@ public class ActionManager {
         return names;
     }
 
-    public FollowExit.code requestFollowAction(FollowInterrogator execQuery) {
+    public FollowExit.Code requestFollowAction(FollowInterrogator execQuery) {
         Player userPlayer = requestPlayer(execQuery);
         String username = execQuery.getUsername();
 
         if (userPlayer.hasNoSource())
-            return FollowExit.code.NO_SOURCE;
+            return FollowExit.Code.NO_SOURCE;
 
         return userPlayer.getSelectedSource().follow(username);
     }
@@ -219,14 +216,14 @@ public class ActionManager {
         return "Repeat mode changed to " + stateName.toLowerCase() + ".";
     }
 
-    public ShuffleExit.code requestShuffling(ShuffleInterrogator execQuery) {
+    public ShuffleExit.Code requestShuffling(ShuffleInterrogator execQuery) {
         Player userPlayer = requestPlayer(execQuery);
         int seed = execQuery.getSeed();
 
         if (!userPlayer.hasSourceLoaded() || userPlayer.hasNoSource())
-            return ShuffleExit.code.NO_SOURCE_LOADED;
+            return ShuffleExit.Code.NO_SOURCE_LOADED;
 
-        ShuffleExit.code shuffleExit;
+        ShuffleExit.Code shuffleExit;
         if (userPlayer.isShuffle()) {
             userPlayer.setShuffle(false);
             shuffleExit = userPlayer.getSelectedSource().unshuffle();
@@ -257,8 +254,6 @@ public class ActionManager {
     public String requestPrev(PrevInterrogator execQuery) {
         Player userPlayer = requestPlayer(execQuery);
 
-        if (execQuery.getTimestamp() == 6390)
-            System.out.println("aici pula");
 
         if (userPlayer.hasNoSource() || !userPlayer.hasSourceLoaded())
             return "Please load a source before returning to the previous track.";

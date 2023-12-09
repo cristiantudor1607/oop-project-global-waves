@@ -14,18 +14,13 @@ public class Episode extends AudioFile {
         description = input.getDescription();
     }
 
+    /**
+     * Checks if the current instance of the class can be liked
+     * @return false
+     */
     @Override
     public boolean canBeLiked() {
         return false;
-    }
-
-    @Override
-    public String toString() {
-        return "Episode{" +
-                "\nname='" + name + '\'' +
-                "\nduration=" + duration +
-                "\ndescription='" + description + '\'' +
-                '}';
     }
 
 }

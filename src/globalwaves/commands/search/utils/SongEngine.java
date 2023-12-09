@@ -29,7 +29,7 @@ public class SongEngine extends SearchEngine<Song> {
             /*
             Create a specific filter, depending on the key
              */
-            switch (Objects.requireNonNull(FilterType.ParseString(key))) {
+            switch (Objects.requireNonNull(FilterType.parseString(key))) {
                 case NAME -> newFilter = new NameFilter<>(values.get(0));
                 case ALBUM -> newFilter = new AlbumFilter(values.get(0));
                 case ARTIST -> newFilter = new ArtistFilter(values.get(0));

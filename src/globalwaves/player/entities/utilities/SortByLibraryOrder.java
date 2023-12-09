@@ -27,7 +27,6 @@ public class SortByLibraryOrder implements Comparator<Map.Entry<AudioFile, Integ
         int index1 = songsInOrder.indexOf(o1.getKey());
         int index2 = songsInOrder.indexOf(o2.getKey());
 
-        // TODO: incearca sa le inversezi daca nu merge
         return index1 - index2;
     }
 }

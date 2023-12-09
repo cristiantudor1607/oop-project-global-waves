@@ -31,7 +31,11 @@ public class Player {
         state = PlayerStatus.NOT_IN_USE;
     }
 
+    /**
+     * Resets the player - set all the fields to default
+     */
     public void resetPlayer() {
+        // unshuffle to reload the numerical order
         selectedSource.unshuffle();
         selectedSource = null;
         prevFile = null;
@@ -43,12 +47,32 @@ public class Player {
         remainedTime = 0;
     }
 
+    /**
+     * Sets the player fields to default options on load
+     */
+    public void setDefaultLoadOptions() {
+        state = PlayerStatus.PLAYING;
+        repeat =  0;
+        shuffle = false;
+    }
+
+    /**
+     * Plays next file
+     * @return true, if it succeeds, false if it has no next
+     */
     public boolean playNext() {
+        // If next file is null, then there is no next, so it should
+        // stop
         if  (nextFile == null) {
             resetPlayer();
             return false;
         }
 
+        // If the next file to be played is the same as the current file,
+        // then there are 2 possibilities : the player is either in repeat state
+        // 1 or 2. If it is in 2, it has to remain in 2, but if it is in 1,
+        // it should go to 0 (if there were a Playlist with state 1, the files
+        // would have been different)
         if (playingFile == nextFile && repeat == 1)
             repeat = 0;
 
@@ -60,13 +84,19 @@ public class Player {
         return true;
     }
 
+    /**
+     * Plays previous file
+     * @param timeDiff The time passed from last command / action
+     */
     public void playPrev(int timeDiff) {
         remainedTime -= timeDiff;
-        if (remainedTime == playingFile.getDuration()) {
-            // s-ar putea sa fie nevoie sa resetez repeat-ul aici
 
+        // if it get prev at moment 0, and it has to go to the previous
+        // track
+        if (remainedTime == playingFile.getDuration()) {
+
+            // If it has no prev
             if (prevFile == null) {
-                remainedTime = playingFile.getDuration();
                 state = PlayerStatus.PLAYING;
                 return;
             }
@@ -81,8 +111,10 @@ public class Player {
 
         // If there is more than one second passed
         if (remainedTime < playingFile.getDuration()) {
+            // Repeat Once
             if (playingFile == nextFile && repeat == 1) {
                 repeat = 0;
+                // Basically the playingFile becomes nextFile, but they're equal
                 nextFile = selectedSource.getNextForPlaying(playingFile, repeat);
             }
 
@@ -91,10 +123,16 @@ public class Player {
         }
     }
 
+    /**
+     * Skips 90 seconds, or starts the next file, if it has less than 90
+     * minutes remaining
+     */
     public void skipForward() {
         // If there are less than 90 seconds remaining, start the next episode
         if (remainedTime <= 90 ) {
             prevFile = playingFile;
+            // If Repeat Once is activated, it remains on the same file, but
+            // repeat is set to No Repeat
             if (playingFile == nextFile && repeat == 1)
                 repeat = 0;
             else
@@ -109,6 +147,10 @@ public class Player {
         remainedTime -= 90;
     }
 
+    /**
+     * Go back by 90 seconds, or starts the file from the beginning if there
+     * are no 90 minutes passed
+     */
     public void rewoundBackward() {
         if (playingFile.getDuration() - remainedTime < 90)
             remainedTime = playingFile.getDuration();
@@ -116,13 +158,10 @@ public class Player {
             remainedTime += 90;
     }
 
-
-    public void setDefaultLoadOptions() {
-        state = PlayerStatus.PLAYING;
-        repeat =  0;
-        shuffle = false;
-    }
-
+    /**
+     * Select a source
+     * @param selectedEntity The entity to be selected
+     */
     public void select(PlayableEntity selectedEntity) {
         this.selectedSource = selectedEntity;
         state = PlayerStatus.SELECTED;
@@ -138,33 +177,47 @@ public class Player {
         nextFile = selectedSource.getNextForPlaying(playingFile, repeat);
     }
 
+    /**
+     * Updates the player when going from one command to another
+     * @param timeDiff The time passed between the two templates
+     */
     public void updateAfterTimeskip(int timeDiff) {
+        // If a short time has passed
         if (remainedTime - timeDiff > 0) {
             remainedTime -= timeDiff;
             return;
         }
 
         remainedTime -= timeDiff;
+
+        // If the time passed is exactly the ending of the song
         if (remainedTime == 0) {
-            // for songs and podcasts repeat once is temporary
+            // Change the Repeat Once to No Repeat if necessary
             if (playingFile == nextFile && repeat == 1)
                 repeat = 0;
 
+            // Go to the next file
             prevFile = playingFile;
             playingFile = nextFile;
+
+            // Check if there was a file waiting to be played
             if (playingFile == null) {
                 resetPlayer();
                 return;
             }
+
+            // Calculate the new next and set the remainedTime
             nextFile = selectedSource.getNextForPlaying(playingFile, repeat);
             remainedTime = playingFile.getDuration();
             return;
         }
 
         if (remainedTime < 0) {
+            // Change Repeat Once to No Repeat if necessary
             if (playingFile == nextFile && repeat == 1)
                 repeat = 0;
 
+            // Go one by one, until the remainedTime becomes positive
             while (remainedTime < 0) {
                 prevFile = playingFile;
                 playingFile = nextFile;
@@ -257,18 +310,6 @@ public class Player {
 
     public boolean isPlaying() {
         return state == PlayerStatus.PLAYING;
-    }
-
-    public void printPlayer() {
-        if (selectedSource == null)
-            System.out.println("No AudioFile");
-        else
-            System.out.println(selectedSource.getName());
-
-        System.out.println(state);
-        System.out.println(repeat);
-        System.out.println(shuffle);
-        System.out.println(remainedTime);
     }
 
 }

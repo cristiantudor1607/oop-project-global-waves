@@ -12,9 +12,14 @@ public class ArtistFilter implements Filter<Song> {
         this.artist = artist;
     }
 
+    /**
+     * Checks if the matchingObject  has the same artist as the filter artist
+     * @param matchingObject The song to be compared with this artist
+     * @return true, if the song has the same artist, false otherwise
+     */
     @Override
-    public boolean matches(Song MatchingObject) {
-        String songArtist = MatchingObject.getArtist();
+    public boolean matches(final Song matchingObject) {
+        String songArtist = matchingObject.getArtist();
         return songArtist.equals(artist);
     }
 }

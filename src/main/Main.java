@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import fileio.input.LibraryInput;
-import globalwaves.parser.commands.CommandObject;
+import globalwaves.parser.templates.CommandObject;
 import globalwaves.parser.file.JsonLoader;
 import globalwaves.player.entities.library.ActionManager;
 import globalwaves.player.entities.library.Library;
@@ -54,6 +54,7 @@ public final class Main {
         }
         Files.createDirectories(path);
 
+
         for (File file : Objects.requireNonNull(directory.listFiles())) {
             if (file.getName().startsWith("library")) {
                 continue;
@@ -81,15 +82,13 @@ public final class Main {
         LibraryInput library = objectMapper.readValue(new File(LIBRARY_PATH), LibraryInput.class);
 
         ArrayNode outputs = objectMapper.createArrayNode();
-        // ----- HERE STARTS -----
-        System.out.println(filePathInput);
+
         Library database = Library.getInstance();
         database.loadLibraryData(library);
 
         ActionManager manager = new ActionManager();
         List<CommandObject> commandList = new ArrayList<>();
 
-        // Link [3]
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         JsonLoader myJsonObject = new JsonLoader(filePathInput);
         for (JsonNode node : myJsonObject.getInputContent()) {
@@ -108,7 +107,6 @@ public final class Main {
             outputs.add(output);
         }
 
-        // ----- HERE ENDS -----
         ObjectWriter objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
         objectWriter.writeValue(new File(filePathOutput), outputs);
     }

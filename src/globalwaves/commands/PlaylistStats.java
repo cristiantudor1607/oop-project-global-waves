@@ -16,16 +16,18 @@ public class PlaylistStats {
     private List<String> songNames;
     private final int followers;
 
-    public PlaylistStats(Playlist playlist) {
+    public PlaylistStats(final Playlist playlist) {
         name = playlist.getName();
         followers = playlist.getFollowersNumber();
-        if (playlist.isVisible())
+        if (playlist.isVisible()) {
             visibility = "public";
-        else
+        } else {
             visibility = "private";
+        }
 
         songNames = new ArrayList<>();
-        for (AudioFile song : playlist.getSongs())
+        for (AudioFile song : playlist.getSongs()) {
             songNames.add(song.getName());
+        }
     }
 }

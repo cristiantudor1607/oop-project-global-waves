@@ -12,9 +12,14 @@ public class AlbumFilter implements Filter<Song> {
         this.album = album;
     }
 
+    /**
+     * Checks if the matchingObject has the same album as the filter album
+     * @param matchingObject The Song to be compared with this album
+     * @return true, if the matchingObject has the same album, false otherwise
+     */
     @Override
-    public boolean matches(Song MatchingObject) {
-        String songAlbum = MatchingObject.getAlbum();
+    public boolean matches(final Song matchingObject) {
+        String songAlbum = matchingObject.getAlbum();
 
         return songAlbum.equals(album);
     }

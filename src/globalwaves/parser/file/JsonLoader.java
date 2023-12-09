@@ -19,9 +19,4 @@ public class JsonLoader {
         inputContent = objMapper.readTree(new File(CheckerConstants.TESTS_PATH + filename));
         inputsCount = inputContent.size();
     }
-
-    public JsonNode getElement(final int index) {
-        return inputContent.get(index);
-    }
-
 }

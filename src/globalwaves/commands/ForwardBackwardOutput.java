@@ -1,6 +1,6 @@
 package globalwaves.commands;
 
-import globalwaves.parser.commands.CommandOutputFormatter;
+import globalwaves.parser.templates.CommandOutputFormatter;
 import lombok.Getter;
 
 @Getter

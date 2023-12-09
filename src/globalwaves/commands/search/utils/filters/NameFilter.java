@@ -9,16 +9,23 @@ import lombok.Setter;
  * @param <T>
  */
 @Getter @Setter
-public class NameFilter<T extends PlayableEntity> implements Filter <T>{
+public class NameFilter<T extends PlayableEntity> implements Filter<T> {
     private String prefix;
 
-    public NameFilter (final String prefix) {
+    public NameFilter(final String prefix) {
         this.prefix = prefix;
     }
 
+    /**
+     * Checks if the object has a name that start with this prefix
+     * @param matchingObject the object that has the getName trait, to
+     *                       be compared with this prefix
+     * @return true, if the object name field starts with the this prefix, false
+     * otherwise
+     */
     @Override
-    public boolean matches(T MatchingObject) {
-        String objName = MatchingObject.getName().toLowerCase();
+    public boolean matches(final T matchingObject) {
+        String objName = matchingObject.getName().toLowerCase();
 
         return objName.startsWith(prefix.toLowerCase());
     }

@@ -1,6 +1,6 @@
 package globalwaves.commands;
 
-import globalwaves.parser.commands.CommandOutputFormatter;
+import globalwaves.parser.templates.CommandOutputFormatter;
 import lombok.Getter;
 
 import java.util.List;
@@ -9,13 +9,13 @@ import java.util.List;
 public class StatisticsOutput extends CommandOutputFormatter {
     private final List<String> result;
 
-    public StatisticsOutput(TopFiveSongsInterrogator executedQuery) {
+    public StatisticsOutput(final TopFiveSongsInterrogator executedQuery) {
         command = "getTop5Songs";
         timestamp = executedQuery.getTimestamp();
         result = executedQuery.getResult();
     }
 
-    public StatisticsOutput(TopFivePlaylistsInterrogator executedQuery) {
+    public StatisticsOutput(final TopFivePlaylistsInterrogator executedQuery) {
         command = "getTop5Playlists";
         timestamp = executedQuery.getTimestamp();
         result = executedQuery.getResult();

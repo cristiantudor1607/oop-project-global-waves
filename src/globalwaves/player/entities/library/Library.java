@@ -15,10 +15,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * For Library, I'll use the Singleton Pattern. I designed it as a Database, and I was
- * inspired by the Database exercise from Lab
- */
 
 public class Library {
     private static Library instance = null;

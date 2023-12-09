@@ -14,14 +14,20 @@ public class TagsFilter implements Filter<Song> {
         this.tags = tags;
     }
 
+    /**
+     * Checks if the matchingObject song contains all the tags from this tags
+     * @param matchingObject The song whose tags should be compared with this tags
+     * @return true, if the song contains all this tags, false otherwise
+     */
     @Override
-    public boolean matches(Song MatchingObject) {
-        List<String> songTags = MatchingObject.getTags();
+    public boolean matches(final Song matchingObject) {
+        List<String> songTags = matchingObject.getTags();
 
         int foundTags = 0;
         for (String tag: songTags) {
-            if (tags.contains(tag))
+            if (tags.contains(tag)) {
                 foundTags++;
+            }
         }
 
         return foundTags == tags.size();

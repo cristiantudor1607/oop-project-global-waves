@@ -2,40 +2,23 @@ package globalwaves.commands;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonNode;
-import globalwaves.commands.enums.LikeExit;
-import globalwaves.parser.commands.CommandObject;
-import globalwaves.parser.commands.CommandOutputFormatter;
+import globalwaves.commands.enums.exitcodes.LikeExit;
+import globalwaves.commands.outputs.LikeOutput;
+import globalwaves.parser.templates.CommandObject;
 import globalwaves.player.entities.library.ActionManager;
 import lombok.Getter;
 
 @Getter
-class LikeOutput extends CommandOutputFormatter {
-    private String message;
-
-    public LikeOutput(LikeInterrogator executedQuery) {
-        command = "like";
-        user = executedQuery.getUsername();
-        timestamp = executedQuery.getTimestamp();
-        switch (executedQuery.getExitCode()) {
-            case LIKED -> message = "Like registered successfully.";
-            case UNLIKED -> message = "Unlike registered successfully.";
-            case NO_SOURCE -> message = "Please load a source before liking or unliking.";
-            case NOT_A_SONG -> message = "Loaded source is not a song.";
-        }
-    }
-}
-
-@Getter
 public class LikeInterrogator extends CommandObject {
     @JsonIgnore
-    private LikeExit.code exitCode;
+    private LikeExit.Code exitCode;
 
     @Override
     public JsonNode execute(ActionManager manager) {
         exitCode = manager.requestLikeAction(this);
 
         manager.setLastActionTime(timestamp);
-        manager.setLastAction(this);
+
         return (new LikeOutput(this)).generateOutputNode();
     }
 }

@@ -2,8 +2,8 @@ package globalwaves.player.entities;
 
 import fileio.input.EpisodeInput;
 import fileio.input.PodcastInput;
-import globalwaves.commands.enums.FollowExit;
-import globalwaves.commands.enums.ShuffleExit;
+import globalwaves.commands.enums.exitcodes.FollowExit;
+import globalwaves.commands.enums.exitcodes.ShuffleExit;
 import globalwaves.player.entities.properties.OwnedEntity;
 import globalwaves.player.entities.properties.PlayableEntity;
 import lombok.Getter;
@@ -11,7 +11,6 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Getter @Setter
 public class Podcast implements PlayableEntity, OwnedEntity {
@@ -19,7 +18,7 @@ public class Podcast implements PlayableEntity, OwnedEntity {
     private String owner;
     private List<AudioFile> episodes;
 
-    public Podcast(PodcastInput input) {
+    public Podcast(final PodcastInput input) {
         name = input.getName();
         owner = input.getOwner();
 
@@ -31,7 +30,12 @@ public class Podcast implements PlayableEntity, OwnedEntity {
 
     }
 
-    public AudioFile getNextEpisode(AudioFile currentEpisode) {
+    /**
+     * Returns the episode that has to be played after the specified one
+     * @param currentEpisode The episode currently playing
+     * @return The next episode if it exists, null otherwise
+     */
+    public AudioFile getNextEpisode(final AudioFile currentEpisode) {
         int currentIndex = episodes.indexOf(currentEpisode);
 
         if (currentIndex > episodes.size())
@@ -40,7 +44,12 @@ public class Podcast implements PlayableEntity, OwnedEntity {
         return episodes.get(currentIndex + 1);
     }
 
-    public AudioFile getPrevEpisode(AudioFile currentEpisode) {
+    /**
+     * Returns the episode that has to be played before the specified one
+     * @param currentEpisode The episode currently playing
+     * @return The previous episode, if it exists, null, otherwise
+     */
+    public AudioFile getPrevEpisode(final AudioFile currentEpisode) {
         int currentIndex = episodes.indexOf(currentEpisode);
 
         if (currentIndex == 0)
@@ -49,8 +58,13 @@ public class Podcast implements PlayableEntity, OwnedEntity {
         return episodes.get(currentIndex - 1);
     }
 
+    /**
+     * Returns a String that specifies the repeat state, based on the repeatValue
+     * @param repeatValue The current repeat state
+     * @return a String, if 0 <= repeatValue < 3, null, otherwise
+     */
     @Override
-    public String getRepeatStateName(int repeatValue) {
+    public String getRepeatStateName(final int repeatValue) {
         switch (repeatValue) {
             case 0 -> {
                 return "No Repeat";
@@ -61,19 +75,34 @@ public class Podcast implements PlayableEntity, OwnedEntity {
             case 2 -> {
                 return "Repeat Infinite";
             }
+            default -> {
+                return null;
+            }
         }
-
-        return null;
     }
 
+    /**
+     * Returns the next episode for playing, based on the repeatValue. The repeatValue 1 acts as
+     * 2 because it will be modified by the player to 0, after playing the second time
+     * @param currentFile The playing file
+     * @param repeatValue The current repeat state
+     * @return The next episode to be played in the player
+     */
     @Override
-    public AudioFile getNextForPlaying(AudioFile currentFile, int repeatValue) {
+    public AudioFile getNextForPlaying(final AudioFile currentFile, final int repeatValue) {
         if (repeatValue == 2 || repeatValue == 1)
             return currentFile;
 
         return  getNextEpisode(currentFile);
     }
 
+    /**
+     * Returns the previous episode for playing, based on the repeatValue. The repeatValue 1 acts
+     * as 2 because it will be modified by the player to 0, after playing the second time
+     * @param currentFile The playing file
+     * @param repeatValue The current repeat state
+     * @return The previous episode to be played in the player
+     */
     @Override
     public AudioFile getPrevForPlaying(AudioFile currentFile, int repeatValue) {
         if (repeatValue == 2 || repeatValue == 1)
@@ -104,33 +133,23 @@ public class Podcast implements PlayableEntity, OwnedEntity {
 
 
     @Override
-    public FollowExit.code follow(String username) {
-        return FollowExit.code.NOT_A_PLAYLIST;
+    public FollowExit.Code follow(String username) {
+        return FollowExit.Code.NOT_A_PLAYLIST;
     }
 
     @Override
-    public ShuffleExit.code shuffle(int seed) {
-        return ShuffleExit.code.NOT_A_PLAYLIST;
+    public ShuffleExit.Code shuffle(int seed) {
+        return ShuffleExit.Code.NOT_A_PLAYLIST;
     }
 
     @Override
-    public ShuffleExit.code unshuffle() {
-        return ShuffleExit.code.NOT_A_PLAYLIST;
+    public ShuffleExit.Code unshuffle() {
+        return ShuffleExit.Code.NOT_A_PLAYLIST;
     }
 
     @Override
     public boolean cantGoForwardOrBackward() {
         return false;
     }
-
-    @Override
-    public String toString() {
-        return "Podcast{" +
-                "\nname='" + name + '\'' +
-                "\nowner='" + owner + '\'' +
-                "\nepisodes=" + episodes +
-                '}';
-    }
-
 
 }

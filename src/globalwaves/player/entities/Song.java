@@ -1,14 +1,13 @@
 package globalwaves.player.entities;
 
 import fileio.input.SongInput;
-import globalwaves.commands.enums.FollowExit;
-import globalwaves.commands.enums.ShuffleExit;
+import globalwaves.commands.enums.exitcodes.FollowExit;
+import globalwaves.commands.enums.exitcodes.ShuffleExit;
 import globalwaves.player.entities.properties.PlayableEntity;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 @Getter @Setter
 public class Song extends AudioFile implements PlayableEntity {
@@ -96,8 +95,8 @@ public class Song extends AudioFile implements PlayableEntity {
     }
 
     @Override
-    public FollowExit.code follow(String username) {
-        return FollowExit.code.NOT_A_PLAYLIST;
+    public FollowExit.Code follow(String username) {
+        return FollowExit.Code.NOT_A_PLAYLIST;
     }
 
     @Override
@@ -118,13 +117,13 @@ public class Song extends AudioFile implements PlayableEntity {
     }
 
     @Override
-    public ShuffleExit.code shuffle(int seed) {
-       return ShuffleExit.code.NOT_A_PLAYLIST;
+    public ShuffleExit.Code shuffle(int seed) {
+       return ShuffleExit.Code.NOT_A_PLAYLIST;
     }
 
     @Override
-    public ShuffleExit.code unshuffle() {
-        return ShuffleExit.code.NOT_A_PLAYLIST;
+    public ShuffleExit.Code unshuffle() {
+        return ShuffleExit.Code.NOT_A_PLAYLIST;
     }
 
     @Override

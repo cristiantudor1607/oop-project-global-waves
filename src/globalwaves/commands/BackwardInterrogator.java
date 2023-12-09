@@ -2,7 +2,7 @@ package globalwaves.commands;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonNode;
-import globalwaves.parser.commands.CommandObject;
+import globalwaves.parser.templates.CommandObject;
 import globalwaves.player.entities.library.ActionManager;
 import lombok.Getter;
 
@@ -15,7 +15,7 @@ public class BackwardInterrogator extends CommandObject {
     public JsonNode execute(ActionManager manager) {
         message = manager.requestBackward(this);
         manager.setLastActionTime(timestamp);
-        manager.setLastAction(this);
+
         return (new ForwardBackwardOutput(this)).generateOutputNode();
     }
 }
