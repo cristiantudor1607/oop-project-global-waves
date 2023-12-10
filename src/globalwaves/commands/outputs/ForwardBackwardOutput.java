@@ -1,5 +1,7 @@
-package globalwaves.commands;
+package globalwaves.commands.outputs;
 
+import globalwaves.commands.BackwardInterrogator;
+import globalwaves.commands.ForwardInterrogator;
 import globalwaves.parser.templates.CommandOutputFormatter;
 import lombok.Getter;
 

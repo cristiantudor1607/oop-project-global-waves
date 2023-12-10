@@ -3,6 +3,7 @@ package globalwaves.commands;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import globalwaves.commands.outputs.StatisticsOutput;
 import globalwaves.parser.templates.CommandObject;
 import globalwaves.player.entities.library.ActionManager;
 import lombok.Getter;
@@ -22,11 +23,14 @@ public class TopFivePlaylistsInterrogator extends CommandObject {
      * @return The output formatted as JsonNode.
      */
     @Override
-    public JsonNode execute(final ActionManager manager) {
+    public void execute() {
         result = manager.requestTopFivePlaylists();
 
         manager.setLastActionTime(timestamp);
+    }
 
+    @Override
+    public JsonNode formatOutput() {
         // Method to remove a field found on stack overflow
         JsonNode output =  (new StatisticsOutput(this)).generateOutputNode();
         ObjectNode object = (ObjectNode) output;

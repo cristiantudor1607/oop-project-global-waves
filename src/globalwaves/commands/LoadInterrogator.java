@@ -20,11 +20,13 @@ public class LoadInterrogator extends CommandObject {
      * @return The output formatted as JsonNode.
      */
     @Override
-    public JsonNode execute(final ActionManager manager) {
+    public void execute() {
         exitCode = manager.requestLoading(this);
-
         manager.setLastActionTime(timestamp);
+    }
 
+    @Override
+    public JsonNode formatOutput() {
         return (new LoadOutput(this)).generateOutputNode();
     }
 }

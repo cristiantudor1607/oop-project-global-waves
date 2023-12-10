@@ -15,10 +15,14 @@ public class ShowLikesInterrogator extends CommandObject {
     private List<String> songNames;
 
     @Override
-    public JsonNode execute(ActionManager manager) {
+    public void execute() {
         songNames = manager.requestLikedSongs(this);
 
         manager.setLastActionTime(timestamp);
+    }
+
+    @Override
+    public JsonNode formatOutput() {
         return (new ShowLikesOutput(this)).generateOutputNode();
     }
 }

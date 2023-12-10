@@ -4,6 +4,7 @@ import globalwaves.commands.enums.FilterType;
 import globalwaves.commands.search.utils.filters.*;
 import globalwaves.player.entities.Song;
 import globalwaves.player.entities.library.Library;
+import lombok.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,31 +19,21 @@ public class SongEngine extends SearchEngine<Song> {
     }
 
     @Override
-    public List<Filter<Song>> collectFilters(Map<String, List<String>> filters) {
-         /*
-        Create a list of filters that will be applied
-         */
-        List<Filter<Song>> requestedFilters = new ArrayList<>();
-        for (String key: filters.keySet()) {
-            Filter<Song> newFilter = null;
-            List<String> values = filters.get(key);
-            /*
-            Create a specific filter, depending on the key
-             */
-            switch (Objects.requireNonNull(FilterType.parseString(key))) {
-                case NAME -> newFilter = new NameFilter<>(values.get(0));
-                case ALBUM -> newFilter = new AlbumFilter(values.get(0));
-                case ARTIST -> newFilter = new ArtistFilter(values.get(0));
-                case LYRICS -> newFilter = new LyricsFilter(values.get(0));
-                case TAGS -> newFilter = new TagsFilter(values);
-                case GENRE -> newFilter = new GenreFilter(values.get(0));
-                case RELEASE_YEAR -> newFilter = new ReleaseYearFilter(values.get(0));
-            }
+    public Filter<Song> getFilterByNameAsString(@NonNull final String key,
+                                                @NonNull final List<String> values) {
+        if (values.isEmpty())
+            return null;
 
-            requestedFilters.add(newFilter);
-        }
-
-        return requestedFilters;
+        return switch (FilterType.parseString(key)) {
+            case NAME -> new NameFilter<>(values.get(0));
+            case ALBUM -> new AlbumFilter(values.get(0));
+            case ARTIST -> new ArtistFilter(values.get(0));
+            case LYRICS -> new LyricsFilter(values.get(0));
+            case TAGS -> new TagsFilter(values);
+            case GENRE -> new GenreFilter(values.get(0));
+            case RELEASE_YEAR -> new ReleaseYearFilter(values.get(0));
+            default -> null;
+        };
     }
 
     @Override

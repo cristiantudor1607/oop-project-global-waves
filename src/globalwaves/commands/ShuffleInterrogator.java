@@ -22,10 +22,14 @@ public class ShuffleInterrogator extends CommandObject {
      * @return The output formatted as JsonNode.
      */
     @Override
-    public JsonNode execute(final ActionManager manager) {
+    public void execute() {
         exitCode = manager.requestShuffling(this);
 
         manager.setLastActionTime(timestamp);
+    }
+
+    @Override
+    public JsonNode formatOutput() {
         return (new ShuffleOutput(this)).generateOutputNode();
     }
 }

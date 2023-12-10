@@ -3,6 +3,7 @@ package globalwaves.commands;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import globalwaves.commands.outputs.StatisticsOutput;
 import globalwaves.parser.templates.CommandObject;
 import globalwaves.player.entities.library.ActionManager;
 import lombok.Getter;
@@ -22,11 +23,14 @@ public class TopFiveSongsInterrogator extends CommandObject {
      * @return The output formatted as JsonNode.
      */
     @Override
-    public JsonNode execute(final ActionManager manager) {
+    public void execute() {
         result = manager.requestTopFiveSongs();
 
         manager.setLastActionTime(timestamp);
+    }
 
+    @Override
+    public JsonNode formatOutput() {
         // Link https://www.baeldung.com/java-jackson-remove-json-elements
         JsonNode output =  (new StatisticsOutput(this)).generateOutputNode();
         ObjectNode object = (ObjectNode) output;

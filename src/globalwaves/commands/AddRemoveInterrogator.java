@@ -14,18 +14,14 @@ public class AddRemoveInterrogator extends CommandObject {
     @JsonIgnore
     private AddRemoveExit.Code exitCode;
 
-    /**
-     * The method executes the AddRemove Command and returns it's output.
-     * @param manager The ActionManager that manages the players and is able to make changes
-     *                at a specific player, or communicates with the library interrogator to
-     *                retrieve infos from library.
-     * @return The output formatted as JsonNode.
-     */
     @Override
-    public JsonNode execute(final ActionManager manager) {
+    public void execute() {
         exitCode = manager.requestAddRemove(this);
         manager.setLastActionTime(timestamp);
+    }
 
+    @Override
+    public JsonNode formatOutput() {
         return (new AddRemoveOutput(this)).generateOutputNode();
     }
 }

@@ -17,11 +17,11 @@ public class SearchOutput extends CommandOutputFormatter {
         user = executedQuery.getUsername();
         timestamp = executedQuery.getTimestamp();
         message = generateMessage(executedQuery);
-        results = EngineResultsParser.getNamesFromList(executedQuery.getSearchResults());
+        results = executedQuery.getResults();
     }
 
-    String generateMessage(final SearchInterrogator executingCommand) {
-        int n = executingCommand.getSearchResults().size();
+    String generateMessage(final SearchInterrogator executedQuery) {
+        int n = executedQuery.getResults().size();
         return "Search returned " + n + " results";
     }
 }

@@ -14,11 +14,14 @@ public class LikeInterrogator extends CommandObject {
     private LikeExit.Code exitCode;
 
     @Override
-    public JsonNode execute(ActionManager manager) {
+    public void execute() {
         exitCode = manager.requestLikeAction(this);
 
         manager.setLastActionTime(timestamp);
+    }
 
+    @Override
+    public JsonNode formatOutput() {
         return (new LikeOutput(this)).generateOutputNode();
     }
 }

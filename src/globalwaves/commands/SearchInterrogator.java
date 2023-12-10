@@ -23,38 +23,17 @@ import java.util.Objects;
 public class SearchInterrogator extends CommandObject {
     private String type;
     @JsonIgnore private Map<String, List<String>> filters;
-    @JsonIgnore private SearchEngine<? extends PlayableEntity> engine;
-    @JsonIgnore private List<? extends PlayableEntity> searchResults;
+    @JsonIgnore private List<String> results;
 
-    /**
-     * Method that chooses what Search Engine should be used, based on the type
-     * provided at input
-     */
-    public SearchEngine<? extends PlayableEntity> chooseEngine() {
-        return switch (Objects.requireNonNull(SearchType.parseString(type))) {
-            case SONG -> new SongEngine(filters);
-            case PODCAST -> new PodcastEngine(filters);
-            case PLAYLIST -> new PlaylistEngine(filters, username);
-            default -> null;
-        };
+
+    @Override
+    public void execute() {
+        results = manager.requestSearch(this);
+        manager.setLastActionTime(timestamp);
     }
 
-    /**
-     * Method that executes the search command and returns it's output.
-     * @param manager The ActionManager that manages the players and is able to make changes
-     *                at a specific player, or communicates with the library interrogator to
-     *                retrieve infos from library.
-     * @return The output formatted as JsonNode.
-     */
     @Override
-    public JsonNode execute(final ActionManager manager) {
-        engine = chooseEngine();
-        searchResults = engine.collectResults();
-        searchResults = EngineResultsParser.getRelevantResults(searchResults);
-
-        manager.requestSearchResult(this);
-        manager.setLastActionTime(timestamp);
-
+    public JsonNode formatOutput() {
         return (new SearchOutput(this)).generateOutputNode();
     }
 
@@ -63,9 +42,12 @@ public class SearchInterrogator extends CommandObject {
      * @return true
      */
     @Override
-    public boolean hasFilters() {
+    public boolean hasFiltersField() {
         return true;
     }
 
-
+    @Override
+    public void setFiltersField(Map<String, List<String>> mappedFilters) {
+        filters = mappedFilters;
+    }
 }

@@ -6,6 +6,7 @@ public final class SearchType {
         SONG,
         PODCAST,
         PLAYLIST,
+        UNKNOWN,
     }
 
     private SearchType() { };
@@ -28,6 +29,6 @@ public final class SearchType {
             return Type.PLAYLIST;
         }
 
-        return null;
+        return Type.UNKNOWN;
     }
 }

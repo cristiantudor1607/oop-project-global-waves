@@ -1,6 +1,5 @@
 package globalwaves.commands.outputs;
 
-import globalwaves.commands.PlaylistStats;
 import globalwaves.commands.ShowPlaylistsInterrogator;
 import globalwaves.parser.templates.CommandOutputFormatter;
 import globalwaves.player.entities.Playlist;

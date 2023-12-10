@@ -16,12 +16,26 @@ import java.util.Map;
 
 @Getter @Setter
 public class ActionManager {
+    private static ActionManager instance;
+
     private LibraryInterrogator interrogator;
     private SearchBar searchBar;
     private Map<String, Player> players;
     private int lastActionTime;
 
-    public ActionManager() {
+    public static ActionManager getInstance() {
+        if (instance == null)
+            instance = new ActionManager();
+
+        return instance;
+    }
+
+    public static void deleteInstance() {
+        instance = null;
+    }
+
+
+    private ActionManager() {
         interrogator = new LibraryInterrogator();
         searchBar = new SearchBar();
         players = new HashMap<>();
@@ -32,19 +46,26 @@ public class ActionManager {
         lastActionTime = 0;
     }
 
-    public Player requestPlayer(CommandObject executingQuery) {
-        String username = executingQuery.getUsername();
+    public Player requestPlayer(CommandObject execQuery) {
+        String username = execQuery.getUsername();
 
         return players.get(username);
+    }
+
+    public List<String> requestSearch(SearchInterrogator execQuery) {
+        Player userPlayer = requestPlayer(execQuery);
+        userPlayer.stopPlayer();
+
+        searchBar.setUsername(execQuery.getUsername());
+        searchBar.search(execQuery.getType(), execQuery.getFilters());
+
+        return searchBar.getRelevantResultsAsNames();
     }
 
     public void requestSearchResult(SearchInterrogator executingSearch) {
         // First stop the player
         Player userPlayer = requestPlayer(executingSearch);
         userPlayer.stopPlayer();
-
-        searchBar.setResults(executingSearch.getSearchResults());
-
     }
 
     public SelectExit.Code requestItemSelection(SelectInterrogator executingSelect) {
@@ -304,5 +325,4 @@ public class ActionManager {
             currPlayer.updatePlayer(diff);
         }
     }
-
 }

@@ -20,11 +20,14 @@ public class PrevInterrogator extends CommandObject {
      * @return The output formatted as JsonNode.
      */
     @Override
-    public JsonNode execute(final ActionManager manager) {
+    public void execute() {
         message = manager.requestPrev(this);
 
         manager.setLastActionTime(timestamp);
+    }
 
+    @Override
+    public JsonNode formatOutput() {
         return (new PrevOutput(this)).generateOutputNode();
     }
 }

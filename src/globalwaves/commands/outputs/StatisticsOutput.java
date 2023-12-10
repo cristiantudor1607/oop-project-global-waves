@@ -1,5 +1,7 @@
-package globalwaves.commands;
+package globalwaves.commands.outputs;
 
+import globalwaves.commands.TopFivePlaylistsInterrogator;
+import globalwaves.commands.TopFiveSongsInterrogator;
 import globalwaves.parser.templates.CommandOutputFormatter;
 import lombok.Getter;
 

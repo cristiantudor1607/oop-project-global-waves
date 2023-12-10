@@ -6,6 +6,7 @@ import globalwaves.commands.search.utils.filters.NameFilter;
 import globalwaves.commands.search.utils.filters.OwnerFilter;
 import globalwaves.player.entities.Playlist;
 import globalwaves.player.entities.library.LibraryInterrogator;
+import lombok.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,34 +20,17 @@ public class PlaylistEngine extends SearchEngine<Playlist> {
         this.user = user;
     }
 
-    /**
-     * Collects the filters for a search command of type playlist.
-     * @param filters The filters mapped. Only the tags filter can have multiple
-     *                elements in it's list
-     * @return A List with Filters, which can contain only NameFilter or OwnerFilter, or
-     * both
-     */
     @Override
-    public List<Filter<Playlist>> collectFilters(final Map<String, List<String>> filters) {
-        List<Filter<Playlist>> requestedFilters = new ArrayList<>();
+    public Filter<Playlist> getFilterByNameAsString(@NonNull String key,
+                                                    @NonNull List<String> values) {
+        if (values.isEmpty())
+            return null;
 
-        for (String key: filters.keySet()) {
-            Filter<Playlist> newFilter = null;
-            String value = filters.get(key).get(0);
-
-            switch (Objects.requireNonNull(FilterType.parseString(key))) {
-                case NAME -> newFilter = new NameFilter<>(value);
-                case OWNER -> newFilter = new OwnerFilter<>(value);
-                default -> {
-
-                }
-
-            }
-
-            requestedFilters.add(newFilter);
-        }
-
-        return requestedFilters;
+        return switch (FilterType.parseString(key)) {
+            case NAME -> new NameFilter<>(values.get(0));
+            case OWNER -> new OwnerFilter<>(values.get(0));
+            default -> null;
+        };
     }
 
     /**

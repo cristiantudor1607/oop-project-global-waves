@@ -16,9 +16,7 @@ public class FiltersMapper {
      */
     public static Map<String, List<String>> convertToMap(@NonNull JsonNode filtersNode) {
         Map<String, List<String>> mappedFilters = new HashMap<>();
-        /*
-        Inspired by [4] and I used [5] to learn about Iterators
-         */
+
         Iterator<Map.Entry<String, JsonNode>> filters = filtersNode.fields();
         while (filters.hasNext()) {
             Map.Entry<String, JsonNode> entry = filters.next();
@@ -40,15 +38,5 @@ public class FiltersMapper {
         }
 
         return mappedFilters;
-    }
-
-    public static void printMap(@NonNull Map<String, List<String>> mappedFilters) {
-        for (String key: mappedFilters.keySet()) {
-            System.out.println(key + " : \n[");
-            List<String> valuesList = mappedFilters.get(key);
-            for (String s: valuesList)
-                System.out.println("\t" + s);
-            System.out.println("]");
-        }
     }
 }

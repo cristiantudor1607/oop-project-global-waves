@@ -1,4 +1,4 @@
-package globalwaves.commands;
+package globalwaves.commands.outputs;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import globalwaves.player.entities.AudioFile;

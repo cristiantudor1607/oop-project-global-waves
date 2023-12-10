@@ -1,6 +1,5 @@
 package globalwaves.commands.outputs;
 
-import globalwaves.commands.PlayerStats;
 import globalwaves.commands.StatusInterrogator;
 import globalwaves.parser.templates.CommandOutputFormatter;
 import lombok.Getter;

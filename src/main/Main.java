@@ -2,7 +2,6 @@ package main;
 
 import checker.Checker;
 import checker.CheckerConstants;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -80,22 +79,20 @@ public final class Main {
                               final String filePathOutput) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         LibraryInput library = objectMapper.readValue(new File(LIBRARY_PATH), LibraryInput.class);
-
         ArrayNode outputs = objectMapper.createArrayNode();
 
         Library database = Library.getInstance();
         database.loadLibraryData(library);
 
-        ActionManager manager = new ActionManager();
+        ActionManager manager = ActionManager.getInstance();
         List<CommandObject> commandList = new ArrayList<>();
 
-        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        JsonLoader myJsonObject = new JsonLoader(filePathInput);
-        for (JsonNode node : myJsonObject.getInputContent()) {
+        JsonLoader jsonInput = new JsonLoader(filePathInput);
+        for (JsonNode node : jsonInput.getInputContent()) {
             CommandObject newCommand = objectMapper.treeToValue(node, CommandObject.class);
-            if (newCommand.hasFilters()) {
+            if (newCommand.hasFiltersField()) {
                 JsonNode filtersNode = node.get("filters");
-                newCommand.setFilters(FiltersMapper.convertToMap(filtersNode));
+                newCommand.setFiltersField(FiltersMapper.convertToMap(filtersNode));
             }
 
             commandList.add(newCommand);
@@ -103,11 +100,14 @@ public final class Main {
 
         for (CommandObject c : commandList) {
             manager.updatePlayersData(c);
-            JsonNode output = c.execute(manager);
+            c.execute();
+            JsonNode output = c.formatOutput();
             outputs.add(output);
         }
 
         ObjectWriter objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
         objectWriter.writeValue(new File(filePathOutput), outputs);
+
+        ActionManager.deleteInstance();
     }
 }

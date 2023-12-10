@@ -9,7 +9,8 @@ public final class FilterType {
         GENRE,
         RELEASE_YEAR,
         ARTIST,
-        OWNER
+        OWNER,
+        UNKNOWN,
     }
 
     private FilterType() { }
@@ -52,6 +53,6 @@ public final class FilterType {
             return Type.OWNER;
         }
 
-        return null;
+        return Type.UNKNOWN;
     }
 }

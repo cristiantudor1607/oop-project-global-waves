@@ -4,19 +4,9 @@ import globalwaves.commands.enums.exitcodes.FollowExit;
 import globalwaves.commands.enums.exitcodes.ShuffleExit;
 import globalwaves.player.entities.AudioFile;
 
+import java.util.List;
+
 public interface PlayableEntity {
-    /**
-     * Returns the name of the entity
-     * @return The name of the entity
-     */
-    String getName();
-
-    /**
-     * Returns the duration of the entity
-     * @return The duration of the entity
-     */
-    int getDuration();
-
     /**
      * Checks if the entity is an empty file
      * @return true, if it is an empty file, false otherwise
@@ -45,7 +35,7 @@ public interface PlayableEntity {
     /**
      * Returns the repeatValue formatted as String
      * @param repeatValue The repeatValue to be converted
-     * @return formatted repeatValue, null if 0 > repeatValue or repeatValue > 2
+     * @return formatted repeatValue, null if repeatValue < 0 or repeatValue > 2
      */
     String getRepeatStateName(int repeatValue);
 
@@ -69,4 +59,16 @@ public interface PlayableEntity {
     ShuffleExit.Code shuffle(int seed);
     ShuffleExit.Code unshuffle();
     boolean cantGoForwardOrBackward();
+
+    /**
+     * Returns the name of the entity
+     * @return The name of the entity
+     */
+    String getName();
+
+    /**
+     * Returns the duration of the entity
+     * @return The duration of the entity
+     */
+    int getDuration();
 }

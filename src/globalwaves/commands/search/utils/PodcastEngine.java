@@ -7,12 +7,10 @@ import globalwaves.commands.search.utils.filters.NameFilter;
 import globalwaves.commands.search.utils.filters.OwnerFilter;
 import globalwaves.player.entities.Podcast;
 import globalwaves.player.entities.library.Library;
+import lombok.NonNull;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-
 
 public class PodcastEngine extends SearchEngine<Podcast> {
 
@@ -20,48 +18,17 @@ public class PodcastEngine extends SearchEngine<Podcast> {
         super(filters);
     }
 
-    /**
-     * Method that acts like a converter, it gets a (key, value) pair from the mapped
-     * filters Map, and gets a new Filter, specialised on matching by category specified
-     * in key String (name or owner)
-     * @param key The category that specifies which type of filter should be created
-     * @param value The reference value of the filter
-     * @return The new specialised Filter
-     */
-    public Filter<Podcast> convertToFilter(final String key, final String value) {
-        switch (Objects.requireNonNull(FilterType.parseString(key))) {
-            case NAME -> {
-                return new NameFilter<>(value);
-            }
-            case OWNER -> {
-                return new OwnerFilter<>(value);
-            }
-            default -> {
-                return null;
-            }
-        }
-    }
-
-    /**
-     * Collects the filters for a search command of type podcast.
-     * @param filters The filters mapped. Only the tags filter can have multiple
-     *                elements in it's list
-     * @return A List with Filters, which can contain only NameFilter or OwnerFilter, or
-     * both
-     */
     @Override
-    public List<Filter<Podcast>> collectFilters(final Map<String, List<String>> filters) {
-        List<Filter<Podcast>> requestedFilters = new ArrayList<>();
+    public Filter<Podcast> getFilterByNameAsString(@NonNull String key,
+                                                   @NonNull List<String> values) {
+        if (values.isEmpty())
+            return null;
 
-        for (String key: filters.keySet()) {
-            String value = filters.get(key).get(0);
-
-            Filter<Podcast> newFilter = convertToFilter(key, value);
-
-            requestedFilters.add(newFilter);
-        }
-
-        return requestedFilters;
+        return switch (FilterType.parseString(key)) {
+            case NAME -> new NameFilter<>(values.get(0));
+            case OWNER -> new OwnerFilter<>(values.get(0));
+            default -> null;
+        };
     }
 
     /**

@@ -1,5 +1,6 @@
 package globalwaves.parser.templates;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -62,30 +63,33 @@ import java.util.Map;
 public abstract class CommandObject {
     protected String username;
     protected Integer timestamp;
+    @JsonIgnore
+    protected ActionManager manager;
 
-    /**
-     * The execute method is used to execute a command and get is output as JsonNode
-     * @param manager The ActionManager that manages the players and is able to make changes
-     *                at a specific player, or communicates with the library interrogator to
-     *                retrieve infos from library.
-     * @return The output formatted as JsonNode
-     */
-    public JsonNode execute(final ActionManager manager) {
-        return null;
+    public CommandObject() {
+        manager = ActionManager.getInstance();
     }
+
+    public void getGlobalManager() {
+        manager = ActionManager.getInstance();
+    }
+
+    public abstract void execute();
+
+    public abstract JsonNode formatOutput();
 
     /**
      * Method that checks if the executing command has to work with filters.
      * @return true, if it has to work with filters, false otherwise
      */
-    public boolean hasFilters() {
+    public boolean hasFiltersField() {
         return false;
     }
 
     /**
-     * Method used to setFilters, if the command requires them. Otherwise, it does nothing.
-     * @param mappedFilters The filters parsed as a Map.
+     * Method used to set filters field, if the command requires them. Otherwise, it does nothing.
+     * @param mappedFilters The filters parsed as a Map
      */
-    public void setFilters(final Map<String, List<String>> mappedFilters) { }
+    public void setFiltersField(final Map<String, List<String>> mappedFilters) { }
 
 }

@@ -2,6 +2,7 @@ package globalwaves.commands;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonNode;
+import globalwaves.commands.outputs.ForwardBackwardOutput;
 import globalwaves.parser.templates.CommandObject;
 import globalwaves.player.entities.library.ActionManager;
 import lombok.Getter;
@@ -19,11 +20,13 @@ public class ForwardInterrogator extends CommandObject {
      * @return The output formatted as JsonNode
      */
     @Override
-    public JsonNode execute(final ActionManager manager) {
+    public void execute() {
         message = manager.requestForward(this);
-
         manager.setLastActionTime(timestamp);
+    }
 
+    @Override
+    public JsonNode formatOutput() {
         return (new ForwardBackwardOutput(this)).generateOutputNode();
     }
 }

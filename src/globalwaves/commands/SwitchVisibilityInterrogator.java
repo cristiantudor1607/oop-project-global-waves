@@ -16,10 +16,13 @@ public class SwitchVisibilityInterrogator extends CommandObject {
     private SwitchVisibilityExit.Code exitCode;
 
     @Override
-    public JsonNode execute(ActionManager manager) {
+    public void execute() {
         exitCode = manager.requestSwitch(this);
         manager.setLastActionTime(timestamp);
+    }
 
+    @Override
+    public JsonNode formatOutput() {
         return (new SwitchVisibilityOutput(this)).generateOutputNode();
     }
 }

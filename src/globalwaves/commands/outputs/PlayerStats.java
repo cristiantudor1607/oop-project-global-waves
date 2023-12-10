@@ -1,4 +1,4 @@
-package globalwaves.commands;
+package globalwaves.commands.outputs;
 
 import globalwaves.player.entities.Player;
 import lombok.Getter;

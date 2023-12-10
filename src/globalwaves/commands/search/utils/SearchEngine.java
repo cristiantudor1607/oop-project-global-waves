@@ -1,13 +1,17 @@
 package globalwaves.commands.search.utils;
 
-import globalwaves.commands.search.utils.filters.Filter;
+import globalwaves.commands.enums.FilterType;
+import globalwaves.commands.search.utils.filters.*;
 import globalwaves.player.entities.properties.PlayableEntity;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Getter @Setter
 public abstract class SearchEngine<T extends PlayableEntity> {
@@ -35,6 +39,9 @@ public abstract class SearchEngine<T extends PlayableEntity> {
         return matchedEntity;
     }
 
+    public abstract Filter<T> getFilterByNameAsString(@NonNull final String key,
+                                                      @NonNull final List<String> values);
+
     /**
      * Makes a list of Filters based on Map previously returned by a method that
      * map the accepted categories
@@ -42,7 +49,18 @@ public abstract class SearchEngine<T extends PlayableEntity> {
      *                elements in it's list
      * @return List of Filter objects. Basically is a conversion String - Filter
      */
-    public abstract List<Filter<T>> collectFilters(Map<String, List<String>> mappedFilters);
+    public List<Filter<T>> collectFilters(Map<String, List<String>> mappedFilters) {
+        List<Filter<T>> requestedFilters = new ArrayList<>();
+        for (String key: mappedFilters.keySet()) {
+            List<String> values = mappedFilters.get(key);
+
+            Filter<T> newFilter = getFilterByNameAsString(key, values);
+            requestedFilters.add(newFilter);
+        }
+
+        return requestedFilters;
+    }
+
 
     /**
      * Applies ALL filters on library entities. It starts with the list of all songs,

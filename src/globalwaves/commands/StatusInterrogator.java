@@ -20,10 +20,14 @@ public class StatusInterrogator extends CommandObject {
      * @return The output formatted as JsonNode.
      */
     @Override
-    public JsonNode execute(final ActionManager manager) {
+    public void execute() {
         requestedPlayer = manager.requestPlayer(this);
 
         manager.setLastActionTime(timestamp);
+    }
+
+    @Override
+    public JsonNode formatOutput() {
         return (new StatusOutput(this)).generateOutputNode();
     }
 }

@@ -20,11 +20,14 @@ public class NextInterrogator extends CommandObject {
      * @return The output formatted as JsonNode.
      */
     @Override
-    public JsonNode execute(final ActionManager manager) {
+    public void execute() {
         message = manager.requestNext(this);
 
         manager.setLastActionTime(timestamp);
+    }
 
+    @Override
+    public JsonNode formatOutput() {
         return (new NextOutput(this)).generateOutputNode();
     }
 }
