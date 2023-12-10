@@ -1,0 +1,7 @@
+-> ActionManager devine singleton si se reseteaza la fiecare apelare a lui action
+-> Se separa metoda execute, ca sa devine void execute(), si se adauga o noua metoda getOutput, iar in main
+va fi ceva de genul:
+command.execute
+JsonNode node = command.getOutput
+-> javadoc in draci
+-> adauga la toate out-urile generator de mesaje
