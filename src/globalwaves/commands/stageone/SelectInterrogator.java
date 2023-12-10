@@ -2,7 +2,7 @@ package globalwaves.commands.stageone;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonNode;
-import globalwaves.commands.enums.exitcodes.stageone.SelectExit;
+import globalwaves.commands.enums.exitstats.stageone.SelectExit;
 import globalwaves.commands.outputs.stageone.SelectOutput;
 import globalwaves.parser.templates.CommandObject;
 import globalwaves.player.entities.properties.PlayableEntity;
@@ -18,6 +18,12 @@ public class SelectInterrogator extends CommandObject {
 
     @Override
     public void execute() {
+        approval = manager.requestApprovalForAction(this);
+        if (!approval) {
+            exitStatus = SelectExit.Status.OFFLINE;
+            return;
+        }
+
         exitStatus = manager.requestItemSelection(this);
         manager.setLastActionTime(timestamp);
     }

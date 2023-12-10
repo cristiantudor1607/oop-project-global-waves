@@ -1,3 +1,4 @@
+TODO-uri:
 -> ActionManager devine singleton si se reseteaza la fiecare apelare a lui action
 -> Se separa metoda execute, ca sa devine void execute(), si se adauga o noua metoda getOutput, iar in main
 va fi ceva de genul:
@@ -5,3 +6,23 @@ command.execute
 JsonNode node = command.getOutput
 -> javadoc in draci
 -> adauga la toate out-urile generator de mesaje
+-> daca se strica ceva la library, undo deleteInstance
+-> daca se strica altceva se poate sa fie de la asta:
+ private ActionManager() {
+        adminBot = new AdminBot();
+        searchBar = new SearchBar();
+        players = new HashMap<>();
+        for (User user : adminBot.getDatabase().getUsers()) {
+            players.put(user.getUsername(), new Player());
+        }
+
+        lastActionTime = 0;
+    }
+
+
+EXPLICATII:
++ AdminBot este o extensie a adminului, pentru ca poate face tot ce face adminul, plus operatiile de bot
+-> Admin e mostenit din User, gandidu ma ca pe viitor ar putea exista useri admini,
+-> Admin-ul este singurul user care are acces direct la baza de date
+-> listele de users, artists si host sunt securizate prin metoda de adaugare, care nu permite altui
+tip de entitate User sa fie adaugat

@@ -13,7 +13,7 @@ public final class FilterType {
         UNKNOWN,
     }
 
-    private FilterType() { }
+    private FilterType() {}
 
     /**
      * Method that parse a String to get a FilterType.Type enum, designed as a utility class.

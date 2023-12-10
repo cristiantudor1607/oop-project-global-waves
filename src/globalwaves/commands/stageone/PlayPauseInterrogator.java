@@ -2,7 +2,7 @@ package globalwaves.commands.stageone;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonNode;
-import globalwaves.commands.enums.exitcodes.stageone.PlayPauseExit;
+import globalwaves.commands.enums.exitstats.stageone.PlayPauseExit;
 import globalwaves.commands.outputs.stageone.PlayPauseOutput;
 import globalwaves.parser.templates.CommandObject;
 import lombok.Getter;

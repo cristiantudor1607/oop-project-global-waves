@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.JsonNode;
 import globalwaves.commands.stageone.*;
+import globalwaves.commands.stagetwo.AddUserInterrogator;
 import globalwaves.commands.stagetwo.ConnectionInterrogator;
 import globalwaves.commands.stagetwo.OnlineUsersInterrogator;
 import globalwaves.player.entities.library.ActionManager;
@@ -42,7 +43,7 @@ import java.util.Map;
 
         @JsonSubTypes.Type(value = EmptyCommand.class, name = "changePage"),
         @JsonSubTypes.Type(value = EmptyCommand.class, name = "printCurrentPage"),
-        @JsonSubTypes.Type(value = EmptyCommand.class, name = "addUser"),
+        @JsonSubTypes.Type(value = AddUserInterrogator.class, name = "addUser"),
         @JsonSubTypes.Type(value = EmptyCommand.class, name = "deleteUser"),
         @JsonSubTypes.Type(value = EmptyCommand.class, name = "showAlbums"),
         @JsonSubTypes.Type(value = EmptyCommand.class, name = "showPodcasts"),
@@ -68,6 +69,8 @@ public abstract class CommandObject {
     protected Integer timestamp;
     @JsonIgnore
     protected ActionManager manager;
+    @JsonIgnore
+    protected boolean approval;
 
     public CommandObject() {
         manager = ActionManager.getInstance();

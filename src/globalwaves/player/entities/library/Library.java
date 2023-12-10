@@ -4,10 +4,7 @@ import fileio.input.LibraryInput;
 import fileio.input.PodcastInput;
 import fileio.input.SongInput;
 import fileio.input.UserInput;
-import globalwaves.player.entities.Playlist;
-import globalwaves.player.entities.Podcast;
-import globalwaves.player.entities.Song;
-import globalwaves.player.entities.User;
+import globalwaves.player.entities.*;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -19,32 +16,30 @@ import java.util.Map;
 public class Library {
     private static Library instance = null;
 
-    /**
-     * List of all songs available in the Library
-     */
     @Getter
-    private List<Song> songs = null;
-
-    /**
-     * List of all podcasts available in the Library
-     */
-    @Getter
-    private List<Podcast> podcasts = null;
-
-    /**
-     * List of all users
-     */
-    @Getter
-    private List<User> users = null ;
+    private List<Song> songs;
 
     @Getter
-    private Map<String, List<Playlist>> playlists = null;
+    private List<Podcast> podcasts;
+
+    @Getter
+    private List<User> users;
+
+    @Getter
+    private List<User> artists;
+    @Getter
+    private List<User> hosts;
+
+    @Getter
+    private Map<String, List<Playlist>> playlists;
 
 
     private Library() {
         songs = new ArrayList<>();
         podcasts = new ArrayList<>();
         users = new ArrayList<>();
+        artists = new ArrayList<>();
+        hosts = new ArrayList<>();
         playlists = new HashMap<>();
     }
 
@@ -55,6 +50,10 @@ public class Library {
         return instance;
     }
 
+    public static void deleteInstance() {
+        instance = null;
+    }
+
     public void addSong(Song newSong) {
         songs.add(newSong);
     }
@@ -63,8 +62,33 @@ public class Library {
         podcasts.add(newPodcast);
     }
 
-    public void addUser(User newUser) {
-        users.add(newUser);
+    public boolean addUser(User newUser) {
+        if (!newUser.isNormalUser())
+            return false;
+
+        return users.add(newUser);
+    }
+
+    public boolean addArtist(User newArtist) {
+        if (!newArtist.isArtist())
+            return false;
+
+        return artists.add(newArtist);
+    }
+
+    public boolean addArtist(Artist newArtist) {
+        return artists.add(newArtist);
+    }
+
+    public boolean addHost(User newHost) {
+        if (!newHost.isHost())
+            return false;
+
+        return hosts.add(newHost);
+    }
+
+    public boolean addHost(Host newHost) {
+        return hosts.add(newHost);
     }
 
     public void addPlaylist(String owner, Playlist newPlaylist) {
@@ -78,9 +102,6 @@ public class Library {
      *                Library Database
      */
     public void loadSongs(LibraryInput library) {
-        if (!songs.isEmpty())
-            return;
-
         ArrayList<SongInput> inputs = library.getSongs();
         for (SongInput inputFormatSong: inputs) {
             /* Convert SongInput to Song, and add it to the List */
@@ -95,9 +116,6 @@ public class Library {
      *                Library Database
      */
     public void loadPodcasts(LibraryInput library) {
-        if (!podcasts.isEmpty())
-            return;
-
         ArrayList<PodcastInput> inputs = library.getPodcasts();
         for (PodcastInput inputFormatPodcast: inputs) {
             Podcast myPodcastFormat = new Podcast(inputFormatPodcast);
@@ -111,12 +129,6 @@ public class Library {
      *                Library Database
      */
     public void loadUsers(LibraryInput library) {
-        if (!users.isEmpty()) {
-            for (User user : users)
-                user.getLikes().clear();
-            return;
-        }
-
         ArrayList<UserInput> inputs = library.getUsers();
         for (UserInput inputFormatUser: inputs) {
             User myUserFormat = new User(inputFormatUser);

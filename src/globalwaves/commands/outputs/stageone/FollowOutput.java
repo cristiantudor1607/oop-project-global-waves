@@ -1,7 +1,7 @@
 package globalwaves.commands.outputs.stageone;
 
 import globalwaves.commands.stageone.FollowInterrogator;
-import globalwaves.commands.enums.exitcodes.stageone.FollowExit;
+import globalwaves.commands.enums.exitstats.stageone.FollowExit;
 import globalwaves.parser.templates.CommandOutputFormatter;
 import lombok.Getter;
 

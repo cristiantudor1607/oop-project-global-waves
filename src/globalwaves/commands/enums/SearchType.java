@@ -9,7 +9,7 @@ public final class SearchType {
         UNKNOWN,
     }
 
-    private SearchType() { };
+    private SearchType() {}
 
     /**
      * Method that parse a String and generates a Type enum associated.

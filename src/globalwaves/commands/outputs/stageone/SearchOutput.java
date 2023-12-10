@@ -1,6 +1,6 @@
 package globalwaves.commands.outputs.stageone;
 
-import globalwaves.commands.enums.exitcodes.stageone.SearchExit;
+import globalwaves.commands.enums.exitstats.stageone.SearchExit;
 import globalwaves.commands.stageone.SearchInterrogator;
 import globalwaves.parser.templates.CommandOutputFormatter;
 import lombok.Getter;

@@ -19,6 +19,8 @@ public class User {
     private ConnectionStatus status;
     private List<AudioFile> likes;
 
+    public User() {}
+
     public User(UserInput input) {
         username = input.getUsername();
         age = input.getAge();

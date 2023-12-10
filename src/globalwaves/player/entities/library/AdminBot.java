@@ -1,9 +1,6 @@
 package globalwaves.player.entities.library;
 
-import globalwaves.player.entities.AudioFile;
-import globalwaves.player.entities.Playlist;
-import globalwaves.player.entities.Song;
-import globalwaves.player.entities.User;
+import globalwaves.player.entities.*;
 import globalwaves.player.entities.utilities.SortByCreationTime;
 import globalwaves.player.entities.utilities.SortByFollowers;
 import globalwaves.player.entities.utilities.SortByInteger;
@@ -11,11 +8,28 @@ import globalwaves.player.entities.utilities.SortByLibraryOrder;
 
 import java.util.*;
 
-public class SuperAdmin {
+public class AdminBot extends Admin  {
+    public AdminBot() {
+        super();
+    }
 
-    private final Library database;
-    public SuperAdmin() {
-        database = Library.getInstance();
+    public boolean checkUsername(final String username) {
+        for (User normalUser: database.getUsers()) {
+            if (normalUser.getUsername().equals(username))
+                return true;
+        }
+
+        for (User artist: database.getArtists()) {
+            if (artist.getUsername().equals(username))
+                return true;
+        }
+
+        for (User host: database.getHosts()) {
+            if (host.getUsername().equals(username))
+                return true;
+        }
+
+        return false;
     }
 
     public boolean checkIfOwnerHasPlaylist(final String owner, final String playlistName) {

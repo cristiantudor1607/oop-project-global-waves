@@ -1,8 +1,11 @@
 package globalwaves.player.entities.library;
 
-import globalwaves.commands.enums.exitcodes.stageone.*;
-import globalwaves.commands.enums.exitcodes.stagetwo.SwitchConnectionExit;
+import globalwaves.commands.enums.UserType;
+import globalwaves.commands.enums.exitstats.stageone.*;
+import globalwaves.commands.enums.exitstats.stagetwo.AddUserExit;
+import globalwaves.commands.enums.exitstats.stagetwo.SwitchConnectionExit;
 import globalwaves.commands.stageone.*;
+import globalwaves.commands.stagetwo.AddUserInterrogator;
 import globalwaves.commands.stagetwo.ConnectionInterrogator;
 import globalwaves.commands.stagetwo.OnlineUsersInterrogator;
 import globalwaves.parser.templates.CommandObject;
@@ -20,7 +23,7 @@ import java.util.Map;
 @Getter @Setter
 public class ActionManager {
     private static ActionManager instance;
-    private SuperAdmin admin;
+    private AdminBot adminBot;
     private SearchBar searchBar;
     private int lastActionTime;
 
@@ -40,10 +43,10 @@ public class ActionManager {
 
 
     private ActionManager() {
-        admin = new SuperAdmin();
+        adminBot = new AdminBot();
         searchBar = new SearchBar();
         players = new HashMap<>();
-        for (User user : Library.getInstance().getUsers()) {
+        for (User user : adminBot.getDatabase().getUsers()) {
             players.put(user.getUsername(), new Player());
         }
 
@@ -56,12 +59,10 @@ public class ActionManager {
         return players.get(username);
     }
 
-    public SearchExit.Status requestApprovalForSearch(SearchInterrogator execQuery) {
-        User queriedUser = admin.getUserByUsername(execQuery.getUsername());
-        if (queriedUser.isOffline())
-            return SearchExit.Status.OFFLINE;
+    public boolean requestApprovalForAction(CommandObject execQuery) {
+        User queriedUser = adminBot.getUserByUsername(execQuery.getUsername());
 
-        return SearchExit.Status.SUCCESS;
+        return queriedUser.isOnline();
     }
 
     public List<String> requestSearchResults(SearchInterrogator execQuery) {
@@ -132,10 +133,10 @@ public class ActionManager {
         String playlistName = execQuery.getPlaylistName();
         int timestamp = execQuery.getTimestamp();
 
-        if (admin.checkIfOwnerHasPlaylist(owner, playlistName))
+        if (adminBot.checkIfOwnerHasPlaylist(owner, playlistName))
             return CreationExit.Status.ALREADY_EXISTS;
 
-        admin.createPlaylist(owner, playlistName, timestamp);
+        adminBot.createPlaylist(owner, playlistName, timestamp);
 
         return CreationExit.Status.CREATED;
     }
@@ -144,7 +145,7 @@ public class ActionManager {
         int id = execQuery.getPlaylistId();
         String owner = execQuery.getUsername();
 
-        Playlist ownerPlaylist = admin.getOwnerPlaylistById(owner, id);
+        Playlist ownerPlaylist = adminBot.getOwnerPlaylistById(owner, id);
         if (ownerPlaylist == null)
             return SwitchVisibilityExit.Status.TOO_HIGH;
 
@@ -161,7 +162,7 @@ public class ActionManager {
     public AddRemoveExit.Status requestAddRemove(AddRemoveInterrogator execQuery) {
         String owner = execQuery.getUsername();
         int id = execQuery.getPlaylistId();
-        Playlist ownerPlaylist = admin.getOwnerPlaylistById(owner, id);
+        Playlist ownerPlaylist = adminBot.getOwnerPlaylistById(owner, id);
         Player ownerPlayer = players.get(owner);
 
         if (!ownerPlayer.hasSourceLoaded())
@@ -184,12 +185,12 @@ public class ActionManager {
     }
 
     public List<Playlist> requestOwnerPlaylists(final String owner) {
-        return admin.getOwnerPlaylists(owner);
+        return adminBot.getOwnerPlaylists(owner);
     }
 
     public LikeExit.Status requestLikeAction(LikeInterrogator execQuery) {
         String username = execQuery.getUsername();
-        User queriedUser = admin.getUserByUsername(username);
+        User queriedUser = adminBot.getUserByUsername(username);
         Player queriedUserPlayer = getPlayers().get(username);
 
         if (!queriedUserPlayer.hasSourceLoaded())
@@ -212,7 +213,7 @@ public class ActionManager {
     public List<String> requestLikedSongs(ShowLikesInterrogator execQuery) {
         String username = execQuery.getUsername();
 
-        List<AudioFile> songs = admin.getUserLikedSongs(username);
+        List<AudioFile> songs = adminBot.getUserLikedSongs(username);
 
         List<String> names = new ArrayList<>();
         for (AudioFile file : songs)
@@ -317,21 +318,21 @@ public class ActionManager {
     }
 
     public List<String> requestTopFiveSongs() {
-        return admin.getTopFiveSongs();
+        return adminBot.getTopFiveSongs();
     }
 
     public List<String> requestTopFivePlaylists() {
-        return admin.getTopFivePlaylists();
+        return adminBot.getTopFivePlaylists();
     }
 
-    public SwitchConnectionExit.Code requestSwitchConnection(ConnectionInterrogator execQuery) {
-        User queriedUser = admin.getUserByUsername(execQuery.getUsername());
+    public SwitchConnectionExit.Status requestSwitchConnection(ConnectionInterrogator execQuery) {
+        User queriedUser = adminBot.getUserByUsername(execQuery.getUsername());
 
         if (queriedUser == null)
-            return SwitchConnectionExit.Code.INVALID_USERNAME;
+            return SwitchConnectionExit.Status.INVALID_USERNAME;
 
         if (!queriedUser.isNormalUser())
-            return SwitchConnectionExit.Code.NOT_NORMAL;
+            return SwitchConnectionExit.Status.NOT_NORMAL;
 
         Player userPlayer = requestPlayer(execQuery);
         if (userPlayer.isFreeze())
@@ -339,13 +340,33 @@ public class ActionManager {
         else
             userPlayer.freeze();
         queriedUser.switchStatus();
-        return SwitchConnectionExit.Code.SUCCESS;
+        return SwitchConnectionExit.Status.SUCCESS;
+    }
+
+    public AddUserExit.Status requestAddingUser(AddUserInterrogator execQuery) {
+        boolean usernameExists = adminBot.checkUsername(execQuery.getUsername());
+        if (usernameExists)
+            return AddUserExit.Status.USERNAME_TAKEN;
+
+        // Transform the string into a type
+        UserType.Type newUserType = UserType.parseString(execQuery.getType());
+        if (newUserType == UserType.Type.UNKNOWN)
+            return AddUserExit.Status.ERROR;
+
+        // Extract the infos of the new user
+        String username = execQuery.getUsername();
+        int age = execQuery.getAge();
+        String city = execQuery.getCity();
+
+        User newUser = adminBot.createUser(username, age, city, newUserType);
+        adminBot.addUser(newUser);
+        return AddUserExit.Status.SUCCESS;
     }
 
     public List<String> requestOnlineUsers(OnlineUsersInterrogator execQuery) {
-        List<User> onlineUsers = admin.getOnlineUsers();
+        List<User> onlineUsers = adminBot.getOnlineUsers();
 
-        return admin.getUsernames(onlineUsers);
+        return adminBot.getUsernames(onlineUsers);
     }
 
     public void updatePlayersData(CommandObject nextToExecuteCommand) {

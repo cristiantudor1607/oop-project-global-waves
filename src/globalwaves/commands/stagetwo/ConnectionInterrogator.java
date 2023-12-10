@@ -2,7 +2,7 @@ package globalwaves.commands.stagetwo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonNode;
-import globalwaves.commands.enums.exitcodes.stagetwo.SwitchConnectionExit;
+import globalwaves.commands.enums.exitstats.stagetwo.SwitchConnectionExit;
 import globalwaves.commands.outputs.stagetwo.SwitchConnectionOutput;
 import globalwaves.parser.templates.CommandObject;
 import lombok.Getter;
@@ -10,11 +10,11 @@ import lombok.Getter;
 @Getter
 public class ConnectionInterrogator extends CommandObject {
     @JsonIgnore
-    private SwitchConnectionExit.Code exitCode;
+    private SwitchConnectionExit.Status exitStatus;
 
     @Override
     public void execute() {
-        exitCode = manager.requestSwitchConnection(this);
+        exitStatus = manager.requestSwitchConnection(this);
         manager.setLastActionTime(timestamp);
     }
 

@@ -1,4 +1,4 @@
-package globalwaves.commands.enums.exitcodes.stageone;
+package globalwaves.commands.enums.exitstats.stageone;
 
 public class LoadExit {
     public enum Status {

@@ -5,7 +5,7 @@ import globalwaves.commands.search.utils.filters.Filter;
 import globalwaves.commands.search.utils.filters.NameFilter;
 import globalwaves.commands.search.utils.filters.OwnerFilter;
 import globalwaves.player.entities.Playlist;
-import globalwaves.player.entities.library.SuperAdmin;
+import globalwaves.player.entities.library.AdminBot;
 import lombok.NonNull;
 
 import java.util.List;
@@ -38,7 +38,7 @@ public class PlaylistEngine extends SearchEngine<Playlist> {
      */
     @Override
     public List<Playlist> collectResults() {
-        SuperAdmin interrogator = new SuperAdmin();
+        AdminBot interrogator = new AdminBot();
 
         List<Playlist> matchedPlaylists = interrogator.getAvailablePlaylists(user);
 

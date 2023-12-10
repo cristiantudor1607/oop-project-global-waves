@@ -2,7 +2,7 @@ package globalwaves.commands.stageone;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonNode;
-import globalwaves.commands.enums.exitcodes.stageone.ShuffleExit;
+import globalwaves.commands.enums.exitstats.stageone.ShuffleExit;
 import globalwaves.commands.outputs.stageone.ShuffleOutput;
 import globalwaves.parser.templates.CommandObject;
 import lombok.Getter;

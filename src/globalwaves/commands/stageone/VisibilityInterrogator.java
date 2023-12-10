@@ -2,7 +2,7 @@ package globalwaves.commands.stageone;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonNode;
-import globalwaves.commands.enums.exitcodes.stageone.SwitchVisibilityExit;
+import globalwaves.commands.enums.exitstats.stageone.SwitchVisibilityExit;
 import globalwaves.commands.outputs.stageone.SwitchVisibilityOutput;
 import globalwaves.parser.templates.CommandObject;
 import lombok.Getter;

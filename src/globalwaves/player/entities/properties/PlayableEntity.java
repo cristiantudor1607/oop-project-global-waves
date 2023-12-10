@@ -1,7 +1,7 @@
 package globalwaves.player.entities.properties;
 
-import globalwaves.commands.enums.exitcodes.stageone.FollowExit;
-import globalwaves.commands.enums.exitcodes.stageone.ShuffleExit;
+import globalwaves.commands.enums.exitstats.stageone.FollowExit;
+import globalwaves.commands.enums.exitstats.stageone.ShuffleExit;
 import globalwaves.player.entities.AudioFile;
 
 public interface PlayableEntity {

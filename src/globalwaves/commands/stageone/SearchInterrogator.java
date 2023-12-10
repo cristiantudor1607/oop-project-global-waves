@@ -2,7 +2,7 @@ package globalwaves.commands.stageone;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonNode;
-import globalwaves.commands.enums.exitcodes.stageone.SearchExit;
+import globalwaves.commands.enums.exitstats.stageone.SearchExit;
 import globalwaves.commands.outputs.stageone.SearchOutput;
 import globalwaves.parser.templates.CommandObject;
 import lombok.Getter;
@@ -19,11 +19,11 @@ public class SearchInterrogator extends CommandObject {
     @JsonIgnore private List<String> results;
     @JsonIgnore private SearchExit.Status exitStatus;
 
-
     @Override
     public void execute() {
-        exitStatus = manager.requestApprovalForSearch(this);
-        if (exitStatus == SearchExit.Status.OFFLINE) {
+        approval = manager.requestApprovalForAction(this);
+        if (!approval) {
+            exitStatus = SearchExit.Status.OFFLINE;
             results = new ArrayList<>();
             return;
         }

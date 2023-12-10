@@ -110,5 +110,6 @@ public final class Main {
         objectWriter.writeValue(new File(filePathOutput), outputs);
 
         ActionManager.deleteInstance();
+        Library.deleteInstance();
     }
 }
