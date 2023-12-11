@@ -18,6 +18,8 @@ JsonNode node = command.getOutput
 
         lastActionTime = 0;
     }
+-> daca o sa ai timp muta toate string urile la StringConstants
+-> ADAUGA LA TOATE STAREA DE OFFLINE !!! foarte important
 
 
 EXPLICATII:

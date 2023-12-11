@@ -1,6 +1,8 @@
 package globalwaves.commands.outputs.stageone;
 
+import globalwaves.commands.enums.exitstats.stageone.ShuffleExit;
 import globalwaves.commands.stageone.ShuffleInterrogator;
+import globalwaves.constants.StringConstants;
 import globalwaves.parser.templates.CommandOutputFormatter;
 import lombok.Getter;
 
@@ -12,15 +14,16 @@ public class ShuffleOutput extends CommandOutputFormatter {
         command = "shuffle";
         user = executedQuery.getUsername();
         timestamp = executedQuery.getTimestamp();
-        switch (executedQuery.getExitStatus()) {
-            case ACTIVATED -> message = "Shuffle function activated successfully.";
-            case DEACTIVATED -> message = "Shuffle function deactivated successfully.";
-            case NOT_A_PLAYLIST -> message = "The loaded source is not a playlist.";
-            case NO_SOURCE_LOADED -> message = "Please load a source before using the "
-                    + "shuffle function.";
-            default -> {
+        message = generateMessage(user, executedQuery.getExitStatus());
+    }
 
-            }
-        }
+    public String generateMessage(final String username, final ShuffleExit.Status atExit) {
+        return switch (atExit) {
+            case ACTIVATED -> StringConstants.SHUFFLE_ON;
+            case DEACTIVATED -> StringConstants.SHUFFLE_OFF;
+            case NOT_A_PLAYLIST -> StringConstants.SHUFFLE_NOT_PLAYLIST;
+            case NO_SOURCE_LOADED -> StringConstants.SHUFFLE_NO_SRC;
+            case OFFLINE -> username + StringConstants.OFFLINE_DESCRIPTOR;
+        };
     }
 }

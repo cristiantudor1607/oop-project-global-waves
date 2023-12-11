@@ -22,6 +22,12 @@ public class ShuffleInterrogator extends CommandObject {
      */
     @Override
     public void execute() {
+        approval = manager.requestApprovalForAction(this);
+        if (!approval) {
+            exitStatus = ShuffleExit.Status.OFFLINE;
+            return;
+        }
+
         exitStatus = manager.requestShuffling(this);
 
         manager.setLastActionTime(timestamp);

@@ -20,8 +20,13 @@ public class PlayPauseInterrogator extends CommandObject {
      */
     @Override
     public void execute() {
-        exitStatus = manager.requestUpdateState(this);
+        approval = manager.requestApprovalForAction(this);
+        if (!approval) {
+            exitStatus = PlayPauseExit.Status.OFFLINE;
+            return;
+        }
 
+        exitStatus = manager.requestUpdateState(this);
         manager.setLastActionTime(timestamp);
     }
 

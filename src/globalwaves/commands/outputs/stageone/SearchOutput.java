@@ -2,6 +2,7 @@ package globalwaves.commands.outputs.stageone;
 
 import globalwaves.commands.enums.exitstats.stageone.SearchExit;
 import globalwaves.commands.stageone.SearchInterrogator;
+import globalwaves.constants.StringConstants;
 import globalwaves.parser.templates.CommandOutputFormatter;
 import lombok.Getter;
 
@@ -22,7 +23,7 @@ public class SearchOutput extends CommandOutputFormatter {
 
     public String generateMessage(final SearchInterrogator executedQuery) {
         if (executedQuery.getExitStatus() == SearchExit.Status.OFFLINE)
-            return executedQuery.getUsername() + " is offline.";
+            return executedQuery.getUsername() + StringConstants.OFFLINE_DESCRIPTOR;
 
         int n = executedQuery.getResults().size();
         return "Search returned " + n + " results";

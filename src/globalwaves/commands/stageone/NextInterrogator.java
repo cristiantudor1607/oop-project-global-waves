@@ -3,6 +3,7 @@ package globalwaves.commands.stageone;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonNode;
 import globalwaves.commands.outputs.stageone.NextOutput;
+import globalwaves.constants.StringConstants;
 import globalwaves.parser.templates.CommandObject;
 import lombok.Getter;
 
@@ -20,8 +21,13 @@ public class NextInterrogator extends CommandObject {
      */
     @Override
     public void execute() {
-        message = manager.requestNext(this);
+        approval = manager.requestApprovalForAction(this);
+        if (!approval) {
+            message = username + StringConstants.OFFLINE_DESCRIPTOR;
+            return;
+        }
 
+        message = manager.requestNext(this);
         manager.setLastActionTime(timestamp);
     }
 

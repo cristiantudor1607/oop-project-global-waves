@@ -3,13 +3,14 @@ package globalwaves.commands.stageone;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonNode;
 import globalwaves.commands.outputs.stageone.RepeatOutput;
+import globalwaves.constants.StringConstants;
 import globalwaves.parser.templates.CommandObject;
 import lombok.Getter;
 
 @Getter
 public class RepeatInterrogator extends CommandObject {
     @JsonIgnore
-    private String exitMessage;
+    private String message;
 
     /**
      * The method executes the Repeat Command and returns it's output.
@@ -20,7 +21,13 @@ public class RepeatInterrogator extends CommandObject {
      */
     @Override
     public void execute() {
-        exitMessage = manager.requestRepeatAction(this);
+        approval = manager.requestApprovalForAction(this);
+        if (!approval) {
+            message = username + StringConstants.OFFLINE_DESCRIPTOR;
+            return;
+        }
+
+        message = manager.requestRepeatAction(this);
         manager.setLastActionTime(timestamp);
     }
 

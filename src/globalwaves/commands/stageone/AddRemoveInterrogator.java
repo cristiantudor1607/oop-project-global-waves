@@ -15,6 +15,12 @@ public class AddRemoveInterrogator extends CommandObject {
 
     @Override
     public void execute() {
+        approval = manager.requestApprovalForAction(this);
+        if (!approval) {
+            exitStatus = AddRemoveExit.Status.OFFLINE;
+            return;
+        }
+
         exitStatus = manager.requestAddRemove(this);
         manager.setLastActionTime(timestamp);
     }

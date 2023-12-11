@@ -7,5 +7,6 @@ public final class AddRemoveExit {
         NO_SOURCE,
         ADDED,
         REMOVED,
+        OFFLINE,
     }
 }

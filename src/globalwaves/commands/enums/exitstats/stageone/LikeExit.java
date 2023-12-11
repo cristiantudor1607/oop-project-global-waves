@@ -6,5 +6,6 @@ public final class LikeExit {
         UNLIKED,
         NO_SOURCE,
         NOT_A_SONG,
+        OFFLINE,
     }
 }

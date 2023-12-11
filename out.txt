@@ -34,12 +34,12 @@
   "command" : "like",
   "user" : "alice22",
   "timestamp" : 280,
-  "message" : "Like registered successfully."
+  "message" : "alice22 is offline."
 }, {
   "command" : "addUser",
   "user" : "melodymaster",
   "timestamp" : 295,
-  "message" : "The username melodymaster has been added successfully"
+  "message" : "The username melodymaster has been added successfully."
 }, null, null, {
   "command" : "addUser",
   "user" : "alice22",

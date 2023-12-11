@@ -5,5 +5,6 @@ public class LoadExit {
         NO_SOURCE_SELECTED,
         EMPTY_SOURCE,
         LOADED,
+        OFFLINE,
     }
 }

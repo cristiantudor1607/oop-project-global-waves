@@ -14,6 +14,12 @@ public class LikeInterrogator extends CommandObject {
 
     @Override
     public void execute() {
+        approval = manager.requestApprovalForAction(this);
+        if (!approval) {
+            exitStatus = LikeExit.Status.OFFLINE;
+            return;
+        }
+
         exitStatus = manager.requestLikeAction(this);
 
         manager.setLastActionTime(timestamp);

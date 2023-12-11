@@ -1,6 +1,8 @@
 package globalwaves.commands.outputs.stageone;
 
+import globalwaves.commands.enums.exitstats.stageone.AddRemoveExit;
 import globalwaves.commands.stageone.AddRemoveInterrogator;
+import globalwaves.constants.StringConstants;
 import globalwaves.parser.templates.CommandOutputFormatter;
 import lombok.Getter;
 
@@ -12,16 +14,17 @@ public class AddRemoveOutput extends CommandOutputFormatter {
         command = "addRemoveInPlaylist";
         user = executedQuery.getUsername();
         timestamp = executedQuery.getTimestamp();
-        switch (executedQuery.getExitStatus()) {
-            case ADDED -> message = "Successfully added to playlist.";
-            case REMOVED -> message = "Successfully removed from playlist.";
-            case NOT_A_SONG -> message = "The loaded source is not a song.";
-            case INVALID_PLAYLIST -> message = "The specified playlist does not exist.";
-            case NO_SOURCE -> message = "Please load a source before adding to or "
-                    + "removing from the playlist.";
-            default -> {
+        message = generateMessage(executedQuery.getUsername(), executedQuery.getExitStatus());
+    }
 
-            }
-        }
+    public String generateMessage(final String username, final AddRemoveExit.Status atExit) {
+        return switch (atExit) {
+            case ADDED -> StringConstants.ADDED_TO_PLAYLIST;
+            case REMOVED -> StringConstants.REMOVED_FROM_PLAYLIST;
+            case NOT_A_SONG -> StringConstants.NOT_A_SONG;
+            case INVALID_PLAYLIST -> StringConstants.PLAYLIST_NOT_EXIST;
+            case NO_SOURCE -> StringConstants.ADD_REMOVE_NO_SOURCE;
+            case OFFLINE -> username + StringConstants.OFFLINE_DESCRIPTOR;
+        };
     }
 }

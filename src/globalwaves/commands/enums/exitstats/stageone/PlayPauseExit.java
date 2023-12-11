@@ -5,5 +5,6 @@ public class PlayPauseExit {
         PAUSED,
         RESUMED,
         NO_SOURCE,
+        OFFLINE,
     }
 }

@@ -10,7 +10,7 @@ import lombok.Getter;
 @Getter
 public class CreatePlaylistInterrogator extends CommandObject {
     private String playlistName;
-    @JsonIgnore private CreationExit.Status exitCode;
+    @JsonIgnore private CreationExit.Status exitStatus;
 
     /**
      * Method that executes the CreatePlaylist Command and returns it's output
@@ -21,7 +21,13 @@ public class CreatePlaylistInterrogator extends CommandObject {
      */
     @Override
     public void execute() {
-        exitCode = manager.requestPlaylistCreation(this);
+        approval = manager.requestApprovalForAction(this);
+        if (!approval) {
+            exitStatus = CreationExit.Status.OFFLINE;
+            return;
+        }
+
+        exitStatus = manager.requestPlaylistCreation(this);
         manager.setLastActionTime(timestamp);
     }
 

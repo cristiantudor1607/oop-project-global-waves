@@ -5,5 +5,6 @@ public class SwitchVisibilityExit {
         MADE_PRIVATE,
         MADE_PUBLIC,
         TOO_HIGH,
+        OFFLINE,
     }
 }

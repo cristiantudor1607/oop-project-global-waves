@@ -21,6 +21,12 @@ public class FollowInterrogator extends CommandObject {
      */
     @Override
     public void execute() {
+        approval = manager.requestApprovalForAction(this);
+        if (!approval) {
+            exitStatus = FollowExit.Status.OFFLINE;
+            return;
+        }
+
         exitStatus = manager.requestFollowAction(this);
         manager.setLastActionTime(timestamp);
     }

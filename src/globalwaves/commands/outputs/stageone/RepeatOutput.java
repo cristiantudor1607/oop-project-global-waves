@@ -12,6 +12,6 @@ public class RepeatOutput extends CommandOutputFormatter {
         command = "repeat";
         user = executedQuery.getUsername();
         timestamp = executedQuery.getTimestamp();
-        message = executedQuery.getExitMessage();
+        message = executedQuery.getMessage();
     }
 }

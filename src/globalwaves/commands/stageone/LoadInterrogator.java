@@ -20,6 +20,12 @@ public class LoadInterrogator extends CommandObject {
      */
     @Override
     public void execute() {
+        approval = manager.requestApprovalForAction(this);
+        if (!approval) {
+            exitStatus = LoadExit.Status.OFFLINE;
+            return;
+        }
+
         exitStatus = manager.requestLoading(this);
         manager.setLastActionTime(timestamp);
     }

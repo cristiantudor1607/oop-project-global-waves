@@ -16,6 +16,12 @@ public class VisibilityInterrogator extends CommandObject {
 
     @Override
     public void execute() {
+        approval = manager.requestApprovalForAction(this);
+        if (!approval) {
+            exitStatus = SwitchVisibilityExit.Status.OFFLINE;
+            return;
+        }
+
         exitStatus = manager.requestSwitchVisibility(this);
         manager.setLastActionTime(timestamp);
     }
