@@ -1,22 +1,45 @@
 package globalwaves.player.entities;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import fileio.input.SongInput;
 import globalwaves.commands.enums.exitstats.stageone.FollowExit;
 import globalwaves.commands.enums.exitstats.stageone.ShuffleExit;
 import globalwaves.player.entities.properties.PlayableEntity;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Getter @Setter
-public class Song extends AudioFile implements PlayableEntity {
+public class Song extends AudioFile implements PlayableEntity, Comparable<Song> {
     private String album;
-    private ArrayList<String> tags;
+    private List<String> tags;
     private String lyrics;
     private String genre;
     private int releaseYear;
     private String artist;
+
+    @JsonCreator
+    public Song(@JsonProperty("name") final String name,
+                @JsonProperty("duration") final int duration,
+                @JsonProperty("album") final String album,
+                @JsonProperty("tags") final List<String> tags,
+                @JsonProperty("lyrics") final String lyrics,
+                @JsonProperty("genre") final String genre,
+                @JsonProperty("releaseYear") final int releaseYear,
+                @JsonProperty("artist") final String artist) {
+        this.name = name;
+        this.duration = duration;
+        this.album = album;
+        this.tags = tags;
+        this.lyrics = lyrics;
+        this.genre = genre;
+        this.releaseYear = releaseYear;
+        this.artist = artist;
+    }
 
     /**
      * "Converter" Constructor: it creates a Song object based on a SongInput
@@ -59,7 +82,7 @@ public class Song extends AudioFile implements PlayableEntity {
     }
 
     @Override
-    public boolean canBeLiked() {
+    public boolean isSong() {
         return true;
     }
 
@@ -145,4 +168,12 @@ public class Song extends AudioFile implements PlayableEntity {
                 '}';
     }
 
+    /**
+     * @param o the song to be compared.
+     * @return true, it the songs have the same name, false, otherwise
+     */
+    @Override
+    public int compareTo(@NonNull Song o) {
+        return name.compareTo(o.name);
+    }
 }

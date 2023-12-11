@@ -12,5 +12,5 @@ public abstract class AudioFile {
      * Checks if the inherited class can be liked
      * @return true, if it can be liked, false, otherwise
      */
-    public abstract boolean canBeLiked();
+    public abstract boolean isSong();
 }

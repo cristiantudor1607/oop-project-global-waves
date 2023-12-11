@@ -2,9 +2,11 @@ package globalwaves.player.entities.library;
 
 import globalwaves.commands.enums.UserType;
 import globalwaves.commands.enums.exitstats.stageone.*;
+import globalwaves.commands.enums.exitstats.stagetwo.AddAlbumExit;
 import globalwaves.commands.enums.exitstats.stagetwo.AddUserExit;
 import globalwaves.commands.enums.exitstats.stagetwo.SwitchConnectionExit;
 import globalwaves.commands.stageone.*;
+import globalwaves.commands.stagetwo.AddAlbumInterrogator;
 import globalwaves.commands.stagetwo.AddUserInterrogator;
 import globalwaves.commands.stagetwo.ConnectionInterrogator;
 import globalwaves.commands.stagetwo.OnlineUsersInterrogator;
@@ -24,6 +26,7 @@ import java.util.Map;
 public class ActionManager {
     private static ActionManager instance;
     private AdminBot adminBot;
+    private HelperTool tool;
     private SearchBar searchBar;
     private int lastActionTime;
 
@@ -44,6 +47,7 @@ public class ActionManager {
 
     private ActionManager() {
         adminBot = new AdminBot();
+        tool = HelperTool.getInstance();
         searchBar = new SearchBar();
         players = new HashMap<>();
         for (User user : adminBot.getDatabase().getUsers()) {
@@ -168,7 +172,7 @@ public class ActionManager {
         if (!ownerPlayer.hasSourceLoaded())
             return  AddRemoveExit.Status.NO_SOURCE;
 
-        if (!ownerPlayer.getPlayingFile().canBeLiked())
+        if (!ownerPlayer.getPlayingFile().isSong())
             return AddRemoveExit.Status.NOT_A_SONG;
 
         if (ownerPlaylist == null)
@@ -198,7 +202,7 @@ public class ActionManager {
 
         AudioFile queriedSong = queriedUserPlayer.getPlayingFile();
 
-        if (!queriedSong.canBeLiked())
+        if (!queriedSong.isSong())
             return LikeExit.Status.NOT_A_SONG;
 
         if (queriedUser.hasLikedSong(queriedSong)) {
@@ -366,7 +370,34 @@ public class ActionManager {
     public List<String> requestOnlineUsers(OnlineUsersInterrogator execQuery) {
         List<User> onlineUsers = adminBot.getOnlineUsers();
 
-        return adminBot.getUsernames(onlineUsers);
+        return tool.getUsernames(onlineUsers);
+    }
+
+    public AddAlbumExit.Status requestAddingAlbum(AddAlbumInterrogator execQuery) {
+        boolean usernameExist = adminBot.checkUsername(execQuery.getUsername());
+        if (!usernameExist)
+            return AddAlbumExit.Status.INVALID_USERNAME;
+
+        User u = adminBot.getArtistByUsername(execQuery.getUsername());
+        if (!u.isArtist())
+            return AddAlbumExit.Status.NOT_ARTIST;
+
+        String albumName = execQuery.getAlbumName();
+        if (adminBot.checkAlbumNameForUser(u, albumName))
+            return AddAlbumExit.Status.SAME_NAME;
+
+        if (tool.hasSameSongAtLeastTwice(execQuery.getSongs()))
+            return AddAlbumExit.Status.SAME_SONG;
+
+        String artistName = execQuery.getUsername();
+        int creationTime = execQuery.getTimestamp();
+
+        Album artistNewAlbum = new Album(albumName,artistName, creationTime, execQuery.getSongs());
+
+        // addAlbum won't fail, because of the previous checking we made
+        u.addAlbum(artistNewAlbum);
+
+        return AddAlbumExit.Status.SUCCESS;
     }
 
     public void updatePlayersData(CommandObject nextToExecuteCommand) {

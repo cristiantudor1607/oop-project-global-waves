@@ -9,8 +9,10 @@ import globalwaves.player.entities.utilities.SortByLibraryOrder;
 import java.util.*;
 
 public class AdminBot extends Admin  {
+    private final HelperTool tool;
     public AdminBot() {
         super();
+        tool = HelperTool.getInstance();
     }
 
     public boolean checkUsername(final String username) {
@@ -30,6 +32,20 @@ public class AdminBot extends Admin  {
         }
 
         return false;
+    }
+
+    /**
+     * Checks if the user has an album with the name specified.
+     * @param user User to be inspected.
+     * @param albumName The name of the album.
+     * @return false, if the user isn't an artist, or it doesn't have an album with the
+     * specified name, or true, if it has.
+     */
+    public boolean checkAlbumNameForUser(final User user, final String albumName) {
+        if (!user.isArtist())
+            return false;
+
+        return user.hasAlbumWithName(albumName);
     }
 
     public boolean checkIfOwnerHasPlaylist(final String owner, final String playlistName) {
@@ -64,6 +80,27 @@ public class AdminBot extends Admin  {
         for (User matchUser : database.getUsers()) {
             if (matchUser.getUsername().equals(username))
                 return matchUser;
+        }
+
+        // TODO: Consider removing this
+        for (User matchArtist: database.getArtists()) {
+            if (matchArtist.getUsername().equals(username))
+                return matchArtist;
+        }
+
+        // TODO: And this
+        for (User matchHost: database.getHosts()) {
+            if (matchHost.getUsername().equals(username))
+                return matchHost;
+        }
+
+        return null;
+    }
+
+    public User getArtistByUsername(final String username) {
+        for (User matchArtist: database.getArtists()) {
+            if (matchArtist.getUsername().equals(username))
+                return matchArtist;
         }
 
         return null;
@@ -126,32 +163,12 @@ public class AdminBot extends Admin  {
         return mappedSongs;
     }
 
-    public List<Map.Entry<AudioFile, Integer>> unrollLikes(Map<AudioFile, Integer> mappedLikes) {
-        List<Map.Entry<AudioFile, Integer>> unrolledLikes = new ArrayList<>();
-
-        for (AudioFile key : mappedLikes.keySet()) {
-            Integer value = mappedLikes.get(key);
-            Map.Entry<AudioFile, Integer> newTuple = new AbstractMap.SimpleEntry<>(key, value);
-            unrolledLikes.add(newTuple);
-        }
-
-        return unrolledLikes;
-    }
-
-    public void sortLikes(List<Map.Entry<AudioFile, Integer>> unrolledLikes) {
-        unrolledLikes.sort(new SortByInteger());
-    }
-
-    public void sortByLibrary(List<Map.Entry<AudioFile, Integer>> sortedLikes) {
-        sortedLikes.sort(new SortByLibraryOrder());
-    }
-
     public List<String> getTopFiveSongs() {
         Map<AudioFile, Integer> mappedLikes = mapLikes();
-        List<Map.Entry<AudioFile, Integer>> unrolledLikes = unrollLikes(mappedLikes);
-        sortLikes(unrolledLikes);
-        sortByLibrary(unrolledLikes);
-        truncateResults(unrolledLikes);
+        List<Map.Entry<AudioFile, Integer>> unrolledLikes =  tool.unrollLikes(mappedLikes);
+        tool.sortLikes(unrolledLikes);
+        tool.sortByLibrary(unrolledLikes);
+        tool.truncateResults(unrolledLikes);
 
         List<String> results = new ArrayList<>();
 
@@ -187,40 +204,17 @@ public class AdminBot extends Admin  {
         return onlineUsers;
     }
 
-    public List<String> getUsernames(final List<User> users) {
-        List<String> usernames = new ArrayList<>();
-
-        for (User u: users)
-            usernames.add(u.getUsername());
-
-        return usernames;
-    }
-
-    public void sortPlaylists(List<Playlist> publicPlaylists) {
-        publicPlaylists.sort(new SortByFollowers());
-    }
-
-    public void sortPlaylistsByTime(List<Playlist> publicPlaylists) {
-        publicPlaylists.sort(new SortByCreationTime());
-    }
 
     public List<String> getTopFivePlaylists() {
         List<Playlist> playlists = getPublicPlaylists();
-        sortPlaylists(playlists);
-        sortPlaylistsByTime(playlists);
-        truncateResults(playlists);
+        tool.sortPlaylists(playlists);
+        tool.sortPlaylistsByTime(playlists);
+        tool.truncateResults(playlists);
 
         List<String> names = new ArrayList<>();
         for (Playlist p : playlists)
             names.add(p.getName());
 
         return names;
-    }
-
-    public <T> void truncateResults(List<T> results) {
-        if (results.size() < 5)
-            return;
-
-        results.subList(5, results.size()).clear();
     }
 }

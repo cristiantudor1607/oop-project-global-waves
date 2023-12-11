@@ -5,6 +5,7 @@ import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Getter
 public class User {
@@ -84,6 +85,20 @@ public class User {
 
     public boolean isHost() {
         return false;
+    }
+
+    public boolean hasAlbumWithName(final String albumName) {
+        return false;
+    }
+
+    public boolean addAlbum(final Album newAlbum) {
+        return false;
+    }
+
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getUsername());
     }
 
     @Override

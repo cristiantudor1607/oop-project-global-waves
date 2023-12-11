@@ -20,7 +20,11 @@ JsonNode node = command.getOutput
     }
 -> daca o sa ai timp muta toate string urile la StringConstants
 -> ADAUGA LA TOATE STAREA DE OFFLINE !!! foarte important
-
+-> cand adaugi melodii intr un album s-ar putea sa trebuiasca sa le adaugi si in
+biblioteca
+-> adauga equals la user
+-> ca sa eficentizezi  cautarea unui user, poti face functii separate de cautare, penbtru fiecare tip,
+si se apeleaza in functie de ce metoda returneaza true dintre isArtist, isNormalUser, isHost
 
 EXPLICATII:
 + AdminBot este o extensie a adminului, pentru ca poate face tot ce face adminul, plus operatiile de bot

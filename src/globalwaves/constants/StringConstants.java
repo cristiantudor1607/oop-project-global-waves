@@ -4,6 +4,7 @@ public final class StringConstants {
     private StringConstants() { }
 
     public static final String OFFLINE_DESCRIPTOR = " is offline.";
+    public static final String DOESNT_EXIST = " doesn't exist.";
 
     // Load
     public static final String LOAD_SUCCESS = "Playback loaded successfully.";
@@ -41,4 +42,11 @@ public final class StringConstants {
             "private.";
     public static final String MADE_PUBLIC = "Visibility status updated successfully to " +
             "public.";
+
+    // AddAlbum
+
+    public static final String IS_NOT_ARTIST = " is not an artist.";
+    public static final String ALBUM_SAME_NAME = " has another album with the same name.";
+    public static final String ALBUM_SAME_SONG = " has the same song at least twice in this album.";
+    public static final String ADD_ALBUM_SUCCESS = " has added new album successfully.";
 }
