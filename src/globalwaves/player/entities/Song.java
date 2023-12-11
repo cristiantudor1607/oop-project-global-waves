@@ -24,6 +24,8 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
     private String artist;
     @JsonIgnore
     private int creationTime;
+    @JsonIgnore
+    private int likesNumber;
 
     @JsonCreator
     public Song(@JsonProperty("name") final String name,
@@ -42,7 +44,8 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
         this.genre = genre;
         this.releaseYear = releaseYear;
         this.artist = artist;
-        this.creationTime = 0;
+        creationTime = 0;
+        likesNumber = 0;
     }
 
     /**
@@ -66,6 +69,7 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
         releaseYear = input.getReleaseYear();
         artist = input.getArtist();
         creationTime = 0;
+        likesNumber = 0;
     }
 
     /**
@@ -85,6 +89,19 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
         releaseYear = songToBeCopied.getReleaseYear();
         artist = songToBeCopied.getArtist();
         creationTime = songToBeCopied.creationTime;
+        likesNumber = 0;
+    }
+
+    public List<String> getFollowers() {
+        return null;
+    }
+
+    public void addLike() {
+        likesNumber++;
+    }
+
+    public void removeLike() {
+        likesNumber--;
     }
 
     @Override
@@ -155,13 +172,14 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
         return true;
     }
 
-    public List<String> getFollowers() {
+    @Override
+    public Playlist getWorkingOnPlaylist() {
         return null;
     }
 
     @Override
-    public Playlist getWorkingOnPlaylist() {
-        return null;
+    public Song getWorkingOnSong() {
+        return this;
     }
 
     @Override

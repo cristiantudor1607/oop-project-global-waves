@@ -18,7 +18,7 @@ public class User {
     private int age;
     private String city;
     private ConnectionStatus status;
-    private List<AudioFile> likes;
+    private List<Song> likes;
     private List<Playlist> following;
 
     public User() {}
@@ -40,16 +40,28 @@ public class User {
         likes = new ArrayList<>();
     }
 
-    public boolean hasLikedSong(AudioFile file) {
-        return likes.contains(file);
+//    public boolean hasLikedSong(AudioFile file) {
+//        return likes.contains(file);
+//    }
+//
+//    public void addSongToLikes(AudioFile file) {
+//        likes.add(file);
+//    }
+//
+//    public void removeSongFromLikes(AudioFile file) {
+//        likes.remove(file);
+//    }
+
+    public boolean isLikingSong(Song song) {
+        return likes.contains(song);
     }
 
-    public void addSongToLikes(AudioFile file) {
-        likes.add(file);
+    public void like(Song song) {
+        likes.add(song);
     }
 
-    public void removeSongFromLikes(AudioFile file) {
-        likes.remove(file);
+    public void unlike(Song song) {
+        likes.remove(song);
     }
 
     public boolean isFollowing(Playlist playlist) {

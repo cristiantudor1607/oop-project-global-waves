@@ -130,7 +130,7 @@ public class AdminBot extends Admin  {
         return availablePlaylists;
     }
 
-    public List<AudioFile> getUserLikedSongs(final String username) {
+    public List<Song> getUserLikedSongs(final String username) {
         User queriedUser = getUserByUsername(username);
 
         return queriedUser.getLikes();

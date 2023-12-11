@@ -1,15 +1,12 @@
 package globalwaves.player.entities.paging;
 
-import globalwaves.player.entities.AudioFile;
-import globalwaves.player.entities.Player;
-import globalwaves.player.entities.Playlist;
-import globalwaves.player.entities.User;
-import globalwaves.player.entities.properties.ContentVisitor;
+import globalwaves.player.entities.*;
+import globalwaves.player.entities.properties.Visitor;
 
 import java.util.List;
 
 public class LikedContentPage extends Page {
-    private final List<AudioFile> likedSongs;
+    private final List<Song> likedSongs;
     private final List<Playlist> followingPlaylists;
 
     public LikedContentPage(final User user) {
@@ -18,7 +15,7 @@ public class LikedContentPage extends Page {
    }
 
     @Override
-    public void accept(ContentVisitor v) {
-
+    public String accept(Visitor v) {
+        return null;
     }
 }

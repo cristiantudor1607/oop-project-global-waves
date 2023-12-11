@@ -23,4 +23,8 @@ public class Episode extends AudioFile {
         return false;
     }
 
+    @Override
+    public Song getWorkingOnSong() {
+        return null;
+    }
 }

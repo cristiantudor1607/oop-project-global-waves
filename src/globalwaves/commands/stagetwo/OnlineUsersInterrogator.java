@@ -16,7 +16,7 @@ public class OnlineUsersInterrogator extends CommandObject {
 
     @Override
     public void execute() {
-        results = manager.requestOnlineUsers(this);
+        results = manager.requestOnlineUsers();
         manager.setLastActionTime(timestamp);
     }
 

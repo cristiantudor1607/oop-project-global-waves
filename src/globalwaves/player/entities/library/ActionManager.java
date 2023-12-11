@@ -9,6 +9,8 @@ import globalwaves.commands.stageone.*;
 import globalwaves.commands.stagetwo.*;
 import globalwaves.parser.templates.CommandObject;
 import globalwaves.player.entities.*;
+import globalwaves.player.entities.paging.Page;
+import globalwaves.player.entities.properties.ContentVisitor;
 import globalwaves.player.entities.properties.PlayableEntity;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,6 +26,7 @@ public class ActionManager {
     private static ActionManager instance;
     private AdminBot adminBot;
     private HelperTool tool;
+    private ContentVisitor contentVisitor;
     private int lastActionTime;
 
     private Map<String, UserInterface> userInterfaces;
@@ -43,6 +46,7 @@ public class ActionManager {
     private ActionManager() {
         adminBot = new AdminBot();
         tool = HelperTool.getInstance();
+        contentVisitor = new ContentVisitor();
         lastActionTime = 0;
 
         userInterfaces = new HashMap<>();
@@ -69,6 +73,14 @@ public class ActionManager {
         return ui.getProfile();
     }
 
+    private Page getPageByUsername(final String username) {
+        UserInterface ui = userInterfaces.get(username);
+
+        return ui.getCurrentPage();
+    }
+
+
+    // Request player is a wrapper
     public Player requestPlayer(CommandObject execQuery) {
         String username = execQuery.getUsername();
 
@@ -183,29 +195,32 @@ public class ActionManager {
     }
 
     public AddRemoveExit.Status requestAddRemove(AddRemoveInterrogator execQuery) {
-        String owner = execQuery.getUsername();
+        String ownername = execQuery.getUsername();
         int id = execQuery.getPlaylistId();
 
-        Player ownerPlayer = getPlayerByUsername(owner);
-        Playlist ownerPlaylist = adminBot.getOwnerPlaylistById(owner, id);
-
-        if (!ownerPlayer.hasSourceLoaded())
-            return  AddRemoveExit.Status.NO_SOURCE;
-
-        if (!ownerPlayer.getPlayingFile().isSong())
-            return AddRemoveExit.Status.NOT_A_SONG;
+        Player ownerPlayer = getPlayerByUsername(ownername);
+        Playlist ownerPlaylist = adminBot.getOwnerPlaylistById(ownername, id);
 
         if (ownerPlaylist == null)
             return AddRemoveExit.Status.INVALID_PLAYLIST;
 
-        AudioFile selectedSource = ownerPlayer.getPlayingFile();
-        if (ownerPlaylist.hasSong(selectedSource)) {
-            ownerPlaylist.removeSong(selectedSource);
-            return AddRemoveExit.Status.REMOVED;
-        } else {
-            ownerPlaylist.addSong(selectedSource);
+        if (!ownerPlayer.hasSourceLoaded())
+            return AddRemoveExit.Status.NO_SOURCE;
+
+        AudioFile playingFile = ownerPlayer.getPlayingFile();
+        Song workingOnSong = playingFile.getWorkingOnSong();
+
+        // If getWorkingOnSong returned null, then the playing file is not a song
+        if (workingOnSong == null)
+            return AddRemoveExit.Status.NOT_A_SONG;
+
+        if (!ownerPlaylist.hasSong(workingOnSong)) {
+            ownerPlaylist.addSong(workingOnSong);
             return AddRemoveExit.Status.ADDED;
         }
+
+        ownerPlaylist.removeSong(workingOnSong);
+        return AddRemoveExit.Status.REMOVED;
     }
 
     public List<Playlist> requestOwnerPlaylists(final String owner) {
@@ -215,34 +230,39 @@ public class ActionManager {
     public LikeExit.Status requestLikeAction(LikeInterrogator execQuery) {
         String username = execQuery.getUsername();
 
-        User queriedUser = getProfileByUsername(username);
-        Player queriedPlayer = getPlayerByUsername(username);
+        User user = getProfileByUsername(username);
+        Player userPlayer = getPlayerByUsername(username);
 
-        if (!queriedPlayer.hasSourceLoaded())
+        if (!userPlayer.hasSourceLoaded())
             return LikeExit.Status.NO_SOURCE;
 
-        AudioFile queriedSong = queriedPlayer.getPlayingFile();
+        AudioFile playingFile = userPlayer.getPlayingFile();
+        Song workingOnSong = playingFile.getWorkingOnSong();
 
-        if (!queriedSong.isSong())
+        // If getWorkingSong method returned null, it means that the selected source
+        // is not a song
+        if (workingOnSong == null)
             return LikeExit.Status.NOT_A_SONG;
 
-        if (queriedUser.hasLikedSong(queriedSong)) {
-            queriedUser.removeSongFromLikes(queriedSong);
-            return LikeExit.Status.UNLIKED;
-        } else {
-            queriedUser.addSongToLikes(queriedSong);
+        if (!user.isLikingSong(workingOnSong)) {
+            user.like(workingOnSong);
+            workingOnSong.addLike();
             return LikeExit.Status.LIKED;
         }
+
+        user.unlike(workingOnSong);
+        workingOnSong.removeLike();
+        return LikeExit.Status.UNLIKED;
     }
 
     public List<String> requestLikedSongs(ShowLikesInterrogator execQuery) {
         String username = execQuery.getUsername();
 
-        List<AudioFile> songs = adminBot.getUserLikedSongs(username);
+        List<Song> songs = adminBot.getUserLikedSongs(username);
 
         List<String> names = new ArrayList<>();
-        for (AudioFile file : songs)
-            names.add(file.getName());
+        for (Song s : songs)
+            names.add(s.getName());
 
         return names;
     }
@@ -421,7 +441,7 @@ public class ActionManager {
         return AddUserExit.Status.SUCCESS;
     }
 
-    public List<String> requestOnlineUsers(OnlineUsersInterrogator execQuery) {
+    public List<String> requestOnlineUsers() {
         List<User> onlineUsers = adminBot.getOnlineUsers();
 
         return tool.getUsernames(onlineUsers);
@@ -462,6 +482,14 @@ public class ActionManager {
         String username = execQuery.getUsername();
 
         return adminBot.getArtistAlbums(username);
+    }
+
+    public String requestPageContent(final PrintPageInterrogator execQuery) {
+        String username = execQuery.getUsername();
+
+        Page userPage = getPageByUsername(username);
+
+        return userPage.accept(contentVisitor);
     }
 
     public void updatePlayersData(CommandObject nextToExecuteCommand) {

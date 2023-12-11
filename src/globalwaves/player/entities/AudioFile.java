@@ -13,4 +13,5 @@ public abstract class AudioFile {
      * @return true, if it can be liked, false, otherwise
      */
     public abstract boolean isSong();
+    public abstract Song getWorkingOnSong();
 }

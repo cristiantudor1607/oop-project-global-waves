@@ -4,6 +4,7 @@ import globalwaves.commands.enums.exitstats.stageone.FollowExit;
 import globalwaves.commands.enums.exitstats.stageone.ShuffleExit;
 import globalwaves.player.entities.AudioFile;
 import globalwaves.player.entities.Playlist;
+import globalwaves.player.entities.Song;
 import globalwaves.player.entities.User;
 
 import java.util.List;
@@ -56,11 +57,6 @@ public interface PlayableEntity {
     boolean cantGoForwardOrBackward();
     String getName();
 
-    // For follow
-    //List<String> getFollowers();
-    //boolean isFollowedBy(User user);
-    //void getFollowedBy(User user);
-    //void getUnfollowedBy(User user);
     Playlist getWorkingOnPlaylist();
     /**
      * Returns the duration of the entity

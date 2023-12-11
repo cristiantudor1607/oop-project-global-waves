@@ -19,7 +19,7 @@ public class Playlist implements PlayableEntity, OwnedEntity {
     private int creationTime;
     private int followersNumber;
     private boolean visible;
-    private List<AudioFile> songs;
+    private List<Song> songs;
     private List<Integer> playOrder;
     private List<User> followers;
 
@@ -34,6 +34,14 @@ public class Playlist implements PlayableEntity, OwnedEntity {
         playOrder = getNumericalOrder();
     }
 
+    public int getTotalLikesNumber() {
+        int sum = 0;
+        for (Song s: songs)
+            sum += s.getLikesNumber();
+
+        return sum;
+    }
+
     public boolean isPublic() {
         return visible;
     }
@@ -46,23 +54,25 @@ public class Playlist implements PlayableEntity, OwnedEntity {
         visible = true;
     }
 
-    public boolean hasSong(AudioFile searchedSong) {
-        for (AudioFile playlistSong : songs)
-            if (playlistSong == searchedSong)
+    public boolean hasSong(Song song) {
+        for (Song s: songs) {
+            if (s == song)
                 return true;
+        }
 
         return false;
     }
 
-    public void addSong(AudioFile songToBeAdded) {
-        songs.add(songToBeAdded);
+    public void addSong(Song newSong) {
+        songs.add(newSong);
         playOrder = getNumericalOrder();
     }
 
-    public void removeSong(AudioFile songToBeRemoved) {
-        songs.remove(songToBeRemoved);
+    public void removeSong(Song alreadyInListSong) {
+        songs.remove(alreadyInListSong);
         playOrder = getNumericalOrder();
     }
+
 
     public List<Integer> getNumericalOrder() {
         List<Integer> order = new ArrayList<>();
@@ -94,28 +104,6 @@ public class Playlist implements PlayableEntity, OwnedEntity {
         int prevSongIndex = playOrder.get(currentSongIndex - 1);
         return songs.get(prevSongIndex);
     }
-
-//    public boolean isFollowedByUser(String username) {
-//        for (String name : followers)
-//            if (name.equals(username))
-//                return true;
-//
-//        return false;
-//    }
-//
-//    public boolean isOwnedByUser(String username) {
-//        return owner.equals(username);
-//    }
-//
-//    public void addUserToFollowers(String username) {
-//        followers.add(username);
-//        followersNumber++;
-//    }
-//
-//    public void removeUserFromFollowers(String username) {
-//        followers.remove(username);
-//        followersNumber--;
-//    }
 
     public boolean isFollowedByUser(User user) {
         for (User u: followers) {
