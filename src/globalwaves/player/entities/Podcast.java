@@ -151,5 +151,9 @@ public class Podcast implements PlayableEntity, OwnedEntity {
     public boolean cantGoForwardOrBackward() {
         return false;
     }
-
+    
+    @Override
+    public List<String> getFollowers() {
+        return null;
+    }
 }

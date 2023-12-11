@@ -15,10 +15,11 @@ import java.util.Map;
 public class SearchBar {
     private List<? extends PlayableEntity> results;
     private SearchEngine<? extends PlayableEntity> engine;
-    private String username;
+    private final String username;
 
-    public SearchBar() {
+    public SearchBar(final String username) {
         results = new ArrayList<>();
+        this.username = username;
     }
 
     public SearchEngine<? extends PlayableEntity>

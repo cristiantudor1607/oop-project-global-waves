@@ -4,6 +4,8 @@ import globalwaves.commands.enums.exitstats.stageone.FollowExit;
 import globalwaves.commands.enums.exitstats.stageone.ShuffleExit;
 import globalwaves.player.entities.AudioFile;
 
+import java.util.List;
+
 public interface PlayableEntity {
     /**
      * Checks if the entity is an empty file
@@ -58,6 +60,7 @@ public interface PlayableEntity {
     ShuffleExit.Status unshuffle();
     boolean cantGoForwardOrBackward();
     String getName();
+    List<String> getFollowers();
     /**
      * Returns the duration of the entity
      * @return The duration of the entity

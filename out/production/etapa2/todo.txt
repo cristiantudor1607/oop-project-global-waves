@@ -27,6 +27,8 @@ biblioteca -> SIGUR TREBUIE
 si se apeleaza in functie de ce metoda returneaza true dintre isArtist, isNormalUser, isHost
 -> creeaza artisti in momentul in care incarci melodille predefinite in biblioteca. !!!
 -> ar trebui sa implementez equals in loc de compareTo la Song, compareTo o sa faca altceva
+-> pentru ca vreau ca nimeni altcineva sa aiba access la informatiile din UIs, metodele sunt private,
+si doar request urile publice
 
 EXPLICATII:
 + AdminBot este o extensie a adminului, pentru ca poate face tot ce face adminul, plus operatiile de bot

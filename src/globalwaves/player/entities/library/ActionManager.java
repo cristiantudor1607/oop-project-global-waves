@@ -24,11 +24,9 @@ public class ActionManager {
     private static ActionManager instance;
     private AdminBot adminBot;
     private HelperTool tool;
-    private SearchBar searchBar;
     private int lastActionTime;
 
-    private Map<String, Player> players;
-    private List<User> activeUsers;
+    private Map<String, UserInterface> userInterfaces;
 
     public static ActionManager getInstance() {
         if (instance == null)
@@ -45,19 +43,36 @@ public class ActionManager {
     private ActionManager() {
         adminBot = new AdminBot();
         tool = HelperTool.getInstance();
-        searchBar = new SearchBar();
-        players = new HashMap<>();
-        for (User user : adminBot.getDatabase().getUsers()) {
-            players.put(user.getUsername(), new Player());
-        }
-
         lastActionTime = 0;
+
+        userInterfaces = new HashMap<>();
+        for (User user: adminBot.getDatabase().getUsers()) {
+            userInterfaces.put(user.getUsername(), new UserInterface(user));
+        }
+    }
+
+    private Player getPlayerByUsername(final String username) {
+        UserInterface ui = userInterfaces.get(username);
+
+        return ui.getPlayer();
+    }
+
+    private SearchBar getSearchBarByUsername(final String username) {
+        UserInterface ui = userInterfaces.get(username);
+
+        return ui.getSearchbar();
+    }
+
+    private User getProfileByUsername(final String username) {
+        UserInterface ui = userInterfaces.get(username);
+
+        return ui.getProfile();
     }
 
     public Player requestPlayer(CommandObject execQuery) {
         String username = execQuery.getUsername();
 
-        return players.get(username);
+        return getPlayerByUsername(username);
     }
 
     public boolean requestApprovalForAction(CommandObject execQuery) {
@@ -67,37 +82,44 @@ public class ActionManager {
     }
 
     public List<String> requestSearchResults(SearchInterrogator execQuery) {
-        Player userPlayer = requestPlayer(execQuery);
+        String username = execQuery.getUsername();
+
+        Player userPlayer = getPlayerByUsername(username);
+        SearchBar searchbar = getSearchBarByUsername(username);
+
         userPlayer.stopPlayer();
+        searchbar.search(execQuery.getType(), execQuery.getFilters());
 
-        searchBar.setUsername(execQuery.getUsername());
-        searchBar.search(execQuery.getType(), execQuery.getFilters());
-
-        return searchBar.getRelevantResultsAsNames();
+        return searchbar.getRelevantResultsAsNames();
     }
 
     public SelectExit.Status requestItemSelection(SelectInterrogator executingSelect) {
         int itemNumber = executingSelect.getItemNumber();
+        String username = executingSelect.getUsername();
 
-        if (searchBar.wasNotInvoked())
+        Player userPlayer = getPlayerByUsername(username);
+        SearchBar searchbar = getSearchBarByUsername(username);
+
+        if (searchbar.wasNotInvoked())
             return SelectExit.Status.NO_LIST;
 
-        if (!searchBar.invalidItem(itemNumber) || searchBar.hasNoSearchResult())
+        if (!searchbar.invalidItem(itemNumber) || searchbar.hasNoSearchResult())
             return SelectExit.Status.OUT_OF_BOUNDS;
 
-        PlayableEntity entity = searchBar.getResultAtIndex(itemNumber - 1);
-        Player userPlayer = players.get(executingSelect.getUsername());
+        PlayableEntity entity = searchbar.getResultAtIndex(itemNumber - 1);
+
         userPlayer.select(entity);
         executingSelect.setSelectedAudio(entity);
 
         // Reset the Search Bar after selection
-        searchBar.reset();
+        searchbar.reset();
 
         return SelectExit.Status.SELECTED;
     }
 
     public LoadExit.Status requestLoading(LoadInterrogator executingLoad) {
-        Player userPlayer = players.get(executingLoad.getUsername());
+        String username = executingLoad.getUsername();
+        Player userPlayer = getPlayerByUsername(username);
 
         if (!userPlayer.hasSourceSelected())
             return LoadExit.Status.NO_SOURCE_SELECTED;
@@ -114,7 +136,8 @@ public class ActionManager {
     }
 
     public PlayPauseExit.Status requestUpdateState(PlayPauseInterrogator executingQuery) {
-        Player userPlayer = players.get(executingQuery.getUsername());
+        String username = executingQuery.getUsername();
+        Player userPlayer = getPlayerByUsername(username);
 
         if (userPlayer.hasNoSource())
             return PlayPauseExit.Status.NO_SOURCE;
@@ -125,7 +148,6 @@ public class ActionManager {
         }
 
         userPlayer.play();
-
         return PlayPauseExit.Status.RESUMED;
     }
 
@@ -163,8 +185,9 @@ public class ActionManager {
     public AddRemoveExit.Status requestAddRemove(AddRemoveInterrogator execQuery) {
         String owner = execQuery.getUsername();
         int id = execQuery.getPlaylistId();
+
+        Player ownerPlayer = getPlayerByUsername(owner);
         Playlist ownerPlaylist = adminBot.getOwnerPlaylistById(owner, id);
-        Player ownerPlayer = players.get(owner);
 
         if (!ownerPlayer.hasSourceLoaded())
             return  AddRemoveExit.Status.NO_SOURCE;
@@ -191,13 +214,14 @@ public class ActionManager {
 
     public LikeExit.Status requestLikeAction(LikeInterrogator execQuery) {
         String username = execQuery.getUsername();
-        User queriedUser = adminBot.getUserByUsername(username);
-        Player queriedUserPlayer = getPlayers().get(username);
 
-        if (!queriedUserPlayer.hasSourceLoaded())
+        User queriedUser = getProfileByUsername(username);
+        Player queriedPlayer = getPlayerByUsername(username);
+
+        if (!queriedPlayer.hasSourceLoaded())
             return LikeExit.Status.NO_SOURCE;
 
-        AudioFile queriedSong = queriedUserPlayer.getPlayingFile();
+        AudioFile queriedSong = queriedPlayer.getPlayingFile();
 
         if (!queriedSong.isSong())
             return LikeExit.Status.NOT_A_SONG;
@@ -224,8 +248,12 @@ public class ActionManager {
     }
 
     public FollowExit.Status requestFollowAction(FollowInterrogator execQuery) {
-        Player userPlayer = requestPlayer(execQuery);
         String username = execQuery.getUsername();
+
+        User user = getProfileByUsername(username);
+        Player userPlayer = getPlayerByUsername(username);
+
+        // TODO: Aici trebuie adaugat playlistul la follow la user
 
         if (userPlayer.hasNoSource())
             return FollowExit.Status.NO_SOURCE;
@@ -234,7 +262,9 @@ public class ActionManager {
     }
 
     public String requestRepeatAction(RepeatInterrogator execQuery) {
-        Player userPlayer = requestPlayer(execQuery);
+        String username = execQuery.getUsername();
+
+        Player userPlayer = getPlayerByUsername(username);
 
         if (!userPlayer.hasSourceLoaded() || userPlayer.hasNoSource())
             return "Please load a source before setting the repeat status.";
@@ -246,8 +276,10 @@ public class ActionManager {
     }
 
     public ShuffleExit.Status requestShuffling(ShuffleInterrogator execQuery) {
-        Player userPlayer = requestPlayer(execQuery);
         int seed = execQuery.getSeed();
+        String username = execQuery.getUsername();
+
+        Player userPlayer = getPlayerByUsername(username);
 
         if (!userPlayer.hasSourceLoaded() || userPlayer.hasNoSource())
             return ShuffleExit.Status.NO_SOURCE_LOADED;
@@ -267,7 +299,9 @@ public class ActionManager {
     }
 
     public String requestNext(NextInterrogator execQuery) {
-       Player userPlayer = requestPlayer(execQuery);
+        String username = execQuery.getUsername();
+
+        Player userPlayer = getPlayerByUsername(username);
 
        if (userPlayer.hasNoSource() || !userPlayer.hasSourceLoaded())
            return "Please load a source before skipping to the next track.";
@@ -281,8 +315,8 @@ public class ActionManager {
     }
 
     public String requestPrev(PrevInterrogator execQuery) {
-        Player userPlayer = requestPlayer(execQuery);
-
+        String username = execQuery.getUsername();
+        Player userPlayer = getPlayerByUsername(username);
 
         if (userPlayer.hasNoSource() || !userPlayer.hasSourceLoaded())
             return "Please load a source before returning to the previous track.";
@@ -293,7 +327,8 @@ public class ActionManager {
     }
 
     public String requestForward(ForwardInterrogator execQuery) {
-        Player userPlayer = requestPlayer(execQuery);
+        String username = execQuery.getUsername();
+        Player userPlayer = getPlayerByUsername(username);
 
         if (userPlayer.hasNoSource() || !userPlayer.hasSourceLoaded())
             return "Please load a source before attempting to forward.";
@@ -306,7 +341,8 @@ public class ActionManager {
     }
 
     public String requestBackward(BackwardInterrogator execQuery) {
-        Player userPlayer = requestPlayer(execQuery);
+        String username = execQuery.getUsername();
+        Player userPlayer = getPlayerByUsername(username);
 
         if (userPlayer.hasNoSource() || !userPlayer.hasSourceLoaded())
             return "Please load a source before rewinding.";
@@ -327,7 +363,9 @@ public class ActionManager {
     }
 
     public SwitchConnectionExit.Status requestSwitchConnection(ConnectionInterrogator execQuery) {
-        User queriedUser = adminBot.getUserByUsername(execQuery.getUsername());
+        String username = execQuery.getUsername();
+
+        User queriedUser = adminBot.getUserByUsername(username);
 
         if (queriedUser == null)
             return SwitchConnectionExit.Status.INVALID_USERNAME;
@@ -335,7 +373,7 @@ public class ActionManager {
         if (!queriedUser.isNormalUser())
             return SwitchConnectionExit.Status.NOT_NORMAL;
 
-        Player userPlayer = requestPlayer(execQuery);
+        Player userPlayer = getPlayerByUsername(username);
         if (userPlayer.isFreeze())
             userPlayer.unfreeze();
         else
@@ -409,8 +447,8 @@ public class ActionManager {
 
     public void updatePlayersData(CommandObject nextToExecuteCommand) {
         int diff = nextToExecuteCommand.getTimestamp() - lastActionTime;
-        for (Map.Entry<String, Player> entry : players.entrySet()) {
-            Player currPlayer = entry.getValue();
+        for (Map.Entry<String, UserInterface> entry: userInterfaces.entrySet()) {
+            Player currPlayer = entry.getValue().getPlayer();
             if (currPlayer.isFreeze())
                 continue;
 

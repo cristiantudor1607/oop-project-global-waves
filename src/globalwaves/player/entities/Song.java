@@ -161,6 +161,11 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
     }
 
     @Override
+    public List<String> getFollowers() {
+        return null;
+    }
+
+    @Override
     public String toString() {
         return "Song{" +
                 "\nname='" + name + '\'' +

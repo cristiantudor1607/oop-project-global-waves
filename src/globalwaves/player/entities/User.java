@@ -19,6 +19,7 @@ public class User {
     private String city;
     private ConnectionStatus status;
     private List<AudioFile> likes;
+    private List<Playlist> following;
 
     public User() {}
 
@@ -28,6 +29,7 @@ public class User {
         city = input.getCity();
         status = ConnectionStatus.ONLINE;
         likes = new ArrayList<>();
+        following = new ArrayList<>();
     }
 
     public User(final String username, final int age, final String city) {
@@ -48,6 +50,14 @@ public class User {
 
     public void removeSongFromLikes(AudioFile file) {
         likes.remove(file);
+    }
+
+    public void addPlaylistToFollow(Playlist playlist) {
+        following.add(playlist);
+    }
+
+    public void removePlaylistFromFollow(Playlist playlist) {
+        following.remove(playlist);
     }
 
     public boolean isOnline() {
