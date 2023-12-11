@@ -124,11 +124,6 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
     }
 
     @Override
-    public FollowExit.Status follow(String username) {
-        return FollowExit.Status.NOT_A_PLAYLIST;
-    }
-
-    @Override
     public String getRepeatStateName(int repeatValue) {
         switch (repeatValue) {
             case 0 -> {
@@ -160,8 +155,12 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
         return true;
     }
 
-    @Override
     public List<String> getFollowers() {
+        return null;
+    }
+
+    @Override
+    public Playlist getWorkingOnPlaylist() {
         return null;
     }
 

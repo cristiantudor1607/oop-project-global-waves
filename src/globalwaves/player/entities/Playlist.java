@@ -21,7 +21,7 @@ public class Playlist implements PlayableEntity, OwnedEntity {
     private boolean visible;
     private List<AudioFile> songs;
     private List<Integer> playOrder;
-    private List<String> followers;
+    private List<User> followers;
 
     public Playlist(String owner, String name, int creationTime) {
         this.name = name;
@@ -95,25 +95,48 @@ public class Playlist implements PlayableEntity, OwnedEntity {
         return songs.get(prevSongIndex);
     }
 
-    public boolean isFollowedByUser(String username) {
-        for (String name : followers)
-            if (name.equals(username))
+//    public boolean isFollowedByUser(String username) {
+//        for (String name : followers)
+//            if (name.equals(username))
+//                return true;
+//
+//        return false;
+//    }
+//
+//    public boolean isOwnedByUser(String username) {
+//        return owner.equals(username);
+//    }
+//
+//    public void addUserToFollowers(String username) {
+//        followers.add(username);
+//        followersNumber++;
+//    }
+//
+//    public void removeUserFromFollowers(String username) {
+//        followers.remove(username);
+//        followersNumber--;
+//    }
+
+    public boolean isFollowedByUser(User user) {
+        for (User u: followers) {
+            if (u.getUsername().equals(user.getUsername()))
                 return true;
+        }
 
         return false;
     }
 
-    public boolean isOwnedByUser(String username) {
-        return owner.equals(username);
+    public boolean isOwnedByUser(User user) {
+        return owner.equals(user.getUsername());
     }
 
-    public void addUserToFollowers(String username) {
-        followers.add(username);
+    public void getFollowedBy(User user) {
+        followers.add(user);
         followersNumber++;
     }
 
-    public void removeUserFromFollowers(String username) {
-        followers.remove(username);
+    public void getUnfollowedBy(User user) {
+        followers.remove(user);
         followersNumber--;
     }
 
@@ -180,21 +203,6 @@ public class Playlist implements PlayableEntity, OwnedEntity {
         return songs.get(0).getDuration();
     }
 
-
-    @Override
-    public FollowExit.Status follow(String username) {
-        if (isOwnedByUser(username))
-            return FollowExit.Status.OWNER;
-
-        if (isFollowedByUser(username)) {
-            removeUserFromFollowers(username);
-            return FollowExit.Status.UNFOLLOWED;
-        }
-
-        addUserToFollowers(username);
-        return FollowExit.Status.FOLLOWED;
-    }
-
     @Override
     public ShuffleExit.Status shuffle(int seed) {
         Collections.shuffle(playOrder, new Random(seed));
@@ -205,6 +213,11 @@ public class Playlist implements PlayableEntity, OwnedEntity {
     public ShuffleExit.Status unshuffle() {
         playOrder = getNumericalOrder();
         return ShuffleExit.Status.DEACTIVATED;
+    }
+
+    @Override
+    public Playlist getWorkingOnPlaylist() {
+        return this;
     }
 
     @Override

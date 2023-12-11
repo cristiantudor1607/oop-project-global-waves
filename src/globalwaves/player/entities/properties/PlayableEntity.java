@@ -3,6 +3,8 @@ package globalwaves.player.entities.properties;
 import globalwaves.commands.enums.exitstats.stageone.FollowExit;
 import globalwaves.commands.enums.exitstats.stageone.ShuffleExit;
 import globalwaves.player.entities.AudioFile;
+import globalwaves.player.entities.Playlist;
+import globalwaves.player.entities.User;
 
 import java.util.List;
 
@@ -24,13 +26,6 @@ public interface PlayableEntity {
      * @return true, if it needs, false otherwise
      */
     boolean needsHistoryTrack();
-
-    /**
-     * Add the specified user to followers, if possible
-     * @param username The name of the user that requested follow
-     * @return
-     */
-    FollowExit.Status follow(String username);
 
     /**
      * Returns the repeatValue formatted as String
@@ -60,7 +55,13 @@ public interface PlayableEntity {
     ShuffleExit.Status unshuffle();
     boolean cantGoForwardOrBackward();
     String getName();
-    List<String> getFollowers();
+
+    // For follow
+    //List<String> getFollowers();
+    //boolean isFollowedBy(User user);
+    //void getFollowedBy(User user);
+    //void getUnfollowedBy(User user);
+    Playlist getWorkingOnPlaylist();
     /**
      * Returns the duration of the entity
      * @return The duration of the entity

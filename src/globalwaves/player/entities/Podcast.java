@@ -131,12 +131,6 @@ public class Podcast implements PlayableEntity, OwnedEntity {
         return true;
     }
 
-
-    @Override
-    public FollowExit.Status follow(String username) {
-        return FollowExit.Status.NOT_A_PLAYLIST;
-    }
-
     @Override
     public ShuffleExit.Status shuffle(int seed) {
         return ShuffleExit.Status.NOT_A_PLAYLIST;
@@ -151,9 +145,9 @@ public class Podcast implements PlayableEntity, OwnedEntity {
     public boolean cantGoForwardOrBackward() {
         return false;
     }
-    
+
     @Override
-    public List<String> getFollowers() {
+    public Playlist getWorkingOnPlaylist() {
         return null;
     }
 }

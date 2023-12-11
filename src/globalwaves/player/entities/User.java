@@ -52,11 +52,15 @@ public class User {
         likes.remove(file);
     }
 
-    public void addPlaylistToFollow(Playlist playlist) {
+    public boolean isFollowing(Playlist playlist) {
+        return following.contains(playlist);
+    }
+
+    public void follow(Playlist playlist) {
         following.add(playlist);
     }
 
-    public void removePlaylistFromFollow(Playlist playlist) {
+    public void unfollow(Playlist playlist) {
         following.remove(playlist);
     }
 
@@ -108,7 +112,6 @@ public class User {
     public List<Album> getAlbums() {
         return null;
     }
-
 
     @Override
     public int hashCode() {

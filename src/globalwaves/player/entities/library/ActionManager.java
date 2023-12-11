@@ -247,18 +247,37 @@ public class ActionManager {
         return names;
     }
 
+
     public FollowExit.Status requestFollowAction(FollowInterrogator execQuery) {
         String username = execQuery.getUsername();
 
         User user = getProfileByUsername(username);
         Player userPlayer = getPlayerByUsername(username);
 
-        // TODO: Aici trebuie adaugat playlistul la follow la user
-
         if (userPlayer.hasNoSource())
             return FollowExit.Status.NO_SOURCE;
 
-        return userPlayer.getSelectedSource().follow(username);
+        PlayableEntity playing = userPlayer.getSelectedSource();
+        Playlist workingOnPlaylist = playing.getWorkingOnPlaylist();
+
+        // If getWorkingOnPlaylist method returned null, it means that the source
+        // is not a playlist
+        if (workingOnPlaylist == null)
+            return FollowExit.Status.NOT_A_PLAYLIST;
+
+        if (workingOnPlaylist.isOwnedByUser(user))
+            return FollowExit.Status.OWNER;
+
+        if (!workingOnPlaylist.isFollowedByUser(user)) {
+            workingOnPlaylist.getFollowedBy(user);
+            user.follow(workingOnPlaylist);
+            return FollowExit.Status.FOLLOWED;
+        }
+
+        workingOnPlaylist.getUnfollowedBy(user);
+        user.unfollow(workingOnPlaylist);
+        return FollowExit.Status.UNFOLLOWED;
+
     }
 
     public String requestRepeatAction(RepeatInterrogator execQuery) {
