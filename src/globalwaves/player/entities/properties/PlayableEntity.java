@@ -57,13 +57,7 @@ public interface PlayableEntity {
     ShuffleExit.Status shuffle(int seed);
     ShuffleExit.Status unshuffle();
     boolean cantGoForwardOrBackward();
-
-    /**
-     * Returns the name of the entity
-     * @return The name of the entity
-     */
     String getName();
-
     /**
      * Returns the duration of the entity
      * @return The duration of the entity

@@ -1,6 +1,7 @@
 package globalwaves.player.entities;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import fileio.input.SongInput;
 import globalwaves.commands.enums.exitstats.stageone.FollowExit;
@@ -21,6 +22,8 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
     private String genre;
     private int releaseYear;
     private String artist;
+    @JsonIgnore
+    private int creationTime;
 
     @JsonCreator
     public Song(@JsonProperty("name") final String name,
@@ -39,6 +42,7 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
         this.genre = genre;
         this.releaseYear = releaseYear;
         this.artist = artist;
+        this.creationTime = 0;
     }
 
     /**
@@ -61,6 +65,7 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
         genre = input.getGenre();
         releaseYear = input.getReleaseYear();
         artist = input.getArtist();
+        creationTime = 0;
     }
 
     /**
@@ -78,7 +83,8 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
         lyrics = songToBeCopied.getLyrics();
         genre = songToBeCopied.getGenre();
         releaseYear = songToBeCopied.getReleaseYear();
-        artist  =songToBeCopied.getArtist();
+        artist = songToBeCopied.getArtist();
+        creationTime = songToBeCopied.creationTime;
     }
 
     @Override

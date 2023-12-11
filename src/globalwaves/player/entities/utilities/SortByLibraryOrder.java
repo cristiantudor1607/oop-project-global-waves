@@ -15,7 +15,7 @@ public class SortByLibraryOrder implements Comparator<Map.Entry<AudioFile, Integ
     public SortByLibraryOrder() {
         songsInOrder = new ArrayList<>();
 
-        for (Song s : Library.getInstance().getSongs())
+        for (Song s : Library.getInstance().getPreLoadedSongs())
             songsInOrder.add(s);
     }
 

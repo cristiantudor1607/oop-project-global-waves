@@ -1,10 +1,6 @@
 package globalwaves.player.entities.library;
 
 import globalwaves.player.entities.*;
-import globalwaves.player.entities.utilities.SortByCreationTime;
-import globalwaves.player.entities.utilities.SortByFollowers;
-import globalwaves.player.entities.utilities.SortByInteger;
-import globalwaves.player.entities.utilities.SortByLibraryOrder;
 
 import java.util.*;
 
@@ -143,7 +139,7 @@ public class AdminBot extends Admin  {
     public Map<AudioFile, Integer> mapSongs() {
         Map<AudioFile, Integer> mappedSongs = new HashMap<>();
 
-        for (Song s : database.getSongs())
+        for (Song s : database.getPreLoadedSongs())
             mappedSongs.put(s, 0);
 
         return mappedSongs;
@@ -223,4 +219,16 @@ public class AdminBot extends Admin  {
 
         return artist.getAlbums();
     }
+
+    public void addSongsToLibrary(final String artist, final List<Song> songs) {
+        List<Song> artistSongs = database.getAddedSongs().get(artist);
+
+        if (artistSongs == null) {
+            artistSongs = new ArrayList<>();
+            database.getAddedSongs().put(artist, artistSongs);
+        }
+
+        artistSongs.addAll(songs);
+    }
+
 }

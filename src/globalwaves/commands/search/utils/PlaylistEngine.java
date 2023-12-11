@@ -38,9 +38,9 @@ public class PlaylistEngine extends SearchEngine<Playlist> {
      */
     @Override
     public List<Playlist> collectResults() {
-        AdminBot interrogator = new AdminBot();
+        AdminBot adminBot = new AdminBot();
 
-        List<Playlist> matchedPlaylists = interrogator.getAvailablePlaylists(user);
+        List<Playlist> matchedPlaylists = adminBot.getAvailablePlaylists(user);
 
         for (Filter<Playlist> filter : filters) {
             matchedPlaylists = applyFilter(matchedPlaylists, filter);

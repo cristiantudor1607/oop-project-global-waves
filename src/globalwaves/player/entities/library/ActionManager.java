@@ -389,9 +389,13 @@ public class ActionManager {
         String artistName = execQuery.getUsername();
         int creationTime = execQuery.getTimestamp();
 
+        // Set the creation time for all songs on the album
+        tool.setCreationTimestamp(execQuery.getSongs(), creationTime);
+        // Add new songs to library
+        adminBot.addSongsToLibrary(artistName, execQuery.getSongs());
+        // Create the album object
         Album artistNewAlbum = new Album(artistName, albumName, creationTime, execQuery.getSongs());
-
-        // addAlbum won't fail, because of the previous checking we made
+        // Add album to user albums
         u.addAlbum(artistNewAlbum);
 
         return AddAlbumExit.Status.SUCCESS;

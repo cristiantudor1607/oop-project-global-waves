@@ -1,17 +1,16 @@
 package globalwaves.commands.search.utils;
 
-import globalwaves.commands.enums.FilterType;
+
 import globalwaves.commands.search.utils.filters.*;
+
 import globalwaves.player.entities.properties.PlayableEntity;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 @Getter @Setter
 public abstract class SearchEngine<T extends PlayableEntity> {

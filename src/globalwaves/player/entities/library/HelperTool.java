@@ -78,6 +78,10 @@ public class HelperTool {
         return false;
     }
 
+    public void setCreationTimestamp(final List<Song> songs, final int timestamp) {
+        for (Song s : songs)
+            s.setCreationTime(timestamp);
+    }
 
     public <T> void truncateResults(List<T> results) {
         if (results.size() < TRUNC_SIZE)
