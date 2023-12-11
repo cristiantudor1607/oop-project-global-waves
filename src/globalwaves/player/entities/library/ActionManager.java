@@ -6,10 +6,7 @@ import globalwaves.commands.enums.exitstats.stagetwo.AddAlbumExit;
 import globalwaves.commands.enums.exitstats.stagetwo.AddUserExit;
 import globalwaves.commands.enums.exitstats.stagetwo.SwitchConnectionExit;
 import globalwaves.commands.stageone.*;
-import globalwaves.commands.stagetwo.AddAlbumInterrogator;
-import globalwaves.commands.stagetwo.AddUserInterrogator;
-import globalwaves.commands.stagetwo.ConnectionInterrogator;
-import globalwaves.commands.stagetwo.OnlineUsersInterrogator;
+import globalwaves.commands.stagetwo.*;
 import globalwaves.parser.templates.CommandObject;
 import globalwaves.player.entities.*;
 import globalwaves.player.entities.properties.PlayableEntity;
@@ -392,12 +389,18 @@ public class ActionManager {
         String artistName = execQuery.getUsername();
         int creationTime = execQuery.getTimestamp();
 
-        Album artistNewAlbum = new Album(albumName,artistName, creationTime, execQuery.getSongs());
+        Album artistNewAlbum = new Album(artistName, albumName, creationTime, execQuery.getSongs());
 
         // addAlbum won't fail, because of the previous checking we made
         u.addAlbum(artistNewAlbum);
 
         return AddAlbumExit.Status.SUCCESS;
+    }
+
+    public List<Album> requestUserAlbums(final ShowAlbumsInterrogator execQuery) {
+        String username = execQuery.getUsername();
+
+        return adminBot.getArtistAlbums(username);
     }
 
     public void updatePlayersData(CommandObject nextToExecuteCommand) {

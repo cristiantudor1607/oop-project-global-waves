@@ -6,10 +6,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.JsonNode;
 import globalwaves.commands.stageone.*;
-import globalwaves.commands.stagetwo.AddAlbumInterrogator;
-import globalwaves.commands.stagetwo.AddUserInterrogator;
-import globalwaves.commands.stagetwo.ConnectionInterrogator;
-import globalwaves.commands.stagetwo.OnlineUsersInterrogator;
+import globalwaves.commands.stagetwo.*;
 import globalwaves.player.entities.library.ActionManager;
 import lombok.Getter;
 import lombok.Setter;
@@ -46,7 +43,7 @@ import java.util.Map;
         @JsonSubTypes.Type(value = EmptyCommand.class, name = "printCurrentPage"),
         @JsonSubTypes.Type(value = AddUserInterrogator.class, name = "addUser"),
         @JsonSubTypes.Type(value = EmptyCommand.class, name = "deleteUser"),
-        @JsonSubTypes.Type(value = EmptyCommand.class, name = "showAlbums"),
+        @JsonSubTypes.Type(value = ShowAlbumsInterrogator.class, name = "showAlbums"),
         @JsonSubTypes.Type(value = EmptyCommand.class, name = "showPodcasts"),
         @JsonSubTypes.Type(value = AddAlbumInterrogator.class, name = "addAlbum"),
         @JsonSubTypes.Type(value = EmptyCommand.class, name = "removeAlbum"),

@@ -95,6 +95,10 @@ public class User {
         return false;
     }
 
+    public List<Album> getAlbums() {
+        return null;
+    }
+
 
     @Override
     public int hashCode() {

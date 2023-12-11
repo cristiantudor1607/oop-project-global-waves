@@ -45,7 +45,15 @@
   "user" : "melodymaster",
   "timestamp" : 305,
   "message" : "melodymaster has added new album successfully."
-}, null, {
+}, {
+  "command" : "showAlbums",
+  "user" : "melodymaster",
+  "timestamp" : 350,
+  "result" : [ {
+    "name" : "Harmonic Horizons",
+    "songs" : [ "Vibrant Echoes", "Synth Symphony", "Retro Rhythms", "Digital Dreams", "Night Pulse" ]
+  } ]
+}, {
   "command" : "addUser",
   "user" : "alice22",
   "timestamp" : 380,
@@ -91,8 +99,19 @@
   "command" : "addAlbum",
   "user" : "melodymaster",
   "timestamp" : 515,
-  "message" : "melodymaster has added new album successfully."
-}, null, {
+  "message" : "melodymaster has another album with the same name."
+}, {
+  "command" : "showAlbums",
+  "user" : "melodymaster",
+  "timestamp" : 550,
+  "result" : [ {
+    "name" : "Harmonic Horizons",
+    "songs" : [ "Vibrant Echoes", "Synth Symphony", "Retro Rhythms", "Digital Dreams", "Night Pulse" ]
+  }, {
+    "name" : "Echoes of Harmony",
+    "songs" : [ "Melodic Mirage", "Pop Serenade" ]
+  } ]
+}, {
   "command" : "addAlbum",
   "user" : "melodymaster",
   "timestamp" : 560,

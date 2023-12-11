@@ -217,4 +217,10 @@ public class AdminBot extends Admin  {
 
         return names;
     }
+
+    public List<Album> getArtistAlbums(final String username) {
+        User artist = getArtistByUsername(username);
+
+        return artist.getAlbums();
+    }
 }
