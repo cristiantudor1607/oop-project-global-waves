@@ -118,6 +118,12 @@ public class User {
         return null;
     }
 
+    public boolean hasEvent(final String eventName) {
+        return false;
+    }
+
+    public void addEvent(final Event newEvent) { }
+
     @Override
     public int hashCode() {
         return Objects.hash(getUsername());

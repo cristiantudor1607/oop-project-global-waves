@@ -32,7 +32,27 @@
   "user" : "beatblazer",
   "timestamp" : 40,
   "result" : [ ]
-}, null, null, null, null, {
+}, {
+  "command" : "addEvent",
+  "user" : "melodymaster",
+  "timestamp" : 45,
+  "message" : "melodymaster has added new event successfully."
+}, {
+  "command" : "addEvent",
+  "user" : "melodymaster",
+  "timestamp" : 50,
+  "message" : "melodymaster has added new event successfully."
+}, {
+  "command" : "addEvent",
+  "user" : "alice23",
+  "timestamp" : 55,
+  "message" : "The username alice23 doesn't exist."
+}, {
+  "command" : "addEvent",
+  "user" : "bob35",
+  "timestamp" : 60,
+  "message" : "bob35 is not an artist."
+}, {
   "command" : "search",
   "user" : "alice22",
   "timestamp" : 65,

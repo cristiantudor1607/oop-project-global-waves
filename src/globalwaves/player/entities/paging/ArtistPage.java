@@ -4,10 +4,12 @@ import globalwaves.player.entities.Artist;
 import globalwaves.player.entities.Event;
 import globalwaves.player.entities.User;
 import globalwaves.player.entities.properties.Visitor;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 public class ArtistPage extends Page {
     private final User artist;
     private final List<Event> events;

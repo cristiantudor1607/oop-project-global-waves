@@ -13,9 +13,11 @@ import globalwaves.player.entities.*;
 import globalwaves.player.entities.paging.Page;
 import globalwaves.player.entities.properties.ContentVisitor;
 import globalwaves.player.entities.properties.PlayableEntity;
+import globalwaves.player.entities.utilities.DateMapper;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -505,9 +507,19 @@ public class ActionManager {
         if (artist == null)
             return AddEventExit.Status.NOT_AN_ARTIST;
 
-        // TODO: continue this
+        String eventName = execQuery.getName();
+        String eventDescription = execQuery.getDescription();
+        LocalDate eventDate = DateMapper.parseStringToDate(execQuery.getDate());
 
-        return AddEventExit.Status.DOESNT_EXIST;
+        if (artist.hasEvent(eventName))
+            return AddEventExit.Status.SAME_NAME;
+
+        if (eventDate == null)
+            return AddEventExit.Status.INVALID_DATE;
+
+        artist.addEvent(new Event(eventName, eventDescription, eventDate));
+
+        return AddEventExit.Status.SUCCESS;
     }
 
 

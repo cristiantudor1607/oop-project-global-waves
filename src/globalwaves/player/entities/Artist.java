@@ -39,6 +39,21 @@ public class Artist extends User {
     }
 
     @Override
+    public boolean hasEvent(String eventName) {
+        for (Event e: selfPage.getEvents()) {
+            if (e.getName().equals(eventName))
+                return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public void addEvent(Event newEvent) {
+        selfPage.getEvents().add(newEvent);
+    }
+
+    @Override
     public boolean isArtist() {
         return true;
     }
