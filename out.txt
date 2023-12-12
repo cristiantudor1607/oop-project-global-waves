@@ -68,12 +68,37 @@
   "user" : "alice22",
   "timestamp" : 75,
   "message" : "Liked songs:\n\t[]\n\nFollowed playlists:\n\t[]"
-}, null, null, {
+}, {
+  "command" : "addMerch",
+  "user" : "melodymaster",
+  "timestamp" : 80,
+  "message" : "The username melodymaster doesn't exist."
+}, {
+  "command" : "addMerch",
+  "user" : "melodymaster",
+  "timestamp" : 85,
+  "message" : "The username melodymaster doesn't exist."
+}, {
   "command" : "switchConnectionStatus",
   "user" : "alice22",
   "timestamp" : 87,
   "message" : "alice22 has changed status successfully."
-}, null, null, null, {
+}, {
+  "command" : "addMerch",
+  "user" : "melodymaster",
+  "timestamp" : 90,
+  "message" : "The username melodymaster doesn't exist."
+}, {
+  "command" : "addMerch",
+  "user" : "Melodic Hoodie",
+  "timestamp" : 95,
+  "message" : "Melodic Hoodie is not an artist."
+}, {
+  "command" : "addMerch",
+  "user" : "melodymaster",
+  "timestamp" : 100,
+  "message" : "The username melodymaster doesn't exist."
+}, {
   "command" : "search",
   "user" : "alice22",
   "timestamp" : 105,

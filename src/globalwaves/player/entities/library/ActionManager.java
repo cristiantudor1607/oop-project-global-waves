@@ -2,10 +2,7 @@ package globalwaves.player.entities.library;
 
 import globalwaves.commands.enums.UserType;
 import globalwaves.commands.enums.exitstats.stageone.*;
-import globalwaves.commands.enums.exitstats.stagetwo.AddAlbumExit;
-import globalwaves.commands.enums.exitstats.stagetwo.AddEventExit;
-import globalwaves.commands.enums.exitstats.stagetwo.AddUserExit;
-import globalwaves.commands.enums.exitstats.stagetwo.SwitchConnectionExit;
+import globalwaves.commands.enums.exitstats.stagetwo.*;
 import globalwaves.commands.stageone.*;
 import globalwaves.commands.stagetwo.*;
 import globalwaves.parser.templates.CommandObject;
@@ -505,7 +502,7 @@ public class ActionManager {
 
         User artist = adminBot.getArtistByUsername(username);
         if (artist == null)
-            return AddEventExit.Status.NOT_AN_ARTIST;
+            return AddEventExit.Status.NOT_ARTIST;
 
         String eventName = execQuery.getName();
         String eventDescription = execQuery.getDescription();
@@ -520,6 +517,31 @@ public class ActionManager {
         artist.addEvent(new Event(eventName, eventDescription, eventDate));
 
         return AddEventExit.Status.SUCCESS;
+    }
+
+    public AddMerchExit.Status requestAddingMerch(final AddMerchInterrogator execQuery) {
+        String username = execQuery.getUsername();
+
+        if (adminBot.checkUsername(username))
+            return AddMerchExit.Status.DOESNT_EXIST;
+
+        User artist = adminBot.getArtistByUsername(username);
+        if (artist == null)
+            return AddMerchExit.Status.NOT_ARTIST;
+
+        String merchName = execQuery.getName();
+        String merchDescription = execQuery.getDescription();
+        int merchPrice = execQuery.getPrice();
+
+        if (artist.hasMerch(merchName))
+            return AddMerchExit.Status.SAME_NAME;
+
+        if (merchPrice < 0)
+            return AddMerchExit.Status.NEGATIVE_PRICE;
+
+        artist.addMerch(new Merch(merchName, merchDescription, merchPrice));
+
+        return AddMerchExit.Status.SUCCESS;
     }
 
 

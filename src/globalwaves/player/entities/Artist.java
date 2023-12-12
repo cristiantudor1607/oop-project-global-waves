@@ -54,6 +54,21 @@ public class Artist extends User {
     }
 
     @Override
+    public boolean hasMerch(String merchName) {
+        for (Merch m: selfPage.getMerchandising()) {
+            if (m.getName().equals(merchName))
+                return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public void addMerch(Merch newMerch) {
+        selfPage.getMerchandising().add(newMerch);
+    }
+
+    @Override
     public boolean isArtist() {
         return true;
     }

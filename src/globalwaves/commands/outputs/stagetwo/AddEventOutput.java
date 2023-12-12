@@ -21,7 +21,7 @@ public class AddEventOutput extends CommandOutputFormatter {
             case SUCCESS -> username + " has added new event successfully.";
             case DOESNT_EXIST -> "The username " + username + " doesn't exist.";
             case SAME_NAME -> username + " has another event with the same name";
-            case NOT_AN_ARTIST -> username + " is not an artist.";
+            case NOT_ARTIST -> username + " is not an artist.";
             case INVALID_DATE -> "Event for " + username + " does not have a valid date.";
         };
     }

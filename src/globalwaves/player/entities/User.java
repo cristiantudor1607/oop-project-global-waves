@@ -124,6 +124,12 @@ public class User {
 
     public void addEvent(final Event newEvent) { }
 
+    public boolean hasMerch(final String merchName) {
+        return false;
+    }
+
+    public void addMerch(final Merch newMerch) { }
+
     @Override
     public int hashCode() {
         return Objects.hash(getUsername());
