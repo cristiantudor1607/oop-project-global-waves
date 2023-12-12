@@ -6,6 +6,9 @@ public final class SearchType {
         SONG,
         PODCAST,
         PLAYLIST,
+        ALBUM,
+        ARTIST,
+        HOST,
         UNKNOWN,
     }
 
@@ -17,17 +20,23 @@ public final class SearchType {
      * @return a Type enum if the String can be turned into an enum, or null otherwise.
      */
     public static Type parseString(final String typeAsString) {
-        if (typeAsString.equals("song")) {
+        if (typeAsString.equals("song"))
             return Type.SONG;
-        }
 
-        if (typeAsString.equals("podcast")) {
+        if (typeAsString.equals("podcast"))
             return Type.PODCAST;
-        }
 
-        if (typeAsString.equals("playlist")) {
+        if (typeAsString.equals("playlist"))
             return Type.PLAYLIST;
-        }
+
+        if (typeAsString.equals("album"))
+            return Type.ALBUM;
+
+        if (typeAsString.equals("artist"))
+            return Type.ARTIST;
+
+        if (typeAsString.equals("host"))
+            return Type.HOST;
 
         return Type.UNKNOWN;
     }

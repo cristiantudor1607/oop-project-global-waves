@@ -1,5 +1,6 @@
 package globalwaves.commands.search.utils;
 
+import globalwaves.player.entities.paging.Page;
 import globalwaves.player.entities.properties.PlayableEntity;
 
 import java.util.ArrayList;
@@ -8,8 +9,8 @@ import java.util.List;
 public class EngineResultsParser {
     private EngineResultsParser() {}
     public static int TRUNC_SIZE = 5;
-    public static List<? extends PlayableEntity>
-    getRelevantResults(List<? extends PlayableEntity> allResults) {
+    public static <T> List<T>
+    getRelevantResults(List<T> allResults) {
         if (allResults.size() <= TRUNC_SIZE)
             return allResults;
 
@@ -25,4 +26,14 @@ public class EngineResultsParser {
 
         return names;
     }
+
+    public static List<String> getUsernamesFromPages(List<Page> pages) {
+        List<String> usernames = new ArrayList<>();
+
+        for (Page page: pages)
+            usernames.add(page.getUsername());
+
+        return usernames;
+    }
+
 }

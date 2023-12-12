@@ -29,6 +29,7 @@ si se apeleaza in functie de ce metoda returneaza true dintre isArtist, isNormal
 -> ar trebui sa implementez equals in loc de compareTo la Song, compareTo o sa faca altceva
 -> pentru ca vreau ca nimeni altcineva sa aiba access la informatiile din UIs, metodele sunt private,
 si doar request urile publice
+-> TODO: adauga noi UI uri cand se adauga un user normal
 
 EXPLICATII:
 + AdminBot este o extensie a adminului, pentru ca poate face tot ce face adminul, plus operatiile de bot
@@ -36,3 +37,5 @@ EXPLICATII:
 -> Admin-ul este singurul user care are acces direct la baza de date
 -> listele de users, artists si host sunt securizate prin metoda de adaugare, care nu permite altui
 tip de entitate User sa fie adaugat
+-> am folosit compunere la artisti: Artistul are o pagina si pagina are un artist, dispare una disapre
+si cealalta

@@ -13,8 +13,10 @@ import java.util.List;
 import java.util.Map;
 
 @Getter @Setter
-public abstract class SearchEngine<T extends PlayableEntity> {
+public abstract class SearchEngine<T> {
     protected List<Filter<T>> filters;
+
+    public SearchEngine() { }
 
     public SearchEngine(final Map<String, List<String>> filters) {
         this.filters = collectFilters(filters);

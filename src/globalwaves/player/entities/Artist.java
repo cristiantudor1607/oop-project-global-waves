@@ -1,5 +1,7 @@
 package globalwaves.player.entities;
 
+import globalwaves.player.entities.paging.ArtistPage;
+import globalwaves.player.entities.paging.Page;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -8,10 +10,17 @@ import java.util.List;
 @Getter
 public class Artist extends User {
     private final List<Album> albums;
+    private final ArtistPage selfPage;
 
     public Artist(final String username, final int age, final String city) {
         super(username, age, city);
         albums = new ArrayList<>();
+        selfPage = new ArtistPage(this);
+    }
+
+    @Override
+    public Page getPage() {
+        return selfPage;
     }
 
     @Override

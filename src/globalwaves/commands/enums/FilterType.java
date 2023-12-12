@@ -10,6 +10,9 @@ public final class FilterType {
         RELEASE_YEAR,
         ARTIST,
         OWNER,
+        USERNAME,
+        ARTIST_USERNAME,
+        HOST_USERNAME,
         UNKNOWN,
     }
 
@@ -52,6 +55,19 @@ public final class FilterType {
         if (filterAsString.equals("owner")) {
             return Type.OWNER;
         }
+
+        if (filterAsString.equals("username"))
+            return Type.USERNAME;
+
+        return Type.UNKNOWN;
+    }
+
+    public static Type parseString(final String filterAsString, final SearchType.Type type) {
+        if (type == SearchType.Type.ARTIST && filterAsString.equals("name"))
+            return Type.ARTIST_USERNAME;
+
+        if (type == SearchType.Type.HOST && filterAsString.equals("name"))
+            return Type.HOST_USERNAME;
 
         return Type.UNKNOWN;
     }

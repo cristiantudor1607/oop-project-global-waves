@@ -5,6 +5,7 @@ import fileio.input.PodcastInput;
 import fileio.input.SongInput;
 import fileio.input.UserInput;
 import globalwaves.player.entities.*;
+import globalwaves.player.entities.paging.Page;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -57,6 +58,24 @@ public class Library {
 
     public static void deleteInstance() {
         instance = null;
+    }
+
+    public List<Page> getArtistPages() {
+        List<Page> pages = new ArrayList<>();
+
+        for (User user: artists)
+            pages.add(user.getPage());
+
+        return pages;
+    }
+
+    public List<Page> getHostPages() {
+        List<Page> pages = new ArrayList<>();
+
+        for (User user: hosts)
+            pages.add(user.getPage());
+
+        return pages;
     }
 
     public void addSong(Song newSong) {

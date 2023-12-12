@@ -3,6 +3,7 @@ package globalwaves.player.entities.library;
 import globalwaves.commands.enums.UserType;
 import globalwaves.commands.enums.exitstats.stageone.*;
 import globalwaves.commands.enums.exitstats.stagetwo.AddAlbumExit;
+import globalwaves.commands.enums.exitstats.stagetwo.AddEventExit;
 import globalwaves.commands.enums.exitstats.stagetwo.AddUserExit;
 import globalwaves.commands.enums.exitstats.stagetwo.SwitchConnectionExit;
 import globalwaves.commands.stageone.*;
@@ -99,10 +100,12 @@ public class ActionManager {
         Player userPlayer = getPlayerByUsername(username);
         SearchBar searchbar = getSearchBarByUsername(username);
 
-        userPlayer.stopPlayer();
         searchbar.search(execQuery.getType(), execQuery.getFilters());
+        if (searchbar.hasSearchedPages())
+            return searchbar.getPagesAsNames();
 
-        return searchbar.getRelevantResultsAsNames();
+        userPlayer.stopPlayer();
+        return searchbar.getResultsAsNames();
     }
 
     public SelectExit.Status requestItemSelection(SelectInterrogator executingSelect) {
@@ -491,6 +494,22 @@ public class ActionManager {
 
         return userPage.accept(contentVisitor);
     }
+
+    public AddEventExit.Status requestAddingEvent(final AddEventInterrogator execQuery) {
+        String username = execQuery.getUsername();
+
+        if (!adminBot.checkUsername(username))
+            return AddEventExit.Status.DOESNT_EXIST;
+
+        User artist = adminBot.getArtistByUsername(username);
+        if (artist == null)
+            return AddEventExit.Status.NOT_AN_ARTIST;
+
+        // TODO: continue this
+
+        return AddEventExit.Status.DOESNT_EXIST;
+    }
+
 
     public void updatePlayersData(CommandObject nextToExecuteCommand) {
         int diff = nextToExecuteCommand.getTimestamp() - lastActionTime;

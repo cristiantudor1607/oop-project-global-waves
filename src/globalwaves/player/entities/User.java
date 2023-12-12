@@ -1,6 +1,7 @@
 package globalwaves.player.entities;
 
 import fileio.input.UserInput;
+import globalwaves.player.entities.paging.Page;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -40,17 +41,9 @@ public class User {
         likes = new ArrayList<>();
     }
 
-//    public boolean hasLikedSong(AudioFile file) {
-//        return likes.contains(file);
-//    }
-//
-//    public void addSongToLikes(AudioFile file) {
-//        likes.add(file);
-//    }
-//
-//    public void removeSongFromLikes(AudioFile file) {
-//        likes.remove(file);
-//    }
+    public Page getPage() {
+        return null;
+    }
 
     public boolean isLikingSong(Song song) {
         return likes.contains(song);

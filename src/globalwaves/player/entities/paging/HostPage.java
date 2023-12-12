@@ -7,4 +7,5 @@ public class HostPage extends Page{
     public String accept(Visitor v) {
         return null;
     }
+
 }

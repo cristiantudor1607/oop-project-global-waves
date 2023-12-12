@@ -47,7 +47,7 @@ import java.util.Map;
         @JsonSubTypes.Type(value = EmptyCommand.class, name = "showPodcasts"),
         @JsonSubTypes.Type(value = AddAlbumInterrogator.class, name = "addAlbum"),
         @JsonSubTypes.Type(value = EmptyCommand.class, name = "removeAlbum"),
-        @JsonSubTypes.Type(value = EmptyCommand.class, name = "addEvent"),
+        @JsonSubTypes.Type(value = AddEventInterrogator.class, name = "addEvent"),
         @JsonSubTypes.Type(value = EmptyCommand.class, name = "removeEvent"),
         @JsonSubTypes.Type(value = EmptyCommand.class, name = "addMerch"),
         @JsonSubTypes.Type(value = EmptyCommand.class, name = "addPodcast"),
