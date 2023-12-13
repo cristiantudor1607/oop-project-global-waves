@@ -30,6 +30,7 @@ si se apeleaza in functie de ce metoda returneaza true dintre isArtist, isNormal
 -> pentru ca vreau ca nimeni altcineva sa aiba access la informatiile din UIs, metodele sunt private,
 si doar request urile publice
 -> TODO: adauga noi UI uri cand se adauga un user normal
+-> TODO: refactorizeaza visiturile
 
 EXPLICATII:
 + AdminBot este o extensie a adminului, pentru ca poate face tot ce face adminul, plus operatiile de bot

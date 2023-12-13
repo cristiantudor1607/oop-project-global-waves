@@ -1,5 +1,6 @@
 package globalwaves.player.entities;
 
+import globalwaves.player.entities.utilities.DateMapper;
 import lombok.Getter;
 
 import java.text.SimpleDateFormat;
@@ -15,5 +16,9 @@ public class Event {
         this.name = name;
         this.description = description;
         this.date = date;
+    }
+
+    public String getFormattedDate() {
+        return DateMapper.parseDateToString(date);
     }
 }

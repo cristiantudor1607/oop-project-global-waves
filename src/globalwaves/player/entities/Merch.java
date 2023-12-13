@@ -14,5 +14,4 @@ public class Merch {
         this.price = price;
     }
 
-
 }

@@ -21,8 +21,8 @@ public class AddMerchOutput extends CommandOutputFormatter {
             case SUCCESS -> username + " has added new merchandise successfully.";
             case DOESNT_EXIST -> "The username " + username + " doesn't exist.";
             case NOT_ARTIST -> username + " is not an artist.";
-            case SAME_NAME -> username + " has merchandise with same name.";
-            case NEGATIVE_PRICE -> "Price for merchandise can not be negative";
+            case SAME_NAME -> username + " has merchandise with the same name.";
+            case NEGATIVE_PRICE -> "Price for merchandise can not be negative.";
         };
     }
 }

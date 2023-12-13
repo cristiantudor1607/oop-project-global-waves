@@ -134,6 +134,7 @@ public class ActionManager {
             case PAGE -> {
                 Page foundPage = searchbar.getPageAtIndex(itemNumber - 1);
                 userUI.setCurrentPage(foundPage);
+                executingSelect.setSelectedPage(foundPage);
                 yield SelectExit.Status.SELECTED_PAGE;
             }
         };
@@ -530,7 +531,7 @@ public class ActionManager {
     public AddMerchExit.Status requestAddingMerch(final AddMerchInterrogator execQuery) {
         String username = execQuery.getUsername();
 
-        if (adminBot.checkUsername(username))
+        if (!adminBot.checkUsername(username))
             return AddMerchExit.Status.DOESNT_EXIST;
 
         User artist = adminBot.getArtistByUsername(username);

@@ -62,22 +62,22 @@
   "command" : "select",
   "user" : "alice22",
   "timestamp" : 70,
-  "message" : "The selected ID is too high."
+  "message" : "Successfully selected melodymaster's page."
 }, {
   "command" : "printCurrentPage",
   "user" : "alice22",
   "timestamp" : 75,
-  "message" : "Liked songs:\n\t[]\n\nFollowed playlists:\n\t[]"
+  "message" : "Albums:\n\t[Harmonic Horizons]\n\nMerch:\n\t[]\n\nEvents:\n\t[Harmonic Convergence - 15-06-2022:\n\tA night of mesmerizing melodies and soundscapes., Echoes of the Future - 23-09-2022:\n\tExploring futuristic sounds in a live performance.]"
 }, {
   "command" : "addMerch",
   "user" : "melodymaster",
   "timestamp" : 80,
-  "message" : "The username melodymaster doesn't exist."
+  "message" : "melodymaster has added new merchandise successfully."
 }, {
   "command" : "addMerch",
   "user" : "melodymaster",
   "timestamp" : 85,
-  "message" : "The username melodymaster doesn't exist."
+  "message" : "melodymaster has added new merchandise successfully."
 }, {
   "command" : "switchConnectionStatus",
   "user" : "alice22",
@@ -87,17 +87,17 @@
   "command" : "addMerch",
   "user" : "melodymaster",
   "timestamp" : 90,
-  "message" : "The username melodymaster doesn't exist."
+  "message" : "Price for merchandise can not be negative."
 }, {
   "command" : "addMerch",
   "user" : "Melodic Hoodie",
   "timestamp" : 95,
-  "message" : "Melodic Hoodie is not an artist."
+  "message" : "The username Melodic Hoodie doesn't exist."
 }, {
   "command" : "addMerch",
   "user" : "melodymaster",
   "timestamp" : 100,
-  "message" : "The username melodymaster doesn't exist."
+  "message" : "melodymaster has merchandise with the same name."
 }, {
   "command" : "search",
   "user" : "alice22",
@@ -114,7 +114,7 @@
   "command" : "select",
   "user" : "bob35",
   "timestamp" : 110,
-  "message" : "The selected ID is too high."
+  "message" : "Successfully selected melodymaster's page."
 }, {
   "command" : "printCurrentPage",
   "user" : "alice22",
@@ -124,5 +124,5 @@
   "command" : "printCurrentPage",
   "user" : "bob35",
   "timestamp" : 120,
-  "message" : "Liked songs:\n\t[]\n\nFollowed playlists:\n\t[]"
+  "message" : "Albums:\n\t[Harmonic Horizons]\n\nMerch:\n\t[Harmonic T-Shirt - 25:\n\tLimited edition T-shirt featuring unique harmonic designs., Echoes Cap - 20:\n\tStylish cap with the 'Echoes of Harmony' album artwork.]\n\nEvents:\n\t[Harmonic Convergence - 15-06-2022:\n\tA night of mesmerizing melodies and soundscapes., Echoes of the Future - 23-09-2022:\n\tExploring futuristic sounds in a live performance.]"
 } ]

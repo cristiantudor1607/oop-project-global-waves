@@ -1,10 +1,8 @@
 package globalwaves.player.entities.paging;
 
-import globalwaves.player.entities.Artist;
-import globalwaves.player.entities.Event;
-import globalwaves.player.entities.Merch;
-import globalwaves.player.entities.User;
+import globalwaves.player.entities.*;
 import globalwaves.player.entities.properties.Visitor;
+import globalwaves.player.entities.utilities.DateMapper;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -22,9 +20,13 @@ public class ArtistPage extends Page {
         merchandising = new ArrayList<>();
     }
 
+    public List<Album> getAlbums() {
+        return artist.getAlbums();
+    }
+
     @Override
     public String accept(Visitor v) {
-        return null;
+        return v.visit(this);
     }
 
     @Override
