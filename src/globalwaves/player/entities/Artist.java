@@ -49,8 +49,23 @@ public class Artist extends User {
     }
 
     @Override
+    public Event getEvent(String eventName) {
+        for (Event e : selfPage.getEvents()) {
+            if (e.getName().equals(eventName))
+                return e;
+        }
+
+        return null;
+    }
+
+    @Override
     public void addEvent(Event newEvent) {
         selfPage.getEvents().add(newEvent);
+    }
+
+    @Override
+    public boolean removeEvent(Event event) {
+        return selfPage.getEvents().remove(event);
     }
 
     @Override

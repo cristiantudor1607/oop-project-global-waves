@@ -122,7 +122,14 @@ public class User {
         return false;
     }
 
+    public Event getEvent(final String eventName) {
+        return null;
+    }
+
     public void addEvent(final Event newEvent) { }
+    public boolean removeEvent(final Event event) {
+        return false;
+    }
 
     public boolean hasMerch(final String merchName) {
         return false;

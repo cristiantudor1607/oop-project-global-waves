@@ -544,6 +544,27 @@ public class ActionManager {
         return AddMerchExit.Status.SUCCESS;
     }
 
+    public RemoveEventExit.Status requestRemovingEvent(final RemoveEventInterrogator execQuery) {
+        String username = execQuery.getUsername();
+
+        if (adminBot.checkUsername(username))
+            return RemoveEventExit.Status.DOESNT_EXIST;
+
+        User artist = adminBot.getArtistByUsername(username);
+        if (artist == null)
+            return RemoveEventExit.Status.NOT_ARTIST;
+
+        String eventName = execQuery.getName();
+        Event artistEvent = artist.getEvent(eventName);
+        if (artistEvent == null)
+            return RemoveEventExit.Status.INVALID_NAME;
+
+        artist.removeEvent(artistEvent);
+
+        return RemoveEventExit.Status.SUCCESS;
+    }
+
+
 
     public void updatePlayersData(CommandObject nextToExecuteCommand) {
         int diff = nextToExecuteCommand.getTimestamp() - lastActionTime;
