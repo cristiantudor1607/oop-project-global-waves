@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import globalwaves.commands.enums.exitstats.stageone.SelectExit;
 import globalwaves.commands.outputs.stageone.SelectOutput;
 import globalwaves.parser.templates.CommandObject;
+import globalwaves.player.entities.paging.Page;
 import globalwaves.player.entities.properties.PlayableEntity;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +14,8 @@ import lombok.Setter;
 @Getter @Setter
 public class SelectInterrogator extends CommandObject {
     private int itemNumber;
-    @JsonIgnore private PlayableEntity selectedAudio = null;
+    @JsonIgnore private PlayableEntity selectedPlayableEntity = null;
+    @JsonIgnore private Page selectedPage = null;
     @JsonIgnore private SelectExit.Status exitStatus;
 
     @Override

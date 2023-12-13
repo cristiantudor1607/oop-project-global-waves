@@ -111,24 +111,32 @@ public class ActionManager {
         int itemNumber = executingSelect.getItemNumber();
         String username = executingSelect.getUsername();
 
-        Player userPlayer = getPlayerByUsername(username);
         SearchBar searchbar = getSearchBarByUsername(username);
+        UserInterface userUI = userInterfaces.get(username);
+        Player userPlayer = getPlayerByUsername(username);
 
         if (searchbar.wasNotInvoked())
             return SelectExit.Status.NO_LIST;
 
-        if (!searchbar.invalidItem(itemNumber) || searchbar.hasNoSearchResult())
+        if (searchbar.invalidItem(itemNumber) || searchbar.hasNoSearchResult())
             return SelectExit.Status.OUT_OF_BOUNDS;
 
-        PlayableEntity entity = searchbar.getResultAtIndex(itemNumber - 1);
+        return switch (searchbar.getTypeOfSearch()) {
+            case PLAYABLE_ENTITY -> {
+                PlayableEntity entity = searchbar.getResultAtIndex(itemNumber - 1);
+                userPlayer.select(entity);
+                executingSelect.setSelectedPlayableEntity(entity);
 
-        userPlayer.select(entity);
-        executingSelect.setSelectedAudio(entity);
-
-        // Reset the Search Bar after selection
-        searchbar.reset();
-
-        return SelectExit.Status.SELECTED;
+                // Reset the searchbar results after selecting the object
+                searchbar.resetResults();
+                yield SelectExit.Status.SELECTED_PLAYABLE_ENTITY;
+            }
+            case PAGE -> {
+                Page foundPage = searchbar.getPageAtIndex(itemNumber - 1);
+                userUI.setCurrentPage(foundPage);
+                yield SelectExit.Status.SELECTED_PAGE;
+            }
+        };
     }
 
     public LoadExit.Status requestLoading(LoadInterrogator executingLoad) {

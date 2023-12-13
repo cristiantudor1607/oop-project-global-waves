@@ -19,7 +19,7 @@ public class SearchBar {
     private List<Page> pages;
     private SearchEngine<? extends PlayableEntity> engine;
     private PageFinder pager;
-    private SearchResult lastSearchType;
+    private SearchResult typeOfSearch;
     private final String username;
 
     public SearchBar(final String username) {
@@ -51,16 +51,17 @@ public class SearchBar {
 
     public void search(@NonNull final String type,
                        @NonNull final Map<String, List<String>> filters) {
+        // One of them will return null, so we'll use the one that isn't null
         engine = chooseEngine(type, filters);
         pager = choosePager(type, filters);
 
         if (engine != null) {
-            lastSearchType = SearchResult.PLAYABLE_ENTITY;
+            typeOfSearch = SearchResult.PLAYABLE_ENTITY;
             results = engine.collectResults();
         }
 
         if (pager != null) {
-            lastSearchType = SearchResult.PAGE;
+            typeOfSearch = SearchResult.PAGE;
             pages = pager.collectResults();
         }
     }
@@ -86,26 +87,45 @@ public class SearchBar {
     }
 
     public boolean hasSearchedPages() {
-        return lastSearchType == SearchResult.PAGE;
+        return typeOfSearch == SearchResult.PAGE;
+    }
+
+    public boolean hasSearchedPlayableEntities() {
+        return typeOfSearch == SearchResult.PLAYABLE_ENTITY;
     }
 
     public boolean hasNoSearchResult() {
-        return results.isEmpty();
+        return switch (typeOfSearch) {
+            case PLAYABLE_ENTITY -> results.isEmpty();
+            case PAGE -> pages.isEmpty();
+        };
     }
 
     public boolean invalidItem(int index) {
-        return  index <= results.size();
+        //return  index <= results.size();
+        return switch (typeOfSearch) {
+            case PLAYABLE_ENTITY -> index > results.size() || index < 0;
+            case PAGE -> index > pages.size() || index < 0;
+        };
     }
 
-    public void reset() {
+    public void resetResults() {
         results = null;
     }
 
     public boolean wasNotInvoked() {
-        return results == null;
+        // return results == null;
+        return switch (typeOfSearch) {
+            case PLAYABLE_ENTITY -> results == null;
+            case PAGE -> pages == null;
+        };
     }
 
     public PlayableEntity getResultAtIndex(int index) {
         return results.get(index);
+    }
+
+    public Page getPageAtIndex(int index) {
+        return pages.get(index);
     }
 }

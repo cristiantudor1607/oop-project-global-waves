@@ -3,6 +3,7 @@ package globalwaves.player.entities;
 import globalwaves.player.entities.paging.*;
 import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 
 @Getter
 public class UserInterface {
@@ -10,6 +11,7 @@ public class UserInterface {
     private final SearchBar searchbar;
     private final Page homePage;
     private final Page likedContentPage;
+    @Setter
     private Page currentPage;
     private final Player player;
 

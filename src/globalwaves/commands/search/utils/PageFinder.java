@@ -13,11 +13,11 @@ import java.util.List;
 import java.util.Map;
 
 public class PageFinder extends SearchEngine<Page> {
-    private final SearchType.Type typeOfSearch;
+    private final SearchType.Type typeOfUser;
 
     public PageFinder(final Map<String, List<String>> filters,
-                      final SearchType.Type typeOfSearch) {
-        this.typeOfSearch = typeOfSearch;
+                      final SearchType.Type typeOfUser) {
+        this.typeOfUser = typeOfUser;
         this.filters = collectFilters(filters);
     }
 
@@ -26,7 +26,7 @@ public class PageFinder extends SearchEngine<Page> {
         if (values.isEmpty())
             return null;
 
-        FilterType.Type filterType = FilterType.parseString(key, typeOfSearch);
+        FilterType.Type filterType = FilterType.parseString(key, typeOfUser);
 
         if (filterType == FilterType.Type.ARTIST_USERNAME)
             return new ArtistPageFilter(values.get(0));
@@ -50,10 +50,10 @@ public class PageFinder extends SearchEngine<Page> {
     public List<Page> collectResults() {
         Library database = Library.getInstance();
 
-        if (typeOfSearch == SearchType.Type.ARTIST)
+        if (typeOfUser == SearchType.Type.ARTIST)
             return findInDatabase(database.getArtistPages());
 
-        if (typeOfSearch == SearchType.Type.HOST)
+        if (typeOfUser == SearchType.Type.HOST)
             return findInDatabase(database.getHostPages());
 
         return null;
