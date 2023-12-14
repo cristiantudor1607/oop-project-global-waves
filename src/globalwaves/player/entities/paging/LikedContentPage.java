@@ -2,9 +2,11 @@ package globalwaves.player.entities.paging;
 
 import globalwaves.player.entities.*;
 import globalwaves.player.entities.properties.Visitor;
+import lombok.Getter;
 
 import java.util.List;
 
+@Getter
 public class LikedContentPage extends Page {
     private final List<Song> likedSongs;
     private final List<Playlist> followingPlaylists;
@@ -16,6 +18,6 @@ public class LikedContentPage extends Page {
 
     @Override
     public String accept(Visitor v) {
-        return null;
+        return v.visit(this);
     }
 }

@@ -4,6 +4,7 @@ import globalwaves.player.entities.*;
 import globalwaves.player.entities.paging.ArtistPage;
 import globalwaves.player.entities.paging.HomePage;
 import globalwaves.player.entities.paging.HostPage;
+import globalwaves.player.entities.paging.LikedContentPage;
 
 import java.util.List;
 
@@ -109,5 +110,34 @@ public class ContentVisitor implements Visitor {
 
         return "Podcasts:\n\t[" + podcastFormat + "]\n\nAnnouncements:\n\t["
                 + announceFormat + "\n]";
+    }
+
+    @Override
+    public String visit(LikedContentPage page) {
+        List<Song> songs = page.getLikedSongs();
+        List<Playlist> playlists = page.getFollowingPlaylists();
+
+        StringBuilder songsFormat = new StringBuilder();
+        for (int i = 0; i < songs.size(); i++) {
+            if (i != 0)
+                songsFormat.append(", ");
+
+            songsFormat.append(songs.get(i).getName())
+                    .append(" - ")
+                    .append(songs.get(i).getArtist());
+        }
+
+        StringBuilder playlistsFormat = new StringBuilder();
+        for (int i = 0; i < playlists.size(); i++) {
+            if (i != 0)
+                playlistsFormat.append(", ");
+
+            playlistsFormat.append(playlists.get(i).getName())
+                    .append(" - ")
+                    .append(playlists.get(i).getOwner());
+        }
+
+        return "Liked songs:\n\t[" + songsFormat + "]\n\nFollowed playlists:\n\t["
+                + playlistsFormat + "]";
     }
 }

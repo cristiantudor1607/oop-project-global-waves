@@ -1,5 +1,6 @@
 package globalwaves.player.entities.library;
 
+import globalwaves.commands.enums.PageType;
 import globalwaves.commands.enums.UserType;
 import globalwaves.commands.enums.exitstats.stageone.*;
 import globalwaves.commands.enums.exitstats.stagetwo.*;
@@ -793,6 +794,29 @@ public class ActionManager {
         // Remove the album as an admin
         adminBot.removeAlbum(album);
         return RemoveAlbumExit.Status.SUCCESS;
+    }
+
+    public String requestChangePage(final ChangePageInterrogator execQuery) {
+        String username = execQuery.getUsername();
+        String nextPage = execQuery.getNextPage();
+
+        UserInterface ui = userInterfaces.get(username);
+
+        // TODO: More checking if necessary
+
+        return switch (PageType.parseString(nextPage)) {
+            case HOME -> {
+                Page homePage = ui.getHomePage();
+                ui.setCurrentPage(homePage);
+                yield username + " accessed Home successfully.";
+            }
+            case LIKED -> {
+                Page likedPage = ui.getLikedContentPage();
+                ui.setCurrentPage(likedPage);
+                yield  username + " accessed LikedContent successfully.";
+            }
+            case UNKNOWN -> username + " is trying to access a non-existent page.";
+        };
     }
 
     public void updatePlayersData(CommandObject nextToExecuteCommand) {
