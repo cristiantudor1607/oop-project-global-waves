@@ -34,8 +34,22 @@ public class Artist extends User {
     }
 
     @Override
+    public Album getAlbumByName(String albumName) {
+        for (Album album: albums)
+            if (album.getName().equals(albumName))
+                return album;
+
+        return null;
+    }
+
+    @Override
     public boolean addAlbum(Album newAlbum) {
         return albums.add(newAlbum);
+    }
+
+    @Override
+    public void removeAlbum(Album oldAlbum) {
+        albums.remove(oldAlbum);
     }
 
     @Override

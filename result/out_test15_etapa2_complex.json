@@ -4924,13 +4924,18 @@
   "user" : "alice22",
   "timestamp" : 5429,
   "message" : "Shuffle function activated successfully."
-}, null, {
+}, {
+  "command" : "removeAlbum",
+  "user" : "jacobdean",
+  "timestamp" : 5433,
+  "message" : "jacobdean can't delete this album."
+}, {
   "command" : "status",
   "user" : "alice22",
   "timestamp" : 5434,
   "stats" : {
     "name" : "Serendipity Serendipity",
-    "remainedTime" : 235,
+    "remainedTime" : 239,
     "repeat" : "No Repeat",
     "shuffle" : true,
     "paused" : false
@@ -5018,13 +5023,18 @@
   "user" : "bob35",
   "timestamp" : 5740,
   "message" : "Shuffle function activated successfully."
-}, null, {
+}, {
+  "command" : "removeAlbum",
+  "user" : "leslie27",
+  "timestamp" : 5744,
+  "message" : "leslie27 can't delete this album."
+}, {
   "command" : "status",
   "user" : "bob35",
   "timestamp" : 5745,
   "stats" : {
     "name" : "Whisper Pulse",
-    "remainedTime" : 250,
+    "remainedTime" : 254,
     "repeat" : "No Repeat",
     "shuffle" : true,
     "paused" : false
@@ -5117,13 +5127,18 @@
   "user" : "carol19",
   "timestamp" : 6051,
   "message" : "Shuffle function activated successfully."
-}, null, {
+}, {
+  "command" : "removeAlbum",
+  "user" : "cbutler",
+  "timestamp" : 6055,
+  "message" : "cbutler can't delete this album."
+}, {
   "command" : "status",
   "user" : "carol19",
   "timestamp" : 6056,
   "stats" : {
     "name" : "Heart Bliss",
-    "remainedTime" : 153,
+    "remainedTime" : 157,
     "repeat" : "No Repeat",
     "shuffle" : true,
     "paused" : false
@@ -5211,7 +5226,12 @@
   "user" : "david27",
   "timestamp" : 6362,
   "message" : "Please load a source before using the shuffle function."
-}, null, {
+}, {
+  "command" : "removeAlbum",
+  "user" : "charlesgarcia",
+  "timestamp" : 6366,
+  "message" : "charlesgarcia is not an artist."
+}, {
   "command" : "status",
   "user" : "david27",
   "timestamp" : 6367,
@@ -5305,13 +5325,18 @@
   "user" : "emily30",
   "timestamp" : 6673,
   "message" : "Shuffle function activated successfully."
-}, null, {
+}, {
+  "command" : "removeAlbum",
+  "user" : "jacobdean",
+  "timestamp" : 6677,
+  "message" : "jacobdean can't delete this album."
+}, {
   "command" : "status",
   "user" : "emily30",
   "timestamp" : 6678,
   "stats" : {
     "name" : "Serendipity Serendipity",
-    "remainedTime" : 235,
+    "remainedTime" : 239,
     "repeat" : "No Repeat",
     "shuffle" : true,
     "paused" : false
@@ -5399,13 +5424,18 @@
   "user" : "frank21",
   "timestamp" : 6984,
   "message" : "Shuffle function activated successfully."
-}, null, {
+}, {
+  "command" : "removeAlbum",
+  "user" : "amanda16",
+  "timestamp" : 6988,
+  "message" : "amanda16 can't delete this album."
+}, {
   "command" : "status",
   "user" : "frank21",
   "timestamp" : 6989,
   "stats" : {
     "name" : "Luminescence Crescendo",
-    "remainedTime" : 220,
+    "remainedTime" : 224,
     "repeat" : "No Repeat",
     "shuffle" : true,
     "paused" : false
@@ -5493,13 +5523,18 @@
   "user" : "grace25",
   "timestamp" : 7295,
   "message" : "Shuffle function activated successfully."
-}, null, {
+}, {
+  "command" : "removeAlbum",
+  "user" : "barmstrong",
+  "timestamp" : 7299,
+  "message" : "barmstrong can't delete this album."
+}, {
   "command" : "status",
   "user" : "grace25",
   "timestamp" : 7300,
   "stats" : {
     "name" : "Love Love",
-    "remainedTime" : 227,
+    "remainedTime" : 231,
     "repeat" : "No Repeat",
     "shuffle" : true,
     "paused" : false
@@ -5587,13 +5622,18 @@
   "user" : "henry26",
   "timestamp" : 7606,
   "message" : "Shuffle function activated successfully."
-}, null, {
+}, {
+  "command" : "removeAlbum",
+  "user" : "amanda16",
+  "timestamp" : 7610,
+  "message" : "amanda16 can't delete this album."
+}, {
   "command" : "status",
   "user" : "henry26",
   "timestamp" : 7611,
   "stats" : {
     "name" : "Sunset Melody",
-    "remainedTime" : 241,
+    "remainedTime" : 245,
     "repeat" : "No Repeat",
     "shuffle" : true,
     "paused" : false
@@ -5681,13 +5721,18 @@
   "user" : "irene33",
   "timestamp" : 7917,
   "message" : "Shuffle function activated successfully."
-}, null, {
+}, {
+  "command" : "removeAlbum",
+  "user" : "jacobdean",
+  "timestamp" : 7921,
+  "message" : "jacobdean can't delete this album."
+}, {
   "command" : "status",
   "user" : "irene33",
   "timestamp" : 7922,
   "stats" : {
     "name" : "Celestial Soul",
-    "remainedTime" : 209,
+    "remainedTime" : 213,
     "repeat" : "No Repeat",
     "shuffle" : true,
     "paused" : false
@@ -5775,13 +5820,18 @@
   "user" : "jack29",
   "timestamp" : 8228,
   "message" : "Shuffle function activated successfully."
-}, null, {
+}, {
+  "command" : "removeAlbum",
+  "user" : "cbutler",
+  "timestamp" : 8232,
+  "message" : "cbutler can't delete this album."
+}, {
   "command" : "status",
   "user" : "jack29",
   "timestamp" : 8233,
   "stats" : {
     "name" : "Heart Bliss",
-    "remainedTime" : 153,
+    "remainedTime" : 157,
     "repeat" : "No Repeat",
     "shuffle" : true,
     "paused" : false
@@ -23746,5 +23796,5 @@
 }, {
   "command" : "getTop5Songs",
   "timestamp" : 14849,
-  "result" : [ "Utopia Harmony", "Celestial Soul", "Celestial Harmony", "Night Utopia", "Bliss Rhythm" ]
+  "result" : [ "Utopia Harmony", "Celestial Soul", "Bliss Rhythm", "Whirlwind Whirlwind", "Night Utopia" ]
 }, null, null ]

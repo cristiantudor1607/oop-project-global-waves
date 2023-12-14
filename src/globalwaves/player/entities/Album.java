@@ -3,6 +3,7 @@ package globalwaves.player.entities;
 import lombok.Getter;
 
 import java.util.List;
+import java.util.Objects;
 
 @Getter
 public class Album extends Playlist {
@@ -31,6 +32,15 @@ public class Album extends Playlist {
         this.setPlayOrder(order);
     }
 
+    public boolean isUsedInPlaylist() {
+        for (Song s: getSongs()) {
+            if (s.getPlaylistsInclusionCounter() > 0)
+                return true;
+        }
+
+        return false;
+    }
+
     @Override
     public String getPublicPerson() {
         return artist;
@@ -42,7 +52,20 @@ public class Album extends Playlist {
     }
 
     @Override
-    public Album getWorkinOnAlbum() {
+    public Album getWorkingOnAlbum() {
         return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Album)) return false;
+        Album album = (Album) o;
+        return artist.equals(album.artist) && getName().equals(album.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getArtist(), getDescription());
     }
 }

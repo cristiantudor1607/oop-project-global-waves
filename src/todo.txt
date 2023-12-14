@@ -32,6 +32,7 @@ si doar request urile publice
 -> TODO: adauga noi UI uri cand se adauga un user normal
 -> TODO: refactorizeaza visiturile
 -> aranjeaza requesturile dpdv logic
+-> s-ar putea sa fie nevoie sa verific si daca au selectat la removeAlbum ceva
 
 EXPLICATII:
 + AdminBot este o extensie a adminului, pentru ca poate face tot ce face adminul, plus operatiile de bot
@@ -41,3 +42,4 @@ EXPLICATII:
 tip de entitate User sa fie adaugat
 -> am folosit compunere la artisti: Artistul are o pagina si pagina are un artist, dispare una disapre
 si cealalta
+-> mentioneaza la instanceof uri de ce nu ai facut instanceof Album album

@@ -104,10 +104,6 @@ public class Library {
         return artists.add(newArtist);
     }
 
-    public boolean addArtist(Artist newArtist) {
-        return artists.add(newArtist);
-    }
-
     public boolean addHost(User newHost) {
         if (!newHost.isHost())
             return false;
@@ -115,16 +111,12 @@ public class Library {
         return hosts.add(newHost);
     }
 
-    public boolean addHost(Host newHost) {
-        return hosts.add(newHost);
-    }
-
-    private void removeSongsFromAlbum(final String artistName, final String albumName) {
+    public void removeSongsFromAlbum(final String artistName, final String albumName) {
         addedSongs.get(artistName).removeIf(songFromArtist ->
                 songFromArtist.getAlbum().equals(albumName));
     }
 
-    private void removeSongsFromLiked(final String albumName) {
+    public void removeSongsFromLiked(final String albumName) {
         for (User user: users) {
             List<Song> likes = user.getLikes();
             likes.removeIf(likedSong -> likedSong.getAlbum().equals(albumName));

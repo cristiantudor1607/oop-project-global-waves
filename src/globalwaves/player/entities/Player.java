@@ -323,18 +323,28 @@ public class Player {
         return state == PlayerStatus.PLAYING;
     }
 
-    public boolean isPlayingFromAlbum(String albumName) {
-        // Check if there is playing an album, by trying to get the album
-        Album playingAlbum = selectedSource.getWorkinOnAlbum();
-        if (playingAlbum != null)
-            if (playingAlbum.getName().equals(albumName))
+    public boolean isPlayingFromAlbum(Album album) {
+        // We have only two cases to check: when there's an album loaded or a song.
+        // The Playlist case it treated before calling this method, because there is
+        // enough for a song to be in a playlist, so it won't be deleted.
+
+        if (selectedSource == null)
+            return false;
+
+        Album possiblyPlayingAlbum = selectedSource.getWorkingOnAlbum();
+        if (possiblyPlayingAlbum != null)
+            if (possiblyPlayingAlbum.equals(album))
                 return true;
 
-        // Check if there is playing an playlist, by trying to get the playlist
-        Playlist playingPlaylist = selectedSource.getWorkingOnPlaylist();
-        if (playingPlaylist != null)
-            if (playingPlaylist.hasSongFromAlbum(albumName))
-                return true;
+        // Check if there's something playing
+        AudioFile file = selectedSource.getAudioFile();
+        if (file == null)
+            return false;
+
+        // Check if there's a Song playing
+        Song possiblyPlayingSong = file.getWorkingOnSong();
+        if (possiblyPlayingSong != null)
+            return possiblyPlayingSong.getAlbum().equals(album.getName());
 
         return false;
     }

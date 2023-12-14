@@ -26,6 +26,8 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
     private int creationTime;
     @JsonIgnore
     private int likesNumber;
+    @JsonIgnore
+    private int playlistsInclusionCounter;
 
     @JsonCreator
     public Song(@JsonProperty("name") final String name,
@@ -46,6 +48,7 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
         this.artist = artist;
         creationTime = 0;
         likesNumber = 0;
+        playlistsInclusionCounter = 0;
     }
 
     /**
@@ -102,6 +105,14 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
 
     public void removeLike() {
         likesNumber--;
+    }
+
+    public void increasePlaylistsCount() {
+        playlistsInclusionCounter++;
+    }
+
+    public void decreasePlaylistsCount() {
+        playlistsInclusionCounter--;
     }
 
     @Override
@@ -198,7 +209,7 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
     }
 
     @Override
-    public Album getWorkinOnAlbum() {
+    public Album getWorkingOnAlbum() {
         return null;
     }
 

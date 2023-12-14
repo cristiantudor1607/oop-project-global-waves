@@ -300,14 +300,4 @@ public class AdminBot extends Admin  {
         return false;
     }
 
-    public boolean playlistsHaveSongFromAlbum(final String albumName) {
-        for (List<Playlist> playlists: database.getPlaylists().values()) {
-            if (tool.playlistsHaveAlbum(playlists, albumName))
-                return true;
-        }
-
-        return false;
-    }
-
-
 }

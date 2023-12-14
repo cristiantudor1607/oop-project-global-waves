@@ -62,5 +62,5 @@ public interface PlayableEntity {
     int getDuration();
 
     boolean hasAudiofileFromUser(String username);
-    Album getWorkinOnAlbum();
+    Album getWorkingOnAlbum();
 }

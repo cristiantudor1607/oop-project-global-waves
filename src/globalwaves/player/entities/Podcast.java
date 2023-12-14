@@ -169,7 +169,7 @@ public class Podcast implements PlayableEntity, OwnedEntity {
     }
 
     @Override
-    public Album getWorkinOnAlbum() {
+    public Album getWorkingOnAlbum() {
         return null;
     }
 }

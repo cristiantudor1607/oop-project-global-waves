@@ -100,9 +100,13 @@ public class User {
     public List<Album> getAlbums() {
         return null;
     }
+    public Album getAlbumByName(final String albumName) {
+        return null;
+    }
     public boolean addAlbum(final Album newAlbum) {
         return false;
     }
+    public void removeAlbum(final Album oldAlbum) { }
 
 
     public boolean hasEvent(final String eventName) {

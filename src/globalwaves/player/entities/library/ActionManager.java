@@ -125,8 +125,29 @@ public class ActionManager {
         return false;
     }
 
+    /**
+     * Checks if the given album is being listened in at least one of the players
+     * @param album The album to be searched
+     * @return true, if someone is listening the album or a song from the album
+     */
+    public boolean albumIsBeingListened(@NonNull final Album album) {
+        for (UserInterface ui : userInterfaces.values()) {
+            Player userPlayer = ui.getPlayer();
+            if (userPlayer.isPlayingFromAlbum(album))
+                return true;
+        }
 
-    // Request player is a wrapper
+        return false;
+    }
+
+
+    /**
+     * Wrapper over the getPlayerByUsername to be used as a request
+     * @param execQuery the CommandObject that wants to access the player
+     *                  of the user
+     * @return The player, if the user with the given username exists, false
+     * otherwise ( if the username doesn't exist, or it is used by an artist or a host )
+     */
     public Player requestPlayer(CommandObject execQuery) {
         String username = execQuery.getUsername();
 
@@ -273,10 +294,14 @@ public class ActionManager {
 
         if (!ownerPlaylist.hasSong(workingOnSong)) {
             ownerPlaylist.addSong(workingOnSong);
+            workingOnSong.increasePlaylistsCount();
+            System.out.println(workingOnSong.getName() + ": " + workingOnSong.getPlaylistsInclusionCounter());
             return AddRemoveExit.Status.ADDED;
         }
 
         ownerPlaylist.removeSong(workingOnSong);
+        workingOnSong.decreasePlaylistsCount();
+        System.out.println(workingOnSong.getName() + ": " + workingOnSong.getPlaylistsInclusionCounter());
         return AddRemoveExit.Status.REMOVED;
     }
 
@@ -752,6 +777,21 @@ public class ActionManager {
         if (!artist.hasAlbumWithName(albumName))
             return RemoveAlbumExit.Status.DONT_HAVE;
 
+        // Retrieve the album from artist. It won't return null,
+        // because we already checked if the user is an artist, or
+        // if the artist doesn't have an album with that name
+        Album album = artist.getAlbumByName(albumName);
+
+        // If there is at least one song from the album used in a playlist
+        if (album.isUsedInPlaylist())
+            return RemoveAlbumExit.Status.FAIL;
+
+        // If there is at least one player listening to something from album
+        if (albumIsBeingListened(album))
+            return RemoveAlbumExit.Status.FAIL;
+
+        // Remove the album as an admin
+        adminBot.removeAlbum(album);
         return RemoveAlbumExit.Status.SUCCESS;
     }
 

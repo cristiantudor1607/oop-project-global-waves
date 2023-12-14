@@ -40,6 +40,14 @@ public class Admin extends User {
         return database.removeUser(oldUser);
     }
 
+    public void removeAlbum(@NonNull Album oldAlbum) {
+        String albumName = oldAlbum.getName();
+        String artistName = oldAlbum.getArtist();
+
+        database.removeSongsFromAlbum(artistName, albumName);
+        database.removeSongsFromLiked(albumName);
+    }
+
     @Override
     public boolean isNormalUser() {
         return false;
