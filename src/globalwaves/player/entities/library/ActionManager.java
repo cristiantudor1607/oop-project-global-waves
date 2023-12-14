@@ -646,6 +646,28 @@ public class ActionManager {
         return RemoveEventExit.Status.SUCCESS;
     }
 
+    public AddAnnouncementExit.Status requestAddingAnnouncement(final AddAnnouncementInterrogator
+                                                                execQuery) {
+        String username = execQuery.getUsername();
+
+        if (!adminBot.checkUsername(username))
+            return AddAnnouncementExit.Status.DOESNT_EXIST;
+
+        User host = adminBot.getHostByUsername(username);
+        if (host == null)
+            return AddAnnouncementExit.Status.NOT_HOST;
+
+        String announcementName = execQuery.getName();
+        String announcementDescription = execQuery.getDescription();
+        if (host.hasAnnouncement(announcementName))
+            return AddAnnouncementExit.Status.SAME_NAME;
+
+        host.addAnnouncement(new Announcement(announcementName, announcementDescription));
+
+        return AddAnnouncementExit.Status.SUCCESS;
+    }
+
+
     public List<String> requestOnlineUsers() {
         List<User> onlineUsers = adminBot.getOnlineUsers();
 

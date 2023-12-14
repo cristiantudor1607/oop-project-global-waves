@@ -31,6 +31,7 @@ si se apeleaza in functie de ce metoda returneaza true dintre isArtist, isNormal
 si doar request urile publice
 -> TODO: adauga noi UI uri cand se adauga un user normal
 -> TODO: refactorizeaza visiturile
+-> aranjeaza requesturile dpdv logic
 
 EXPLICATII:
 + AdminBot este o extensie a adminului, pentru ca poate face tot ce face adminul, plus operatiile de bot

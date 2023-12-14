@@ -36,12 +36,32 @@
   "timestamp" : 50,
   "message" : "Search returned 1 results",
   "results" : [ "soundseeker" ]
-}, null, null, null, null, {
+}, {
+  "command" : "addPodcast",
+  "user" : "soundseeker",
+  "timestamp" : 51,
+  "message" : "soundseeker has added new podcast successfully."
+}, {
+  "command" : "addPodcast",
+  "user" : "alice22",
+  "timestamp" : 52,
+  "message" : "alice22 is not a host."
+}, {
+  "command" : "addPodcast",
+  "user" : "soundseeker",
+  "timestamp" : 53,
+  "message" : "soundseeker has added new podcast successfully."
+}, null, {
   "command" : "printCurrentPage",
   "user" : "jack29",
   "timestamp" : 53,
   "message" : "Liked songs:\n\t[]\n\nFollowed playlists:\n\t[]"
-}, null, {
+}, {
+  "command" : "addPodcast",
+  "user" : "soundseeker",
+  "timestamp" : 53,
+  "message" : "soundseeker has another podcast with the same name."
+}, {
   "command" : "select",
   "user" : "jack29",
   "timestamp" : 57,
@@ -57,7 +77,12 @@
   "user" : "alice22",
   "timestamp" : 65,
   "message" : "Successfully selected TED Radio Hour."
-}, null, {
+}, {
+  "command" : "addAnnouncement",
+  "user" : "alice22",
+  "timestamp" : 67,
+  "message" : "alice22 is not a host."
+}, {
   "command" : "load",
   "user" : "alice22",
   "timestamp" : 70,
@@ -68,12 +93,17 @@
   "timestamp" : 73,
   "stats" : {
     "name" : "The Power of Design",
-    "remainedTime" : 3052,
+    "remainedTime" : 3061,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
   }
-}, null, {
+}, {
+  "command" : "addAnnouncement",
+  "user" : "soundseeker",
+  "timestamp" : 74,
+  "message" : "soundseeker has successfully added new announcement."
+}, {
   "command" : "search",
   "user" : "alice22",
   "timestamp" : 75,

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
 import globalwaves.commands.enums.exitstats.stagetwo.AddPodcastExit;
+import globalwaves.commands.outputs.stagetwo.AddPodcastOutput;
 import globalwaves.parser.templates.CommandObject;
 import globalwaves.player.entities.Episode;
 import lombok.Getter;
@@ -26,6 +27,6 @@ public class AddPodcastInterrogator extends CommandObject {
 
     @Override
     public JsonNode formatOutput() {
-        return null;
+        return (new AddPodcastOutput(this)).generateOutputNode();
     }
 }

@@ -42,6 +42,21 @@ public class Host extends User {
     }
 
     @Override
+    public boolean hasAnnouncement(String announceName) {
+        for (Announcement announce: selfPage.getAnnouncements()) {
+            if (announce.getName().equals(announceName))
+                return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean addAnnouncement(Announcement newAnnouncement) {
+        return selfPage.getAnnouncements().add(newAnnouncement);
+    }
+
+    @Override
     public boolean isNormalUser() {
         return false;
     }

@@ -4,10 +4,12 @@ import globalwaves.player.entities.Announcement;
 import globalwaves.player.entities.Podcast;
 import globalwaves.player.entities.User;
 import globalwaves.player.entities.properties.Visitor;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 public class HostPage extends Page{
     private final User host;
     private final List<Podcast> podcasts;

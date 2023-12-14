@@ -131,6 +131,14 @@ public class User {
         return false;
     }
 
+    public boolean hasAnnouncement(final String announceName) {
+        return false;
+    }
+    public boolean addAnnouncement(final Announcement newAnnouncement) {
+        return false;
+    }
+
+
 
     public boolean isNormalUser() {
         return true;

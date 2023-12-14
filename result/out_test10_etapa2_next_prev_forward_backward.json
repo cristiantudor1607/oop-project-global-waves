@@ -193,7 +193,12 @@
   "user" : "soundseeker",
   "timestamp" : 715,
   "message" : "The username soundseeker has been added successfully."
-}, null, {
+}, {
+  "command" : "addPodcast",
+  "user" : "soundseeker",
+  "timestamp" : 716,
+  "message" : "soundseeker has added new podcast successfully."
+}, {
   "command" : "search",
   "user" : "bob35",
   "timestamp" : 800,
