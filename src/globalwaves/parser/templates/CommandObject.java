@@ -57,7 +57,7 @@ import java.util.Map;
         @JsonSubTypes.Type(value = ConnectionInterrogator.class, name = "switchConnectionStatus"),
         @JsonSubTypes.Type(value = EmptyCommand.class, name = "getTop5Albums"),
         @JsonSubTypes.Type(value = EmptyCommand.class, name = "getTop5Artists"),
-        @JsonSubTypes.Type(value = EmptyCommand.class, name = "getAllUsers"),
+        @JsonSubTypes.Type(value = AllUsersInterrogator.class, name = "getAllUsers"),
         @JsonSubTypes.Type(value = OnlineUsersInterrogator.class, name = "getOnlineUsers"),
 })
 @JsonIgnoreProperties(ignoreUnknown = true)

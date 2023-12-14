@@ -39,6 +39,7 @@ public class User {
         this.city = city;
         status = ConnectionStatus.ONLINE;
         likes = new ArrayList<>();
+        following = new ArrayList<>();
     }
 
     public Page getPage() {
@@ -91,41 +92,25 @@ public class User {
             sendOffline();
         else
             bringOnline();
-
-    }
-
-    public boolean isNormalUser() {
-        return true;
-    }
-
-    public boolean isArtist() {
-        return false;
-    }
-
-    public boolean isHost() {
-        return false;
     }
 
     public boolean hasAlbumWithName(final String albumName) {
         return false;
     }
-
+    public List<Album> getAlbums() {
+        return null;
+    }
     public boolean addAlbum(final Album newAlbum) {
         return false;
     }
 
-    public List<Album> getAlbums() {
-        return null;
-    }
 
     public boolean hasEvent(final String eventName) {
         return false;
     }
-
     public Event getEvent(final String eventName) {
         return null;
     }
-
     public void addEvent(final Event newEvent) { }
     public boolean removeEvent(final Event event) {
         return false;
@@ -134,8 +119,28 @@ public class User {
     public boolean hasMerch(final String merchName) {
         return false;
     }
-
     public void addMerch(final Merch newMerch) { }
+
+    public boolean hasPodcastWithName(final String podcastName) {
+        return false;
+    }
+    public List<Podcast> getPodcasts() {
+        return null;
+    }
+    public boolean addPodcast(final Podcast newPodcast) {
+        return false;
+    }
+
+
+    public boolean isNormalUser() {
+        return true;
+    }
+    public boolean isArtist() {
+        return false;
+    }
+    public boolean isHost() {
+        return false;
+    }
 
     @Override
     public int hashCode() {

@@ -20,6 +20,7 @@ public class Playlist implements PlayableEntity, OwnedEntity {
     private int followersNumber;
     private boolean visible;
     private List<Song> songs;
+    @Setter
     private List<Integer> playOrder;
     private List<User> followers;
 
@@ -83,7 +84,7 @@ public class Playlist implements PlayableEntity, OwnedEntity {
     }
 
     public int getSongIndex(AudioFile queriedSong) {
-        int index = songs.indexOf(queriedSong);
+        int index = songs.indexOf((Song)queriedSong);
         return getPlayOrder().indexOf(index);
     }
 

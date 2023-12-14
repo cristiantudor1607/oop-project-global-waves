@@ -14,4 +14,5 @@ public abstract class AudioFile {
      */
     public abstract boolean isSong();
     public abstract Song getWorkingOnSong();
+    public abstract Episode getWorkingOnEpisode();
 }

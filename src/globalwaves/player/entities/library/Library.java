@@ -18,13 +18,16 @@ public class Library {
     private static Library instance = null;
 
     @Getter
-    private List<Song> preLoadedSongs;
+    private List<Song> songs;
 
     @Getter
     private Map<String, List<Song>> addedSongs;
 
     @Getter
     private List<Podcast> podcasts;
+
+    @Getter
+    private Map<String, List<Podcast>> addedPodcasts;
 
     @Getter
     private List<User> users;
@@ -40,9 +43,10 @@ public class Library {
 
 
     private Library() {
-        preLoadedSongs = new ArrayList<>();
+        songs = new ArrayList<>();
         addedSongs = new HashMap<>();
         podcasts = new ArrayList<>();
+        addedPodcasts = new HashMap<>();
         users = new ArrayList<>();
         artists = new ArrayList<>();
         hosts = new ArrayList<>();
@@ -79,7 +83,7 @@ public class Library {
     }
 
     public void addSong(Song newSong) {
-        preLoadedSongs.add(newSong);
+        songs.add(newSong);
     }
 
     public void addPodcast(Podcast newPodcast) {
@@ -117,6 +121,10 @@ public class Library {
 
     public void addPlaylist(String owner, Playlist newPlaylist) {
         List<Playlist> ownerPlaylists = playlists.get(owner);
+        if (ownerPlaylists == null) {
+            ownerPlaylists = new ArrayList<>();
+            playlists.put(owner, ownerPlaylists);
+        }
         ownerPlaylists.add(newPlaylist);
     }
 

@@ -44,8 +44,18 @@ public class AdminBot extends Admin  {
         return user.hasAlbumWithName(albumName);
     }
 
+    public boolean checkPodcastNameForUser(final User user, final String podcastName) {
+        if (!user.isHost())
+            return false;
+
+        return user.hasPodcastWithName(podcastName);
+    }
+
     public boolean checkIfOwnerHasPlaylist(final String owner, final String playlistName) {
         List<Playlist> ownerPlaylists =  database.getPlaylists().get(owner);
+        if (ownerPlaylists == null)
+            return false;
+
         for (Playlist p : ownerPlaylists) {
             if (p.getName().equals(playlistName))
                 return true;
@@ -102,6 +112,15 @@ public class AdminBot extends Admin  {
         return null;
     }
 
+    public User getHostByUsername(final String username) {
+        for (User matchHost: database.getHosts()) {
+            if (matchHost.getUsername().equals(username))
+                return matchHost;
+        }
+
+        return null;
+    }
+
 
     public List<Playlist> getUserPublicPlaylists(final String username) {
         List<Playlist> publicPlaylists = new ArrayList<>();
@@ -115,10 +134,11 @@ public class AdminBot extends Admin  {
     }
 
     public List<Playlist> getAvailablePlaylists(final String owner) {
-        List<Playlist> ownedPlaylists = database.getPlaylists().get(owner);
+        List<Playlist> availablePlaylists = new ArrayList<>();
 
-        // Make a shallow copy
-        List<Playlist> availablePlaylists = new ArrayList<>(ownedPlaylists);
+        List<Playlist> ownedPlaylists = database.getPlaylists().get(owner);
+        if (ownedPlaylists != null)
+            availablePlaylists.addAll(ownedPlaylists);
 
         for (String username : database.getPlaylists().keySet()) {
             if (username.equals(owner))
@@ -139,8 +159,14 @@ public class AdminBot extends Admin  {
     public Map<AudioFile, Integer> mapSongs() {
         Map<AudioFile, Integer> mappedSongs = new HashMap<>();
 
-        for (Song s : database.getPreLoadedSongs())
+        for (Song s : database.getSongs())
             mappedSongs.put(s, 0);
+
+        for (List<Song> songs: database.getAddedSongs().values()) {
+           for (Song s: songs) {
+                mappedSongs.put(s, 0);
+           }
+        }
 
         return mappedSongs;
     }
@@ -200,6 +226,16 @@ public class AdminBot extends Admin  {
         return onlineUsers;
     }
 
+    public List<User> getAllUsers() {
+        List<User> users = new ArrayList<>();
+
+        users.addAll(database.getUsers());
+        users.addAll(database.getArtists());
+        users.addAll(database.getHosts());
+
+        return users;
+    }
+
 
     public List<String> getTopFivePlaylists() {
         List<Playlist> playlists = getPublicPlaylists();
@@ -220,6 +256,15 @@ public class AdminBot extends Admin  {
         return artist.getAlbums();
     }
 
+    public List<Album> getAllAlbums() {
+        List<Album> albums = new ArrayList<>();
+
+        for (User artist: database.getArtists())
+            albums.addAll(artist.getAlbums());
+
+        return albums;
+    }
+
     public void addSongsToLibrary(final String artist, final List<Song> songs) {
         List<Song> artistSongs = database.getAddedSongs().get(artist);
 
@@ -229,6 +274,17 @@ public class AdminBot extends Admin  {
         }
 
         artistSongs.addAll(songs);
+    }
+
+    public void addPocastToLibrary(final String host, final Podcast podcast) {
+        List<Podcast> hostPodcasts = database.getAddedPodcasts().get(host);
+
+        if (hostPodcasts == null) {
+            hostPodcasts = new ArrayList<>();
+            database.getAddedPodcasts().put(host, hostPodcasts);
+        }
+
+        hostPodcasts.add(podcast);
     }
 
 }

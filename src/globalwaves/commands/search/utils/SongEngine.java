@@ -2,7 +2,6 @@ package globalwaves.commands.search.utils;
 
 import globalwaves.commands.enums.FilterType;
 import globalwaves.commands.search.utils.filters.*;
-import globalwaves.player.entities.AudioFile;
 import globalwaves.player.entities.Song;
 import globalwaves.player.entities.library.Library;
 import lombok.NonNull;
@@ -50,7 +49,7 @@ public class SongEngine extends SearchEngine<Song> {
     public List<Song> collectResults() {
         List<Song> results = new ArrayList<>();
 
-        List<Song> preloadedSongs = Library.getInstance().getPreLoadedSongs();
+        List<Song> preloadedSongs = Library.getInstance().getSongs();
         results.addAll(findInDatabase(preloadedSongs));
 
         Map<String, List<Song>> addedSongs = Library.getInstance().getAddedSongs();

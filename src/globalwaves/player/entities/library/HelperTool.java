@@ -1,9 +1,6 @@
 package globalwaves.player.entities.library;
 
-import globalwaves.player.entities.AudioFile;
-import globalwaves.player.entities.Playlist;
-import globalwaves.player.entities.Song;
-import globalwaves.player.entities.User;
+import globalwaves.player.entities.*;
 import globalwaves.player.entities.utilities.SortByCreationTime;
 import globalwaves.player.entities.utilities.SortByFollowers;
 import globalwaves.player.entities.utilities.SortByInteger;
@@ -75,6 +72,7 @@ public class HelperTool {
         return usernames;
     }
 
+    // TODO: remove this if hasSameElementTwice works
     public boolean hasSameSongAtLeastTwice(final List<Song> songs) {
         for (int i = 0; i < songs.size() - 1; i++) {
             for (int j = i + 1; j < songs.size(); j++) {
@@ -85,6 +83,18 @@ public class HelperTool {
 
         return false;
     }
+
+    public <T> boolean hasSameElementTwice(final List<T> elements) {
+        for (int i = 0; i < elements.size() - 1; i++) {
+            for (int j = i + 1; j < elements.size(); j++) {
+                if (elements.get(i).equals(elements.get(j)))
+                    return true;
+            }
+        }
+
+        return false;
+    }
+
 
     public void setCreationTimestamp(final List<Song> songs, final int timestamp) {
         for (Song s : songs)

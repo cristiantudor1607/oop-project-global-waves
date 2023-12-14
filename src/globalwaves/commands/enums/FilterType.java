@@ -10,7 +10,7 @@ public final class FilterType {
         RELEASE_YEAR,
         ARTIST,
         OWNER,
-        USERNAME,
+        DESCRIPTION,
         ARTIST_USERNAME,
         HOST_USERNAME,
         UNKNOWN,
@@ -56,8 +56,8 @@ public final class FilterType {
             return Type.OWNER;
         }
 
-        if (filterAsString.equals("username"))
-            return Type.USERNAME;
+        if (filterAsString.equals("description"))
+            return Type.DESCRIPTION;
 
         return Type.UNKNOWN;
     }

@@ -449,13 +449,11 @@ public class ActionManager {
 
         User newUser = adminBot.createUser(username, age, city, newUserType);
         adminBot.addUser(newUser);
+        // Create an interface for the User
+        if (newUser.isNormalUser())
+            userInterfaces.put(username, new UserInterface(newUser));
+
         return AddUserExit.Status.SUCCESS;
-    }
-
-    public List<String> requestOnlineUsers() {
-        List<User> onlineUsers = adminBot.getOnlineUsers();
-
-        return tool.getUsernames(onlineUsers);
     }
 
     public AddAlbumExit.Status requestAddingAlbum(AddAlbumInterrogator execQuery) {
@@ -463,18 +461,19 @@ public class ActionManager {
         if (!usernameExist)
             return AddAlbumExit.Status.INVALID_USERNAME;
 
-        User u = adminBot.getArtistByUsername(execQuery.getUsername());
-        if (!u.isArtist())
+        User artist = adminBot.getArtistByUsername(execQuery.getUsername());
+        if (artist == null)
             return AddAlbumExit.Status.NOT_ARTIST;
 
         String albumName = execQuery.getAlbumName();
-        if (adminBot.checkAlbumNameForUser(u, albumName))
+        if (adminBot.checkAlbumNameForUser(artist, albumName))
             return AddAlbumExit.Status.SAME_NAME;
 
         if (tool.hasSameSongAtLeastTwice(execQuery.getSongs()))
             return AddAlbumExit.Status.SAME_SONG;
 
         String artistName = execQuery.getUsername();
+        String description = execQuery.getDescription();
         int creationTime = execQuery.getTimestamp();
 
         // Set the creation time for all songs on the album
@@ -482,11 +481,39 @@ public class ActionManager {
         // Add new songs to library
         adminBot.addSongsToLibrary(artistName, execQuery.getSongs());
         // Create the album object
-        Album artistNewAlbum = new Album(artistName, albumName, creationTime, execQuery.getSongs());
+        Album artistNewAlbum = new Album(artistName, albumName, description,
+                creationTime, execQuery.getSongs());
         // Add album to user albums
-        u.addAlbum(artistNewAlbum);
+        artist.addAlbum(artistNewAlbum);
 
         return AddAlbumExit.Status.SUCCESS;
+    }
+
+    public AddPodcastExit.Status requestAddingPodcast(final AddPodcastInterrogator execQuery) {
+        String hostName = execQuery.getUsername();
+
+        if (!adminBot.checkUsername(hostName))
+            return AddPodcastExit.Status.DOESNT_EXIST;
+
+        User host = adminBot.getHostByUsername(hostName);
+        if (host == null)
+            return AddPodcastExit.Status.NOT_HOST;
+
+        String podcastName = execQuery.getPodcastName();
+        if (adminBot.checkPodcastNameForUser(host, podcastName))
+            return AddPodcastExit.Status.SAME_NAME;
+
+        if (tool.hasSameElementTwice(execQuery.getEpisodes()))
+            return AddPodcastExit.Status.DUPLICATE;
+
+        // Create the new Podcast Object
+        Podcast hostPodcast = new Podcast(podcastName, hostName, execQuery.getEpisodes());
+        // Add Podcast to Library
+        adminBot.addPocastToLibrary(hostName, hostPodcast);
+        // Add Podcast to user podcasts
+        host.addPodcast(hostPodcast);
+
+        return AddPodcastExit.Status.SUCCESS;
     }
 
     public List<Album> requestUserAlbums(final ShowAlbumsInterrogator execQuery) {
@@ -556,7 +583,7 @@ public class ActionManager {
     public RemoveEventExit.Status requestRemovingEvent(final RemoveEventInterrogator execQuery) {
         String username = execQuery.getUsername();
 
-        if (adminBot.checkUsername(username))
+        if (!adminBot.checkUsername(username))
             return RemoveEventExit.Status.DOESNT_EXIST;
 
         User artist = adminBot.getArtistByUsername(username);
@@ -573,7 +600,17 @@ public class ActionManager {
         return RemoveEventExit.Status.SUCCESS;
     }
 
+    public List<String> requestOnlineUsers() {
+        List<User> onlineUsers = adminBot.getOnlineUsers();
 
+        return tool.getUsernames(onlineUsers);
+    }
+
+    public List<String> requestAllUsers() {
+        List<User> allUsers = adminBot.getAllUsers();
+
+        return tool.getUsernames(allUsers);
+    }
 
     public void updatePlayersData(CommandObject nextToExecuteCommand) {
         int diff = nextToExecuteCommand.getTimestamp() - lastActionTime;

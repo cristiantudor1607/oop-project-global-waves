@@ -35,6 +35,7 @@ public class SearchBar {
             case SONG -> new SongEngine(filters);
             case PODCAST -> new PodcastEngine(filters);
             case PLAYLIST -> new PlaylistEngine(filters, username);
+            case ALBUM -> new AlbumEngine(filters);
             default -> null;
         };
     }
@@ -114,7 +115,9 @@ public class SearchBar {
     }
 
     public boolean wasNotInvoked() {
-        // return results == null;
+        if (typeOfSearch == null)
+            return true;
+
         return switch (typeOfSearch) {
             case PLAYABLE_ENTITY -> results == null;
             case PAGE -> pages == null;

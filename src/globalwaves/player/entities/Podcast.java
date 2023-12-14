@@ -2,7 +2,6 @@ package globalwaves.player.entities;
 
 import fileio.input.EpisodeInput;
 import fileio.input.PodcastInput;
-import globalwaves.commands.enums.exitstats.stageone.FollowExit;
 import globalwaves.commands.enums.exitstats.stageone.ShuffleExit;
 import globalwaves.player.entities.properties.OwnedEntity;
 import globalwaves.player.entities.properties.PlayableEntity;
@@ -16,7 +15,14 @@ import java.util.List;
 public class Podcast implements PlayableEntity, OwnedEntity {
     private String name;
     private String owner;
-    private List<AudioFile> episodes;
+    private List<Episode> episodes;
+
+    public Podcast(final String name, final String owner, final List<Episode> episodes) {
+        this.name = name;
+        this.owner = owner;
+        this.episodes = episodes;
+    }
+
 
     public Podcast(final PodcastInput input) {
         name = input.getName();
@@ -30,13 +36,14 @@ public class Podcast implements PlayableEntity, OwnedEntity {
 
     }
 
+
     /**
      * Returns the episode that has to be played after the specified one
      * @param currentEpisode The episode currently playing
      * @return The next episode if it exists, null otherwise
      */
     public AudioFile getNextEpisode(final AudioFile currentEpisode) {
-        int currentIndex = episodes.indexOf(currentEpisode);
+        int currentIndex = episodes.indexOf((Episode) currentEpisode);
 
         if (currentIndex > episodes.size())
             return null;
@@ -50,7 +57,7 @@ public class Podcast implements PlayableEntity, OwnedEntity {
      * @return The previous episode, if it exists, null, otherwise
      */
     public AudioFile getPrevEpisode(final AudioFile currentEpisode) {
-        int currentIndex = episodes.indexOf(currentEpisode);
+        int currentIndex = episodes.indexOf((Episode) currentEpisode);
 
         if (currentIndex == 0)
             return null;
