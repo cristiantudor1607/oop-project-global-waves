@@ -3,6 +3,7 @@ package globalwaves.player.entities.properties;
 import globalwaves.player.entities.*;
 import globalwaves.player.entities.paging.ArtistPage;
 import globalwaves.player.entities.paging.HomePage;
+import globalwaves.player.entities.paging.HostPage;
 
 import java.util.List;
 
@@ -68,5 +69,45 @@ public class ContentVisitor implements Visitor {
 
         return "Albums:\n\t[" + albumNames + "]\n\nMerch:\n\t[" + merchNames
                 + "]\n\nEvents:\n\t[" + eventNames + "]";
+    }
+
+    @Override
+    public String visit(HostPage page) {
+        List<Podcast> podcasts = page.getHost().getPodcasts();
+        List<Announcement> announcements = page.getAnnouncements();
+
+        StringBuilder podcastFormat = new StringBuilder();
+        for (int i = 0; i < podcasts.size(); i++) {
+            if (i != 0)
+                podcastFormat.append(", ");
+
+            podcastFormat.append(podcasts.get(i).getName()).append(":\n\t[");
+
+            List<Episode> episodes = podcasts.get(i).getEpisodes();
+            for (int j = 0; j < episodes.size(); j++) {
+                if (j != 0)
+                    podcastFormat.append(", ");
+
+                podcastFormat.append(episodes.get(j).getName())
+                        .append(" - ")
+                        .append(episodes.get(j).getDescription());
+            }
+
+            podcastFormat.append("]\n");
+        }
+
+        StringBuilder announceFormat = new StringBuilder();
+        for (int i = 0; i < announcements.size(); i++) {
+            if (i != 0)
+                announceFormat.append(", ");
+
+            announceFormat.append(announcements.get(i).getName())
+                    .append(":")
+                    .append("\n\t")
+                    .append(announcements.get(i).getDescription());
+        }
+
+        return "Podcasts:\n\t[" + podcastFormat + "]\n\nAnnouncements:\n\t["
+                + announceFormat + "\n]";
     }
 }

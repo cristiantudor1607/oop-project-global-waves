@@ -254,6 +254,12 @@ public class AdminBot extends Admin  {
         return artist.getAlbums();
     }
 
+    public List<Podcast> getHostPodcasts(final String username) {
+        User host = getHostByUsername(username);
+
+        return host.getPodcasts();
+    }
+
     public List<Album> getAllAlbums() {
         List<Album> albums = new ArrayList<>();
 

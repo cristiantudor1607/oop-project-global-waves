@@ -23,7 +23,6 @@ public class PrintPageInterrogator extends CommandObject {
             return;
 
         output = manager.requestPageContent(this);
-        manager.setLastActionTime(timestamp);
     }
 
 

@@ -9,6 +9,7 @@ import globalwaves.player.entities.Podcast;
 import globalwaves.player.entities.library.Library;
 import lombok.NonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -39,8 +40,11 @@ public class PodcastEngine extends SearchEngine<Podcast> {
     @Override
     public List<Podcast> collectResults() {
         Library database = Library.getInstance();
+        List<Podcast> matchedPodcasts = new ArrayList<>(database.getPodcasts());
 
-        List<Podcast> matchedPodcasts = database.getPodcasts();
+        for (List<Podcast> podcasts: database.getAddedPodcasts().values())
+            matchedPodcasts.addAll(podcasts);
+
 
         for (Filter<Podcast> filter : filters) {
             matchedPodcasts = applyFilter(matchedPodcasts, filter);

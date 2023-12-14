@@ -145,11 +145,11 @@ public class ActionManager {
         Player userPlayer = getPlayerByUsername(username);
         SearchBar searchbar = getSearchBarByUsername(username);
 
+        userPlayer.stopPlayer();
         searchbar.search(execQuery.getType(), execQuery.getFilters());
         if (searchbar.hasSearchedPages())
             return searchbar.getPagesAsNames();
 
-        userPlayer.stopPlayer();
         return searchbar.getResultsAsNames();
     }
 
@@ -568,6 +568,12 @@ public class ActionManager {
         return adminBot.getArtistAlbums(username);
     }
 
+    public List<Podcast> requestUserPodcasts(final ShowPodcastsInterrogator execQuery) {
+        String hostName = execQuery.getUsername();
+
+        return adminBot.getHostPodcasts(hostName);
+    }
+
     public String requestPageContent(final PrintPageInterrogator execQuery) {
         String username = execQuery.getUsername();
 
@@ -646,8 +652,8 @@ public class ActionManager {
         return RemoveEventExit.Status.SUCCESS;
     }
 
-    public AddAnnouncementExit.Status requestAddingAnnouncement(final AddAnnouncementInterrogator
-                                                                execQuery) {
+    public AddAnnouncementExit.Status
+    requestAddingAnnouncement(final AddAnnouncementInterrogator execQuery) {
         String username = execQuery.getUsername();
 
         if (!adminBot.checkUsername(username))
@@ -665,6 +671,27 @@ public class ActionManager {
         host.addAnnouncement(new Announcement(announcementName, announcementDescription));
 
         return AddAnnouncementExit.Status.SUCCESS;
+    }
+
+    public RemoveAnnouncementExit.Status
+    requestRemovingAnnouncement(final RemoveAnnouncementInterrogator execQuery) {
+        String username =  execQuery.getUsername();
+
+        if (!adminBot.checkUsername(username))
+            return RemoveAnnouncementExit.Status.DOESNT_EXIST;
+
+        User host = adminBot.getHostByUsername(username);
+        if (host == null)
+            return RemoveAnnouncementExit.Status.NOT_HOST;
+
+        String announcementName = execQuery.getName();
+        Announcement announcement = host.getAnnouncement(announcementName);
+        if (announcement == null)
+            return RemoveAnnouncementExit.Status.INVALID_NAME;
+
+        host.removeAnnouncement(announcement);
+
+        return RemoveAnnouncementExit.Status.SUCCESS;
     }
 
 
