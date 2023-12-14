@@ -45,7 +45,7 @@ public class Podcast implements PlayableEntity, OwnedEntity {
     public AudioFile getNextEpisode(final AudioFile currentEpisode) {
         int currentIndex = episodes.indexOf((Episode) currentEpisode);
 
-        if (currentIndex > episodes.size())
+        if (currentIndex >= episodes.size() - 1)
             return null;
 
         return episodes.get(currentIndex + 1);
@@ -124,7 +124,7 @@ public class Podcast implements PlayableEntity, OwnedEntity {
     }
 
     @Override
-    public AudioFile getPlayableFile() {
+    public AudioFile getAudioFile() {
         return episodes.get(0);
     }
 
@@ -166,5 +166,10 @@ public class Podcast implements PlayableEntity, OwnedEntity {
     @Override
     public boolean hasAudiofileFromUser(String username) {
         return owner.equals(username);
+    }
+
+    @Override
+    public Album getWorkinOnAlbum() {
+        return null;
     }
 }

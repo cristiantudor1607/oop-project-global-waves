@@ -6,18 +6,7 @@ import globalwaves.player.entities.utilities.SortByFollowers;
 import globalwaves.player.entities.utilities.SortByInteger;
 import globalwaves.player.entities.utilities.SortByLibraryOrder;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.DateTimeException;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.time.format.DateTimeParseException;
-import java.time.format.ResolverStyle;
-import java.time.temporal.TemporalAccessor;
 import java.util.*;
-import java.util.zip.DataFormatException;
 
 public class HelperTool {
     private static HelperTool instance = null;
@@ -35,9 +24,18 @@ public class HelperTool {
         instance = null;
     }
 
-    public boolean playlistsHasArtist(final List<Playlist> playlists, final String artistName) {
+    public boolean playlistsHaveArtist(final List<Playlist> playlists, final String artistName) {
         for (Playlist p: playlists) {
             if (p.hasAudiofileFromUser(artistName))
+                return true;
+        }
+
+        return false;
+    }
+
+    public boolean playlistsHaveAlbum(final List<Playlist> playlists, final String albumName) {
+        for (Playlist p: playlists) {
+            if (p.hasSongFromAlbum(albumName))
                 return true;
         }
 

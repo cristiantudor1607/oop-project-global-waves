@@ -115,7 +115,7 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
     }
 
     @Override
-    public AudioFile getPlayableFile() {
+    public AudioFile getAudioFile() {
         return this;
     }
 
@@ -195,6 +195,11 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
     @Override
     public boolean hasAudiofileFromUser(String username) {
         return artist.equals(username);
+    }
+
+    @Override
+    public Album getWorkinOnAlbum() {
+        return null;
     }
 
     @Override

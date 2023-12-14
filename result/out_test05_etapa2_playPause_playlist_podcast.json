@@ -203,7 +203,18 @@
   "user" : "magichost",
   "timestamp" : 3247,
   "message" : "The username magichost is already taken."
-}, null, {
+}, {
+  "command" : "showPodcasts",
+  "user" : "soundseeker",
+  "timestamp" : 3250,
+  "result" : [ {
+    "name" : "Auditory Adventures",
+    "episodes" : [ "Exploring Sonic Landscapes", "The Future of Music Technology", "Cultural Beats" ]
+  }, {
+    "name" : "Harmony & History",
+    "episodes" : [ "The Roots of Blues", "Classical Music's Modern Impact", "Jazz Journeys", "The Folk Revival" ]
+  } ]
+}, {
   "command" : "addRemoveInPlaylist",
   "user" : "alice22",
   "timestamp" : 3250,

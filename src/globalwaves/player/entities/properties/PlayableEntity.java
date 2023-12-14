@@ -1,6 +1,7 @@
 package globalwaves.player.entities.properties;
 
 import globalwaves.commands.enums.exitstats.stageone.ShuffleExit;
+import globalwaves.player.entities.Album;
 import globalwaves.player.entities.AudioFile;
 import globalwaves.player.entities.Playlist;
 
@@ -15,7 +16,7 @@ public interface PlayableEntity {
      * Gets the first file to be loaded and played
      * @return The first file of the entity
      */
-    AudioFile getPlayableFile();
+    AudioFile getAudioFile();
 
     /**
      * Checks if the entity needs to save its data to the history
@@ -60,5 +61,6 @@ public interface PlayableEntity {
      */
     int getDuration();
 
-    public boolean hasAudiofileFromUser(String username);
+    boolean hasAudiofileFromUser(String username);
+    Album getWorkinOnAlbum();
 }

@@ -293,7 +293,7 @@ public class Player {
             return;
         }
 
-        AudioFile newAudiofile = selectedSource.getPlayableFile();
+        AudioFile newAudiofile = selectedSource.getAudioFile();
         int duration = newAudiofile.getDuration();
 
         playingFile = newAudiofile;
@@ -321,6 +321,22 @@ public class Player {
 
     public boolean isPlaying() {
         return state == PlayerStatus.PLAYING;
+    }
+
+    public boolean isPlayingFromAlbum(String albumName) {
+        // Check if there is playing an album, by trying to get the album
+        Album playingAlbum = selectedSource.getWorkinOnAlbum();
+        if (playingAlbum != null)
+            if (playingAlbum.getName().equals(albumName))
+                return true;
+
+        // Check if there is playing an playlist, by trying to get the playlist
+        Playlist playingPlaylist = selectedSource.getWorkingOnPlaylist();
+        if (playingPlaylist != null)
+            if (playingPlaylist.hasSongFromAlbum(albumName))
+                return true;
+
+        return false;
     }
 
 }

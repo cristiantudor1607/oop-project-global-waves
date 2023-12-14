@@ -1,6 +1,5 @@
 package globalwaves.player.entities;
 
-import globalwaves.commands.enums.exitstats.stageone.FollowExit;
 import globalwaves.commands.enums.exitstats.stageone.ShuffleExit;
 import globalwaves.player.entities.properties.OwnedEntity;
 import globalwaves.player.entities.properties.PlayableEntity;
@@ -129,6 +128,14 @@ public class Playlist implements PlayableEntity, OwnedEntity {
         followersNumber--;
     }
 
+    public boolean hasSongFromAlbum(final String albumName) {
+        for (Song song: songs)
+            if (song.getAlbum().equals(albumName))
+                return true;
+
+        return false;
+    }
+
     @Override
     public String getRepeatStateName(int repeatValue) {
         switch (repeatValue) {
@@ -154,7 +161,7 @@ public class Playlist implements PlayableEntity, OwnedEntity {
        AudioFile next = getNextSong(currentFile);
 
        if (repeatValue == 1 && next == null)
-           return getPlayableFile();
+           return getAudioFile();
 
        return next;
     }
@@ -177,7 +184,7 @@ public class Playlist implements PlayableEntity, OwnedEntity {
     }
 
     @Override
-    public AudioFile getPlayableFile() {
+    public AudioFile getAudioFile() {
         if (songs.isEmpty())
             return null;
 
@@ -232,5 +239,10 @@ public class Playlist implements PlayableEntity, OwnedEntity {
         }
 
         return false;
+    }
+
+    @Override
+    public Album getWorkinOnAlbum() {
+        return null;
     }
 }

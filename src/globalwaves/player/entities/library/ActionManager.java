@@ -86,7 +86,7 @@ public class ActionManager {
         return ui != null;
     }
 
-    public boolean userIsListenedTo(@NonNull final String username) {
+    public boolean userIsBeingListened(@NonNull final String username) {
         for (UserInterface ui: userInterfaces.values()) {
             // Ignore the users that don't listen to anything
             PlayableEntity playingCollection = ui.getPlayer().getSelectedSource();
@@ -723,19 +723,36 @@ public class ActionManager {
             return username + " was successfully deleted.";
         }
 
-        if (userIsListenedTo(username))
+        if (userIsBeingListened(username))
             return username + " can't be deleted.";
 
         if (userIsBeingWatched(username))
             return username + "can't be deleted.";
 
-        if (adminBot.playlistHasSongFromArtist(username))
+        if (adminBot.playlistsHaveSongFromArtist(username))
             return username + "can't be deleted.";
 
         adminBot.removeUser(user);
 
         return username + " was successfully deleted.";
 
+    }
+
+    public RemoveAlbumExit.Status requestRemovingAlbum(final RemoveAlbumInterrogator execQuery) {
+        String username = execQuery.getUsername();
+        String albumName = execQuery.getName();
+
+        if (!adminBot.checkUsername(username))
+            return RemoveAlbumExit.Status.DOESNT_EXIST;
+
+        User artist = adminBot.getArtistByUsername(username);
+        if (artist == null)
+            return RemoveAlbumExit.Status.NOT_ARTIST;
+
+        if (!artist.hasAlbumWithName(albumName))
+            return RemoveAlbumExit.Status.DONT_HAVE;
+
+        return RemoveAlbumExit.Status.SUCCESS;
     }
 
     public void updatePlayersData(CommandObject nextToExecuteCommand) {

@@ -40,4 +40,9 @@ public class Album extends Playlist {
     public boolean hasAudiofileFromUser(String username) {
         return artist.equals(username);
     }
+
+    @Override
+    public Album getWorkinOnAlbum() {
+        return this;
+    }
 }

@@ -291,13 +291,23 @@ public class AdminBot extends Admin  {
         hostPodcasts.add(podcast);
     }
 
-    public boolean playlistHasSongFromArtist(final String artistName) {
+    public boolean playlistsHaveSongFromArtist(final String artistName) {
         for (List<Playlist> playlists: database.getPlaylists().values()) {
-            if (tool.playlistsHasArtist(playlists, artistName))
+            if (tool.playlistsHaveArtist(playlists, artistName))
                 return true;
         }
 
         return false;
     }
+
+    public boolean playlistsHaveSongFromAlbum(final String albumName) {
+        for (List<Playlist> playlists: database.getPlaylists().values()) {
+            if (tool.playlistsHaveAlbum(playlists, albumName))
+                return true;
+        }
+
+        return false;
+    }
+
 
 }
