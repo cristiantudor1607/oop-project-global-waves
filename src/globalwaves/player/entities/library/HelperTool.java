@@ -35,6 +35,15 @@ public class HelperTool {
         instance = null;
     }
 
+    public boolean playlistsHasArtist(final List<Playlist> playlists, final String artistName) {
+        for (Playlist p: playlists) {
+            if (p.hasAudiofileFromUser(artistName))
+                return true;
+        }
+
+        return false;
+    }
+
     public List<Map.Entry<AudioFile, Integer>> unrollLikes(Map<AudioFile, Integer> mappedLikes) {
         List<Map.Entry<AudioFile, Integer>> unrolledLikes = new ArrayList<>();
 

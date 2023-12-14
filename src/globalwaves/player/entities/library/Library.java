@@ -119,6 +119,41 @@ public class Library {
         return hosts.add(newHost);
     }
 
+    private void removeSongsFromAlbum(final String artistName, final String albumName) {
+        addedSongs.get(artistName).removeIf(songFromArtist ->
+                songFromArtist.getAlbum().equals(albumName));
+    }
+
+    private void removeSongsFromLiked(final String albumName) {
+        for (User user: users) {
+            List<Song> likes = user.getLikes();
+            likes.removeIf(likedSong -> likedSong.getAlbum().equals(albumName));
+        }
+    }
+
+    public boolean removeUser(User oldUser) {
+        if (oldUser.isNormalUser())
+            return users.remove(oldUser);
+
+        if (oldUser.isArtist()) {
+            // TODO: Remove from user liked songs
+            for (Album album: oldUser.getAlbums()) {
+                String albumName = album.getName();
+                removeSongsFromAlbum(oldUser.getUsername(), albumName);
+                removeSongsFromLiked(albumName);
+            }
+
+
+            return artists.remove(oldUser);
+        }
+
+        if (oldUser.isHost())
+            return hosts.remove(oldUser);
+
+        return false;
+    }
+
+
     public void addPlaylist(String owner, Playlist newPlaylist) {
         List<Playlist> ownerPlaylists = playlists.get(owner);
         if (ownerPlaylists == null) {

@@ -157,4 +157,14 @@ public class Podcast implements PlayableEntity, OwnedEntity {
     public Playlist getWorkingOnPlaylist() {
         return null;
     }
+
+    @Override
+    public String getPublicPerson() {
+        return owner;
+    }
+
+    @Override
+    public boolean hasAudiofileFromUser(String username) {
+        return owner.equals(username);
+    }
 }

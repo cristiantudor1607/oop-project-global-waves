@@ -88,13 +88,11 @@ public class AdminBot extends Admin  {
                 return matchUser;
         }
 
-        // TODO: Consider removing this
         for (User matchArtist: database.getArtists()) {
             if (matchArtist.getUsername().equals(username))
                 return matchArtist;
         }
 
-        // TODO: And this
         for (User matchHost: database.getHosts()) {
             if (matchHost.getUsername().equals(username))
                 return matchHost;
@@ -285,6 +283,15 @@ public class AdminBot extends Admin  {
         }
 
         hostPodcasts.add(podcast);
+    }
+
+    public boolean playlistHasSongFromArtist(final String artistName) {
+        for (List<Playlist> playlists: database.getPlaylists().values()) {
+            if (tool.playlistsHasArtist(playlists, artistName))
+                return true;
+        }
+
+        return false;
     }
 
 }

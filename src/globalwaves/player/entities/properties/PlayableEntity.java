@@ -1,13 +1,8 @@
 package globalwaves.player.entities.properties;
 
-import globalwaves.commands.enums.exitstats.stageone.FollowExit;
 import globalwaves.commands.enums.exitstats.stageone.ShuffleExit;
 import globalwaves.player.entities.AudioFile;
 import globalwaves.player.entities.Playlist;
-import globalwaves.player.entities.Song;
-import globalwaves.player.entities.User;
-
-import java.util.List;
 
 public interface PlayableEntity {
     /**
@@ -56,11 +51,14 @@ public interface PlayableEntity {
     ShuffleExit.Status unshuffle();
     boolean cantGoForwardOrBackward();
     String getName();
-
     Playlist getWorkingOnPlaylist();
+    String getPublicPerson();
+
     /**
      * Returns the duration of the entity
      * @return The duration of the entity
      */
     int getDuration();
+
+    public boolean hasAudiofileFromUser(String username);
 }

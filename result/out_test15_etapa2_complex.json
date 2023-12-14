@@ -5107,7 +5107,12 @@
   "command" : "getOnlineUsers",
   "timestamp" : 6041,
   "result" : [ "alice22", "bob35", "carol19", "david27", "emily30", "frank21", "grace25", "henry26", "irene33", "jack29" ]
-}, null, {
+}, {
+  "command" : "deleteUser",
+  "user" : "cbutler",
+  "timestamp" : 6046,
+  "message" : "cbutler can't be deleted."
+}, {
   "command" : "shuffle",
   "user" : "carol19",
   "timestamp" : 6051,
@@ -5118,7 +5123,7 @@
   "timestamp" : 6056,
   "stats" : {
     "name" : "Heart Bliss",
-    "remainedTime" : 148,
+    "remainedTime" : 153,
     "repeat" : "No Repeat",
     "shuffle" : true,
     "paused" : false
@@ -23741,5 +23746,5 @@
 }, {
   "command" : "getTop5Songs",
   "timestamp" : 14849,
-  "result" : [ "Utopia Harmony", "Celestial Soul", "Night Utopia", "Ethereal Rapture", "Whirlwind Whirlwind" ]
+  "result" : [ "Utopia Harmony", "Celestial Soul", "Celestial Harmony", "Night Utopia", "Bliss Rhythm" ]
 }, null, null ]

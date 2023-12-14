@@ -136,17 +136,22 @@
   "user" : "bob35",
   "timestamp" : 525,
   "message" : "Liked songs:\n\t[Aurora Harmony]\n\nFollowed playlists:\n\t[Playlist bengos]"
-}, null, {
+}, {
+  "command" : "deleteUser",
+  "user" : "sonicpainter",
+  "timestamp" : 620,
+  "message" : "sonicpainter can't be deleted."
+}, {
   "command" : "search",
   "user" : "soundseeker21",
   "timestamp" : 625,
-  "message" : "Search returned 0 results",
-  "results" : [ ]
+  "message" : "Search returned 1 results",
+  "results" : [ "audiosage" ]
 }, {
   "command" : "select",
   "user" : "soundseeker21",
   "timestamp" : 630,
-  "message" : "The selected ID is too high."
+  "message" : "Successfully selected audiosage's page."
 }, {
   "command" : "search",
   "user" : "carol19",
@@ -174,27 +179,82 @@
   "timestamp" : 760,
   "message" : "Search returned 1 results",
   "results" : [ "sonicpainter" ]
-}, null, null, null, null, {
+}, {
+  "command" : "deleteUser",
+  "user" : "sonicpainter",
+  "timestamp" : 900,
+  "message" : "sonicpainter can't be deleted."
+}, {
+  "command" : "deleteUser",
+  "user" : "audiosage",
+  "timestamp" : 930,
+  "message" : "audiosagecan't be deleted."
+}, null, {
+  "command" : "deleteUser",
+  "user" : "melodicwanderer",
+  "timestamp" : 960,
+  "message" : "melodicwanderer was successfully deleted."
+}, {
   "command" : "repeat",
   "user" : "carol19",
   "timestamp" : 965,
   "message" : "Please load a source before setting the repeat status."
-}, null, null, null, {
+}, {
+  "command" : "deleteUser",
+  "user" : "sonicpainter",
+  "timestamp" : 975,
+  "message" : "sonicpaintercan't be deleted."
+}, null, {
+  "command" : "deleteUser",
+  "user" : "audiosage",
+  "timestamp" : 1100,
+  "message" : "audiosagecan't be deleted."
+}, {
   "command" : "select",
   "user" : "david27",
   "timestamp" : 1225,
   "message" : "Successfully selected sonicpainter's page."
-}, null, null, {
+}, {
+  "command" : "deleteUser",
+  "user" : "melodicwanderer",
+  "timestamp" : 1500,
+  "message" : "The username melodicwanderer doesn't exist."
+}, {
+  "command" : "deleteUser",
+  "user" : "musicmaven",
+  "timestamp" : 6900,
+  "message" : "musicmaven was successfully deleted."
+}, {
   "command" : "repeat",
   "user" : "carol19",
   "timestamp" : 7200,
   "message" : "Please load a source before setting the repeat status."
-}, null, {
+}, {
+  "command" : "deleteUser",
+  "user" : "sonicpainter",
+  "timestamp" : 7225,
+  "message" : "sonicpaintercan't be deleted."
+}, {
   "command" : "repeat",
   "user" : "carol19",
   "timestamp" : 7505,
   "message" : "Please load a source before setting the repeat status."
-}, null, null, null, null, {
+}, {
+  "command" : "deleteUser",
+  "user" : "melodicwanderer",
+  "timestamp" : 7855,
+  "message" : "The username melodicwanderer doesn't exist."
+}, {
+  "command" : "deleteUser",
+  "user" : "sonicpainter",
+  "timestamp" : 7860,
+  "message" : "sonicpaintercan't be deleted."
+}, null, {
+  "command" : "deleteUser",
+  "user" : "sonicpainter",
+  "timestamp" : 7890,
+  "message" : "sonicpaintercan't be deleted."
+}, {
   "command" : "printCurrentPage",
   "user" : "bob35",
   "timestamp" : 7900,

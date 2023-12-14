@@ -42,7 +42,7 @@ import java.util.Map;
         @JsonSubTypes.Type(value = EmptyCommand.class, name = "changePage"),
         @JsonSubTypes.Type(value = PrintPageInterrogator.class, name = "printCurrentPage"),
         @JsonSubTypes.Type(value = AddUserInterrogator.class, name = "addUser"),
-        @JsonSubTypes.Type(value = EmptyCommand.class, name = "deleteUser"),
+        @JsonSubTypes.Type(value = DeleteUserInterrogator.class, name = "deleteUser"),
         @JsonSubTypes.Type(value = ShowAlbumsInterrogator.class, name = "showAlbums"),
         @JsonSubTypes.Type(value = EmptyCommand.class, name = "showPodcasts"),
         @JsonSubTypes.Type(value = AddAlbumInterrogator.class, name = "addAlbum"),

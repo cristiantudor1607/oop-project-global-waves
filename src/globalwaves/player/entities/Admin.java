@@ -36,6 +36,10 @@ public class Admin extends User {
         return false;
     }
 
+    public boolean removeUser(@NonNull User oldUser) {
+        return database.removeUser(oldUser);
+    }
+
     @Override
     public boolean isNormalUser() {
         return false;

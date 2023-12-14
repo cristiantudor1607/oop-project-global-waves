@@ -34,8 +34,8 @@
   "command" : "search",
   "user" : "jack29",
   "timestamp" : 50,
-  "message" : "Search returned 0 results",
-  "results" : [ ]
+  "message" : "Search returned 1 results",
+  "results" : [ "soundseeker" ]
 }, null, null, null, null, {
   "command" : "printCurrentPage",
   "user" : "jack29",
@@ -45,7 +45,7 @@
   "command" : "select",
   "user" : "jack29",
   "timestamp" : 57,
-  "message" : "The selected ID is too high."
+  "message" : "Successfully selected soundseeker's page."
 }, {
   "command" : "search",
   "user" : "alice22",
@@ -104,7 +104,7 @@
   "command" : "printCurrentPage",
   "user" : "jack29",
   "timestamp" : 90,
-  "message" : "Liked songs:\n\t[]\n\nFollowed playlists:\n\t[]"
+  "message" : "jack29 is offline."
 }, {
   "command" : "playPause",
   "user" : "alice22",
@@ -210,7 +210,12 @@
   "timestamp" : 3255,
   "message" : "Search returned 1 results",
   "results" : [ "2010 hits" ]
-}, null, {
+}, {
+  "command" : "deleteUser",
+  "user" : "david27",
+  "timestamp" : 3257,
+  "message" : "david27 was successfully deleted."
+}, {
   "command" : "select",
   "user" : "alice22",
   "timestamp" : 3260,
@@ -279,7 +284,12 @@
     "followers" : 1,
     "songs" : [ "Freedom", "Happier" ]
   } ]
-}, null, {
+}, {
+  "command" : "deleteUser",
+  "user" : "soundseeker",
+  "timestamp" : 4010,
+  "message" : "soundseekercan't be deleted."
+}, {
   "command" : "status",
   "user" : "carol19",
   "timestamp" : 4500,
@@ -290,4 +300,9 @@
     "shuffle" : false,
     "paused" : true
   }
-}, null ]
+}, {
+  "command" : "deleteUser",
+  "user" : "soundseeker",
+  "timestamp" : 100000,
+  "message" : "soundseekercan't be deleted."
+} ]

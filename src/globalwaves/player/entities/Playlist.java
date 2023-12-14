@@ -218,4 +218,19 @@ public class Playlist implements PlayableEntity, OwnedEntity {
     public boolean cantGoForwardOrBackward() {
         return true;
     }
+
+    @Override
+    public String getPublicPerson() {
+        return null;
+    }
+
+    @Override
+    public boolean hasAudiofileFromUser(String username) {
+        for (Song s : songs) {
+            if (s.hasAudiofileFromUser(username))
+                return true;
+        }
+
+        return false;
+    }
 }

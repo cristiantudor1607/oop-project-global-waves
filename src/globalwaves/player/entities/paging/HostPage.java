@@ -19,10 +19,18 @@ public class HostPage extends Page{
         announcements = new ArrayList<>();
     }
 
-
     @Override
     public String accept(Visitor v) {
         return null;
     }
 
+    @Override
+    public String getHostName() {
+        return host.getUsername();
+    }
+
+    @Override
+    public String getUsername() {
+        return getHostName();
+    }
 }

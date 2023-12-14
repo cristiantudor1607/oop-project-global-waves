@@ -30,4 +30,14 @@ public class Album extends Playlist {
         List<Integer> order = getNumericalOrder();
         this.setPlayOrder(order);
     }
+
+    @Override
+    public String getPublicPerson() {
+        return artist;
+    }
+
+    @Override
+    public boolean hasAudiofileFromUser(String username) {
+        return artist.equals(username);
+    }
 }

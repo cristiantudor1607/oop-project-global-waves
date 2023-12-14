@@ -12,6 +12,7 @@ import globalwaves.player.entities.properties.ContentVisitor;
 import globalwaves.player.entities.properties.PlayableEntity;
 import globalwaves.player.entities.utilities.DateMapper;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
 import java.time.LocalDate;
@@ -77,6 +78,51 @@ public class ActionManager {
         UserInterface ui = userInterfaces.get(username);
 
         return ui.getCurrentPage();
+    }
+
+    public boolean removeUserInterface(final String username) {
+        UserInterface ui = userInterfaces.remove(username);
+
+        return ui != null;
+    }
+
+    public boolean userIsListenedTo(@NonNull final String username) {
+        for (UserInterface ui: userInterfaces.values()) {
+            // Ignore the users that don't listen to anything
+            PlayableEntity playingCollection = ui.getPlayer().getSelectedSource();
+            if (playingCollection == null)
+                continue;
+
+            // Get the name of the artist or host that is being listened to
+            String publicPerson = ui.getPlayer().getSelectedSource().getPublicPerson();
+
+            // If it returned null, then it's a playlist, and we have to check if the
+            // user has a song in playlist from this artist
+            if (publicPerson == null) {
+                if (playingCollection.hasAudiofileFromUser(username))
+                    return true;
+
+                continue;
+            }
+
+            if (publicPerson.equals(username))
+                return true;
+        }
+
+        return false;
+    }
+
+    public boolean userIsBeingWatched(@NonNull final String username) {
+        for (UserInterface ui: userInterfaces.values()) {
+            String pageOwner = ui.getCurrentPage().getUsername();
+            if (pageOwner == null)
+                continue;
+
+            if (pageOwner.equals(username))
+                return true;
+        }
+
+        return false;
     }
 
 
@@ -610,6 +656,37 @@ public class ActionManager {
         List<User> allUsers = adminBot.getAllUsers();
 
         return tool.getUsernames(allUsers);
+    }
+
+    public String requestDeletingUser(final DeleteUserInterrogator execQuery) {
+        String username = execQuery.getUsername();
+        User user = adminBot.getUserByUsername(username);
+
+        // If getUserByUsername method returned null, it means that the user doesn't exist
+        if (user == null)
+            return "The username " + username + " doesn't exist.";
+
+        if (user.isNormalUser()) {
+            // Method won't fail, because a normal user always have a interface in the action
+            // manager.
+            removeUserInterface(username);
+            adminBot.removeUser(user);
+            return username + " was successfully deleted.";
+        }
+
+        if (userIsListenedTo(username))
+            return username + " can't be deleted.";
+
+        if (userIsBeingWatched(username))
+            return username + "can't be deleted.";
+
+        if (adminBot.playlistHasSongFromArtist(username))
+            return username + "can't be deleted.";
+
+        adminBot.removeUser(user);
+
+        return username + " was successfully deleted.";
+
     }
 
     public void updatePlayersData(CommandObject nextToExecuteCommand) {
