@@ -109,6 +109,7 @@ public class HelperTool {
     }
 
     public <T> void truncateResults(List<T> results) {
+        System.out.println(results);
         if (results.size() < TRUNC_SIZE)
             return;
 

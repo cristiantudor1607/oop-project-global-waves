@@ -213,7 +213,7 @@
   "command" : "deleteUser",
   "user" : "audiosage",
   "timestamp" : 930,
-  "message" : "audiosagecan't be deleted."
+  "message" : "audiosage can't be deleted."
 }, {
   "command" : "changePage",
   "user" : "soundseeker21",
@@ -234,7 +234,12 @@
   "user" : "sonicpainter",
   "timestamp" : 975,
   "message" : "sonicpainter can't be deleted."
-}, null, {
+}, {
+  "command" : "removePodcast",
+  "user" : "musicmaven",
+  "timestamp" : 980,
+  "message" : "musicmaven can't delete this podcast."
+}, {
   "command" : "deleteUser",
   "user" : "audiosage",
   "timestamp" : 1100,
@@ -263,7 +268,7 @@
   "command" : "deleteUser",
   "user" : "sonicpainter",
   "timestamp" : 7225,
-  "message" : "sonicpaintercan't be deleted."
+  "message" : "sonicpainter can't be deleted."
 }, {
   "command" : "repeat",
   "user" : "carol19",
@@ -278,7 +283,7 @@
   "command" : "deleteUser",
   "user" : "sonicpainter",
   "timestamp" : 7860,
-  "message" : "sonicpaintercan't be deleted."
+  "message" : "sonicpainter can't be deleted."
 }, {
   "command" : "changePage",
   "user" : "david27",
@@ -288,10 +293,10 @@
   "command" : "deleteUser",
   "user" : "sonicpainter",
   "timestamp" : 7890,
-  "message" : "sonicpaintercan't be deleted."
+  "message" : "sonicpainter was successfully deleted."
 }, {
   "command" : "printCurrentPage",
   "user" : "bob35",
   "timestamp" : 7900,
-  "message" : "Liked songs:\n\t[Aurora Harmony]\n\nFollowed playlists:\n\t[Playlist bengos]"
+  "message" : "Liked songs:\n\t[]\n\nFollowed playlists:\n\t[]"
 } ]

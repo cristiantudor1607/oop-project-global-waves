@@ -32,7 +32,8 @@ public final class StringConstants {
     // Shuffle
     public static final String SHUFFLE_ON = "Shuffle function activated successfully.";
     public static final String SHUFFLE_OFF = "Shuffle function deactivated successfully.";
-    public static final String SHUFFLE_NOT_PLAYLIST = "The loaded source is not a playlist.";
+    public static final String SHUFFLE_NOT_COLLECTION = "The loaded source is not "
+            + "a playlist or an album.";
     public static final String SHUFFLE_NO_SRC = "Please load a source before using the "
             + "shuffle function.";
 

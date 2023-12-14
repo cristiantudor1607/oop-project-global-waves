@@ -215,16 +215,7 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
 
     @Override
     public String toString() {
-        return "Song{" +
-                "\nname='" + name + '\'' +
-                "\nduration=" + duration +
-                "\nalbum='" + album + '\'' +
-                "\ntags=" + tags +
-                "\nlyrics='" + lyrics + '\'' +
-                "\ngenre='" + genre + '\'' +
-                "\nreleaseYear=" + releaseYear +
-                "\nartist='" + artist + '\'' +
-                '}';
+        return name;
     }
 
     /**

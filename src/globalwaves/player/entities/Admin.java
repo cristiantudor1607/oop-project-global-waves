@@ -36,8 +36,8 @@ public class Admin extends User {
         return false;
     }
 
-    public boolean removeUser(@NonNull User oldUser) {
-        return database.removeUser(oldUser);
+    public void removeUser(@NonNull User oldUser) {
+        database.removeUser(oldUser);
     }
 
     public void removeAlbum(@NonNull Album oldAlbum) {
@@ -46,6 +46,12 @@ public class Admin extends User {
 
         database.removeSongsFromAlbum(artistName, albumName);
         database.removeSongsFromLiked(albumName);
+    }
+
+    public void removePodcast(@NonNull Podcast oldPodcast) {
+        String hostName = oldPodcast.getOwner();
+
+        database.getAddedPodcasts().get(hostName).remove(oldPodcast);
     }
 
     @Override

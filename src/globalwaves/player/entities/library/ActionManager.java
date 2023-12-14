@@ -98,7 +98,8 @@ public class ActionManager {
             String publicPerson = ui.getPlayer().getSelectedSource().getPublicPerson();
 
             // If it returned null, then it's a playlist, and we have to check if the
-            // user has a song in playlist from this artist
+            // user has a song in playlist from this artist, or has an episode from
+            // this host
             if (publicPerson == null) {
                 if (playingCollection.hasAudiofileFromUser(username))
                     return true;
@@ -296,13 +297,11 @@ public class ActionManager {
         if (!ownerPlaylist.hasSong(workingOnSong)) {
             ownerPlaylist.addSong(workingOnSong);
             workingOnSong.increasePlaylistsCount();
-            System.out.println(workingOnSong.getName() + ": " + workingOnSong.getPlaylistsInclusionCounter());
             return AddRemoveExit.Status.ADDED;
         }
 
         ownerPlaylist.removeSong(workingOnSong);
         workingOnSong.decreasePlaylistsCount();
-        System.out.println(workingOnSong.getName() + ": " + workingOnSong.getPlaylistsInclusionCounter());
         return AddRemoveExit.Status.REMOVED;
     }
 
@@ -753,10 +752,10 @@ public class ActionManager {
             return username + " can't be deleted.";
 
         if (userIsBeingWatched(username))
-            return username + "can't be deleted.";
+            return username + " can't be deleted.";
 
         if (adminBot.playlistsHaveSongFromArtist(username))
-            return username + "can't be deleted.";
+            return username + " can't be deleted.";
 
         adminBot.removeUser(user);
 
@@ -794,6 +793,33 @@ public class ActionManager {
         // Remove the album as an admin
         adminBot.removeAlbum(album);
         return RemoveAlbumExit.Status.SUCCESS;
+    }
+
+    public RemovePodcastExit.Status
+    requestRemovingPodcast(final RemovePodcastInterrogator execQuery) {
+        String username = execQuery.getUsername();
+        String podcastName = execQuery.getName();
+
+        if (!adminBot.checkUsername(username))
+            return RemovePodcastExit.Status.DOESNT_EXIST;
+
+        User host = adminBot.getHostByUsername(username);
+        if (host == null)
+            return RemovePodcastExit.Status.NOT_HOST;
+
+        if (!host.hasPodcastWithName(podcastName))
+            return RemovePodcastExit.Status.DONT_HAVE;
+
+        if (userIsBeingListened(username))
+            return RemovePodcastExit.Status.FAIL;
+
+        Podcast podcast = host.getPodcastByName(podcastName);
+
+        // Remove the podcast from the host point of view
+        host.removePodcast(podcast);
+        // Remove the podcast from the others point of view
+        adminBot.removePodcast(podcast);
+        return RemovePodcastExit.Status.SUCCESS;
     }
 
     public String requestChangePage(final ChangePageInterrogator execQuery) {

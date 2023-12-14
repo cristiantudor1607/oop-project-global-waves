@@ -94,6 +94,7 @@ public class Library {
         if (!newUser.isNormalUser())
             return false;
 
+        playlists.put(newUser.getUsername(), new ArrayList<>());
         return users.add(newUser);
     }
 
@@ -117,15 +118,32 @@ public class Library {
     }
 
     public void removeSongsFromLiked(final String albumName) {
+        users.forEach((user -> user.getLikes()
+                .removeIf(likedSong -> likedSong.getAlbum().equals(albumName))));
+    }
+
+    public void removeAllFollowsFromUser(User normalUser) {
         for (User user: users) {
-            List<Song> likes = user.getLikes();
-            likes.removeIf(likedSong -> likedSong.getAlbum().equals(albumName));
+            playlists.get(user.getUsername())
+                    .forEach((playlist -> playlist.getUnfollowedBy(normalUser)));
         }
     }
 
-    public boolean removeUser(User oldUser) {
-        if (oldUser.isNormalUser())
-            return users.remove(oldUser);
+    public void removeUser(User oldUser) {
+        if (oldUser.isNormalUser()) {
+            String username = oldUser.getUsername();
+
+            removeAllFollowsFromUser(oldUser);
+            // For each playlist of the user, go through all the users and unfollow the
+            // playlist
+            playlists.get(username)
+                    .forEach((playlist -> users.forEach((user -> user.unfollow(playlist)))));
+
+            // Remove the map entry of the user
+            playlists.remove(username);
+            // Remove the user
+            users.remove(oldUser);
+        }
 
         if (oldUser.isArtist()) {
             // TODO: Remove from user liked songs
@@ -135,14 +153,12 @@ public class Library {
                 removeSongsFromLiked(albumName);
             }
 
-
-            return artists.remove(oldUser);
+            artists.remove(oldUser);
         }
 
         if (oldUser.isHost())
-            return hosts.remove(oldUser);
+            hosts.remove(oldUser);
 
-        return false;
     }
 
 

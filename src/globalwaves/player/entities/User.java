@@ -94,6 +94,7 @@ public class User {
             bringOnline();
     }
 
+
     public boolean hasAlbumWithName(final String albumName) {
         return false;
     }
@@ -128,12 +129,16 @@ public class User {
     public boolean hasPodcastWithName(final String podcastName) {
         return false;
     }
+    public Podcast getPodcastByName(final String podcastName) {
+        return null;
+    }
     public List<Podcast> getPodcasts() {
         return null;
     }
     public boolean addPodcast(final Podcast newPodcast) {
         return false;
     }
+    public void removePodcast(final Podcast oldPodcast) { }
 
     public boolean hasAnnouncement(final String announceName) {
         return false;

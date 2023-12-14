@@ -32,6 +32,16 @@ public class Host extends User {
     }
 
     @Override
+    public Podcast getPodcastByName(String podcastName) {
+        for (Podcast p : podcasts) {
+            if (p.getName().equals(podcastName))
+                return p;
+        }
+
+        return null;
+    }
+
+    @Override
     public List<Podcast> getPodcasts() {
         return podcasts;
     }
@@ -39,6 +49,11 @@ public class Host extends User {
     @Override
     public boolean addPodcast(Podcast newPodcast) {
         return podcasts.add(newPodcast);
+    }
+
+    @Override
+    public void removePodcast(Podcast oldPodcast) {
+        podcasts.remove(oldPodcast);
     }
 
     @Override

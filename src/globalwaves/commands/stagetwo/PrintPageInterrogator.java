@@ -13,9 +13,6 @@ public class PrintPageInterrogator extends CommandObject {
 
     @Override
     public void execute() {
-        if (timestamp == 2338)
-            System.out.println("ceva");
-
         // Because the timestamp doesn't have an effect on requestPageContent
         // we can set the timestamp of the action manager before requesting
         // the approval

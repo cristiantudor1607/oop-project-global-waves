@@ -21,7 +21,7 @@ public class ShuffleOutput extends CommandOutputFormatter {
         return switch (atExit) {
             case ACTIVATED -> StringConstants.SHUFFLE_ON;
             case DEACTIVATED -> StringConstants.SHUFFLE_OFF;
-            case NOT_A_PLAYLIST -> StringConstants.SHUFFLE_NOT_PLAYLIST;
+            case NOT_A_PLAYLIST -> StringConstants.SHUFFLE_NOT_COLLECTION;
             case NO_SOURCE_LOADED -> StringConstants.SHUFFLE_NO_SRC;
             case OFFLINE -> username + StringConstants.OFFLINE_DESCRIPTOR;
         };

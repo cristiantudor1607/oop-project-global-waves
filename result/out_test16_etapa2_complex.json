@@ -25962,5 +25962,5 @@
 }, {
   "command" : "getTop5Songs",
   "timestamp" : 14850,
-  "result" : [ "Adventure Infinity", "Soul Pandora", "Pinnacle Cascade", "Starlight Rapture", "Solitude Reflection" ]
+  "result" : [ "Adventure Infinity", "Soul Pandora", "Starlight Rapture", "Pinnacle Cascade", "Solitude Reflection" ]
 }, null, null ]

@@ -294,5 +294,5 @@
 }, {
   "command" : "getTop5Songs",
   "timestamp" : 3300,
-  "result" : [ "Bohemian Rhapsody", "Vibrant Echoes 2", "Angie", "Digital Dreams", "Night Pulse" ]
+  "result" : [ "Bohemian Rhapsody", "Vibrant Echoes 2", "Angie", "Vibrant Echoes", "Synth Symphony" ]
 }, null ]

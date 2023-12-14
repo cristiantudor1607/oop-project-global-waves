@@ -10,6 +10,7 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Getter @Setter
 public class Podcast implements PlayableEntity, OwnedEntity {
@@ -171,5 +172,18 @@ public class Podcast implements PlayableEntity, OwnedEntity {
     @Override
     public Album getWorkingOnAlbum() {
         return null;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Podcast)) return false;
+        Podcast podcast = (Podcast) o;
+        return name.equals(podcast.name) && owner.equals(podcast.owner);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName(), getOwner());
     }
 }
