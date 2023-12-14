@@ -4,7 +4,7 @@ import globalwaves.player.entities.Playlist;
 
 import java.util.Comparator;
 
-public class SortByCreationTime implements Comparator<Playlist> {
+public class SortByCreationTimeWithFollowers implements Comparator<Playlist> {
     @Override
     public int compare(Playlist o1, Playlist o2) {
         if (o1.getFollowersNumber() != o2.getFollowersNumber())

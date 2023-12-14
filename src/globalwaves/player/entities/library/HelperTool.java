@@ -1,7 +1,7 @@
 package globalwaves.player.entities.library;
 
 import globalwaves.player.entities.*;
-import globalwaves.player.entities.utilities.SortByCreationTime;
+import globalwaves.player.entities.utilities.SortByCreationTimeWithFollowers;
 import globalwaves.player.entities.utilities.SortByFollowers;
 import globalwaves.player.entities.utilities.SortByInteger;
 import globalwaves.player.entities.utilities.SortByLibraryOrder;
@@ -42,23 +42,23 @@ public class HelperTool {
         return false;
     }
 
-    public List<Map.Entry<AudioFile, Integer>> unrollLikes(Map<AudioFile, Integer> mappedLikes) {
-        List<Map.Entry<AudioFile, Integer>> unrolledLikes = new ArrayList<>();
+    public List<Map.Entry<Song, Integer>> unrollLikes(Map<Song, Integer> mappedLikes) {
+        List<Map.Entry<Song, Integer>> unrolledLikes = new ArrayList<>();
 
-        for (AudioFile key : mappedLikes.keySet()) {
+        for (Song key : mappedLikes.keySet()) {
             Integer value = mappedLikes.get(key);
-            Map.Entry<AudioFile, Integer> newTuple = new AbstractMap.SimpleEntry<>(key, value);
+            Map.Entry<Song, Integer> newTuple = new AbstractMap.SimpleEntry<>(key, value);
             unrolledLikes.add(newTuple);
         }
 
         return unrolledLikes;
     }
 
-    public void sortLikes(List<Map.Entry<AudioFile, Integer>> unrolledLikes) {
+    public void sortLikes(List<Map.Entry<Song, Integer>> unrolledLikes) {
         unrolledLikes.sort(new SortByInteger());
     }
 
-    public void sortByLibrary(List<Map.Entry<AudioFile, Integer>> sortedLikes) {
+    public void sortByLibrary(List<Map.Entry<Song, Integer>> sortedLikes) {
         sortedLikes.sort(new SortByLibraryOrder());
     }
 
@@ -67,7 +67,7 @@ public class HelperTool {
     }
 
     public void sortPlaylistsByTime(List<Playlist> publicPlaylists) {
-        publicPlaylists.sort(new SortByCreationTime());
+        publicPlaylists.sort(new SortByCreationTimeWithFollowers());
     }
 
     public List<String> getUsernames(final List<User> users) {
@@ -109,7 +109,6 @@ public class HelperTool {
     }
 
     public <T> void truncateResults(List<T> results) {
-        System.out.println(results);
         if (results.size() < TRUNC_SIZE)
             return;
 

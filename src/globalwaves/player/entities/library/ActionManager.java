@@ -845,6 +845,11 @@ public class ActionManager {
         };
     }
 
+    public List<String> requestTopFiveAlbums() {
+        return adminBot.getTopFiveAlbums();
+    }
+
+
     public void updatePlayersData(CommandObject nextToExecuteCommand) {
         int diff = nextToExecuteCommand.getTimestamp() - lastActionTime;
         for (Map.Entry<String, UserInterface> entry: userInterfaces.entrySet()) {

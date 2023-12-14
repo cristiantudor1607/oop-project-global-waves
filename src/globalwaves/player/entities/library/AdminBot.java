@@ -1,6 +1,9 @@
 package globalwaves.player.entities.library;
 
 import globalwaves.player.entities.*;
+import globalwaves.player.entities.utilities.SortAlphabetical;
+import globalwaves.player.entities.utilities.SortByNumberOfLikes;
+import globalwaves.player.entities.utilities.SortByTotalLikes;
 
 import java.util.*;
 
@@ -154,8 +157,8 @@ public class AdminBot extends Admin  {
         return queriedUser.getLikes();
     }
 
-    public Map<AudioFile, Integer> mapSongs() {
-        Map<AudioFile, Integer> mappedSongs = new HashMap<>();
+    public Map<Song, Integer> mapSongs() {
+        Map<Song, Integer> mappedSongs = new HashMap<>();
 
         for (Song s : database.getSongs())
             mappedSongs.put(s, 0);
@@ -169,11 +172,11 @@ public class AdminBot extends Admin  {
         return mappedSongs;
     }
 
-    public Map<AudioFile, Integer> mapLikes() {
-        Map<AudioFile, Integer> mappedSongs = mapSongs();
+    public Map<Song, Integer> mapLikes() {
+        Map<Song, Integer> mappedSongs = mapSongs();
 
         for (User u : database.getUsers()) {
-            for (AudioFile likedSong : u.getLikes()) {
+            for (Song likedSong : u.getLikes()) {
                int likes = mappedSongs.get(likedSong);
                likes++;
                mappedSongs.put(likedSong, likes);
@@ -181,22 +184,6 @@ public class AdminBot extends Admin  {
         }
 
         return mappedSongs;
-    }
-
-    public List<String> getTopFiveSongs() {
-        Map<AudioFile, Integer> mappedLikes = mapLikes();
-        List<Map.Entry<AudioFile, Integer>> unrolledLikes =  tool.unrollLikes(mappedLikes);
-        tool.sortLikes(unrolledLikes);
-        tool.sortByLibrary(unrolledLikes);
-        tool.truncateResults(unrolledLikes);
-
-        List<String> results = new ArrayList<>();
-
-        for (Map.Entry<AudioFile, Integer> entry : unrolledLikes) {
-            results.add(entry.getKey().getName());
-        }
-
-        return results;
     }
 
     public List<Playlist> getPublicPlaylists() {
@@ -234,6 +221,21 @@ public class AdminBot extends Admin  {
         return users;
     }
 
+    public List<String> getTopFiveSongs() {
+        Map<Song, Integer> mappedLikes = mapLikes();
+        List<Map.Entry<Song, Integer>> unrolledLikes =  tool.unrollLikes(mappedLikes);
+        tool.sortLikes(unrolledLikes);
+        tool.sortByLibrary(unrolledLikes);
+        tool.truncateResults(unrolledLikes);
+
+        List<String> results = new ArrayList<>();
+
+        for (Map.Entry<Song, Integer> entry : unrolledLikes) {
+            results.add(entry.getKey().getName());
+        }
+
+        return results;
+    }
 
     public List<String> getTopFivePlaylists() {
         List<Playlist> playlists = getPublicPlaylists();
@@ -244,6 +246,20 @@ public class AdminBot extends Admin  {
         List<String> names = new ArrayList<>();
         for (Playlist p : playlists)
             names.add(p.getName());
+
+        return names;
+    }
+
+    public List<String> getTopFiveAlbums() {
+        List<Album> albums = getAllAlbums();
+        albums.sort(new SortByTotalLikes().thenComparing(new SortAlphabetical()));
+        tool.truncateResults(albums);
+        albums.forEach((album -> {
+            System.out.println(album.getName() + " : " + album.getTotalLikesNumber());
+        }));
+
+        List<String> names = new ArrayList<>();
+        albums.forEach(album -> names.add(album.getName()));
 
         return names;
     }
@@ -263,8 +279,7 @@ public class AdminBot extends Admin  {
     public List<Album> getAllAlbums() {
         List<Album> albums = new ArrayList<>();
 
-        for (User artist: database.getArtists())
-            albums.addAll(artist.getAlbums());
+        database.getArtists().forEach((artist -> albums.addAll(artist.getAlbums())));
 
         return albums;
     }

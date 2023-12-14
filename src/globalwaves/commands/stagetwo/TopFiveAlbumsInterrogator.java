@@ -1,4 +1,4 @@
-package globalwaves.commands.stageone;
+package globalwaves.commands.stagetwo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -10,15 +10,13 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-public class TopFiveSongsInterrogator extends CommandObject {
+public class TopFiveAlbumsInterrogator extends CommandObject {
     @JsonIgnore
-    private List<String> result;
-
+    private List<String> results;
 
     @Override
     public void execute() {
-        result = manager.requestTopFiveSongs();
-
+        results = manager.requestTopFiveAlbums();
         manager.setLastActionTime(timestamp);
     }
 

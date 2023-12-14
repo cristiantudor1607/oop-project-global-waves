@@ -25962,5 +25962,9 @@
 }, {
   "command" : "getTop5Songs",
   "timestamp" : 14850,
-  "result" : [ "Adventure Infinity", "Soul Pandora", "Starlight Rapture", "Pinnacle Cascade", "Solitude Reflection" ]
-}, null, null ]
+  "result" : [ "Soul Pandora", "Adventure Infinity", "Starlight Rapture", "Pinnacle Cascade", "Heart Utopia" ]
+}, {
+  "command" : "getTop5Albums",
+  "timestamp" : 14850,
+  "result" : [ "Bad Dirt", "Teen Revolution", "Breezy View", "Groovy Harmonies", "Alone Hood" ]
+}, null ]

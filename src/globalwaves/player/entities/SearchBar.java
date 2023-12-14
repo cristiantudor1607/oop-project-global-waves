@@ -5,6 +5,7 @@ import globalwaves.commands.enums.SearchType;
 import globalwaves.commands.search.utils.*;
 import globalwaves.player.entities.paging.Page;
 import globalwaves.player.entities.properties.PlayableEntity;
+import globalwaves.player.entities.utilities.SortByTimestamp;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
@@ -59,6 +60,7 @@ public class SearchBar {
         if (engine != null) {
             typeOfSearch = SearchResult.PLAYABLE_ENTITY;
             results = engine.collectResults();
+            results.sort(new SortByTimestamp());
         }
 
         if (pager != null) {

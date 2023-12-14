@@ -4,6 +4,7 @@ import globalwaves.commands.stageone.TopFivePlaylistsInterrogator;
 import globalwaves.commands.stageone.TopFiveSongsInterrogator;
 import globalwaves.commands.stagetwo.AllUsersInterrogator;
 import globalwaves.commands.stagetwo.OnlineUsersInterrogator;
+import globalwaves.commands.stagetwo.TopFiveAlbumsInterrogator;
 import globalwaves.parser.templates.CommandOutputFormatter;
 import lombok.Getter;
 
@@ -33,6 +34,12 @@ public class StatisticsOutput extends CommandOutputFormatter {
 
     public StatisticsOutput(final AllUsersInterrogator executedQuery) {
         command = "getAllUsers";
+        timestamp = executedQuery.getTimestamp();
+        result = executedQuery.getResults();
+    }
+
+    public StatisticsOutput(final TopFiveAlbumsInterrogator executedQuery) {
+        command = "getTop5Albums";
         timestamp = executedQuery.getTimestamp();
         result = executedQuery.getResults();
     }

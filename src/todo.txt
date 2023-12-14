@@ -33,6 +33,7 @@ si doar request urile publice
 -> TODO: refactorizeaza visiturile
 -> aranjeaza requesturile dpdv logic
 -> s-ar putea sa fie nevoie sa verific si daca au selectat la removeAlbum ceva
+-> foarte important, rearanjeaza dracu codu
 
 EXPLICATII:
 + AdminBot este o extensie a adminului, pentru ca poate face tot ce face adminul, plus operatiile de bot
