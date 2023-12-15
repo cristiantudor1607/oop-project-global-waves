@@ -22,7 +22,6 @@ public class PrintPageInterrogator extends CommandObject {
         if (!approval)
             return;
 
-        System.out.println(username + " at timestamp " + timestamp);
         output = manager.requestPageContent(this);
     }
 

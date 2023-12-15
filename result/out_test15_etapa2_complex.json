@@ -5581,8 +5581,8 @@
   "user" : "henry26",
   "timestamp" : 7581,
   "stats" : {
-    "name" : "Luminescence Crescendo",
-    "remainedTime" : 244,
+    "name" : "Sunset Melody",
+    "remainedTime" : 265,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -5597,8 +5597,8 @@
   "user" : "henry26",
   "timestamp" : 7591,
   "stats" : {
-    "name" : "Luminescence Crescendo",
-    "remainedTime" : 239,
+    "name" : "Sunset Melody",
+    "remainedTime" : 260,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -5632,8 +5632,8 @@
   "user" : "henry26",
   "timestamp" : 7611,
   "stats" : {
-    "name" : "Luminescence Crescendo",
-    "remainedTime" : 224,
+    "name" : "Sunset Melody",
+    "remainedTime" : 245,
     "repeat" : "No Repeat",
     "shuffle" : true,
     "paused" : false
@@ -5642,14 +5642,14 @@
   "command" : "next",
   "user" : "henry26",
   "timestamp" : 7612,
-  "message" : "Skipped to next track successfully. The current track is Zephyr Eclipse."
+  "message" : "Skipped to next track successfully. The current track is Colors Rapture."
 }, {
   "command" : "status",
   "user" : "henry26",
   "timestamp" : 7866,
   "stats" : {
     "name" : "Colors Rapture",
-    "remainedTime" : 273,
+    "remainedTime" : 37,
     "repeat" : "No Repeat",
     "shuffle" : true,
     "paused" : false
@@ -7518,14 +7518,14 @@
   "command" : "prev",
   "user" : "david27",
   "timestamp" : 9519,
-  "message" : "Returned to previous track successfully. The current track is Angie."
+  "message" : "Returned to previous track successfully. The current track is Black Dog."
 }, {
   "command" : "status",
   "user" : "david27",
   "timestamp" : 9519,
   "stats" : {
-    "name" : "Angie",
-    "remainedTime" : 273,
+    "name" : "Black Dog",
+    "remainedTime" : 294,
     "repeat" : "No Repeat",
     "shuffle" : true,
     "paused" : false
@@ -7701,8 +7701,8 @@
   "user" : "david27",
   "timestamp" : 9619,
   "stats" : {
-    "name" : "Angie",
-    "remainedTime" : 173,
+    "name" : "Black Dog",
+    "remainedTime" : 194,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -7861,14 +7861,14 @@
   "command" : "prev",
   "user" : "david27",
   "timestamp" : 9719,
-  "message" : "Returned to previous track successfully. The current track is Angie."
+  "message" : "Returned to previous track successfully. The current track is Black Dog."
 }, {
   "command" : "status",
   "user" : "david27",
   "timestamp" : 9719,
   "stats" : {
-    "name" : "Angie",
-    "remainedTime" : 273,
+    "name" : "Black Dog",
+    "remainedTime" : 294,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -7903,14 +7903,14 @@
   "command" : "prev",
   "user" : "frank21",
   "timestamp" : 9739,
-  "message" : "Returned to previous track successfully. The current track is Whatever You Need."
+  "message" : "Returned to previous track successfully. The current track is Stairway to Heaven."
 }, {
   "command" : "status",
   "user" : "frank21",
   "timestamp" : 9739,
   "stats" : {
-    "name" : "Whatever You Need",
-    "remainedTime" : 210,
+    "name" : "Stairway to Heaven",
+    "remainedTime" : 482,
     "repeat" : "No Repeat",
     "shuffle" : true,
     "paused" : false
@@ -8059,8 +8059,8 @@
   "user" : "david27",
   "timestamp" : 9819,
   "stats" : {
-    "name" : "Angie",
-    "remainedTime" : 173,
+    "name" : "Black Dog",
+    "remainedTime" : 194,
     "repeat" : "No Repeat",
     "shuffle" : true,
     "paused" : false
@@ -8096,8 +8096,8 @@
   "user" : "frank21",
   "timestamp" : 9839,
   "stats" : {
-    "name" : "Whatever You Need",
-    "remainedTime" : 110,
+    "name" : "Stairway to Heaven",
+    "remainedTime" : 382,
     "repeat" : "No Repeat",
     "shuffle" : true,
     "paused" : true
@@ -8234,8 +8234,8 @@
   "user" : "david27",
   "timestamp" : 9919,
   "stats" : {
-    "name" : "Angie",
-    "remainedTime" : 73,
+    "name" : "Black Dog",
+    "remainedTime" : 94,
     "repeat" : "No Repeat",
     "shuffle" : false,
     "paused" : false
@@ -8266,8 +8266,8 @@
   "user" : "frank21",
   "timestamp" : 9939,
   "stats" : {
-    "name" : "Whatever You Need",
-    "remainedTime" : 110,
+    "name" : "Stairway to Heaven",
+    "remainedTime" : 382,
     "repeat" : "No Repeat",
     "shuffle" : true,
     "paused" : false
@@ -8404,17 +8404,17 @@
   "command" : "repeat",
   "user" : "david27",
   "timestamp" : 10019,
-  "message" : "Please load a source before setting the repeat status."
+  "message" : "Repeat mode changed to repeat all."
 }, {
   "command" : "status",
   "user" : "david27",
   "timestamp" : 10019,
   "stats" : {
-    "name" : "",
-    "remainedTime" : 0,
-    "repeat" : "No Repeat",
+    "name" : "Angie",
+    "remainedTime" : 267,
+    "repeat" : "Repeat All",
     "shuffle" : false,
-    "paused" : true
+    "paused" : false
   }
 }, {
   "command" : "switchVisibility",
@@ -8441,14 +8441,14 @@
   "command" : "next",
   "user" : "frank21",
   "timestamp" : 10039,
-  "message" : "Skipped to next track successfully. The current track is Stairway to Heaven."
+  "message" : "Skipped to next track successfully. The current track is Whatever You Need."
 }, {
   "command" : "status",
   "user" : "frank21",
   "timestamp" : 10039,
   "stats" : {
-    "name" : "Stairway to Heaven",
-    "remainedTime" : 482,
+    "name" : "Whatever You Need",
+    "remainedTime" : 210,
     "repeat" : "No Repeat",
     "shuffle" : true,
     "paused" : false
@@ -8590,17 +8590,17 @@
   "command" : "next",
   "user" : "david27",
   "timestamp" : 10119,
-  "message" : "Please load a source before skipping to the next track."
+  "message" : "Skipped to next track successfully. The current track is Black Dog."
 }, {
   "command" : "status",
   "user" : "david27",
   "timestamp" : 10119,
   "stats" : {
-    "name" : "",
-    "remainedTime" : 0,
-    "repeat" : "No Repeat",
+    "name" : "Black Dog",
+    "remainedTime" : 294,
+    "repeat" : "Repeat All",
     "shuffle" : false,
-    "paused" : true
+    "paused" : false
   }
 }, {
   "command" : "playPause",
@@ -8622,17 +8622,17 @@
   "command" : "next",
   "user" : "frank21",
   "timestamp" : 10139,
-  "message" : "Skipped to next track successfully. The current track is Whatever You Need."
+  "message" : "Please load a source before skipping to the next track."
 }, {
   "command" : "status",
   "user" : "frank21",
   "timestamp" : 10139,
   "stats" : {
-    "name" : "Whatever You Need",
-    "remainedTime" : 210,
+    "name" : "",
+    "remainedTime" : 0,
     "repeat" : "No Repeat",
-    "shuffle" : true,
-    "paused" : false
+    "shuffle" : false,
+    "paused" : true
   }
 }, {
   "command" : "switchVisibility",
@@ -8771,17 +8771,17 @@
   "command" : "like",
   "user" : "david27",
   "timestamp" : 10219,
-  "message" : "Please load a source before liking or unliking."
+  "message" : "Like registered successfully."
 }, {
   "command" : "status",
   "user" : "david27",
   "timestamp" : 10219,
   "stats" : {
-    "name" : "",
-    "remainedTime" : 0,
-    "repeat" : "No Repeat",
+    "name" : "Black Dog",
+    "remainedTime" : 194,
+    "repeat" : "Repeat All",
     "shuffle" : false,
-    "paused" : true
+    "paused" : false
   }
 }, {
   "command" : "repeat",
@@ -8804,22 +8804,22 @@
   "user" : "frank21",
   "timestamp" : 10239,
   "stats" : {
-    "name" : "Whatever You Need",
-    "remainedTime" : 110,
+    "name" : "",
+    "remainedTime" : 0,
     "repeat" : "No Repeat",
-    "shuffle" : true,
-    "paused" : false
+    "shuffle" : false,
+    "paused" : true
   }
 }, {
   "command" : "status",
   "user" : "frank21",
   "timestamp" : 10239,
   "stats" : {
-    "name" : "Whatever You Need",
-    "remainedTime" : 110,
+    "name" : "",
+    "remainedTime" : 0,
     "repeat" : "No Repeat",
-    "shuffle" : true,
-    "paused" : false
+    "shuffle" : false,
+    "paused" : true
   }
 }, {
   "command" : "prev",
@@ -9077,7 +9077,7 @@
   "command" : "printCurrentPage",
   "user" : "david27",
   "timestamp" : 10309,
-  "message" : "Liked songs:\n\t[]\n\nFollowed playlists:\n\t[]"
+  "message" : "Liked songs:\n\t[Black Dog - Led Zeppelin]\n\nFollowed playlists:\n\t[]"
 }, {
   "command" : "search",
   "user" : "david27",
@@ -9118,7 +9118,7 @@
   "command" : "printCurrentPage",
   "user" : "david27",
   "timestamp" : 10309,
-  "message" : "Liked songs:\n\t[Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean]\n\nFollowed playlists:\n\t[]"
+  "message" : "Liked songs:\n\t[Black Dog - Led Zeppelin, Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean]\n\nFollowed playlists:\n\t[]"
 }, {
   "command" : "changePage",
   "user" : "david27",
@@ -9128,7 +9128,7 @@
   "command" : "printCurrentPage",
   "user" : "david27",
   "timestamp" : 10309,
-  "message" : "Liked songs:\n\t[Serendipity Serendipity, Melody Sunset]\n\nFollowed playlists:\n\t[]"
+  "message" : "Liked songs:\n\t[Black Dog, Serendipity Serendipity, Melody Sunset]\n\nFollowed playlists:\n\t[]"
 }, {
   "command" : "changePage",
   "user" : "emily30",
@@ -9687,7 +9687,7 @@
   "command" : "printCurrentPage",
   "user" : "david27",
   "timestamp" : 10409,
-  "message" : "Liked songs:\n\t[Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean]\n\nFollowed playlists:\n\t[]"
+  "message" : "Liked songs:\n\t[Black Dog - Led Zeppelin, Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean]\n\nFollowed playlists:\n\t[]"
 }, {
   "command" : "search",
   "user" : "david27",
@@ -9728,7 +9728,7 @@
   "command" : "printCurrentPage",
   "user" : "david27",
   "timestamp" : 10409,
-  "message" : "Liked songs:\n\t[Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16]\n\nFollowed playlists:\n\t[]"
+  "message" : "Liked songs:\n\t[Black Dog - Led Zeppelin, Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16]\n\nFollowed playlists:\n\t[]"
 }, {
   "command" : "changePage",
   "user" : "david27",
@@ -9738,7 +9738,7 @@
   "command" : "printCurrentPage",
   "user" : "david27",
   "timestamp" : 10409,
-  "message" : "Liked songs:\n\t[Serendipity Serendipity, Melody Sunset, Luminescence Crescendo, Bliss Rhythm]\n\nFollowed playlists:\n\t[]"
+  "message" : "Liked songs:\n\t[Serendipity Serendipity, Melody Sunset, Black Dog, Luminescence Crescendo, Bliss Rhythm]\n\nFollowed playlists:\n\t[]"
 }, {
   "command" : "changePage",
   "user" : "emily30",
@@ -10297,7 +10297,7 @@
   "command" : "printCurrentPage",
   "user" : "david27",
   "timestamp" : 10509,
-  "message" : "Liked songs:\n\t[Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16]\n\nFollowed playlists:\n\t[]"
+  "message" : "Liked songs:\n\t[Black Dog - Led Zeppelin, Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16]\n\nFollowed playlists:\n\t[]"
 }, {
   "command" : "search",
   "user" : "david27",
@@ -10338,7 +10338,7 @@
   "command" : "printCurrentPage",
   "user" : "david27",
   "timestamp" : 10509,
-  "message" : "Liked songs:\n\t[Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16]\n\nFollowed playlists:\n\t[]"
+  "message" : "Liked songs:\n\t[Black Dog - Led Zeppelin, Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16]\n\nFollowed playlists:\n\t[]"
 }, {
   "command" : "changePage",
   "user" : "david27",
@@ -10348,7 +10348,7 @@
   "command" : "printCurrentPage",
   "user" : "david27",
   "timestamp" : 10509,
-  "message" : "Liked songs:\n\t[Serendipity Serendipity, Melody Sunset, Ethereal Rapture, Whirlwind Whirlwind, Luminescence Crescendo]\n\nFollowed playlists:\n\t[]"
+  "message" : "Liked songs:\n\t[Serendipity Serendipity, Melody Sunset, Ethereal Rapture, Whirlwind Whirlwind, Black Dog]\n\nFollowed playlists:\n\t[]"
 }, {
   "command" : "changePage",
   "user" : "emily30",
@@ -10907,7 +10907,7 @@
   "command" : "printCurrentPage",
   "user" : "david27",
   "timestamp" : 10609,
-  "message" : "Liked songs:\n\t[Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16]\n\nFollowed playlists:\n\t[]"
+  "message" : "Liked songs:\n\t[Black Dog - Led Zeppelin, Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16]\n\nFollowed playlists:\n\t[]"
 }, {
   "command" : "search",
   "user" : "david27",
@@ -10948,7 +10948,7 @@
   "command" : "printCurrentPage",
   "user" : "david27",
   "timestamp" : 10609,
-  "message" : "Liked songs:\n\t[Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Night Utopia - leslie27, Celestial Harmony - leslie27]\n\nFollowed playlists:\n\t[]"
+  "message" : "Liked songs:\n\t[Black Dog - Led Zeppelin, Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Night Utopia - leslie27, Celestial Harmony - leslie27]\n\nFollowed playlists:\n\t[]"
 }, {
   "command" : "changePage",
   "user" : "david27",
@@ -11517,7 +11517,7 @@
   "command" : "printCurrentPage",
   "user" : "david27",
   "timestamp" : 10709,
-  "message" : "Liked songs:\n\t[Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Night Utopia - leslie27, Celestial Harmony - leslie27]\n\nFollowed playlists:\n\t[]"
+  "message" : "Liked songs:\n\t[Black Dog - Led Zeppelin, Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Night Utopia - leslie27, Celestial Harmony - leslie27]\n\nFollowed playlists:\n\t[]"
 }, {
   "command" : "search",
   "user" : "david27",
@@ -11558,7 +11558,7 @@
   "command" : "printCurrentPage",
   "user" : "david27",
   "timestamp" : 10709,
-  "message" : "Liked songs:\n\t[Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Night Utopia - leslie27, Celestial Harmony - leslie27, Odyssey Serendipity - amanda16, Sunset Essence - amanda16]\n\nFollowed playlists:\n\t[]"
+  "message" : "Liked songs:\n\t[Black Dog - Led Zeppelin, Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Night Utopia - leslie27, Celestial Harmony - leslie27, Odyssey Serendipity - amanda16, Sunset Essence - amanda16]\n\nFollowed playlists:\n\t[]"
 }, {
   "command" : "changePage",
   "user" : "david27",
@@ -12127,7 +12127,7 @@
   "command" : "printCurrentPage",
   "user" : "david27",
   "timestamp" : 10809,
-  "message" : "Liked songs:\n\t[Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Night Utopia - leslie27, Celestial Harmony - leslie27, Odyssey Serendipity - amanda16, Sunset Essence - amanda16]\n\nFollowed playlists:\n\t[]"
+  "message" : "Liked songs:\n\t[Black Dog - Led Zeppelin, Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Night Utopia - leslie27, Celestial Harmony - leslie27, Odyssey Serendipity - amanda16, Sunset Essence - amanda16]\n\nFollowed playlists:\n\t[]"
 }, {
   "command" : "search",
   "user" : "david27",
@@ -12168,7 +12168,7 @@
   "command" : "printCurrentPage",
   "user" : "david27",
   "timestamp" : 10809,
-  "message" : "Liked songs:\n\t[Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Night Utopia - leslie27, Celestial Harmony - leslie27, Odyssey Serendipity - amanda16, Sunset Essence - amanda16, Heart Bliss - cbutler, Pinnacle Euphoria - cbutler]\n\nFollowed playlists:\n\t[]"
+  "message" : "Liked songs:\n\t[Black Dog - Led Zeppelin, Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Night Utopia - leslie27, Celestial Harmony - leslie27, Odyssey Serendipity - amanda16, Sunset Essence - amanda16, Heart Bliss - cbutler, Pinnacle Euphoria - cbutler]\n\nFollowed playlists:\n\t[]"
 }, {
   "command" : "changePage",
   "user" : "david27",
@@ -12737,7 +12737,7 @@
   "command" : "printCurrentPage",
   "user" : "david27",
   "timestamp" : 10909,
-  "message" : "Liked songs:\n\t[Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Night Utopia - leslie27, Celestial Harmony - leslie27, Odyssey Serendipity - amanda16, Sunset Essence - amanda16, Heart Bliss - cbutler, Pinnacle Euphoria - cbutler]\n\nFollowed playlists:\n\t[]"
+  "message" : "Liked songs:\n\t[Black Dog - Led Zeppelin, Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Night Utopia - leslie27, Celestial Harmony - leslie27, Odyssey Serendipity - amanda16, Sunset Essence - amanda16, Heart Bliss - cbutler, Pinnacle Euphoria - cbutler]\n\nFollowed playlists:\n\t[]"
 }, {
   "command" : "search",
   "user" : "david27",
@@ -12778,7 +12778,7 @@
   "command" : "printCurrentPage",
   "user" : "david27",
   "timestamp" : 10909,
-  "message" : "Liked songs:\n\t[Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Odyssey Serendipity - amanda16, Sunset Essence - amanda16, Heart Bliss - cbutler, Pinnacle Euphoria - cbutler]\n\nFollowed playlists:\n\t[]"
+  "message" : "Liked songs:\n\t[Black Dog - Led Zeppelin, Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Odyssey Serendipity - amanda16, Sunset Essence - amanda16, Heart Bliss - cbutler, Pinnacle Euphoria - cbutler]\n\nFollowed playlists:\n\t[]"
 }, {
   "command" : "changePage",
   "user" : "david27",
@@ -13347,7 +13347,7 @@
   "command" : "printCurrentPage",
   "user" : "david27",
   "timestamp" : 11009,
-  "message" : "Liked songs:\n\t[Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Odyssey Serendipity - amanda16, Sunset Essence - amanda16, Heart Bliss - cbutler, Pinnacle Euphoria - cbutler]\n\nFollowed playlists:\n\t[]"
+  "message" : "Liked songs:\n\t[Black Dog - Led Zeppelin, Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Odyssey Serendipity - amanda16, Sunset Essence - amanda16, Heart Bliss - cbutler, Pinnacle Euphoria - cbutler]\n\nFollowed playlists:\n\t[]"
 }, {
   "command" : "search",
   "user" : "david27",
@@ -13388,7 +13388,7 @@
   "command" : "printCurrentPage",
   "user" : "david27",
   "timestamp" : 11009,
-  "message" : "Liked songs:\n\t[Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Heart Bliss - cbutler, Pinnacle Euphoria - cbutler]\n\nFollowed playlists:\n\t[]"
+  "message" : "Liked songs:\n\t[Black Dog - Led Zeppelin, Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Heart Bliss - cbutler, Pinnacle Euphoria - cbutler]\n\nFollowed playlists:\n\t[]"
 }, {
   "command" : "changePage",
   "user" : "david27",
@@ -13957,7 +13957,7 @@
   "command" : "printCurrentPage",
   "user" : "david27",
   "timestamp" : 11109,
-  "message" : "Liked songs:\n\t[Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Heart Bliss - cbutler, Pinnacle Euphoria - cbutler]\n\nFollowed playlists:\n\t[]"
+  "message" : "Liked songs:\n\t[Black Dog - Led Zeppelin, Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Heart Bliss - cbutler, Pinnacle Euphoria - cbutler]\n\nFollowed playlists:\n\t[]"
 }, {
   "command" : "search",
   "user" : "david27",
@@ -13998,7 +13998,7 @@
   "command" : "printCurrentPage",
   "user" : "david27",
   "timestamp" : 11109,
-  "message" : "Liked songs:\n\t[Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Heart Bliss - cbutler, Pinnacle Euphoria - cbutler, Mystique Harmonize - barmstrong, Harmony Mystique - barmstrong]\n\nFollowed playlists:\n\t[]"
+  "message" : "Liked songs:\n\t[Black Dog - Led Zeppelin, Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Heart Bliss - cbutler, Pinnacle Euphoria - cbutler, Mystique Harmonize - barmstrong, Harmony Mystique - barmstrong]\n\nFollowed playlists:\n\t[]"
 }, {
   "command" : "changePage",
   "user" : "david27",
@@ -14567,7 +14567,7 @@
   "command" : "printCurrentPage",
   "user" : "david27",
   "timestamp" : 11209,
-  "message" : "Liked songs:\n\t[Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Heart Bliss - cbutler, Pinnacle Euphoria - cbutler, Mystique Harmonize - barmstrong, Harmony Mystique - barmstrong]\n\nFollowed playlists:\n\t[]"
+  "message" : "Liked songs:\n\t[Black Dog - Led Zeppelin, Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Heart Bliss - cbutler, Pinnacle Euphoria - cbutler, Mystique Harmonize - barmstrong, Harmony Mystique - barmstrong]\n\nFollowed playlists:\n\t[]"
 }, {
   "command" : "search",
   "user" : "david27",
@@ -14608,7 +14608,7 @@
   "command" : "printCurrentPage",
   "user" : "david27",
   "timestamp" : 11209,
-  "message" : "Liked songs:\n\t[Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Heart Bliss - cbutler, Pinnacle Euphoria - cbutler, Mystique Harmonize - barmstrong, Harmony Mystique - barmstrong, Whisper Paradox - jacobdean, Radiance Voyage - jacobdean]\n\nFollowed playlists:\n\t[]"
+  "message" : "Liked songs:\n\t[Black Dog - Led Zeppelin, Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Heart Bliss - cbutler, Pinnacle Euphoria - cbutler, Mystique Harmonize - barmstrong, Harmony Mystique - barmstrong, Whisper Paradox - jacobdean, Radiance Voyage - jacobdean]\n\nFollowed playlists:\n\t[]"
 }, {
   "command" : "changePage",
   "user" : "david27",
@@ -15177,7 +15177,7 @@
   "command" : "printCurrentPage",
   "user" : "david27",
   "timestamp" : 11309,
-  "message" : "Liked songs:\n\t[Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Heart Bliss - cbutler, Pinnacle Euphoria - cbutler, Mystique Harmonize - barmstrong, Harmony Mystique - barmstrong, Whisper Paradox - jacobdean, Radiance Voyage - jacobdean]\n\nFollowed playlists:\n\t[]"
+  "message" : "Liked songs:\n\t[Black Dog - Led Zeppelin, Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Heart Bliss - cbutler, Pinnacle Euphoria - cbutler, Mystique Harmonize - barmstrong, Harmony Mystique - barmstrong, Whisper Paradox - jacobdean, Radiance Voyage - jacobdean]\n\nFollowed playlists:\n\t[]"
 }, {
   "command" : "search",
   "user" : "david27",
@@ -15218,7 +15218,7 @@
   "command" : "printCurrentPage",
   "user" : "david27",
   "timestamp" : 11309,
-  "message" : "Liked songs:\n\t[Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Heart Bliss - cbutler, Pinnacle Euphoria - cbutler, Mystique Harmonize - barmstrong, Harmony Mystique - barmstrong, Whisper Paradox - jacobdean, Radiance Voyage - jacobdean]\n\nFollowed playlists:\n\t[]"
+  "message" : "Liked songs:\n\t[Black Dog - Led Zeppelin, Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Heart Bliss - cbutler, Pinnacle Euphoria - cbutler, Mystique Harmonize - barmstrong, Harmony Mystique - barmstrong, Whisper Paradox - jacobdean, Radiance Voyage - jacobdean]\n\nFollowed playlists:\n\t[]"
 }, {
   "command" : "changePage",
   "user" : "david27",
@@ -15787,7 +15787,7 @@
   "command" : "printCurrentPage",
   "user" : "david27",
   "timestamp" : 11409,
-  "message" : "Liked songs:\n\t[Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Heart Bliss - cbutler, Pinnacle Euphoria - cbutler, Mystique Harmonize - barmstrong, Harmony Mystique - barmstrong, Whisper Paradox - jacobdean, Radiance Voyage - jacobdean]\n\nFollowed playlists:\n\t[]"
+  "message" : "Liked songs:\n\t[Black Dog - Led Zeppelin, Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Heart Bliss - cbutler, Pinnacle Euphoria - cbutler, Mystique Harmonize - barmstrong, Harmony Mystique - barmstrong, Whisper Paradox - jacobdean, Radiance Voyage - jacobdean]\n\nFollowed playlists:\n\t[]"
 }, {
   "command" : "search",
   "user" : "david27",
@@ -15828,7 +15828,7 @@
   "command" : "printCurrentPage",
   "user" : "david27",
   "timestamp" : 11409,
-  "message" : "Liked songs:\n\t[Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Mystique Harmonize - barmstrong, Harmony Mystique - barmstrong, Whisper Paradox - jacobdean, Radiance Voyage - jacobdean]\n\nFollowed playlists:\n\t[]"
+  "message" : "Liked songs:\n\t[Black Dog - Led Zeppelin, Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Mystique Harmonize - barmstrong, Harmony Mystique - barmstrong, Whisper Paradox - jacobdean, Radiance Voyage - jacobdean]\n\nFollowed playlists:\n\t[]"
 }, {
   "command" : "changePage",
   "user" : "david27",
@@ -16397,7 +16397,7 @@
   "command" : "printCurrentPage",
   "user" : "david27",
   "timestamp" : 11509,
-  "message" : "Liked songs:\n\t[Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Mystique Harmonize - barmstrong, Harmony Mystique - barmstrong, Whisper Paradox - jacobdean, Radiance Voyage - jacobdean]\n\nFollowed playlists:\n\t[]"
+  "message" : "Liked songs:\n\t[Black Dog - Led Zeppelin, Serendipity Serendipity - jacobdean, Melody Sunset - jacobdean, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Mystique Harmonize - barmstrong, Harmony Mystique - barmstrong, Whisper Paradox - jacobdean, Radiance Voyage - jacobdean]\n\nFollowed playlists:\n\t[]"
 }, {
   "command" : "search",
   "user" : "david27",
@@ -16438,7 +16438,7 @@
   "command" : "printCurrentPage",
   "user" : "david27",
   "timestamp" : 11509,
-  "message" : "Liked songs:\n\t[Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Mystique Harmonize - barmstrong, Harmony Mystique - barmstrong, Whisper Paradox - jacobdean, Radiance Voyage - jacobdean]\n\nFollowed playlists:\n\t[]"
+  "message" : "Liked songs:\n\t[Black Dog - Led Zeppelin, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Mystique Harmonize - barmstrong, Harmony Mystique - barmstrong, Whisper Paradox - jacobdean, Radiance Voyage - jacobdean]\n\nFollowed playlists:\n\t[]"
 }, {
   "command" : "changePage",
   "user" : "david27",
@@ -17007,7 +17007,7 @@
   "command" : "printCurrentPage",
   "user" : "david27",
   "timestamp" : 11609,
-  "message" : "Liked songs:\n\t[Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Mystique Harmonize - barmstrong, Harmony Mystique - barmstrong, Whisper Paradox - jacobdean, Radiance Voyage - jacobdean]\n\nFollowed playlists:\n\t[]"
+  "message" : "Liked songs:\n\t[Black Dog - Led Zeppelin, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Mystique Harmonize - barmstrong, Harmony Mystique - barmstrong, Whisper Paradox - jacobdean, Radiance Voyage - jacobdean]\n\nFollowed playlists:\n\t[]"
 }, {
   "command" : "search",
   "user" : "david27",
@@ -17048,7 +17048,7 @@
   "command" : "printCurrentPage",
   "user" : "david27",
   "timestamp" : 11609,
-  "message" : "Liked songs:\n\t[Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Mystique Harmonize - barmstrong, Harmony Mystique - barmstrong, Whisper Paradox - jacobdean, Radiance Voyage - jacobdean, Heart Bliss - cbutler, Pinnacle Euphoria - cbutler]\n\nFollowed playlists:\n\t[]"
+  "message" : "Liked songs:\n\t[Black Dog - Led Zeppelin, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Mystique Harmonize - barmstrong, Harmony Mystique - barmstrong, Whisper Paradox - jacobdean, Radiance Voyage - jacobdean, Heart Bliss - cbutler, Pinnacle Euphoria - cbutler]\n\nFollowed playlists:\n\t[]"
 }, {
   "command" : "changePage",
   "user" : "david27",
@@ -17617,7 +17617,7 @@
   "command" : "printCurrentPage",
   "user" : "david27",
   "timestamp" : 11709,
-  "message" : "Liked songs:\n\t[Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Mystique Harmonize - barmstrong, Harmony Mystique - barmstrong, Whisper Paradox - jacobdean, Radiance Voyage - jacobdean, Heart Bliss - cbutler, Pinnacle Euphoria - cbutler]\n\nFollowed playlists:\n\t[]"
+  "message" : "Liked songs:\n\t[Black Dog - Led Zeppelin, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Mystique Harmonize - barmstrong, Harmony Mystique - barmstrong, Whisper Paradox - jacobdean, Radiance Voyage - jacobdean, Heart Bliss - cbutler, Pinnacle Euphoria - cbutler]\n\nFollowed playlists:\n\t[]"
 }, {
   "command" : "search",
   "user" : "david27",
@@ -17658,7 +17658,7 @@
   "command" : "printCurrentPage",
   "user" : "david27",
   "timestamp" : 11709,
-  "message" : "Liked songs:\n\t[Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Mystique Harmonize - barmstrong, Harmony Mystique - barmstrong, Whisper Paradox - jacobdean, Radiance Voyage - jacobdean, Heart Bliss - cbutler, Pinnacle Euphoria - cbutler, Celestial Soul - jacobdean, Utopia Harmony - jacobdean]\n\nFollowed playlists:\n\t[]"
+  "message" : "Liked songs:\n\t[Black Dog - Led Zeppelin, Luminescence Crescendo - amanda16, Bliss Rhythm - amanda16, Ethereal Rapture - amanda16, Whirlwind Whirlwind - amanda16, Mystique Harmonize - barmstrong, Harmony Mystique - barmstrong, Whisper Paradox - jacobdean, Radiance Voyage - jacobdean, Heart Bliss - cbutler, Pinnacle Euphoria - cbutler, Celestial Soul - jacobdean, Utopia Harmony - jacobdean]\n\nFollowed playlists:\n\t[]"
 }, {
   "command" : "changePage",
   "user" : "david27",
@@ -25914,7 +25914,7 @@
   "command" : "showPreferredSongs",
   "user" : "david27",
   "timestamp" : 14789,
-  "result" : [ "Luminescence Crescendo", "Bliss Rhythm", "Ethereal Rapture", "Whirlwind Whirlwind", "Mystique Harmonize", "Harmony Mystique", "Whisper Paradox", "Radiance Voyage", "Heart Bliss", "Pinnacle Euphoria", "Celestial Soul", "Utopia Harmony" ]
+  "result" : [ "Black Dog", "Luminescence Crescendo", "Bliss Rhythm", "Ethereal Rapture", "Whirlwind Whirlwind", "Mystique Harmonize", "Harmony Mystique", "Whisper Paradox", "Radiance Voyage", "Heart Bliss", "Pinnacle Euphoria", "Celestial Soul", "Utopia Harmony" ]
 }, {
   "command" : "showPlaylists",
   "user" : "emily30",

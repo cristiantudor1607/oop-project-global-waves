@@ -6,7 +6,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 @Getter @Setter
 public class Player {
@@ -27,6 +29,7 @@ public class Player {
     private boolean shuffle;
     private boolean freeze;
     private int remainedTime;
+    private List<Integer> shufflingOrder;
 
     public Player() {
         history = new HashMap<>();
@@ -49,6 +52,7 @@ public class Player {
         shuffle = false;
         remainedTime = 0;
     }
+
 
     /**
      * Sets the player fields to default options on load
@@ -94,7 +98,7 @@ public class Player {
     public void playPrev(int timeDiff) {
         remainedTime -= timeDiff;
 
-        // if it get prev at moment 0, and it has to go to the previous
+        // if it gets prev at moment 0, and it has to go to the previous
         // track
         if (remainedTime == playingFile.getDuration()) {
 
@@ -104,9 +108,9 @@ public class Player {
                 return;
             }
 
-            prevFile = selectedSource.getPrevForPlaying(playingFile, repeat);
             nextFile = playingFile;
             playingFile = prevFile;
+            prevFile = selectedSource.getPrevForPlaying(playingFile, repeat);
             state = PlayerStatus.PLAYING;
             remainedTime = playingFile.getDuration();
             return;

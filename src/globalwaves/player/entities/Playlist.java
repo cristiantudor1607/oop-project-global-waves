@@ -6,22 +6,20 @@ import globalwaves.player.entities.properties.PlayableEntity;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Getter @Setter
 public class Playlist implements PlayableEntity, OwnedEntity {
-    private String name;
-    private String owner;
-    private int creationTime;
+    private final String name;
+    private final String owner;
+    private final int creationTime;
     private int followersNumber;
     private boolean visible;
     private List<Song> songs;
     @Setter
     private List<Integer> playOrder;
     private List<User> followers;
+
 
     public Playlist(String owner, String name, int creationTime) {
         this.name = name;
@@ -96,6 +94,11 @@ public class Playlist implements PlayableEntity, OwnedEntity {
         return songs.get(nextSongIndex);
     }
 
+    /**
+     * Gets the previous song to be played.
+     * @param currentSong The song playing now.
+     * @return Previous song, if it exists, null, otherwise
+     */
     public AudioFile getPrevSong(AudioFile currentSong) {
         int currentSongIndex = getSongIndex(currentSong);
         if (currentSongIndex == 0)
@@ -172,9 +175,7 @@ public class Playlist implements PlayableEntity, OwnedEntity {
             return currentFile;
 
         AudioFile prev = getPrevSong(currentFile);
-        // It should have been only 1, but the checker wants this even if
-        // the repeat value is set to repeat once
-        if ((repeatValue == 1 || repeatValue == 0) && prev == null)
+        if (repeatValue == 1 && prev == null)
             return songs.get(playOrder.get(playOrder.size() - 1));
 
         return getPrevSong(currentFile);
@@ -190,7 +191,7 @@ public class Playlist implements PlayableEntity, OwnedEntity {
         if (songs.isEmpty())
             return null;
 
-        playOrder = getNumericalOrder();
+        //playOrder = getNumericalOrder();
         return songs.get(playOrder.get(0));
     }
 

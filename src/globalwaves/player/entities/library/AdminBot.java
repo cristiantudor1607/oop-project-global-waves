@@ -266,9 +266,6 @@ public class AdminBot extends Admin  {
         List<User> artists = new ArrayList<>(database.getArtists());
 
         artists.sort(new SortByArtistLikes());
-        artists.forEach(artist -> {
-            System.out.println(artist.getUsername() + " : " + artist.getNumberOfLikes());
-        });
         tool.truncateResults(artists);
 
         List<String> names = new ArrayList<>();

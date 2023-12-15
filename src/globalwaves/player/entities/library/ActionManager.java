@@ -432,7 +432,7 @@ public class ActionManager {
     }
 
     public String requestPrev(PrevInterrogator execQuery) {
-        if (execQuery.getTimestamp() == 9739)
+        if (execQuery.getTimestamp() == 9519)
             System.out.println();
         String username = execQuery.getUsername();
         Player userPlayer = getPlayerByUsername(username);
