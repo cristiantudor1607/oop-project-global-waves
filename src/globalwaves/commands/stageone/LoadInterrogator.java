@@ -11,13 +11,6 @@ import lombok.Getter;
 public class LoadInterrogator extends CommandObject {
     @JsonIgnore private LoadExit.Status exitStatus;
 
-    /**
-     * The method executes the Load Command and returns it's output.
-     * @param manager The ActionManager that manages the players and is able to make changes
-     *                at a specific player, or communicates with the library interrogator to
-     *                retrieve infos from library.
-     * @return The output formatted as JsonNode.
-     */
     @Override
     public void execute() {
         approval = manager.requestApprovalForAction(this);

@@ -17,10 +17,7 @@ import lombok.NonNull;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 @Getter @Setter
@@ -89,25 +86,24 @@ public class ActionManager {
 
     public boolean userIsBeingListened(@NonNull final String username) {
         for (UserInterface ui: userInterfaces.values()) {
+            // Ignore the user that we want to delete
+            if (ui.getProfile().getUsername().equals(username))
+                continue;
+
             // Ignore the users that don't listen to anything
             PlayableEntity playingCollection = ui.getPlayer().getSelectedSource();
             if (playingCollection == null)
                 continue;
 
-            // Get the name of the artist or host that is being listened to
+            // This method will return the name of the artist, or the host, or the owner
+            // of the playlist
             String publicPerson = ui.getPlayer().getSelectedSource().getPublicPerson();
-
-            // If it returned null, then it's a playlist, and we have to check if the
-            // user has a song in playlist from this artist, or has an episode from
-            // this host
-            if (publicPerson == null) {
-                if (playingCollection.hasAudiofileFromUser(username))
-                    return true;
-
-                continue;
-            }
-
             if (publicPerson.equals(username))
+                return true;
+
+            // If there's a playlist on the player, and it has songs from artist,
+            // ot if there's a host podcast playing
+            if (playingCollection.hasAudiofileFromUser(username))
                 return true;
         }
 
@@ -436,6 +432,8 @@ public class ActionManager {
     }
 
     public String requestPrev(PrevInterrogator execQuery) {
+        if (execQuery.getTimestamp() == 9739)
+            System.out.println();
         String username = execQuery.getUsername();
         Player userPlayer = getPlayerByUsername(username);
 
@@ -736,17 +734,12 @@ public class ActionManager {
         String username = execQuery.getUsername();
         User user = adminBot.getUserByUsername(username);
 
+        if (username.equals("melodicwanderer"))
+            System.out.println();
+
         // If getUserByUsername method returned null, it means that the user doesn't exist
         if (user == null)
             return "The username " + username + " doesn't exist.";
-
-        if (user.isNormalUser()) {
-            // Method won't fail, because a normal user always have a interface in the action
-            // manager.
-            removeUserInterface(username);
-            adminBot.removeUser(user);
-            return username + " was successfully deleted.";
-        }
 
         if (userIsBeingListened(username))
             return username + " can't be deleted.";
@@ -756,6 +749,9 @@ public class ActionManager {
 
         if (adminBot.playlistsHaveSongFromArtist(username))
             return username + " can't be deleted.";
+
+        if (user.isNormalUser())
+            userInterfaces.remove(username);
 
         adminBot.removeUser(user);
 
@@ -847,6 +843,10 @@ public class ActionManager {
 
     public List<String> requestTopFiveAlbums() {
         return adminBot.getTopFiveAlbums();
+    }
+
+    public List<String> requestTopFiveArtists() {
+        return adminBot.getTopFiveArtists();
     }
 
 

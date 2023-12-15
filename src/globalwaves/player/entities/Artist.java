@@ -6,6 +6,7 @@ import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Getter
 public class Artist extends User {
@@ -50,6 +51,15 @@ public class Artist extends User {
     @Override
     public void removeAlbum(Album oldAlbum) {
         albums.remove(oldAlbum);
+    }
+
+    @Override
+    public int getNumberOfLikes() {
+        int sumOfLikes = 0;
+        for (Album album: albums)
+            sumOfLikes += album.getTotalLikesNumber();
+
+        return sumOfLikes;
     }
 
     @Override

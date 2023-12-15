@@ -2,6 +2,7 @@ package globalwaves.player.entities.library;
 
 import globalwaves.player.entities.*;
 import globalwaves.player.entities.utilities.SortAlphabetical;
+import globalwaves.player.entities.utilities.SortByArtistLikes;
 import globalwaves.player.entities.utilities.SortByNumberOfLikes;
 import globalwaves.player.entities.utilities.SortByTotalLikes;
 
@@ -254,12 +255,24 @@ public class AdminBot extends Admin  {
         List<Album> albums = getAllAlbums();
         albums.sort(new SortByTotalLikes().thenComparing(new SortAlphabetical()));
         tool.truncateResults(albums);
-        albums.forEach((album -> {
-            System.out.println(album.getName() + " : " + album.getTotalLikesNumber());
-        }));
 
         List<String> names = new ArrayList<>();
         albums.forEach(album -> names.add(album.getName()));
+
+        return names;
+    }
+
+    public List<String> getTopFiveArtists() {
+        List<User> artists = new ArrayList<>(database.getArtists());
+
+        artists.sort(new SortByArtistLikes());
+        artists.forEach(artist -> {
+            System.out.println(artist.getUsername() + " : " + artist.getNumberOfLikes());
+        });
+        tool.truncateResults(artists);
+
+        List<String> names = new ArrayList<>();
+        artists.forEach(artist -> names.add(artist.getUsername()));
 
         return names;
     }

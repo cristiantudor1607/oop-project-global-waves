@@ -104,9 +104,9 @@ public class Player {
                 return;
             }
 
+            prevFile = selectedSource.getPrevForPlaying(playingFile, repeat);
             nextFile = playingFile;
             playingFile = prevFile;
-            prevFile = selectedSource.getPrevForPlaying(playingFile, repeat);
             state = PlayerStatus.PLAYING;
             remainedTime = playingFile.getDuration();
             return;
@@ -196,7 +196,7 @@ public class Player {
         // If the time passed is exactly the ending of the song
         if (remainedTime == 0) {
             // Change the Repeat Once to No Repeat if necessary
-            if (playingFile == nextFile && repeat == 1)
+            if (playingFile == nextFile && repeat == 1 && !selectedSource.isPlaylist())
                 repeat = 0;
 
             // Go to the next file
@@ -217,7 +217,7 @@ public class Player {
 
         if (remainedTime < 0) {
             // Change Repeat Once to No Repeat if necessary
-            if (playingFile == nextFile && repeat == 1)
+            if (playingFile == nextFile && repeat == 1 && !selectedSource.isPlaylist())
                 repeat = 0;
 
             // Go one by one, until the remainedTime becomes positive
@@ -295,6 +295,7 @@ public class Player {
 
         AudioFile newAudiofile = selectedSource.getAudioFile();
         int duration = newAudiofile.getDuration();
+
 
         playingFile = newAudiofile;
         nextFile = selectedSource.getNextForPlaying(playingFile, 0);

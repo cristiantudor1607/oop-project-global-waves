@@ -108,6 +108,10 @@ public class User {
         return false;
     }
     public void removeAlbum(final Album oldAlbum) { }
+    public int getNumberOfLikes() {
+        return 0;
+    }
+
 
 
     public boolean hasEvent(final String eventName) {

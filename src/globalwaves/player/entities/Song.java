@@ -214,6 +214,11 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
     }
 
     @Override
+    public boolean isPlaylist() {
+        return false;
+    }
+
+    @Override
     public String toString() {
         return name;
     }

@@ -64,4 +64,6 @@ public interface PlayableEntity {
     boolean hasAudiofileFromUser(String username);
     Album getWorkingOnAlbum();
     int getCreationTime();
+
+    boolean isPlaylist();
 }

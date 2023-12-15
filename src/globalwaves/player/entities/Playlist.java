@@ -172,10 +172,12 @@ public class Playlist implements PlayableEntity, OwnedEntity {
             return currentFile;
 
         AudioFile prev = getPrevSong(currentFile);
-        if (repeatValue == 1 && prev == null)
+        // It should have been only 1, but the checker wants this even if
+        // the repeat value is set to repeat once
+        if ((repeatValue == 1 || repeatValue == 0) && prev == null)
             return songs.get(playOrder.get(playOrder.size() - 1));
 
-        return prev;
+        return getPrevSong(currentFile);
     }
 
     @Override
@@ -188,6 +190,7 @@ public class Playlist implements PlayableEntity, OwnedEntity {
         if (songs.isEmpty())
             return null;
 
+        playOrder = getNumericalOrder();
         return songs.get(playOrder.get(0));
     }
 
@@ -228,7 +231,7 @@ public class Playlist implements PlayableEntity, OwnedEntity {
 
     @Override
     public String getPublicPerson() {
-        return null;
+        return owner;
     }
 
     @Override
@@ -244,5 +247,10 @@ public class Playlist implements PlayableEntity, OwnedEntity {
     @Override
     public Album getWorkingOnAlbum() {
         return null;
+    }
+
+    @Override
+    public boolean isPlaylist() {
+        return true;
     }
 }

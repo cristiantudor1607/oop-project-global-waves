@@ -180,6 +180,11 @@ public class Podcast implements PlayableEntity, OwnedEntity {
     }
 
     @Override
+    public boolean isPlaylist() {
+        return false;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Podcast)) return false;
