@@ -19,11 +19,10 @@ public class PrintPageInterrogator extends CommandObject {
         manager.setLastActionTime(timestamp);
 
         approval = manager.requestApprovalForAction(this);
-        if (!approval) {
-            System.out.println(username + " offline");
+        if (!approval)
             return;
-        }
 
+        System.out.println(username + " at timestamp " + timestamp);
         output = manager.requestPageContent(this);
     }
 
