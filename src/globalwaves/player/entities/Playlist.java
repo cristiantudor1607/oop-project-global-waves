@@ -13,7 +13,7 @@ public class Playlist implements PlayableEntity, OwnedEntity {
     private final String name;
     private final String owner;
     private final int creationTime;
-    private int followersNumber;
+    private Integer followersNumber;
     private boolean visible;
     private List<Song> songs;
     @Setter
@@ -30,6 +30,24 @@ public class Playlist implements PlayableEntity, OwnedEntity {
         songs = new ArrayList<>();
         followers = new ArrayList<>();
         playOrder = getNumericalOrder();
+    }
+
+    @Override
+    public int getIndexOfFile(AudioFile file) {
+        return songs.indexOf((Song) file);
+    }
+
+    @Override
+    public AudioFile getAudioFileAtIndex(int index) {
+        if (index >= songs.size())
+            return null;
+
+        return songs.get(index);
+    }
+
+    @Override
+    public int getSize() {
+        return songs.size();
     }
 
     public int getTotalLikesNumber() {
@@ -164,7 +182,7 @@ public class Playlist implements PlayableEntity, OwnedEntity {
        AudioFile next = getNextSong(currentFile);
 
        if (repeatValue == 1 && next == null)
-           return getAudioFile();
+           return getFirstAudioFile();
 
        return next;
     }
@@ -187,7 +205,7 @@ public class Playlist implements PlayableEntity, OwnedEntity {
     }
 
     @Override
-    public AudioFile getAudioFile() {
+    public AudioFile getFirstAudioFile() {
         if (songs.isEmpty())
             return null;
 
@@ -216,7 +234,7 @@ public class Playlist implements PlayableEntity, OwnedEntity {
     }
 
     @Override
-    public Playlist getWorkingOnPlaylist() {
+    public Playlist getCurrentPlaylist() {
         return this;
     }
 
@@ -246,7 +264,7 @@ public class Playlist implements PlayableEntity, OwnedEntity {
     }
 
     @Override
-    public Album getWorkingOnAlbum() {
+    public Album getCurrentAlbum() {
         return null;
     }
 

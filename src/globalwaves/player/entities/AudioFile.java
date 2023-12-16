@@ -13,6 +13,6 @@ public abstract class AudioFile {
      * @return true, if it can be liked, false, otherwise
      */
     public abstract boolean isSong();
-    public abstract Song getWorkingOnSong();
-    public abstract Episode getWorkingOnEpisode();
+    public abstract Song getCurrentSong();
+    public abstract Episode getCurrentEpisode();
 }

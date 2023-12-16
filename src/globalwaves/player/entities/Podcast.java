@@ -37,6 +37,23 @@ public class Podcast implements PlayableEntity, OwnedEntity {
 
     }
 
+    @Override
+    public int getIndexOfFile(AudioFile file) {
+        return episodes.indexOf((Episode) file);
+    }
+
+    @Override
+    public AudioFile getAudioFileAtIndex(int index) {
+        if (index >= episodes.size())
+            return null;
+
+        return episodes.get(index);
+    }
+
+    @Override
+    public int getSize() {
+        return episodes.size();
+    }
 
     /**
      * Returns the episode that has to be played after the specified one
@@ -125,7 +142,7 @@ public class Podcast implements PlayableEntity, OwnedEntity {
     }
 
     @Override
-    public AudioFile getAudioFile() {
+    public AudioFile getFirstAudioFile() {
         return episodes.get(0);
     }
 
@@ -155,7 +172,7 @@ public class Podcast implements PlayableEntity, OwnedEntity {
     }
 
     @Override
-    public Playlist getWorkingOnPlaylist() {
+    public Playlist getCurrentPlaylist() {
         return null;
     }
 
@@ -170,7 +187,7 @@ public class Podcast implements PlayableEntity, OwnedEntity {
     }
 
     @Override
-    public Album getWorkingOnAlbum() {
+    public Album getCurrentAlbum() {
         return null;
     }
 

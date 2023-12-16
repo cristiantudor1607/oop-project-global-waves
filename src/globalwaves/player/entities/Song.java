@@ -95,6 +95,24 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
         likesNumber = 0;
     }
 
+    @Override
+    public int getIndexOfFile(AudioFile file) {
+        return 0;
+    }
+
+    @Override
+    public AudioFile getAudioFileAtIndex(int index) {
+        if (index > 0)
+            return null;
+
+        return this;
+    }
+
+    @Override
+    public int getSize() {
+        return 1;
+    }
+
     public List<String> getFollowers() {
         return null;
     }
@@ -126,7 +144,7 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
     }
 
     @Override
-    public AudioFile getAudioFile() {
+    public AudioFile getFirstAudioFile() {
         return this;
     }
 
@@ -184,7 +202,7 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
     }
 
     @Override
-    public Playlist getWorkingOnPlaylist() {
+    public Playlist getCurrentPlaylist() {
         return null;
     }
 
@@ -194,12 +212,12 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
     }
 
     @Override
-    public Song getWorkingOnSong() {
+    public Song getCurrentSong() {
         return this;
     }
 
     @Override
-    public Episode getWorkingOnEpisode() {
+    public Episode getCurrentEpisode() {
         return null;
     }
 
@@ -209,7 +227,7 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
     }
 
     @Override
-    public Album getWorkingOnAlbum() {
+    public Album getCurrentAlbum() {
         return null;
     }
 

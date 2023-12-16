@@ -16,7 +16,7 @@ public interface PlayableEntity {
      * Gets the first file to be loaded and played
      * @return The first file of the entity
      */
-    AudioFile getAudioFile();
+    AudioFile getFirstAudioFile();
 
     /**
      * Checks if the entity needs to save its data to the history
@@ -52,7 +52,7 @@ public interface PlayableEntity {
     ShuffleExit.Status unshuffle();
     boolean cantGoForwardOrBackward();
     String getName();
-    Playlist getWorkingOnPlaylist();
+    Playlist getCurrentPlaylist();
     String getPublicPerson();
 
     /**
@@ -62,8 +62,14 @@ public interface PlayableEntity {
     int getDuration();
 
     boolean hasAudiofileFromUser(String username);
-    Album getWorkingOnAlbum();
+    Album getCurrentAlbum();
     int getCreationTime();
 
     boolean isPlaylist();
+
+
+    // TODO: SPER CA O SA MEARGA FUNCTIILE ASTEA
+    int getIndexOfFile(AudioFile file);
+    AudioFile getAudioFileAtIndex(int index);
+    int getSize();
 }

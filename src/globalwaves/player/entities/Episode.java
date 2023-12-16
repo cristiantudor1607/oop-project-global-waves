@@ -37,12 +37,12 @@ public class Episode extends AudioFile {
     }
 
     @Override
-    public Song getWorkingOnSong() {
+    public Song getCurrentSong() {
         return null;
     }
 
     @Override
-    public Episode getWorkingOnEpisode() {
+    public Episode getCurrentEpisode() {
         return this;
     }
 

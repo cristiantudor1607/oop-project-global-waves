@@ -115,4 +115,14 @@ public class HelperTool {
         results.subList(TRUNC_SIZE, results.size()).clear();
     }
 
+    public List<Integer> getAscendingOrder(final int size) {
+        List<Integer> order = new ArrayList<>();
+
+        for (int i = 0; i < size; i++)
+            order.add(i);
+
+        return order;
+    }
+
+
 }

@@ -218,7 +218,7 @@ public class ActionManager {
         if (userPlayer.hasEmptySource())
             return LoadExit.Status.EMPTY_SOURCE;
 
-        userPlayer.load();
+        userPlayer.load(userPlayer.getSelectedSource());
 
         return LoadExit.Status.LOADED;
     }
@@ -284,9 +284,9 @@ public class ActionManager {
             return AddRemoveExit.Status.NO_SOURCE;
 
         AudioFile playingFile = ownerPlayer.getPlayingFile();
-        Song workingOnSong = playingFile.getWorkingOnSong();
+        Song workingOnSong = playingFile.getCurrentSong();
 
-        // If getWorkingOnSong returned null, then the playing file is not a song
+        // If getCurrentSong returned null, then the playing file is not a song
         if (workingOnSong == null)
             return AddRemoveExit.Status.NOT_A_SONG;
 
@@ -315,7 +315,7 @@ public class ActionManager {
             return LikeExit.Status.NO_SOURCE;
 
         AudioFile playingFile = userPlayer.getPlayingFile();
-        Song workingOnSong = playingFile.getWorkingOnSong();
+        Song workingOnSong = playingFile.getCurrentSong();
 
         // If getWorkingSong method returned null, it means that the selected source
         // is not a song
@@ -356,9 +356,9 @@ public class ActionManager {
             return FollowExit.Status.NO_SOURCE;
 
         PlayableEntity playing = userPlayer.getSelectedSource();
-        Playlist workingOnPlaylist = playing.getWorkingOnPlaylist();
+        Playlist workingOnPlaylist = playing.getCurrentPlaylist();
 
-        // If getWorkingOnPlaylist method returned null, it means that the source
+        // If getCurrentPlaylist method returned null, it means that the source
         // is not a playlist
         if (workingOnPlaylist == null)
             return FollowExit.Status.NOT_A_PLAYLIST;
@@ -402,15 +402,23 @@ public class ActionManager {
             return ShuffleExit.Status.NO_SOURCE_LOADED;
 
         ShuffleExit.Status shuffleExit;
-        if (userPlayer.isShuffle()) {
-            userPlayer.setShuffle(false);
-            shuffleExit = userPlayer.getSelectedSource().unshuffle();
-            userPlayer.changeOrderAfterShuffle();
+        if (!userPlayer.isShuffle()) {
+            if (userPlayer.shuffle(seed))
+                shuffleExit = ShuffleExit.Status.ACTIVATED;
+            else
+                shuffleExit = ShuffleExit.Status.NOT_A_PLAYLIST;
         } else {
-            userPlayer.setShuffle(true);
-            shuffleExit = userPlayer.getSelectedSource().shuffle(seed);
-            userPlayer.changeOrderAfterShuffle();
+            if (userPlayer.unshuffle())
+                shuffleExit = ShuffleExit.Status.DEACTIVATED;
+            else
+                shuffleExit = ShuffleExit.Status.NOT_A_PLAYLIST;
         }
+
+        for (int i : userPlayer.getPlayingOrder()) {
+            System.out.println(i + " : " + userPlayer.getSelectedSource()
+                    .getAudioFileAtIndex(userPlayer.getPlayingOrder().get(i)).getName());
+        }
+        System.out.println("playing: " + userPlayer.getPlayingFile().getName());
 
         return shuffleExit;
     }
@@ -432,8 +440,6 @@ public class ActionManager {
     }
 
     public String requestPrev(PrevInterrogator execQuery) {
-        if (execQuery.getTimestamp() == 9519)
-            System.out.println();
         String username = execQuery.getUsername();
         Player userPlayer = getPlayerByUsername(username);
 
@@ -455,7 +461,7 @@ public class ActionManager {
         if (userPlayer.getSelectedSource().cantGoForwardOrBackward())
             return "The loaded source is not a podcast.";
 
-        userPlayer.skipForward();
+        userPlayer.skip();
         return "Skipped forward successfully.";
     }
 
@@ -469,7 +475,7 @@ public class ActionManager {
         if (userPlayer.getSelectedSource().cantGoForwardOrBackward())
             return "The loaded source is not a podcast.";
 
-        userPlayer.rewoundBackward();
+        userPlayer.rewound();
         return "Rewound successfully.";
     }
 

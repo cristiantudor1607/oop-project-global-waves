@@ -52,7 +52,7 @@ public class Album extends Playlist {
     }
 
     @Override
-    public Album getWorkingOnAlbum() {
+    public Album getCurrentAlbum() {
         return this;
     }
 

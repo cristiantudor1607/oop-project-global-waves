@@ -29,7 +29,6 @@ public class ShuffleInterrogator extends CommandObject {
         }
 
         exitStatus = manager.requestShuffling(this);
-
         manager.setLastActionTime(timestamp);
     }
 
