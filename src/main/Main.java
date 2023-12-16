@@ -7,11 +7,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import fileio.input.LibraryInput;
-import globalwaves.parser.templates.CommandObject;
-import globalwaves.parser.file.JsonLoader;
-import globalwaves.player.entities.library.ActionManager;
-import globalwaves.player.entities.library.Library;
-import globalwaves.player.entities.utilities.FiltersMapper;
+import app.parser.commands.templates.CommandObject;
+import app.parser.file.JsonLoader;
+import app.management.ActionManager;
+import app.management.Library;
+import app.utilities.FiltersMapper;
 
 import java.io.File;
 import java.io.IOException;
