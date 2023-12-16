@@ -12,6 +12,7 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Getter @Setter
 public class Song extends AudioFile implements PlayableEntity, Comparable<Song> {
@@ -214,10 +215,19 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
         return name;
     }
 
-    /**
-     * @param o the song to be compared.
-     * @return true, it the songs have the same name, false, otherwise
-     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Song)) return false;
+        Song song = (Song) o;
+        return artist.equals(song.getArtist()) && name.equals(song.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getArtist());
+    }
+
     @Override
     public int compareTo(@NonNull Song o) {
         return name.compareTo(o.name);

@@ -27,9 +27,6 @@ public class PrevInterrogator extends CommandObject {
             return;
         }
 
-        if (timestamp == 6390)
-            System.out.println();
-
         message = manager.requestPrev(this);
         manager.setLastActionTime(timestamp);
     }

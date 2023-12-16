@@ -17,22 +17,9 @@ public class HelperTool {
         return instance;
     }
 
-    public static void deleteInstance() {
-        instance = null;
-    }
-
     public boolean playlistsHaveArtist(final List<Playlist> playlists, final String artistName) {
         for (Playlist p: playlists) {
             if (p.hasAudiofileFromUser(artistName))
-                return true;
-        }
-
-        return false;
-    }
-
-    public boolean playlistsHaveAlbum(final List<Playlist> playlists, final String albumName) {
-        for (Playlist p: playlists) {
-            if (p.hasSongFromAlbum(albumName))
                 return true;
         }
 
@@ -76,16 +63,25 @@ public class HelperTool {
         return usernames;
     }
 
-    // TODO: remove this if hasSameElementTwice works
-    public boolean hasSameSongAtLeastTwice(final List<Song> songs) {
-        for (int i = 0; i < songs.size() - 1; i++) {
-            for (int j = i + 1; j < songs.size(); j++) {
-                if (songs.get(i).compareTo(songs.get(j)) == 0)
-                    return true;
-            }
-        }
+    public void setCreationTimestamp(final List<Song> songs, final int timestamp) {
+        for (Song s : songs)
+            s.setCreationTime(timestamp);
+    }
 
-        return false;
+    public List<Integer> getAscendingOrder(final int size) {
+        List<Integer> order = new ArrayList<>();
+
+        for (int i = 0; i < size; i++)
+            order.add(i);
+
+        return order;
+    }
+
+    public <T> void truncateResults(List<T> results) {
+        if (results.size() < TRUNC_SIZE)
+            return;
+
+        results.subList(TRUNC_SIZE, results.size()).clear();
     }
 
     public <T> boolean hasSameElementTwice(final List<T> elements) {
@@ -98,28 +94,4 @@ public class HelperTool {
 
         return false;
     }
-
-
-    public void setCreationTimestamp(final List<Song> songs, final int timestamp) {
-        for (Song s : songs)
-            s.setCreationTime(timestamp);
-    }
-
-    public <T> void truncateResults(List<T> results) {
-        if (results.size() < TRUNC_SIZE)
-            return;
-
-        results.subList(TRUNC_SIZE, results.size()).clear();
-    }
-
-    public List<Integer> getAscendingOrder(final int size) {
-        List<Integer> order = new ArrayList<>();
-
-        for (int i = 0; i < size; i++)
-            order.add(i);
-
-        return order;
-    }
-
-
 }

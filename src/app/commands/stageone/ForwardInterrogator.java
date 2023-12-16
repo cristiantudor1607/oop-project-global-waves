@@ -12,13 +12,6 @@ public class ForwardInterrogator extends CommandObject {
     @JsonIgnore
     private String message;
 
-    /**
-     * The method executes the forward method and returns it's output
-     * @param manager The ActionManager that manages the players and is able to make changes
-     *                at a specific player, or communicates with the library interrogator to
-     *                retrieve infos from library.
-     * @return The output formatted as JsonNode
-     */
     @Override
     public void execute() {
         approval = manager.requestApprovalForAction(this);

@@ -14,13 +14,6 @@ public class TopFivePlaylistsInterrogator extends CommandObject {
     @JsonIgnore
     private List<String> result;
 
-    /**
-     * Method that executes the getTop5Playlists command, and returns it;s output.
-     * @param manager The ActionManager that manages the players and is able to make changes
-     *                at a specific player, or communicates with the library interrogator to
-     *                retrieve infos from library.
-     * @return The output formatted as JsonNode.
-     */
     @Override
     public void execute() {
         result = manager.requestTopFivePlaylists();

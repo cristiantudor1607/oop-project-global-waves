@@ -14,7 +14,6 @@ public class TopFiveSongsInterrogator extends CommandObject {
     @JsonIgnore
     private List<String> result;
 
-
     @Override
     public void execute() {
         result = manager.requestTopFiveSongs();

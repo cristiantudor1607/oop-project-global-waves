@@ -554,7 +554,7 @@ public class ActionManager {
         if (adminBot.checkAlbumNameForUser(artist, albumName))
             return AddAlbumExit.Status.SAME_NAME;
 
-        if (tool.hasSameSongAtLeastTwice(execQuery.getSongs()))
+        if (tool.hasSameElementTwice(execQuery.getSongs()))
             return AddAlbumExit.Status.SAME_SONG;
 
         String artistName = execQuery.getUsername();
@@ -749,9 +749,6 @@ public class ActionManager {
     public String requestDeletingUser(final DeleteUserInterrogator execQuery) {
         String username = execQuery.getUsername();
         User user = adminBot.getUserByUsername(username);
-
-        if (username.equals("melodicwanderer"))
-            System.out.println();
 
         // If getUserByUsername method returned null, it means that the user doesn't exist
         if (user == null)

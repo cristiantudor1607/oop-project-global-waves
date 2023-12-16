@@ -252,7 +252,6 @@ public class Player {
     public void skip() {
         // If there are less than 90 seconds remaining, start the next episode
         if (remainedTime <= SECONDS) {
-            // TODO: poate sa fie de aici ceva
             int nextIndex = getNextAudioFileIndex();
             if (nextIndex == -1) {
                 resetPlayer();
@@ -355,8 +354,6 @@ public class Player {
 
         // Get the index of the file. It should be 0
         currentIndex = entity.getIndexOfFile(playingFile);
-        // TODO: Remove this
-        assert currentIndex != 0 : "The first loaded file has not index 0!";
 
         // Set the default order
         playingOrder = getDefaultOrder(entity.getSize());
