@@ -14,7 +14,7 @@ public class ConnectionInterrogator extends CommandObject {
 
     @Override
     public void execute() {
-        exitStatus = manager.requestSwitchConnection(this);
+        exitStatus = manager.requestSwitchConnection(username);
         manager.setLastActionTime(timestamp);
     }
 

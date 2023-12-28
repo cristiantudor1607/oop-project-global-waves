@@ -1,5 +1,6 @@
 package app.commands.stagetwo;
 
+import app.utilities.constants.StringConstants;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonNode;
 import app.outputs.stagetwo.PrintPageOutput;
@@ -19,10 +20,12 @@ public class PrintPageInterrogator extends CommandObject {
         manager.setLastActionTime(timestamp);
 
         approval = manager.requestApprovalForAction(this);
-        if (!approval)
+        if (!approval) {
+            output = username + StringConstants.OFFLINE_DESCRIPTOR;
             return;
+        }
 
-        output = manager.requestPageContent(this);
+        output = manager.requestPageContent(username);
     }
 
 

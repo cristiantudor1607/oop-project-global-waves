@@ -118,8 +118,6 @@ public class User {
         return 0;
     }
 
-
-
     public boolean hasEvent(final String eventName) {
         return false;
     }

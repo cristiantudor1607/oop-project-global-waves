@@ -16,7 +16,7 @@ public class ShowAlbumsInterrogator extends CommandObject {
 
     @Override
     public void execute() {
-        results = manager.requestUserAlbums(this);
+        results = manager.requestUserAlbums(username);
         manager.setLastActionTime(timestamp);
     }
 

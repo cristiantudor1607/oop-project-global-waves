@@ -22,15 +22,11 @@ import app.commands.stagetwo.AddMerchInterrogator;
 import app.commands.stagetwo.AddPodcastInterrogator;
 import app.commands.stagetwo.AddUserInterrogator;
 import app.commands.stagetwo.ChangePageInterrogator;
-import app.commands.stagetwo.ConnectionInterrogator;
 import app.commands.stagetwo.DeleteUserInterrogator;
-import app.commands.stagetwo.PrintPageInterrogator;
 import app.commands.stagetwo.RemoveAlbumInterrogator;
 import app.commands.stagetwo.RemoveAnnouncementInterrogator;
 import app.commands.stagetwo.RemoveEventInterrogator;
 import app.commands.stagetwo.RemovePodcastInterrogator;
-import app.commands.stagetwo.ShowAlbumsInterrogator;
-import app.commands.stagetwo.ShowPodcastsInterrogator;
 import app.enums.PageType;
 import app.enums.UserType;
 import app.exitstats.stageone.AddRemoveExit;
@@ -293,9 +289,10 @@ public final class ActionManager {
 
     /**
      * Performs the select and returns an exit code.
-     * @param execQuery the Select Command that requested the action
-     * @return A SelectExit.Status enum which serves as an exit code. It says what type
-     * of error was occurred during the select action
+     * @param execQuery the select Command that requested the action. It packages all the data
+     *                  needed by the manager, like the username and the itemNumber
+     * @return An exit code which describes what type of entity was selected (a playable one, or a
+     * page), or if there was an error
      */
     public SelectExit.Status requestItemSelection(final SelectInterrogator execQuery) {
         int itemNumber = execQuery.getItemNumber();
@@ -337,9 +334,10 @@ public final class ActionManager {
     /**
      * Loads the previously selected source in the player of the user that gave the
      * command.
-     * @param execQuery the Load Command that requested the action
-     * @return A LoadExit.Status enum, which serves as an exit code. It says what type
-     * of loading error was occurred during the load action
+     * @param execQuery the load Command that requested the action. It packages all the data
+     *                  needed by the manager. For this action only the username is required
+     * @return An exit code which describes if the action was successfully or there was an error
+     * encountered
      */
     public LoadExit.Status requestLoading(final LoadInterrogator execQuery) {
         String username = execQuery.getUsername();
@@ -480,15 +478,6 @@ public final class ActionManager {
     }
 
     /**
-     * Retrieves the user's playlists from database and returns their names as a List.
-     * @param owner The name of the user whose playlists are requested
-     * @return A list of strings, containing the names of the playlists
-     */
-    public List<Playlist> requestOwnerPlaylists(final String owner) {
-        return adminBot.getOwnerPlaylists(owner);
-    }
-
-    /**
      * Likes or unlikes the playing song, if possible.
      * @param execQuery The like Command that requested the action. It contains the name
      *                  of the user
@@ -523,23 +512,6 @@ public final class ActionManager {
         user.unlike(workingOnSong);
         workingOnSong.removeLike();
         return LikeExit.Status.UNLIKED;
-    }
-
-    /**
-     * Retrieves the liked songs from database and returns a list containing their names.
-     * @param username The name of the user whose liked songs are requested
-     * @return A list of strings, containing the names of the songs
-     */
-    public List<String> requestLikedSongs(final String username) {
-
-        List<Song> songs = adminBot.getUserLikedSongs(username);
-
-        List<String> names = new ArrayList<>();
-        for (Song s : songs) {
-            names.add(s.getName());
-        }
-
-        return names;
     }
 
     /**
@@ -624,15 +596,17 @@ public final class ActionManager {
 
         ShuffleExit.Status shuffleExit;
         if (!userPlayer.isShuffle()) {
-            if (userPlayer.shuffle(seed))
+            if (userPlayer.shuffle(seed)) {
                 shuffleExit = ShuffleExit.Status.ACTIVATED;
-            else
+            } else {
                 shuffleExit = ShuffleExit.Status.NOT_A_PLAYLIST;
+            }
         } else {
-            if (userPlayer.unshuffle())
+            if (userPlayer.unshuffle()) {
                 shuffleExit = ShuffleExit.Status.DEACTIVATED;
-            else
+            } else {
                 shuffleExit = ShuffleExit.Status.NOT_A_PLAYLIST;
+            }
         }
 
         return shuffleExit;
@@ -676,8 +650,8 @@ public final class ActionManager {
         }
 
         userPlayer.playPrev(execQuery.getTimestamp() - lastActionTime);
-        return "Returned to previous track successfully. The current track is " +
-                userPlayer.getPlayingFile().getName() + ".";
+        return "Returned to previous track successfully. The current track is "
+                + userPlayer.getPlayingFile().getName() + ".";
     }
 
     /**
@@ -685,7 +659,7 @@ public final class ActionManager {
      * @param execQuery The forward Command that requested the action
      * @return An exit message
      */
-    public String requestForward(ForwardInterrogator execQuery) {
+    public String requestForward(final ForwardInterrogator execQuery) {
         String username = execQuery.getUsername();
         Player userPlayer = getPlayerByUsername(username);
 
@@ -701,7 +675,12 @@ public final class ActionManager {
         return "Skipped forward successfully.";
     }
 
-    public String requestBackward(BackwardInterrogator execQuery) {
+    /**
+     * Goes backward by 90 seconds, or plays the previous track, if it can't.
+     * @param execQuery The backward Command that requested the action
+     * @return An exit message
+     */
+    public String requestBackward(final BackwardInterrogator execQuery) {
         String username = execQuery.getUsername();
         Player userPlayer = getPlayerByUsername(username);
 
@@ -717,17 +696,13 @@ public final class ActionManager {
         return "Rewound successfully.";
     }
 
-    public List<String> requestTopFiveSongs() {
-        return adminBot.getTopFiveSongs();
-    }
-
-    public List<String> requestTopFivePlaylists() {
-        return adminBot.getTopFivePlaylists();
-    }
-
-    public SwitchConnectionExit.Status requestSwitchConnection(ConnectionInterrogator execQuery) {
-        String username = execQuery.getUsername();
-
+    /**
+     * Changes the user connection status.
+     * @param username The name of the user whose status should be changed
+     * @return An exit code which describes either the type of error encountered, or
+     * the success
+     */
+    public SwitchConnectionExit.Status requestSwitchConnection(final String username) {
         User queriedUser = adminBot.getUserByUsername(username);
 
         if (queriedUser == null) {
@@ -741,13 +716,27 @@ public final class ActionManager {
         Player userPlayer = getPlayerByUsername(username);
         if (userPlayer.isFreeze()) {
             userPlayer.unfreeze();
-        } else
+        } else {
             userPlayer.freeze();
+        }
         queriedUser.switchStatus();
         return SwitchConnectionExit.Status.SUCCESS;
     }
 
-    public AddUserExit.Status requestAddingUser(AddUserInterrogator execQuery) {
+    /**
+     * Creates a new user and adds it to the database, if possible.
+     * @param execQuery The addUser Command that sent the request. It packages all
+     *                  the data that the manager needs to create the user:
+     *                  <ul>
+     *                  <li>username</li>
+     *                  <li>age</li>
+     *                  <li>city</li>
+     *                  <li>type : user, artist, host</li>
+     *                  </ul>
+     * @return {@code SUCCESS}, if the user was added successfully, the error encountered,
+     * otherwise
+     */
+    public AddUserExit.Status requestAddingUser(final AddUserInterrogator execQuery) {
         boolean usernameExists = adminBot.checkUsername(execQuery.getUsername());
         if (usernameExists) {
             return AddUserExit.Status.USERNAME_TAKEN;
@@ -774,236 +763,12 @@ public final class ActionManager {
         return AddUserExit.Status.SUCCESS;
     }
 
-    public AddAlbumExit.Status requestAddingAlbum(AddAlbumInterrogator execQuery) {
-        boolean usernameExist = adminBot.checkUsername(execQuery.getUsername());
-        if (!usernameExist) {
-            return AddAlbumExit.Status.INVALID_USERNAME;
-        }
-
-        User artist = adminBot.getArtistByUsername(execQuery.getUsername());
-        if (artist == null) {
-            return AddAlbumExit.Status.NOT_ARTIST;
-        }
-
-        String albumName = execQuery.getAlbumName();
-        if (adminBot.checkAlbumNameForUser(artist, albumName)) {
-            return AddAlbumExit.Status.SAME_NAME;
-        }
-
-        if (tool.hasSameElementTwice(execQuery.getSongs())) {
-            return AddAlbumExit.Status.SAME_SONG;
-        }
-
-        String artistName = execQuery.getUsername();
-        String description = execQuery.getDescription();
-        int creationTime = execQuery.getTimestamp();
-
-        // Set the creation time for all songs on the album
-        tool.setCreationTimestamp(execQuery.getSongs(), creationTime);
-        // Add new songs to library
-        adminBot.addSongsToLibrary(artistName, execQuery.getSongs());
-        // Create the album object
-        Album artistNewAlbum = new Album(artistName, albumName, description,
-                creationTime, execQuery.getSongs());
-        // Add album to user albums
-        artist.addAlbum(artistNewAlbum);
-
-        return AddAlbumExit.Status.SUCCESS;
-    }
-
-    public AddPodcastExit.Status requestAddingPodcast(final AddPodcastInterrogator execQuery) {
-        String hostName = execQuery.getUsername();
-
-        if (!adminBot.checkUsername(hostName)) {
-            return AddPodcastExit.Status.DOESNT_EXIST;
-        }
-
-        User host = adminBot.getHostByUsername(hostName);
-        if (host == null) {
-            return AddPodcastExit.Status.NOT_HOST;
-        }
-
-        String podcastName = execQuery.getPodcastName();
-        if (adminBot.checkPodcastNameForUser(host, podcastName)) {
-            return AddPodcastExit.Status.SAME_NAME;
-        }
-
-        if (tool.hasSameElementTwice(execQuery.getEpisodes())) {
-            return AddPodcastExit.Status.DUPLICATE;
-        }
-
-        // Create the new Podcast Object
-        Podcast hostPodcast = new Podcast(podcastName, hostName, execQuery.getEpisodes());
-        // Add Podcast to Library
-        adminBot.addPodcastToLibrary(hostName, hostPodcast);
-        // Add Podcast to user podcasts
-        host.addPodcast(hostPodcast);
-
-        return AddPodcastExit.Status.SUCCESS;
-    }
-
-    public List<Album> requestUserAlbums(final ShowAlbumsInterrogator execQuery) {
-        String username = execQuery.getUsername();
-
-        return adminBot.getArtistAlbums(username);
-    }
-
-    public List<Podcast> requestUserPodcasts(final ShowPodcastsInterrogator execQuery) {
-        String hostName = execQuery.getUsername();
-
-        return adminBot.getHostPodcasts(hostName);
-    }
-
-    public String requestPageContent(final PrintPageInterrogator execQuery) {
-        String username = execQuery.getUsername();
-
-        Page userPage = getPageByUsername(username);
-
-        return userPage.accept(contentVisitor);
-    }
-
-    public AddEventExit.Status requestAddingEvent(final AddEventInterrogator execQuery) {
-        String username = execQuery.getUsername();
-
-        if (!adminBot.checkUsername(username)) {
-            return AddEventExit.Status.DOESNT_EXIST;
-        }
-
-        User artist = adminBot.getArtistByUsername(username);
-        if (artist == null) {
-            return AddEventExit.Status.NOT_ARTIST;
-        }
-
-        String eventName = execQuery.getName();
-        String eventDescription = execQuery.getDescription();
-        LocalDate eventDate = DateMapper.parseStringToDate(execQuery.getDate());
-
-        if (artist.hasEvent(eventName)) {
-            return AddEventExit.Status.SAME_NAME;
-        }
-
-        if (eventDate == null) {
-            return AddEventExit.Status.INVALID_DATE;
-        }
-
-        artist.addEvent(new Event(eventName, eventDescription, eventDate));
-
-        return AddEventExit.Status.SUCCESS;
-    }
-
-    public AddMerchExit.Status requestAddingMerch(final AddMerchInterrogator execQuery) {
-        String username = execQuery.getUsername();
-
-        if (!adminBot.checkUsername(username)) {
-            return AddMerchExit.Status.DOESNT_EXIST;
-        }
-
-        User artist = adminBot.getArtistByUsername(username);
-        if (artist == null) {
-            return AddMerchExit.Status.NOT_ARTIST;
-        }
-
-        String merchName = execQuery.getName();
-        String merchDescription = execQuery.getDescription();
-        int merchPrice = execQuery.getPrice();
-
-        if (artist.hasMerch(merchName)) {
-            return AddMerchExit.Status.SAME_NAME;
-        }
-
-        if (merchPrice < 0) {
-            return AddMerchExit.Status.NEGATIVE_PRICE;
-        }
-
-        artist.addMerch(new Merch(merchName, merchDescription, merchPrice));
-
-        return AddMerchExit.Status.SUCCESS;
-    }
-
-    public RemoveEventExit.Status requestRemovingEvent(final RemoveEventInterrogator execQuery) {
-        String username = execQuery.getUsername();
-
-        if (!adminBot.checkUsername(username)) {
-            return RemoveEventExit.Status.DOESNT_EXIST;
-        }
-
-        User artist = adminBot.getArtistByUsername(username);
-        if (artist == null) {
-            return RemoveEventExit.Status.NOT_ARTIST;
-        }
-
-        String eventName = execQuery.getName();
-        Event artistEvent = artist.getEvent(eventName);
-        if (artistEvent == null) {
-            return RemoveEventExit.Status.INVALID_NAME;
-        }
-
-        artist.removeEvent(artistEvent);
-
-        return RemoveEventExit.Status.SUCCESS;
-    }
-
-    public AddAnnouncementExit.Status
-    requestAddingAnnouncement(final AddAnnouncementInterrogator execQuery) {
-        String username = execQuery.getUsername();
-
-        if (!adminBot.checkUsername(username)) {
-            return AddAnnouncementExit.Status.DOESNT_EXIST;
-        }
-
-        User host = adminBot.getHostByUsername(username);
-        if (host == null) {
-            return AddAnnouncementExit.Status.NOT_HOST;
-        }
-
-        String announcementName = execQuery.getName();
-        String announcementDescription = execQuery.getDescription();
-        if (host.hasAnnouncement(announcementName)) {
-            return AddAnnouncementExit.Status.SAME_NAME;
-        }
-
-        host.addAnnouncement(new Announcement(announcementName, announcementDescription));
-
-        return AddAnnouncementExit.Status.SUCCESS;
-    }
-
-    public RemoveAnnouncementExit.Status
-    requestRemovingAnnouncement(final RemoveAnnouncementInterrogator execQuery) {
-        String username =  execQuery.getUsername();
-
-        if (!adminBot.checkUsername(username)) {
-            return RemoveAnnouncementExit.Status.DOESNT_EXIST;
-        }
-
-        User host = adminBot.getHostByUsername(username);
-        if (host == null) {
-            return RemoveAnnouncementExit.Status.NOT_HOST;
-        }
-
-        String announcementName = execQuery.getName();
-        Announcement announcement = host.getAnnouncement(announcementName);
-        if (announcement == null) {
-            return RemoveAnnouncementExit.Status.INVALID_NAME;
-        }
-
-        host.removeAnnouncement(announcement);
-
-        return RemoveAnnouncementExit.Status.SUCCESS;
-    }
-
-
-    public List<String> requestOnlineUsers() {
-        List<User> onlineUsers = adminBot.getOnlineUsers();
-
-        return tool.getUsernames(onlineUsers);
-    }
-
-    public List<String> requestAllUsers() {
-        List<User> allUsers = adminBot.getAllUsers();
-
-        return tool.getUsernames(allUsers);
-    }
-
+    /**
+     * Checks if the user can be deleted, and removes it from database, if it can.
+     * @param execQuery The deleteUser Command that sent the request. It contains the
+     *                  username of the user to be deleted
+     * @return An exit message, specific to an error or success
+     */
     public String requestDeletingUser(final DeleteUserInterrogator execQuery) {
         String username = execQuery.getUsername();
         User user = adminBot.getUserByUsername(username);
@@ -1035,6 +800,231 @@ public final class ActionManager {
 
     }
 
+    /**
+     * Checks if the album can be added to the library, and adds it if possible.
+     * @param execQuery The addAlbum Command that sent the request. It packages the data
+     *                  needed to create the album:
+     *                  <ul>
+     *                  <li>username</li>
+     *                  <li>albumName</li>
+     *                  <li>description</li>
+     *                  <li>timestamp, used to set the creationTime of the album</li>
+     *                  <li>releaseYear</li>
+     *                  <li>songs</li>
+     *                  </ul>
+     * @return {@code SUCCESS}, if the album was added successfully, the error encountered
+     * otherwise
+     */
+    public AddAlbumExit.Status requestAddingAlbum(final AddAlbumInterrogator execQuery) {
+        boolean usernameExist = adminBot.checkUsername(execQuery.getUsername());
+        if (!usernameExist) {
+            return AddAlbumExit.Status.INVALID_USERNAME;
+        }
+
+        User artist = adminBot.getArtistByUsername(execQuery.getUsername());
+        if (artist == null) {
+            return AddAlbumExit.Status.NOT_ARTIST;
+        }
+
+        String albumName = execQuery.getAlbumName();
+        if (adminBot.checkAlbumNameForUser(artist, albumName)) {
+            return AddAlbumExit.Status.SAME_NAME;
+        }
+
+        if (tool.hasSameElementTwice(execQuery.getSongs())) {
+            return AddAlbumExit.Status.SAME_SONG;
+        }
+
+        String artistName = execQuery.getUsername();
+        String description = execQuery.getDescription();
+        int creationTime = execQuery.getTimestamp();
+        int releaseYear = execQuery.getReleaseYear();
+        List<Song> songs = execQuery.getSongs();
+
+        // Set the creation time for all songs on the album
+        tool.setCreationTimestamp(songs, creationTime);
+        // Add new songs to library
+        adminBot.addSongsToLibrary(artistName, songs);
+        // Create the album object
+        Album artistNewAlbum = new Album(artistName, albumName, description,
+                releaseYear, creationTime, songs);
+        // Add album to user albums
+        artist.addAlbum(artistNewAlbum);
+
+        return AddAlbumExit.Status.SUCCESS;
+    }
+
+    /**
+     * Checks if the event can be added to the artist page, and adds it if possible.
+     * @param execQuery The addEvent Command that sent the request. It packages all the data
+     *                  needed by the manager to create a new event:
+     *                  <ul>
+     *                  <li>username</li>
+     *                  <li>eventName</li>
+     *                  <li>description</li>
+     *                  <li>date</li>
+     *                  </ul>
+     * @return {@code SUCCESS}, if the event was added successfully, the error encountered,
+     * otherwise
+     */
+    public AddEventExit.Status requestAddingEvent(final AddEventInterrogator execQuery) {
+        String username = execQuery.getUsername();
+
+        if (!adminBot.checkUsername(username)) {
+            return AddEventExit.Status.DOESNT_EXIST;
+        }
+
+        User artist = adminBot.getArtistByUsername(username);
+        if (artist == null) {
+            return AddEventExit.Status.NOT_ARTIST;
+        }
+
+        String eventName = execQuery.getName();
+        String eventDescription = execQuery.getDescription();
+        LocalDate eventDate = DateMapper.parseStringToDate(execQuery.getDate());
+
+        if (artist.hasEvent(eventName)) {
+            return AddEventExit.Status.SAME_NAME;
+        }
+
+        if (eventDate == null) {
+            return AddEventExit.Status.INVALID_DATE;
+        }
+
+        artist.addEvent(new Event(eventName, eventDescription, eventDate));
+
+        return AddEventExit.Status.SUCCESS;
+    }
+
+    /**
+     * Checks if the merch can be added to the artist page, and adds it if possible
+     * @param execQuery The addMerch Command that sent the request. It packages all the
+     *                  data needed by the manager in order to create a new merch:
+     *                  <ul>
+     *                  <li>username</li>
+     *                  <li>merchName</li>
+     *                  <li>description</li>
+     *                  <li>price</li>
+     *                  </ul>
+     * @return {@code SUCCESS}, if the merch was added successfully, the error encountered,
+     * otherwise
+     */
+    public AddMerchExit.Status requestAddingMerch(final AddMerchInterrogator execQuery) {
+        String username = execQuery.getUsername();
+
+        if (!adminBot.checkUsername(username)) {
+            return AddMerchExit.Status.DOESNT_EXIST;
+        }
+
+        User artist = adminBot.getArtistByUsername(username);
+        if (artist == null) {
+            return AddMerchExit.Status.NOT_ARTIST;
+        }
+
+        String merchName = execQuery.getName();
+        String merchDescription = execQuery.getDescription();
+        int merchPrice = execQuery.getPrice();
+
+        if (artist.hasMerch(merchName)) {
+            return AddMerchExit.Status.SAME_NAME;
+        }
+
+        if (merchPrice < 0) {
+            return AddMerchExit.Status.NEGATIVE_PRICE;
+        }
+
+        artist.addMerch(new Merch(merchName, merchDescription, merchPrice));
+
+        return AddMerchExit.Status.SUCCESS;
+    }
+
+    /**
+     * Checks if the podcast can be added to the library, and adds it if possible.
+     * @param execQuery The addPodcast Command that sent the request. It packages all the data
+     *                  needed by the manager in order to create a new podcast:
+     *                  <ul>
+     *                  <li>username</li>
+     *                  <li>podcastName</li>
+     *                  <li>episodes</li>
+     *                  </ul>
+     * @return {@code SUCCESS}, if the action was done successfully, the error encountered,
+     * otherwise
+     */
+    public AddPodcastExit.Status requestAddingPodcast(final AddPodcastInterrogator execQuery) {
+        String hostName = execQuery.getUsername();
+
+        if (!adminBot.checkUsername(hostName)) {
+            return AddPodcastExit.Status.DOESNT_EXIST;
+        }
+
+        User host = adminBot.getHostByUsername(hostName);
+        if (host == null) {
+            return AddPodcastExit.Status.NOT_HOST;
+        }
+
+        String podcastName = execQuery.getPodcastName();
+        if (adminBot.checkPodcastNameForUser(host, podcastName)) {
+            return AddPodcastExit.Status.SAME_NAME;
+        }
+
+        if (tool.hasSameElementTwice(execQuery.getEpisodes())) {
+            return AddPodcastExit.Status.DUPLICATE;
+        }
+
+        // Create the new Podcast Object
+        Podcast hostPodcast = new Podcast(podcastName, hostName, execQuery.getEpisodes());
+        // Add Podcast to Library
+        adminBot.addPodcastToLibrary(hostName, hostPodcast);
+        // Add Podcast to user podcasts
+        host.addPodcast(hostPodcast);
+
+        return AddPodcastExit.Status.SUCCESS;
+    }
+
+    /**
+     * Checks if the announcement can be added to the host's page, and adds it if possible.
+     * @param execQuery The addAnnouncement Command that sent the request. It packages all the
+     *                  data needed by the manager in order to create a new announcement:
+     *                  <ul>
+     *                  <li>username</li>
+     *                  <li>announcementName</li>
+     *                  <li>description</li>
+     *                  </ul>
+     * @return {@code SUCCESS}, if the announcement was added successfully, the error
+     * encountered otherwise
+     */
+    public AddAnnouncementExit.Status
+    requestAddingAnnouncement(final AddAnnouncementInterrogator execQuery) {
+        String username = execQuery.getUsername();
+
+        if (!adminBot.checkUsername(username)) {
+            return AddAnnouncementExit.Status.DOESNT_EXIST;
+        }
+
+        User host = adminBot.getHostByUsername(username);
+        if (host == null) {
+            return AddAnnouncementExit.Status.NOT_HOST;
+        }
+
+        String announcementName = execQuery.getName();
+        String announcementDescription = execQuery.getDescription();
+        if (host.hasAnnouncement(announcementName)) {
+            return AddAnnouncementExit.Status.SAME_NAME;
+        }
+
+        host.addAnnouncement(new Announcement(announcementName, announcementDescription));
+
+        return AddAnnouncementExit.Status.SUCCESS;
+    }
+
+    /**
+     * Checks if the album can be deleted, and removes it if possible.
+     * @param execQuery THe removeAlbum Command that sent the request. It packages all
+     *                  data that manager needs to check and remove the album. <b>Only
+     *                  the username and the name of the album are used</b>
+     * @return {@code SUCCESS}, if the album was removed successfully, the error encountered,
+     * otherwise
+     */
     public RemoveAlbumExit.Status requestRemovingAlbum(final RemoveAlbumInterrogator execQuery) {
         String username = execQuery.getUsername();
         String albumName = execQuery.getName();
@@ -1072,6 +1062,77 @@ public final class ActionManager {
         return RemoveAlbumExit.Status.SUCCESS;
     }
 
+    /**
+     * Checks if the event with the given name exists, and removes it if possible.
+     * @param execQuery The removeEvent Command that sent the request. It packages all
+     *                  data needed in order to remove the event. <b>Only the username
+     *                  and the name of the event are used</b>
+     * @return {@code SUCCESS}, if the event was removed successfully, the error encountered,
+     * otherwise
+     */
+    public RemoveEventExit.Status requestRemovingEvent(final RemoveEventInterrogator execQuery) {
+        String username = execQuery.getUsername();
+
+        if (!adminBot.checkUsername(username)) {
+            return RemoveEventExit.Status.DOESNT_EXIST;
+        }
+
+        User artist = adminBot.getArtistByUsername(username);
+        if (artist == null) {
+            return RemoveEventExit.Status.NOT_ARTIST;
+        }
+
+        String eventName = execQuery.getName();
+        Event artistEvent = artist.getEvent(eventName);
+        if (artistEvent == null) {
+            return RemoveEventExit.Status.INVALID_NAME;
+        }
+
+        artist.removeEvent(artistEvent);
+
+        return RemoveEventExit.Status.SUCCESS;
+    }
+
+    /**
+     * Checks if the announcement with the given name exists, and removes it if possible.
+     * @param execQuery The removeAnnouncement Command that sent the request. It packages
+     *                  the <b>username</b> and the <b>announcement's name</b>, used
+     *                  by the manager.
+     * @return {@code SUCCESS}, if the announcement was removed successfully, the error
+     * encountered othwerwise
+     */
+    public RemoveAnnouncementExit.Status
+    requestRemovingAnnouncement(final RemoveAnnouncementInterrogator execQuery) {
+        String username = execQuery.getUsername();
+
+        if (!adminBot.checkUsername(username)) {
+            return RemoveAnnouncementExit.Status.DOESNT_EXIST;
+        }
+
+        User host = adminBot.getHostByUsername(username);
+        if (host == null) {
+            return RemoveAnnouncementExit.Status.NOT_HOST;
+        }
+
+        String announcementName = execQuery.getName();
+        Announcement announcement = host.getAnnouncement(announcementName);
+        if (announcement == null) {
+            return RemoveAnnouncementExit.Status.INVALID_NAME;
+        }
+
+        host.removeAnnouncement(announcement);
+
+        return RemoveAnnouncementExit.Status.SUCCESS;
+    }
+
+    /**
+     * Checks if the podcast can be deleted, and removes it if possible.
+     * @param execQuery The removePodcast Command that sent the request. It packages
+     *                  the <b>username</b> and the <b>podcast's name</b>, used by
+     *                  manager
+     * @return {@code SUCCESS}, if the podcast was removed successfully, the error encountered,
+     * otherwise
+     */
     public RemovePodcastExit.Status
     requestRemovingPodcast(final RemovePodcastInterrogator execQuery) {
         String username = execQuery.getUsername();
@@ -1103,6 +1164,12 @@ public final class ActionManager {
         return RemovePodcastExit.Status.SUCCESS;
     }
 
+    /**
+     * Changes the user currentPage to specified page.
+     * @param execQuery The changePage Command that sent the request. It packages the
+     *                  <b>username</b> and the <b>nextPage name</b>, used by manager
+     * @return An exit message
+     */
     public String requestChangePage(final ChangePageInterrogator execQuery) {
         String username = execQuery.getUsername();
         String nextPage = execQuery.getNextPage();
@@ -1124,21 +1191,127 @@ public final class ActionManager {
         };
     }
 
+    /**
+     * Gets the current page content.
+     * @param username The user that requested the action
+     * @return A string that contains the page content, or null if the user
+     * isn't tracked by the manager
+     */
+    public String requestPageContent(final String username) {
+        Page userPage = getPageByUsername(username);
+        return userPage == null ? null : userPage.accept(contentVisitor);
+
+    }
+
+    /**
+     * Retrieves the user's playlists from database and returns their names as a List.
+     * @param owner The name of the user whose playlists are requested
+     * @return A list of strings, containing the names of the playlists
+     */
+    public List<Playlist> requestUserPlaylists(final String owner) {
+        return adminBot.getOwnerPlaylists(owner);
+    }
+
+    /**
+     * Retrieves the liked songs from database and returns a list containing their names.
+     * @param username The name of the user whose liked songs are requested
+     * @return A list of strings, containing the names of the songs
+     */
+    public List<String> requestLikedSongs(final String username) {
+
+        List<Song> songs = adminBot.getUserLikedSongs(username);
+
+        List<String> names = new ArrayList<>();
+        for (Song s : songs) {
+            names.add(s.getName());
+        }
+
+        return names;
+    }
+
+    /**
+     * Retrieves the first 5 songs by the number of likes.
+     * @return A list of strings containing the names of the songs
+     */
+    public List<String> requestTopFiveSongs() {
+        return adminBot.getTopFiveSongs();
+    }
+
+    /**
+     * Retrieves the first 5 playlists by the number of followers.
+     * @return A list of strings containing the names of the playlists
+     */
+    public List<String> requestTopFivePlaylists() {
+        return adminBot.getTopFivePlaylists();
+    }
+
+    /**
+     * Retrieves all online users from database. It doesn't search for artist and hosts,
+     * only normal users.
+     * @return A list that contains the usernames of the online users
+     */
+    public List<String> requestOnlineUsers() {
+        List<User> onlineUsers = adminBot.getOnlineUsers();
+
+        return tool.getUsernames(onlineUsers);
+    }
+
+    /**
+     * Retrieves all users from database. It returns all normal users, all artists, and
+     * all hosts.
+     * @return A list that contains the usernames of the users
+     */
+    public List<String> requestAllUsers() {
+        List<User> allUsers = adminBot.getAllUsers();
+
+        return tool.getUsernames(allUsers);
+    }
+
+    /**
+     * Retrieves the user's albums from database.
+     * @param username The user that requested the action
+     * @return A list of albums, if the user is an artist, null otherwise
+     */
+    public List<Album> requestUserAlbums(final String username) {
+        return adminBot.getArtistAlbums(username);
+    }
+
+    /**
+     * Retrieves the user's podcasts from database.
+     * @param username The user that requested the action
+     * @return A list of podcasts, if the user is a host, null otherwise
+     */
+    public List<Podcast> requestUserPodcasts(final String username) {
+        return adminBot.getHostPodcasts(username);
+    }
+
+    /**
+     * Retrieves the first 5 albums by the number of total likes.
+     * @return A list that contains the names of the albums
+     */
     public List<String> requestTopFiveAlbums() {
         return adminBot.getTopFiveAlbums();
     }
 
+    /**
+     * Retrieves the first 5 artist by the number of likes they got.
+     * @return A list that contains the usernames of the artists
+     */
     public List<String> requestTopFiveArtists() {
         return adminBot.getTopFiveArtists();
     }
 
-
-    public void updatePlayersData(CommandObject nextToExecuteCommand) {
-        int diff = nextToExecuteCommand.getTimestamp() - lastActionTime;
+    /**
+     * Update the player remaining time, if needed, before executing the next command.
+     * @param timestamp The timestamp of the next command
+     */
+    public void updatePlayersData(final int timestamp) {
+        int diff = timestamp - lastActionTime;
         for (Map.Entry<String, UserInterface> entry: userInterfaces.entrySet()) {
             Player currPlayer = entry.getValue().getPlayer();
-            if (currPlayer.isFreeze())
+            if (currPlayer.isFreeze()) {
                 continue;
+            }
 
             currPlayer.updatePlayer(diff);
         }

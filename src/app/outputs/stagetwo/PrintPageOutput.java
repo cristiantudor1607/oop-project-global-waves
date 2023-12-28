@@ -21,7 +21,7 @@ public class PrintPageOutput extends CommandOutputFormatter {
         String username = execQuery.getUsername();
 
         if (output == null)
-            return username + StringConstants.OFFLINE_DESCRIPTOR;
+            return "Unexpected: " + username + "is an artist or a host.\n";
 
         return output;
     }

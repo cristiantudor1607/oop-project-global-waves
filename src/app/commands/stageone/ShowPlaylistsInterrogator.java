@@ -17,7 +17,7 @@ public class ShowPlaylistsInterrogator extends CommandObject {
 
     @Override
     public void execute() {
-        userPlaylists = manager.requestOwnerPlaylists(username);
+        userPlaylists = manager.requestUserPlaylists(username);
 
         manager.setLastActionTime(timestamp);
     }

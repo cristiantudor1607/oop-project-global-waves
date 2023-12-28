@@ -8,18 +8,20 @@ import java.util.List;
 public class Album extends Playlist {
     private final String artist;
     private final String description;
+    private final int releaseYear;
 
     public Album(final String artist, final String name, final String description,
-                 final int creationTime) {
+                 final int releaseYear, final int creationTime) {
         super(artist, name, creationTime);
         this.description = description;
         this.artist = artist;
+        this.releaseYear = releaseYear;
     }
 
     public Album(final String artist, final String name, final String description,
-                 final int creationTime, final List<Song> songs) {
+                 final int releaseYear, final int creationTime, final List<Song> songs) {
         // Create the album without songs
-        this(artist, name, description, creationTime);
+        this(artist, name, description, releaseYear, creationTime);
 
         // Add the songs
         songs.forEach(s -> {this.getSongs().add(s);});

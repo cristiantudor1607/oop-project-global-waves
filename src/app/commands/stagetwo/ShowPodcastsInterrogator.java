@@ -14,7 +14,7 @@ public class ShowPodcastsInterrogator extends CommandObject {
 
     @Override
     public void execute() {
-        results = manager.requestUserPodcasts(this);
+        results = manager.requestUserPodcasts(username);
         manager.setLastActionTime(timestamp);
     }
 

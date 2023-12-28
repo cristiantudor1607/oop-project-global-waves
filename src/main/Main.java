@@ -99,7 +99,7 @@ public final class Main {
         }
 
         for (CommandObject c : commandList) {
-            manager.updatePlayersData(c);
+            manager.updatePlayersData(c.getTimestamp());
             c.execute();
             JsonNode output = c.formatOutput();
             outputs.add(output);
