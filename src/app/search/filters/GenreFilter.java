@@ -13,9 +13,8 @@ public class GenreFilter implements Filter<Song> {
     }
 
     /**
-     * Checks if the matchingObject has the same genre as this filter genre. Is
-     * not case-sensitive
-     * @param matchingObject The song to be compared with this genre
+     * Checks if the song has {@code genre}
+     * @param matchingObject The song to be matched
      * @return true, if the song has the same genre, false otherwise
      */
     @Override

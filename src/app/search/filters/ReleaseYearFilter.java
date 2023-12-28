@@ -17,10 +17,11 @@ public class ReleaseYearFilter implements Filter<Song> {
     }
 
     /**
-     * Checks if the song release year is greater / smaller that this releaseYear
-     * @param matchingObject The song to be compared with this releaseYear
-     * @return true, if the song year should be greater and it is, or the song year
-     * should be smaller and it is, false otherwise
+     * Checks if the song's releaseYear is either smaller than {@code releaseYear}, or
+     * bigger than {@code releaseYear}
+     * @param matchingObject The song to be matched
+     * @return true, either the releaseYear should be greater, and it is, or it should
+     * be smaller and it is, false, otherwise
      */
     @Override
     public boolean matches(final Song matchingObject) {

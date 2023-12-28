@@ -3,9 +3,9 @@ package app.search.filters;
 public interface Filter<T> {
 
     /**
-     * A matching function, that compares this instance with an object based
-     * on some field, provided in class implementation
-     * @param matchingObject The object to be compared
+     * It checks if the object is matching some criteria. The criteria can be anything,
+     * it should be defined in the child class.
+     * @param matchingObject The object to be matched
      * @return true, if it matches, false otherwise
      */
     boolean  matches(T matchingObject);

@@ -15,8 +15,8 @@ public class TagsFilter implements Filter<Song> {
     }
 
     /**
-     * Checks if the matchingObject song contains all the tags from this tags
-     * @param matchingObject The song whose tags should be compared with this tags
+     * Checks if the song contains all the tags from {@code tags} field.
+     * @param matchingObject The song to be matched
      * @return true, if the song contains all this tags, false otherwise
      */
     @Override

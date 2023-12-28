@@ -13,9 +13,9 @@ public class ArtistFilter implements Filter<Song> {
     }
 
     /**
-     * Checks if the matchingObject  has the same artist as the filter artist
-     * @param matchingObject The song to be compared with this artist
-     * @return true, if the song has the same artist, false otherwise
+     * Checks if song belongs to {@code artist}
+     * @param matchingObject The song to be matched
+     * @return true, if it matches, false, otherwise
      */
     @Override
     public boolean matches(final Song matchingObject) {

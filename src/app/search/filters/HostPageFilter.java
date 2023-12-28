@@ -9,13 +9,16 @@ public class HostPageFilter implements Filter<Page> {
         this.hostPrefix = hostPrefix;
     }
 
+    /**
+     * Checks if the host page name starts with {@code hostPrefix}.
+     * @param matchingObject The object to be matched
+     * @return true, if it matches, false, otherwise
+     */
     @Override
-    public boolean matches(Page matchingObject) {
+    public boolean matches(final Page matchingObject) {
         String hostName = matchingObject.getHostName();
 
-        if (hostName == null)
-            return false;
+        return hostName != null && hostName.startsWith(hostPrefix);
 
-        return hostName.startsWith(hostPrefix);
     }
 }

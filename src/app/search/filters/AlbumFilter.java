@@ -13,9 +13,9 @@ public class AlbumFilter implements Filter<Song> {
     }
 
     /**
-     * Checks if the matchingObject has the same album as the filter album
-     * @param matchingObject The Song to be compared with this album
-     * @return true, if the matchingObject has the same album, false otherwise
+     * Checks if the song belongs to {@code album}
+     * @param matchingObject The object to be matched
+     * @return true, if it matches, false, otherwise
      */
     @Override
     public boolean matches(final Song matchingObject) {

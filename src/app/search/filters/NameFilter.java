@@ -17,10 +17,9 @@ public class NameFilter<T extends PlayableEntity> implements Filter<T> {
     }
 
     /**
-     * Checks if the object has a name that start with this prefix
-     * @param matchingObject the object that has the getName trait, to
-     *                       be compared with this prefix
-     * @return true, if the object name field starts with the this prefix, false
+     * Checks if the object's name starts with {@code prefix}
+     * @param matchingObject The object to be matched
+     * @return true, if the object's name starts with {@code prefix}, false
      * otherwise
      */
     @Override

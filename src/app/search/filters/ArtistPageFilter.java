@@ -9,13 +9,16 @@ public class ArtistPageFilter implements Filter<Page> {
         this.artistPrefix = artistPrefix;
     }
 
+    /**
+     * Checks if the page artist name starts with {@code artistPrefix}.
+     * @param matchingObject The object to be matched
+     * @return true, if it matches, false otherwise
+     */
     @Override
-    public boolean matches(Page matchingObject) {
+    public boolean matches(final Page matchingObject) {
         String artistName = matchingObject.getArtistName();
 
-        if (artistName == null)
-            return false;
 
-        return artistName.startsWith(artistPrefix);
+        return artistName != null && artistName.startsWith(artistPrefix);
     }
 }

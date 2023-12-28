@@ -13,8 +13,8 @@ public class OwnerFilter<T extends OwnedEntity> implements Filter<T> {
     }
 
     /**
-     * Checks if the object owner has the same owner as this filter owner
-     * @param matchingObject The object to be compared with this owner
+     * Checks if the object's owner is {@code owner}
+     * @param matchingObject The object to be matched
      * @return true, if the object has the same owner, false otherwise
      */
     @Override

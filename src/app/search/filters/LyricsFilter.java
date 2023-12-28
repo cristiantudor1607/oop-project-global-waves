@@ -13,9 +13,9 @@ public class LyricsFilter implements Filter<Song> {
     }
 
     /**
-     * Checks if the matchingObject lyrics contains this pattern
-     * @param matchingObject The song to be compared with this pattern
-     * @return true, if the song lyrics contains the pattern String, false otherwise
+     * Checks if the song lyrics contains the given string / pattern.
+     * @param matchingObject The song to be matched
+     * @return true, if lyrics contains {@code pattern}, false, otherwise
      */
     @Override
     public boolean matches(final Song matchingObject) {

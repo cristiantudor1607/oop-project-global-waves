@@ -1,12 +1,50 @@
 package app.parser.commands.templates;
 
+import app.commands.stageone.AddRemoveInterrogator;
+import app.commands.stageone.BackwardInterrogator;
+import app.commands.stageone.CreatePlaylistInterrogator;
+import app.commands.stageone.FollowInterrogator;
+import app.commands.stageone.ForwardInterrogator;
+import app.commands.stageone.LikeInterrogator;
+import app.commands.stageone.LoadInterrogator;
+import app.commands.stageone.NextInterrogator;
+import app.commands.stageone.PlayPauseInterrogator;
+import app.commands.stageone.PrevInterrogator;
+import app.commands.stageone.RepeatInterrogator;
+import app.commands.stageone.SearchInterrogator;
+import app.commands.stageone.SelectInterrogator;
+import app.commands.stageone.ShowLikesInterrogator;
+import app.commands.stageone.ShowPlaylistsInterrogator;
+import app.commands.stageone.ShuffleInterrogator;
+import app.commands.stageone.StatusInterrogator;
+import app.commands.stageone.TopFivePlaylistsInterrogator;
+import app.commands.stageone.TopFiveSongsInterrogator;
+import app.commands.stageone.VisibilityInterrogator;
+import app.commands.stagetwo.AddAlbumInterrogator;
+import app.commands.stagetwo.AddAnnouncementInterrogator;
+import app.commands.stagetwo.AddEventInterrogator;
+import app.commands.stagetwo.AddMerchInterrogator;
+import app.commands.stagetwo.AddPodcastInterrogator;
+import app.commands.stagetwo.AddUserInterrogator;
+import app.commands.stagetwo.AllUsersInterrogator;
+import app.commands.stagetwo.ChangePageInterrogator;
+import app.commands.stagetwo.ConnectionInterrogator;
+import app.commands.stagetwo.DeleteUserInterrogator;
+import app.commands.stagetwo.OnlineUsersInterrogator;
+import app.commands.stagetwo.PrintPageInterrogator;
+import app.commands.stagetwo.RemoveAlbumInterrogator;
+import app.commands.stagetwo.RemoveAnnouncementInterrogator;
+import app.commands.stagetwo.RemoveEventInterrogator;
+import app.commands.stagetwo.RemovePodcastInterrogator;
+import app.commands.stagetwo.ShowAlbumsInterrogator;
+import app.commands.stagetwo.ShowPodcastsInterrogator;
+import app.commands.stagetwo.TopFiveAlbumsInterrogator;
+import app.commands.stagetwo.TopFiveArtistsInterrogator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.JsonNode;
-import app.commands.stageone.*;
-import app.commands.stagetwo.*;
 import app.management.ActionManager;
 import lombok.Getter;
 import lombok.Setter;
@@ -53,7 +91,8 @@ import java.util.Map;
         @JsonSubTypes.Type(value = AddPodcastInterrogator.class, name = "addPodcast"),
         @JsonSubTypes.Type(value = RemovePodcastInterrogator.class, name = "removePodcast"),
         @JsonSubTypes.Type(value = AddAnnouncementInterrogator.class, name = "addAnnouncement"),
-        @JsonSubTypes.Type(value = RemoveAnnouncementInterrogator.class, name = "removeAnnouncement"),
+        @JsonSubTypes.Type(value = RemoveAnnouncementInterrogator.class,
+                name = "removeAnnouncement"),
         @JsonSubTypes.Type(value = ConnectionInterrogator.class, name = "switchConnectionStatus"),
         @JsonSubTypes.Type(value = TopFiveAlbumsInterrogator.class, name = "getTop5Albums"),
         @JsonSubTypes.Type(value = TopFiveArtistsInterrogator.class, name = "getTop5Artists"),
@@ -74,9 +113,16 @@ public abstract class CommandObject {
         manager = ActionManager.getInstance();
     }
 
-
+    /**
+     * Executes the command.
+     */
     public abstract void execute();
 
+    /**
+     * After calling {@code execute} method, the output of the command can be
+     * generated using this method.
+     * @return A JsonNode containing the output data
+     */
     public abstract JsonNode formatOutput();
 
     /**
