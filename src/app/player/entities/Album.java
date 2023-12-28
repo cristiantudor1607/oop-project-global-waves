@@ -35,7 +35,7 @@ public class Album extends Playlist {
     }
 
     @Override
-    public String getPublicPerson() {
+    public String getPublicIdentity() {
         return artist;
     }
 

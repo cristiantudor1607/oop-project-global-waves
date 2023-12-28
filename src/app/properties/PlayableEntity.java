@@ -1,6 +1,5 @@
 package app.properties;
 
-import app.exitstats.stageone.ShuffleExit;
 import app.player.entities.Album;
 import app.player.entities.AudioFile;
 import app.player.entities.Playlist;
@@ -54,7 +53,7 @@ public interface PlayableEntity {
      * Returns the username of the user that is associated with the entity
      * @return The username of the associated user
      */
-    String getPublicPerson();
+    String getPublicIdentity();
 
     /**
      * Returns the repeatValue formatted as String

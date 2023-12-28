@@ -181,7 +181,7 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
     }
 
     @Override
-    public String getPublicPerson() {
+    public String getPublicIdentity() {
         return artist;
     }
 

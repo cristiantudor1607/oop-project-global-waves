@@ -82,7 +82,7 @@ public final class Main {
         ArrayNode outputs = objectMapper.createArrayNode();
 
         Library database = Library.getInstance();
-        database.loadLibraryData(library);
+        database.convertInputLibrary(library);
 
         ActionManager manager = ActionManager.getInstance();
         List<CommandObject> commandList = new ArrayList<>();

@@ -16,12 +16,13 @@ public final class FilterType {
         UNKNOWN,
     }
 
-    private FilterType() {}
+    private FilterType() { }
 
     /**
-     * Method that parse a String to get a FilterType.Type enum, designed as a utility class.
-     * @param filterAsString The String to be converted.
-     * @return A type, if the String matches a type, or null otherwise
+     * Converts the given string to a FilterType enum. If it doesn't recognize the type, it
+     * returns the type UNKNOWN.
+     * @param filterAsString The name of the type
+     * @return The specific filter type, or unknown
      */
     public static Type parseString(final String filterAsString) {
         if (filterAsString.equals("name")) {
@@ -56,18 +57,21 @@ public final class FilterType {
             return Type.OWNER;
         }
 
-        if (filterAsString.equals("description"))
+        if (filterAsString.equals("description")) {
             return Type.DESCRIPTION;
+        }
 
         return Type.UNKNOWN;
     }
 
     public static Type parseString(final String filterAsString, final SearchType.Type type) {
-        if (type == SearchType.Type.ARTIST && filterAsString.equals("name"))
+        if (type == SearchType.Type.ARTIST && filterAsString.equals("name")) {
             return Type.ARTIST_USERNAME;
+        }
 
-        if (type == SearchType.Type.HOST && filterAsString.equals("name"))
+        if (type == SearchType.Type.HOST && filterAsString.equals("name")) {
             return Type.HOST_USERNAME;
+        }
 
         return Type.UNKNOWN;
     }

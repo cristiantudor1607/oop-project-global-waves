@@ -12,31 +12,38 @@ public final class SearchType {
         UNKNOWN,
     }
 
-    private SearchType() {}
+    private SearchType() { }
 
     /**
-     * Method that parse a String and generates a Type enum associated.
-     * @param typeAsString The String that should be parsed.
-     * @return a Type enum if the String can be turned into an enum, or null otherwise.
+     * Converts the string given as parameter to a PageType enum. If it doesn't recognize the type
+     * specified, it returns the type UNKNOWN.
+     * @param typeAsString The name of the type
+     * @return The specific search type, or unknown
      */
     public static Type parseString(final String typeAsString) {
-        if (typeAsString.equals("song"))
+        if (typeAsString.equals("song")) {
             return Type.SONG;
+        }
 
-        if (typeAsString.equals("podcast"))
+        if (typeAsString.equals("podcast")) {
             return Type.PODCAST;
+        }
 
-        if (typeAsString.equals("playlist"))
+        if (typeAsString.equals("playlist")) {
             return Type.PLAYLIST;
+        }
 
-        if (typeAsString.equals("album"))
+        if (typeAsString.equals("album")) {
             return Type.ALBUM;
+        }
 
-        if (typeAsString.equals("artist"))
+        if (typeAsString.equals("artist")) {
             return Type.ARTIST;
+        }
 
-        if (typeAsString.equals("host"))
+        if (typeAsString.equals("host")) {
             return Type.HOST;
+        }
 
         return Type.UNKNOWN;
     }

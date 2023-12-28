@@ -105,7 +105,6 @@ public class SearchBar {
     }
 
     public boolean invalidItem(int index) {
-        //return  index <= results.size();
         return switch (typeOfSearch) {
             case PLAYABLE_ENTITY -> index > results.size() || index < 0;
             case PAGE -> index > pages.size() || index < 0;

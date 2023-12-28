@@ -7,6 +7,7 @@ import app.pages.features.Merch;
 import app.player.entities.*;
 import app.pages.Page;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,7 @@ public class User {
     private String city;
     private ConnectionStatus status;
     private List<Song> likes;
+    @Setter
     private List<Playlist> following;
 
     public User() {}

@@ -15,7 +15,7 @@ public class ShowLikesInterrogator extends CommandObject {
 
     @Override
     public void execute() {
-        songNames = manager.requestLikedSongs(this);
+        songNames = manager.requestLikedSongs(username);
 
         manager.setLastActionTime(timestamp);
     }

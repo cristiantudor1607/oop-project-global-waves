@@ -9,12 +9,12 @@ import lombok.Getter;
 
 @Getter
 public class StatusInterrogator extends CommandObject {
-    @JsonIgnore private Player requestedPlayer;
+    @JsonIgnore private Player player;
 
 
     @Override
     public void execute() {
-        requestedPlayer = manager.requestPlayer(this);
+        player = manager.getPlayerByUsername(username);
 
         manager.setLastActionTime(timestamp);
     }

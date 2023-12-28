@@ -35,6 +35,8 @@ si doar request urile publice
 -> s-ar putea sa fie nevoie sa verific si daca au selectat la removeAlbum ceva
 -> foarte important, rearanjeaza dracu codu
 
+-> TODO: scapa de deleteInstance, fa un boolean ca sa memoreze daca a mai fost incarcata
+
 EXPLICATII:
 + AdminBot este o extensie a adminului, pentru ca poate face tot ce face adminul, plus operatiile de bot
 -> Admin e mostenit din User, gandidu ma ca pe viitor ar putea exista useri admini,
@@ -44,3 +46,5 @@ tip de entitate User sa fie adaugat
 -> am folosit compunere la artisti: Artistul are o pagina si pagina are un artist, dispare una disapre
 si cealalta
 -> mentioneaza la instanceof uri de ce nu ai facut instanceof Album album
+
+

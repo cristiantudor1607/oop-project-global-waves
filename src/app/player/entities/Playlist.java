@@ -179,7 +179,7 @@ public class Playlist implements PlayableEntity, OwnedEntity {
     }
 
     @Override
-    public String getPublicPerson() {
+    public String getPublicIdentity() {
         return owner;
     }
 

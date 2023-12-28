@@ -12,6 +12,6 @@ public class StatusOutput extends CommandOutputFormatter {
         command = "status";
         user = executedQuery.getUsername();
         timestamp = executedQuery.getTimestamp();
-        stats = new PlayerStats(executedQuery.getRequestedPlayer());
+        stats = new PlayerStats(executedQuery.getPlayer());
     }
 }

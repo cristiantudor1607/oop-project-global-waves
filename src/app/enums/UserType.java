@@ -1,6 +1,6 @@
 package app.enums;
 
-public class UserType {
+public final class UserType {
     public enum Type {
         USER,
         ARTIST,
@@ -9,17 +9,26 @@ public class UserType {
         UNKNOWN,
     }
 
-    private UserType() {}
+    private UserType() { }
 
-    public static Type parseString(final String type) {
-        if (type.equals("user"))
+    /**
+     * Converts the string given as parameter to a UserType enum. If it doesn't recognize the type
+     * specified, it returns the type UNKNOWN.
+     * @param typeAsString The name of the type
+     * @return The specific user type, or unknown
+     */
+    public static Type parseString(final String typeAsString) {
+        if (typeAsString.equals("user")) {
             return Type.USER;
+        }
 
-        if (type.equals("artist"))
+        if (typeAsString.equals("artist")) {
             return Type.ARTIST;
+        }
 
-        if (type.equals("host"))
+        if (typeAsString.equals("host")) {
             return Type.HOST;
+        }
 
         return Type.UNKNOWN;
     }

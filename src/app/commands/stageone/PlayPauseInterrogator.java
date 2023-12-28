@@ -19,7 +19,7 @@ public class PlayPauseInterrogator extends CommandObject {
             return;
         }
 
-        exitStatus = manager.requestUpdateState(this);
+        exitStatus = manager.requestPlayPause(this);
         manager.setLastActionTime(timestamp);
     }
 

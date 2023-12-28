@@ -1,6 +1,10 @@
 package app.management;
 
-import app.pages.*;
+import app.pages.ArtistPage;
+import app.pages.HomePage;
+import app.pages.HostPage;
+import app.pages.LikedContentPage;
+import app.pages.Page;
 import app.player.entities.Player;
 import app.player.entities.SearchBar;
 import app.users.User;
