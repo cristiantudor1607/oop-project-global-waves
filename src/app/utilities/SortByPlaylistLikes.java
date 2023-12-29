@@ -14,7 +14,7 @@ public class SortByPlaylistLikes implements Comparator<Playlist> {
      * one has more likes
      */
     @Override
-    public int compare(Playlist o1, Playlist o2) {
+    public int compare(final Playlist o1, final Playlist o2) {
         return o1.getTotalLikesNumber() - o2.getTotalLikesNumber();
     }
 }

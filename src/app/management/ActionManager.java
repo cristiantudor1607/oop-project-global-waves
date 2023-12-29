@@ -883,7 +883,7 @@ public final class ActionManager {
         String eventDescription = execQuery.getDescription();
         LocalDate eventDate = DateMapper.parseStringToDate(execQuery.getDate());
 
-        if (artist.hasEvent(eventName)) {
+        if (artist.getEvent(eventName) != null) {
             return AddEventExit.Status.SAME_NAME;
         }
 
@@ -1008,7 +1008,7 @@ public final class ActionManager {
 
         String announcementName = execQuery.getName();
         String announcementDescription = execQuery.getDescription();
-        if (host.hasAnnouncement(announcementName)) {
+        if (host.getAnnouncement(announcementName) != null) {
             return AddAnnouncementExit.Status.SAME_NAME;
         }
 
@@ -1038,14 +1038,14 @@ public final class ActionManager {
             return RemoveAlbumExit.Status.NOT_ARTIST;
         }
 
-        if (!artist.hasAlbumWithName(albumName)) {
+        if (artist.getAlbum(albumName) == null) {
             return RemoveAlbumExit.Status.DONT_HAVE;
         }
 
         // Retrieve the album from artist. It won't return null,
         // because we already checked if the user is an artist, or
         // if the artist doesn't have an album with that name
-        Album album = artist.getAlbumByName(albumName);
+        Album album = artist.getAlbum(albumName);
 
         // If there is at least one song from the album used in a playlist
         if (album.isUsedInPlaylist()) {
@@ -1057,8 +1057,12 @@ public final class ActionManager {
             return RemoveAlbumExit.Status.FAIL;
         }
 
-        // Remove the album as an admin
+        // Remove the album from artist pov
+        artist.removeAlbum(album);
+
+        // Remove the album from database
         adminBot.removeAlbum(album);
+
         return RemoveAlbumExit.Status.SUCCESS;
     }
 
@@ -1147,7 +1151,7 @@ public final class ActionManager {
             return RemovePodcastExit.Status.NOT_HOST;
         }
 
-        if (!host.hasPodcastWithName(podcastName)) {
+        if (host.getPodcast(podcastName) == null) {
             return RemovePodcastExit.Status.DONT_HAVE;
         }
 
@@ -1155,7 +1159,7 @@ public final class ActionManager {
             return RemovePodcastExit.Status.FAIL;
         }
 
-        Podcast podcast = host.getPodcastByName(podcastName);
+        Podcast podcast = host.getPodcast(podcastName);
 
         // Remove the podcast from the host point of view
         host.removePodcast(podcast);

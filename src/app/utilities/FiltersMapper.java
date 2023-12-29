@@ -3,10 +3,14 @@ package app.utilities;
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.NonNull;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
-public class FiltersMapper {
-    private FiltersMapper() {}
+public final class FiltersMapper {
+    private FiltersMapper() { }
 
     /**
      * Converts the JsonNode that contains the {@code filters} into a
@@ -16,7 +20,7 @@ public class FiltersMapper {
      * @param filtersNode The node containing the filters.
      * @return The filters converted into a {@code Map<String, List<String>>}
      */
-    public static Map<String, List<String>> convertToMap(@NonNull JsonNode filtersNode) {
+    public static Map<String, List<String>> convertToMap(@NonNull final JsonNode filtersNode) {
         Map<String, List<String>> mappedFilters = new HashMap<>();
 
         Iterator<Map.Entry<String, JsonNode>> filters = filtersNode.fields();
@@ -27,8 +31,9 @@ public class FiltersMapper {
 
             if (value.isArray()) {
                 List<String> tagsList = new ArrayList<>();
-                for (JsonNode tag: value)
+                for (JsonNode tag: value) {
                     tagsList.add(tag.asText());
+                }
 
                 mappedFilters.put(key, tagsList);
                 continue;

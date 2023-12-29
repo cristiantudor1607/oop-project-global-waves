@@ -121,7 +121,7 @@ public class AdminBot extends Admin {
         if (!user.isArtist())
             return false;
 
-        return user.hasAlbumWithName(albumName);
+        return user.getAlbum(albumName) != null;
     }
 
     /**
@@ -135,7 +135,7 @@ public class AdminBot extends Admin {
         if (!user.isHost())
             return false;
 
-        return user.hasPodcastWithName(podcastName);
+        return user.getPodcast(podcastName) != null;
     }
 
     public boolean checkIfOwnerHasPlaylist(final String owner, final String playlistName) {
@@ -279,8 +279,7 @@ public class AdminBot extends Admin {
 
     public List<String> getTopFivePlaylists() {
         List<Playlist> playlists = getPublicPlaylists();
-        tool.sortPlaylists(playlists);
-        tool.sortPlaylistsByTime(playlists);
+        tool.sortPlaylistsByFollowers(playlists);
         tool.truncateResults(playlists);
 
         List<String> names = new ArrayList<>();

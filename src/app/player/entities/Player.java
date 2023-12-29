@@ -365,7 +365,7 @@ public class Player {
     }
 
     public List<Integer> getDefaultOrder(final int size) {
-        return HelperTool.getInstance().getAscendingOrder(size);
+        return HelperTool.getInstance().getIndexesList(size);
     }
 
     /**
