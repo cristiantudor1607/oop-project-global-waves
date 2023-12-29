@@ -1,10 +1,7 @@
 package app.users;
 
-import app.utilities.HelperTool;
+import app.utilities.*;
 import app.player.entities.*;
-import app.utilities.SortAlphabetical;
-import app.utilities.SortByArtistLikes;
-import app.utilities.SortByTotalLikes;
 
 import java.util.*;
 
@@ -77,6 +74,17 @@ public class AdminBot extends Admin {
 
         return users;
     }
+
+    public List<Song> getAllSongs() {
+        List<Song> songs = new ArrayList<>(database.getSongs());
+
+        for (List<Song> listOfSongs : database.getAddedSongs().values()) {
+            songs.addAll(listOfSongs);
+        }
+
+        return songs;
+    }
+
 
     /**
      * Checks if the username exists
@@ -257,16 +265,13 @@ public class AdminBot extends Admin {
     }
 
     public List<String> getTopFiveSongs() {
-        Map<Song, Integer> mappedLikes = mapLikes();
-        List<Map.Entry<Song, Integer>> unrolledLikes =  tool.unrollLikes(mappedLikes);
-        tool.sortLikes(unrolledLikes);
-        tool.sortByLibrary(unrolledLikes);
-        tool.truncateResults(unrolledLikes);
+        List<Song> songs = getAllSongs();
+        songs.sort(new SortByNumberOfLikes().reversed().thenComparing(new SortByCreationTime()));
+        tool.truncateResults(songs);
 
         List<String> results = new ArrayList<>();
-
-        for (Map.Entry<Song, Integer> entry : unrolledLikes) {
-            results.add(entry.getKey().getName());
+        for (Song song: songs) {
+            results.add(song.getName());
         }
 
         return results;
@@ -287,7 +292,7 @@ public class AdminBot extends Admin {
 
     public List<String> getTopFiveAlbums() {
         List<Album> albums = getAllAlbums();
-        albums.sort(new SortByTotalLikes().thenComparing(new SortAlphabetical()));
+        albums.sort(new SortByPlaylistLikes().reversed().thenComparing(new SortAlphabetical()));
         tool.truncateResults(albums);
 
         List<String> names = new ArrayList<>();
@@ -299,7 +304,7 @@ public class AdminBot extends Admin {
     public List<String> getTopFiveArtists() {
         List<User> artists = new ArrayList<>(database.getArtists());
 
-        artists.sort(new SortByArtistLikes());
+        artists.sort(new SortByArtistLikes().reversed());
         tool.truncateResults(artists);
 
         List<String> names = new ArrayList<>();

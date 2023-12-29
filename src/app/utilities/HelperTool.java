@@ -26,32 +26,12 @@ public class HelperTool {
         return false;
     }
 
-    public List<Map.Entry<Song, Integer>> unrollLikes(Map<Song, Integer> mappedLikes) {
-        List<Map.Entry<Song, Integer>> unrolledLikes = new ArrayList<>();
-
-        for (Song key : mappedLikes.keySet()) {
-            Integer value = mappedLikes.get(key);
-            Map.Entry<Song, Integer> newTuple = new AbstractMap.SimpleEntry<>(key, value);
-            unrolledLikes.add(newTuple);
-        }
-
-        return unrolledLikes;
-    }
-
-    public void sortLikes(List<Map.Entry<Song, Integer>> unrolledLikes) {
-        unrolledLikes.sort(new SortByInteger());
-    }
-
-    public void sortByLibrary(List<Map.Entry<Song, Integer>> sortedLikes) {
-        sortedLikes.sort(new SortByLibraryOrder());
-    }
-
     public void sortPlaylists(List<Playlist> publicPlaylists) {
-        publicPlaylists.sort(new SortByFollowers());
+        publicPlaylists.sort(new SortByFollowers().reversed());
     }
 
     public void sortPlaylistsByTime(List<Playlist> publicPlaylists) {
-        publicPlaylists.sort(new SortByCreationTimeWithFollowers());
+        publicPlaylists.sort(new SortByFollowers().reversed().thenComparing(new SortByCreationTime()));
     }
 
     public List<String> getUsernames(final List<User> users) {

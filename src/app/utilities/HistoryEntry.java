@@ -9,7 +9,7 @@ public class HistoryEntry {
     private AudioFile file;
     private int remainedTime;
 
-    public HistoryEntry(AudioFile file, int remainedTime) {
+    public HistoryEntry(final AudioFile file, final int remainedTime) {
         this.file = file;
         this.remainedTime = remainedTime;
     }

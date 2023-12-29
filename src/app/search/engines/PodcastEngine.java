@@ -19,31 +19,40 @@ public class PodcastEngine extends SearchEngine<Podcast> {
         super(filters);
     }
 
+    /**
+     * Converts a (key, value) pair into a filter.
+     * @param key The name of the filter
+     * @param values The patterns of the filters
+     * @return A specific filter, based on {@code key}'s value
+     */
     @Override
-    public Filter<Podcast> getFilterByNameAsString(@NonNull String key,
-                                                   @NonNull List<String> values) {
-        if (values.isEmpty())
-            return null;
+    public Filter<Podcast> getFilterByNameAsString(@NonNull final String key,
+                                                   @NonNull final List<String> values) {
+        Filter<Podcast> result = null;
+        if (!values.isEmpty()) {
+            result = switch (FilterType.parseString(key)) {
+                case NAME -> new NameFilter<>(values.get(0));
+                case OWNER -> new OwnerFilter<>(values.get(0));
+                default -> null;
+            };
+        }
 
-        return switch (FilterType.parseString(key)) {
-            case NAME -> new NameFilter<>(values.get(0));
-            case OWNER -> new OwnerFilter<>(values.get(0));
-            default -> null;
-        };
+        return result;
     }
 
     /**
-     * Applies ALL filters on library entities. It starts with the list of all podcasts
-     * from the library , and filter through them
-     * @return A List of entities of the same type, that matched the filters
+     * Applies all {@code filters} on the list that contains all podcasts from
+     * database.
+     * @return A list of matched podcasts
      */
     @Override
     public List<Podcast> collectResults() {
         Library database = Library.getInstance();
         List<Podcast> matchedPodcasts = new ArrayList<>(database.getPodcasts());
 
-        for (List<Podcast> podcasts: database.getAddedPodcasts().values())
+        for (List<Podcast> podcasts: database.getAddedPodcasts().values()) {
             matchedPodcasts.addAll(podcasts);
+        }
 
 
         for (Filter<Podcast> filter : filters) {

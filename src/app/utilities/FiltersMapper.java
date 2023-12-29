@@ -9,10 +9,12 @@ public class FiltersMapper {
     private FiltersMapper() {}
 
     /**
-     * Method that turns a node with filters into a useful Map with keys as Strings
-     * and values as ArrayLists of Strings
-     * @param filtersNode The JsonNode that contains the filters data
-     * @return A Map with all the filters found
+     * Converts the JsonNode that contains the {@code filters} into a
+     * {@code Map<String, List<String>>}. Only the "<b>tags</b>" filter uses a
+     * list for its values, but most of the time, the first element of the list
+     * is the value.
+     * @param filtersNode The node containing the filters.
+     * @return The filters converted into a {@code Map<String, List<String>>}
      */
     public static Map<String, List<String>> convertToMap(@NonNull JsonNode filtersNode) {
         Map<String, List<String>> mappedFilters = new HashMap<>();

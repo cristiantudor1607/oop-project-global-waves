@@ -6,7 +6,7 @@ import app.users.User;
 import app.utilities.HelperTool;
 import app.properties.Visitor;
 import app.utilities.SortByNumberOfLikes;
-import app.utilities.SortByTotalLikes;
+import app.utilities.SortByPlaylistLikes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ public class HomePage extends Page {
         // User class
         List<Song> copy = new ArrayList<>(likedSongs);
 
-        copy.sort(new SortByNumberOfLikes());
+        copy.sort(new SortByNumberOfLikes().reversed());
         HelperTool.getInstance().truncateResults(copy);
         return copy;
     }
@@ -37,7 +37,7 @@ public class HomePage extends Page {
         // case
         List<Playlist> copy = new ArrayList<>(followingPlaylists);
 
-        copy.sort(new SortByTotalLikes());
+        copy.sort(new SortByPlaylistLikes().reversed());
         HelperTool.getInstance().truncateResults(copy);
         return copy;
     }

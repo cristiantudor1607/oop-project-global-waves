@@ -4,8 +4,14 @@ import app.enums.SearchResult;
 import app.enums.SearchType;
 import app.pages.Page;
 import app.properties.PlayableEntity;
-import app.search.engines.*;
-import app.utilities.SortByTimestamp;
+import app.search.engines.AlbumEngine;
+import app.search.engines.EngineResultsParser;
+import app.search.engines.PageFinder;
+import app.search.engines.PlaylistEngine;
+import app.search.engines.PodcastEngine;
+import app.search.engines.SearchEngine;
+import app.search.engines.SongEngine;
+import app.utilities.SortByCreationTime;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
@@ -60,7 +66,7 @@ public class SearchBar {
         if (engine != null) {
             typeOfSearch = SearchResult.PLAYABLE_ENTITY;
             results = engine.collectResults();
-            results.sort(new SortByTimestamp());
+            results.sort(new SortByCreationTime());
         }
 
         if (pager != null) {

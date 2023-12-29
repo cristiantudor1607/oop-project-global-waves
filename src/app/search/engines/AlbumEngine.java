@@ -12,16 +12,23 @@ import lombok.NonNull;
 import java.util.List;
 import java.util.Map;
 
-public class AlbumEngine extends SearchEngine<Album>{
-    public AlbumEngine(Map<String, List<String>> filters) {
+public class AlbumEngine extends SearchEngine<Album> {
+    public AlbumEngine(final Map<String, List<String>> filters) {
         super(filters);
     }
 
+    /**
+     * Converts a (key, value) pair into a filter.
+     * @param key The name of the filter
+     * @param values The patterns of the filters
+     * @return A specific filter, based on {@code key}'s value
+     */
     @Override
-    public Filter<Album> getFilterByNameAsString(@NonNull String key,
-                                                 @NonNull List<String> values) {
-        if (values.isEmpty())
+    public Filter<Album> getFilterByNameAsString(@NonNull final String key,
+                                                 @NonNull final List<String> values) {
+        if (values.isEmpty()) {
             return null;
+        }
 
         return switch (FilterType.parseString(key)) {
             case NAME -> new NameFilter<>(values.get(0));
@@ -31,14 +38,19 @@ public class AlbumEngine extends SearchEngine<Album>{
         };
     }
 
+    /**
+     * Applies all {@code filters} on a list that contains all albums from library.
+     * @return A list of matched albums
+     */
     @Override
     public List<Album> collectResults() {
         AdminBot adminBot = new AdminBot();
 
         List<Album> matchedAlbums = adminBot.getAllAlbums();
 
-        for (Filter<Album> filter : filters)
+        for (Filter<Album> filter : filters) {
             matchedAlbums = applyFilter(matchedAlbums, filter);
+        }
 
         return matchedAlbums;
     }
