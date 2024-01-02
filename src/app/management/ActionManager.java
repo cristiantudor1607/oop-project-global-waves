@@ -64,9 +64,14 @@ import app.users.AdminBot;
 import app.pages.Page;
 import app.pages.ContentVisitor;
 import app.properties.PlayableEntity;
-import app.utilities.DateMapper;
 import app.users.User;
+import app.utilities.DateMapper;
 import app.utilities.HelperTool;
+import app.utilities.SortAlphabetical;
+import app.utilities.SortByArtistLikes;
+import app.utilities.SortByCreationTime;
+import app.utilities.SortByNumberOfLikes;
+import app.utilities.SortByPlaylistLikes;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
@@ -399,7 +404,7 @@ public final class ActionManager {
         String playlistName = execQuery.getPlaylistName();
         int timestamp = execQuery.getTimestamp();
 
-        if (adminBot.checkIfOwnerHasPlaylist(owner, playlistName)) {
+        if (adminBot.checkPlaylistNameForUser(owner, playlistName)) {
             return CreationExit.Status.ALREADY_EXISTS;
         }
 
@@ -420,7 +425,7 @@ public final class ActionManager {
         int id = execQuery.getPlaylistId();
         String owner = execQuery.getUsername();
 
-        Playlist ownerPlaylist = adminBot.getOwnerPlaylistById(owner, id);
+        Playlist ownerPlaylist = adminBot.getUserPlaylist(owner, id);
         if (ownerPlaylist == null) {
             return SwitchVisibilityExit.Status.TOO_HIGH;
         }
@@ -448,7 +453,7 @@ public final class ActionManager {
         int id = execQuery.getPlaylistId();
 
         Player ownerPlayer = getPlayerByUsername(ownerName);
-        Playlist ownerPlaylist = adminBot.getOwnerPlaylistById(ownerName, id);
+        Playlist ownerPlaylist = adminBot.getUserPlaylist(ownerName, id);
 
         if (ownerPlaylist == null) {
             return AddRemoveExit.Status.INVALID_PLAYLIST;
@@ -786,7 +791,7 @@ public final class ActionManager {
             return username + " can't be deleted.";
         }
 
-        if (adminBot.playlistsHaveSongFromArtist(username)) {
+        if (adminBot.artistHasSongInPlaylists(username)) {
             return username + " can't be deleted.";
         }
 
@@ -1213,7 +1218,7 @@ public final class ActionManager {
      * @return A list of strings, containing the names of the playlists
      */
     public List<Playlist> requestUserPlaylists(final String owner) {
-        return adminBot.getOwnerPlaylists(owner);
+        return adminBot.getUserPlaylists(owner);
     }
 
     /**
@@ -1222,11 +1227,10 @@ public final class ActionManager {
      * @return A list of strings, containing the names of the songs
      */
     public List<String> requestLikedSongs(final String username) {
-
-        List<Song> songs = adminBot.getUserLikedSongs(username);
-
+        User user = adminBot.getUserByUsername(username);
         List<String> names = new ArrayList<>();
-        for (Song s : songs) {
+
+        for (Song s : user.getLikes()) {
             names.add(s.getName());
         }
 
@@ -1238,7 +1242,15 @@ public final class ActionManager {
      * @return A list of strings containing the names of the songs
      */
     public List<String> requestTopFiveSongs() {
-        return adminBot.getTopFiveSongs();
+        List<Song> songs = adminBot.getAllSongs();
+        songs.sort(new SortByNumberOfLikes().reversed()
+                .thenComparing(new SortByCreationTime()));
+        tool.truncateResults(songs);
+
+        List<String> names = new ArrayList<>();
+        songs.forEach(song -> names.add(song.getName()));
+
+        return names;
     }
 
     /**
@@ -1246,7 +1258,14 @@ public final class ActionManager {
      * @return A list of strings containing the names of the playlists
      */
     public List<String> requestTopFivePlaylists() {
-        return adminBot.getTopFivePlaylists();
+        List<Playlist> playlists = adminBot.getPublicPlaylists();
+        tool.sortPlaylistsByFollowers(playlists);
+        tool.truncateResults(playlists);
+
+        List<String> names = new ArrayList<>();
+        playlists.forEach(playlist -> names.add(playlist.getName()));
+
+        return names;
     }
 
     /**
@@ -1294,7 +1313,16 @@ public final class ActionManager {
      * @return A list that contains the names of the albums
      */
     public List<String> requestTopFiveAlbums() {
-        return adminBot.getTopFiveAlbums();
+        List<Album> albums = adminBot.getAllAlbums();
+
+        albums.sort(new SortByPlaylistLikes().reversed()
+                .thenComparing(new SortAlphabetical()));
+        tool.truncateResults(albums);
+
+        List<String> names = new ArrayList<>();
+        albums.forEach(album -> names.add(album.getName()));
+
+        return names;
     }
 
     /**
@@ -1302,7 +1330,14 @@ public final class ActionManager {
      * @return A list that contains the usernames of the artists
      */
     public List<String> requestTopFiveArtists() {
-        return adminBot.getTopFiveArtists();
+        List<User> artists = new ArrayList<>(adminBot.getArtists());
+        artists.sort(new SortByArtistLikes().reversed());
+        tool.truncateResults(artists);
+
+        List<String> names = new ArrayList<>();
+        artists.forEach(artist -> names.add(artist.getUsername()));
+
+        return names;
     }
 
     /**

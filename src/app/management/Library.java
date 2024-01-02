@@ -206,7 +206,7 @@ public final class Library {
      * @param oldUser The user to be removed. It should be previously checked if the user can be
      *                deleted
      */
-    public void removeUser(final User oldUser) {
+    public void deleteUser(final User oldUser) {
         if (oldUser.isNormalUser()) {
             // Unfollow all playlists
             removeAllFollowsFromUser(oldUser);
