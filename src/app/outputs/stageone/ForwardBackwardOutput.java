@@ -9,14 +9,14 @@ import lombok.Getter;
 public class ForwardBackwardOutput extends CommandOutputFormatter {
     private final String message;
 
-    public ForwardBackwardOutput(BackwardInterrogator executedQuery) {
+    public ForwardBackwardOutput(final BackwardInterrogator executedQuery) {
         command = "backward";
         user = executedQuery.getUsername();
         timestamp = executedQuery.getTimestamp();
         message = executedQuery.getMessage();
     }
 
-    public ForwardBackwardOutput(ForwardInterrogator executedQuery) {
+    public ForwardBackwardOutput(final ForwardInterrogator executedQuery) {
         command = "forward";
         user = executedQuery.getUsername();
         timestamp = executedQuery.getTimestamp();

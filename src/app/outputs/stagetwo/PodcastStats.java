@@ -16,7 +16,8 @@ public class PodcastStats {
         name = podcast.getName();
         episodes = new ArrayList<>();
 
-        for (AudioFile episode: podcast.getEpisodes())
+        for (AudioFile episode: podcast.getEpisodes()) {
             episodes.add(episode.getName());
+        }
     }
 }

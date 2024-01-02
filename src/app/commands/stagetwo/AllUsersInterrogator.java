@@ -14,12 +14,20 @@ public class AllUsersInterrogator extends CommandObject {
     @JsonIgnore
     private List<String> results;
 
+    /**
+     * Executes the getAllUsers command.
+     */
     @Override
     public void execute() {
         results = manager.requestAllUsers();
         manager.setLastActionTime(timestamp);
     }
 
+    /**
+     * After calling {@code execute} method, the output of the command can be
+     * generated using this method.
+     * @return A JsonNode containing the output data
+     */
     @Override
     public JsonNode formatOutput() {
         // Link https://www.baeldung.com/java-jackson-remove-json-elements

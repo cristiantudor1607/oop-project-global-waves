@@ -14,7 +14,9 @@ public class ShowPlaylistsInterrogator extends CommandObject {
     @JsonIgnore
     private List<Playlist> userPlaylists;
 
-
+    /**
+     * Executes the showPlaylists command.
+     */
     @Override
     public void execute() {
         userPlaylists = manager.requestUserPlaylists(username);
@@ -22,6 +24,11 @@ public class ShowPlaylistsInterrogator extends CommandObject {
         manager.setLastActionTime(timestamp);
     }
 
+    /**
+     * After calling {@code execute} method, the output of the command can be
+     * generated using this method.
+     * @return A JsonNode containing the output data
+     */
     @Override
     public JsonNode formatOutput() {
         return (new ShowPlaylistsOutput(this)).generateOutputNode();

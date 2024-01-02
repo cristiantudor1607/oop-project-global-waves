@@ -12,7 +12,8 @@ public interface PlayableEntity {
     String getName();
 
     /**
-     * Returns the size of the entity
+     * Returns the size of the entity. <b>Size of an entity is defined as number of audio files
+     * encapsulated by the entity.</b>
      * @return The size of the entity
      */
     int getSize();
@@ -30,21 +31,21 @@ public interface PlayableEntity {
     int getCreationTime();
 
     /**
-     * Returns the AudioFile at index specified
+     * Returns the AudioFile at the specified index
      * @param index The index of the file
-     * @return null, if the index is out of bounds, the AudioFile otherwise
+     * @return {@code null}, if the index is out of bounds, the {@code AudioFile} otherwise
      */
     AudioFile getAudioFileAtIndex(int index);
 
     /**
-     * Returns the index of the file in the list that stores it
+     * Returns the index of the file in the collection / entity.
      * @param file The file to be inspected.
-     * @return The index of the file, or -1 if it doesn't contain the file
+     * @return The index of the file, or {@code -1 } if it doesn't contain the file
      */
     int getIndexOfFile(AudioFile file);
 
     /**
-     * Gets the first file to be loaded and played
+     * Gets the first file in collection
      * @return The first file of the entity
      */
     AudioFile getFirstAudioFile();
@@ -63,7 +64,8 @@ public interface PlayableEntity {
     String getRepeatStateName(int repeatValue);
 
     /**
-     * Checks if the entity is an empty file
+     * Checks if the entity is an empty file. Only a playlist can be empty,
+     * if it doesn't have any song.
      * @return true, if it is an empty file, false otherwise
      */
     boolean isEmptyPlayableFile();
@@ -95,14 +97,14 @@ public interface PlayableEntity {
     boolean cantGoForwardOrBackward();
 
     /**
-     * If the current instance is a playlist, returns its instance
-     * @return Current object instance, if it is a playlist, null otherwise
+     * If {@code this} is a playlist, returns its instance.
+     * @return {@code this}, if it is a playlist, {@code null} otherwise
      */
     Playlist getCurrentPlaylist();
 
     /**
-     * If the current instance is an album, returns its instance
-     * @return Current object instance, if it is an album, null otherwise
+     * If {@code this} is an album, returns its instance.
+     * @return {@code this}, if it is an album, {@code null} otherwise
      */
     Album getCurrentAlbum();
 }

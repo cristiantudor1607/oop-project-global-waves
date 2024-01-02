@@ -14,24 +14,19 @@ public class ShuffleInterrogator extends CommandObject {
     private ShuffleExit.Status exitStatus;
 
     /**
-     * The method executes the Shuffle Command and returns it's output.
-     * @param manager The ActionManager that manages the players and is able to make changes
-     *                at a specific player, or communicates with the library interrogator to
-     *                retrieve infos from library.
-     * @return The output formatted as JsonNode.
+     * Executes the shuffle command.
      */
     @Override
     public void execute() {
-        approval = manager.requestApprovalForAction(this);
-        if (!approval) {
-            exitStatus = ShuffleExit.Status.OFFLINE;
-            return;
-        }
-
         exitStatus = manager.requestShuffling(this);
         manager.setLastActionTime(timestamp);
     }
 
+    /**
+     * After calling {@code execute} method, the output of the command can be
+     * generated using this method.
+     * @return A JsonNode containing the output data
+     */
     @Override
     public JsonNode formatOutput() {
         return (new ShuffleOutput(this)).generateOutputNode();

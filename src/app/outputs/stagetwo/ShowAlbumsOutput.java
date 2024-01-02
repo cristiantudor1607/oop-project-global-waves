@@ -18,7 +18,8 @@ public class ShowAlbumsOutput extends CommandOutputFormatter {
         timestamp = executedQuery.getTimestamp();
         result = new ArrayList<>();
 
-        for (Album album: executedQuery.getResults())
+        for (Album album: executedQuery.getResults()) {
             result.add(new AlbumStats(album));
+        }
     }
 }

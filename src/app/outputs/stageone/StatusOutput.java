@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 public class StatusOutput extends CommandOutputFormatter {
-    private PlayerStats stats;
+    private final PlayerStats stats;
 
     public StatusOutput(final StatusInterrogator executedQuery) {
         command = "status";

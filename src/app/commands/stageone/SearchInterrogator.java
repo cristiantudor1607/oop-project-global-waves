@@ -17,8 +17,11 @@ public class SearchInterrogator extends CommandObject {
     private String type;
     @JsonIgnore private Map<String, List<String>> filters;
     @JsonIgnore private List<String> results;
-    @JsonIgnore private SearchExit.Status exitStatus;
+    @JsonIgnore private SearchExit.Status exitStatus = SearchExit.Status.SUCCESS;
 
+    /**
+     * Executes the search command.
+     */
     @Override
     public void execute() {
         approval = manager.requestApprovalForAction(this);
@@ -32,6 +35,11 @@ public class SearchInterrogator extends CommandObject {
         manager.setLastActionTime(timestamp);
     }
 
+    /**
+     * After calling {@code execute} method, the output of the command can be
+     * generated using this method.
+     * @return A JsonNode containing the output data
+     */
     @Override
     public JsonNode formatOutput() {
         return (new SearchOutput(this)).generateOutputNode();
@@ -46,8 +54,12 @@ public class SearchInterrogator extends CommandObject {
         return true;
     }
 
+    /**
+     * Sets the filters of the search.
+     * @param mappedFilters The filters parsed as a Map
+     */
     @Override
-    public void setFiltersField(Map<String, List<String>> mappedFilters) {
+    public void setFiltersField(final Map<String, List<String>> mappedFilters) {
         filters = mappedFilters;
     }
 }

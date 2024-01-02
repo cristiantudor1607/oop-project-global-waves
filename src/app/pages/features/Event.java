@@ -1,22 +1,16 @@
 package app.pages.features;
 
 import app.utilities.DateMapper;
-import lombok.Getter;
 
 import java.time.LocalDate;
 
-@Getter
-public class Event {
-    private final String name;
-    private final String description;
-    private final LocalDate date;
+public record Event(String name, String description, LocalDate date) {
 
-    public Event(final String name, final String description, final LocalDate date) {
-        this.name = name;
-        this.description = description;
-        this.date = date;
-    }
-
+    /**
+     * Returns the event date in string form.
+     *
+     * @return A string containing the date in dd-mm-yyyy form
+     */
     public String getFormattedDate() {
         return DateMapper.parseDateToString(date);
     }

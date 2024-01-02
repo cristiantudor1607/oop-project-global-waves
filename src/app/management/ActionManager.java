@@ -72,6 +72,7 @@ import app.utilities.SortByArtistLikes;
 import app.utilities.SortByCreationTime;
 import app.utilities.SortByNumberOfLikes;
 import app.utilities.SortByPlaylistLikes;
+import app.utilities.constants.StringConstants;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
@@ -279,7 +280,6 @@ public final class ActionManager {
      */
     public List<String> requestSearchResults(final SearchInterrogator execQuery) {
         String username = execQuery.getUsername();
-
         Player userPlayer = getPlayerByUsername(username);
         SearchBar searchbar = getSearchBarByUsername(username);
 
@@ -300,6 +300,10 @@ public final class ActionManager {
      * page), or if there was an error
      */
     public SelectExit.Status requestItemSelection(final SelectInterrogator execQuery) {
+        if (!requestApprovalForAction(execQuery)) {
+            return SelectExit.Status.OFFLINE;
+        }
+
         int itemNumber = execQuery.getItemNumber();
         String username = execQuery.getUsername();
 
@@ -345,6 +349,10 @@ public final class ActionManager {
      * encountered
      */
     public LoadExit.Status requestLoading(final LoadInterrogator execQuery) {
+        if (!requestApprovalForAction(execQuery)) {
+            return LoadExit.Status.OFFLINE;
+        }
+
         String username = execQuery.getUsername();
         Player userPlayer = getPlayerByUsername(username);
 
@@ -376,6 +384,10 @@ public final class ActionManager {
      * of action was performed (it got played, or it got paused)
      */
     public PlayPauseExit.Status requestPlayPause(final PlayPauseInterrogator execQuery) {
+        if (!requestApprovalForAction(execQuery)) {
+            return PlayPauseExit.Status.OFFLINE;
+        }
+
         String username = execQuery.getUsername();
         Player userPlayer = getPlayerByUsername(username);
 
@@ -400,6 +412,10 @@ public final class ActionManager {
      */
     public CreationExit.Status
     requestPlaylistCreation(final CreatePlaylistInterrogator execQuery) {
+        if (!requestApprovalForAction(execQuery)) {
+            return CreationExit.Status.OFFLINE;
+        }
+
         String owner = execQuery.getUsername();
         String playlistName = execQuery.getPlaylistName();
         int timestamp = execQuery.getTimestamp();
@@ -422,6 +438,10 @@ public final class ActionManager {
      */
     public SwitchVisibilityExit.Status
     requestSwitchVisibility(final VisibilityInterrogator execQuery) {
+        if (!requestApprovalForAction(execQuery)) {
+            return SwitchVisibilityExit.Status.OFFLINE;
+        }
+
         int id = execQuery.getPlaylistId();
         String owner = execQuery.getUsername();
 
@@ -449,6 +469,10 @@ public final class ActionManager {
      * the error occurred
      */
     public AddRemoveExit.Status requestAddRemove(final AddRemoveInterrogator execQuery) {
+        if (!requestApprovalForAction(execQuery)) {
+            return AddRemoveExit.Status.OFFLINE;
+        }
+
         String ownerName = execQuery.getUsername();
         int id = execQuery.getPlaylistId();
 
@@ -490,8 +514,11 @@ public final class ActionManager {
      * the error occurred
      */
     public LikeExit.Status requestLikeAction(final LikeInterrogator execQuery) {
-        String username = execQuery.getUsername();
+        if (!requestApprovalForAction(execQuery)) {
+            return LikeExit.Status.OFFLINE;
+        }
 
+        String username = execQuery.getUsername();
         User user = getProfileByUsername(username);
         Player userPlayer = getPlayerByUsername(username);
 
@@ -527,8 +554,11 @@ public final class ActionManager {
      * or the error occurred.
      */
     public FollowExit.Status requestFollowAction(final FollowInterrogator execQuery) {
-        String username = execQuery.getUsername();
+        if (!requestApprovalForAction(execQuery)) {
+            return FollowExit.Status.OFFLINE;
+        }
 
+        String username = execQuery.getUsername();
         User user = getProfileByUsername(username);
         Player userPlayer = getPlayerByUsername(username);
 
@@ -568,8 +598,11 @@ public final class ActionManager {
      * @return An exit message
      */
     public String requestRepeatAction(final RepeatInterrogator execQuery) {
-        String username = execQuery.getUsername();
+        if (!requestApprovalForAction(execQuery)) {
+            return execQuery.getUsername() + StringConstants.OFFLINE_DESCRIPTOR;
+        }
 
+        String username = execQuery.getUsername();
         Player userPlayer = getPlayerByUsername(username);
 
         if (!userPlayer.hasSourceLoaded() || userPlayer.hasNoSource()) {
@@ -590,6 +623,10 @@ public final class ActionManager {
      * unshuffle), or the error occurred
      */
     public ShuffleExit.Status requestShuffling(final ShuffleInterrogator execQuery) {
+        if (!requestApprovalForAction(execQuery)) {
+            return ShuffleExit.Status.OFFLINE;
+        }
+
         int seed = execQuery.getSeed();
         String username = execQuery.getUsername();
 
@@ -624,18 +661,21 @@ public final class ActionManager {
      * @return A specific exit message
      */
     public String requestNext(final NextInterrogator execQuery) {
-        String username = execQuery.getUsername();
+        if (!requestApprovalForAction(execQuery)) {
+            return execQuery.getUsername() + StringConstants.OFFLINE_DESCRIPTOR;
+        }
 
+        String username = execQuery.getUsername();
         Player userPlayer = getPlayerByUsername(username);
 
-       if (userPlayer.hasNoSource() || !userPlayer.hasSourceLoaded()) {
+        if (userPlayer.hasNoSource() || !userPlayer.hasSourceLoaded()) {
            return "Please load a source before skipping to the next track.";
-       }
+        }
 
-       if (userPlayer.playNext()) {
+        if (userPlayer.playNext()) {
            String track = userPlayer.getPlayingFile().getName();
            return "Skipped to next track successfully. The current track is " + track + ".";
-       }
+        }
 
         return "Please load a source before skipping to the next track.";
     }
@@ -647,6 +687,10 @@ public final class ActionManager {
      * @return A specific exit message
      */
     public String requestPrev(final PrevInterrogator execQuery) {
+        if (!requestApprovalForAction(execQuery)) {
+            return execQuery.getUsername() + StringConstants.OFFLINE_DESCRIPTOR;
+        }
+
         String username = execQuery.getUsername();
         Player userPlayer = getPlayerByUsername(username);
 
@@ -665,6 +709,10 @@ public final class ActionManager {
      * @return An exit message
      */
     public String requestForward(final ForwardInterrogator execQuery) {
+        if (!requestApprovalForAction(execQuery)) {
+            return execQuery.getUsername() + StringConstants.OFFLINE_DESCRIPTOR;
+        }
+
         String username = execQuery.getUsername();
         Player userPlayer = getPlayerByUsername(username);
 
@@ -686,6 +734,10 @@ public final class ActionManager {
      * @return An exit message
      */
     public String requestBackward(final BackwardInterrogator execQuery) {
+        if (!requestApprovalForAction(execQuery)) {
+            return execQuery.getUsername() + StringConstants.OFFLINE_DESCRIPTOR;
+        }
+
         String username = execQuery.getUsername();
         Player userPlayer = getPlayerByUsername(username);
 
@@ -1180,6 +1232,10 @@ public final class ActionManager {
      * @return An exit message
      */
     public String requestChangePage(final ChangePageInterrogator execQuery) {
+        if (!requestApprovalForAction(execQuery)) {
+            return null;
+        }
+
         String username = execQuery.getUsername();
         String nextPage = execQuery.getNextPage();
 
@@ -1209,7 +1265,6 @@ public final class ActionManager {
     public String requestPageContent(final String username) {
         Page userPage = getPageByUsername(username);
         return userPage == null ? null : userPage.accept(contentVisitor);
-
     }
 
     /**

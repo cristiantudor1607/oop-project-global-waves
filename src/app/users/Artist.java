@@ -111,7 +111,7 @@ public class Artist extends User {
     @Override
     public Event getEvent(final String eventName) {
         for (Event e : selfPage.getEvents()) {
-            if (e.getName().equals(eventName)) {
+            if (e.name().equals(eventName)) {
                 return e;
             }
         }
@@ -139,7 +139,7 @@ public class Artist extends User {
     @Override
     public boolean hasMerch(final String merchName) {
         for (Merch m: selfPage.getMerchandising()) {
-            if (m.getName().equals(merchName)) {
+            if (m.name().equals(merchName)) {
                 return true;
             }
         }

@@ -1,7 +1,6 @@
 package app.outputs.stagetwo;
 
 import app.commands.stagetwo.PrintPageInterrogator;
-import app.utilities.constants.StringConstants;
 import app.parser.commands.templates.CommandOutputFormatter;
 import lombok.Getter;
 
@@ -9,19 +8,24 @@ import lombok.Getter;
 public class PrintPageOutput extends CommandOutputFormatter {
     private final String message;
 
-    public PrintPageOutput(final PrintPageInterrogator execQuery) {
+    public PrintPageOutput(final PrintPageInterrogator executedQuery) {
         command = "printCurrentPage";
-        user = execQuery.getUsername();
-        timestamp = execQuery.getTimestamp();
-        message = generateMessage(execQuery);
+        user = executedQuery.getUsername();
+        timestamp = executedQuery.getTimestamp();
+        message = generateMessage(user, executedQuery.getOutput());
     }
 
-    public String generateMessage(final PrintPageInterrogator execQuery) {
-        String output = execQuery.getOutput();
-        String username = execQuery.getUsername();
-
-        if (output == null)
+    /**
+     * Selects between the message sent by manager and the offline default message, in
+     * order to generate the output for printCurrentPage command.
+     * @param username The name of the user that gave the command
+     * @param output The output message sent by manager
+     * @return A specific message
+     */
+    public String generateMessage(final String username, final String output) {
+        if (output == null) {
             return "Unexpected: " + username + "is an artist or a host.\n";
+        }
 
         return output;
     }

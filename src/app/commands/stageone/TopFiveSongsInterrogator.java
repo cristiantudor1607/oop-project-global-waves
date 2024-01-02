@@ -14,13 +14,20 @@ public class TopFiveSongsInterrogator extends CommandObject {
     @JsonIgnore
     private List<String> result;
 
+    /**
+     * Executes the getTop5Songs command.
+     */
     @Override
     public void execute() {
         result = manager.requestTopFiveSongs();
-
         manager.setLastActionTime(timestamp);
     }
 
+    /**
+     * After calling {@code execute} method, the output of the command can be
+     * generated using this method.
+     * @return A JsonNode containing the output data
+     */
     @Override
     public JsonNode formatOutput() {
         // Link https://www.baeldung.com/java-jackson-remove-json-elements

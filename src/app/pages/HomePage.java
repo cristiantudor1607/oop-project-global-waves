@@ -15,11 +15,15 @@ public class HomePage extends Page {
     private final List<Song> likedSongs;
     private final List<Playlist> followingPlaylists;
 
-    public HomePage(User user) {
+    public HomePage(final User user) {
         likedSongs = user.getLikes();
         followingPlaylists = user.getFollowing();
     }
 
+    /**
+     * Returns the recommended songs.
+     * @return A list of songs
+     */
     public List<Song> getRecommendedSongs() {
         // Make a shallow copy of the likedSongs list, because we want to sort
         // the songs, but don't disturb their order in User. That would happen
@@ -32,7 +36,11 @@ public class HomePage extends Page {
         return copy;
     }
 
-    public List<Playlist> getRecommendedPlaylist() {
+    /**
+     * Returns the recommended playlists.
+     * @return A list of recommended playlists.
+     */
+    public List<Playlist> getRecommendedPlaylists() {
         // We make a shallow copy. The explanation is the same as in the getRecommendedSongs
         // case
         List<Playlist> copy = new ArrayList<>(followingPlaylists);
@@ -42,8 +50,13 @@ public class HomePage extends Page {
         return copy;
     }
 
+    /**
+     * Accept method for visitors that returns a string.
+     * @param v The visitor
+     * @return A string. It depends on the visitor what string contains.
+     */
     @Override
-    public String accept(Visitor v) {
+    public String accept(final Visitor v) {
         return v.visit(this);
     }
 }

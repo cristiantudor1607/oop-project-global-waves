@@ -7,7 +7,7 @@ import lombok.Getter;
 
 @Getter
 public class RemoveAnnouncementOutput extends CommandOutputFormatter {
-    private String message;
+    private final String message;
 
     public RemoveAnnouncementOutput(final RemoveAnnouncementInterrogator executedQuery) {
         command = "removeAnnouncement";
@@ -16,7 +16,14 @@ public class RemoveAnnouncementOutput extends CommandOutputFormatter {
         message = generateMessage(user, executedQuery.getExitStatus());
     }
 
-    public String generateMessage(final String username, final RemoveAnnouncementExit.Status atExit) {
+    /**
+     * Generates a message for removeAnnouncement command.
+     * @param username The name of the user that gave the command
+     * @param atExit The exit code sent by manager
+     * @return A specific message
+     */
+    public String generateMessage(final String username,
+                                  final RemoveAnnouncementExit.Status atExit) {
         return switch (atExit) {
             case DOESNT_EXIST -> "The username " + username + "doesn't exist.";
             case NOT_HOST -> username + " is not a host.";

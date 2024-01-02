@@ -41,10 +41,6 @@ public class Episode extends AudioFile {
         return null;
     }
 
-    @Override
-    public Episode getCurrentEpisode() {
-        return this;
-    }
 
     @Override
     public boolean equals(Object o) {

@@ -11,7 +11,7 @@ public class PlayerStats {
     private final boolean shuffle;
     private final boolean paused;
 
-    public PlayerStats(Player userPlayer) {
+    public PlayerStats(final Player userPlayer) {
         if (userPlayer.getSelectedSource() == null || userPlayer.getPlayingFile() == null) {
             name = "";
             remainedTime = 0;

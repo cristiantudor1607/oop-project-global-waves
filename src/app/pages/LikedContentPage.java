@@ -1,6 +1,7 @@
 package app.pages;
 
-import app.player.entities.*;
+import app.player.entities.Playlist;
+import app.player.entities.Song;
 import app.properties.Visitor;
 import app.users.User;
 import lombok.Getter;
@@ -17,8 +18,13 @@ public class LikedContentPage extends Page {
         followingPlaylists = user.getFollowing();
    }
 
+    /**
+     * Accept method for visitors that returns a string.
+     * @param v The visitor
+     * @return A string. It depends on the visitor what string contains.
+     */
     @Override
-    public String accept(Visitor v) {
+    public String accept(final Visitor v) {
         return v.visit(this);
     }
 }

@@ -17,6 +17,12 @@ public class LoadOutput extends CommandOutputFormatter {
         message = generateMessage(user, executedLoad.getExitStatus());
     }
 
+    /**
+     * Generates a message for load command.
+     * @param username The name of the user that gave the command
+     * @param atExit The exit code sent by manager
+     * @return A specific message
+     */
     public String generateMessage(final String username, final LoadExit.Status atExit) {
         return switch (atExit) {
             case LOADED -> StringConstants.LOAD_SUCCESS;

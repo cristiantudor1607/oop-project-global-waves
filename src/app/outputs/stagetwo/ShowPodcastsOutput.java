@@ -18,8 +18,9 @@ public class ShowPodcastsOutput extends CommandOutputFormatter {
         timestamp = executedQuery.getTimestamp();
         result = new ArrayList<>();
 
-        for (Podcast podcast: executedQuery.getResults())
+        for (Podcast podcast: executedQuery.getResults()) {
             result.add(new PodcastStats(podcast));
+        }
 
     }
 }

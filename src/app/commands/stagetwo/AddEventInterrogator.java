@@ -17,12 +17,20 @@ public class AddEventInterrogator extends CommandObject {
     @JsonIgnore
     private AddEventExit.Status exitStatus;
 
+    /**
+     * Executes the addEvent command.
+     */
     @Override
     public void execute() {
         exitStatus = manager.requestAddingEvent(this);
         manager.setLastActionTime(timestamp);
     }
 
+    /**
+     * After calling {@code execute} method, the output of the command can be
+     * generated using this method.
+     * @return A JsonNode containing the output data
+     */
     @Override
     public JsonNode formatOutput() {
         return (new AddEventOutput(this)).generateOutputNode();

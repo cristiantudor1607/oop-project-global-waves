@@ -17,15 +17,23 @@ public class SearchOutput extends CommandOutputFormatter {
         command = "search";
         user = executedQuery.getUsername();
         timestamp = executedQuery.getTimestamp();
-        message = generateMessage(executedQuery);
         results = executedQuery.getResults();
+        message = generateMessage(user, results.size(), executedQuery.getExitStatus());
     }
 
-    public String generateMessage(final SearchInterrogator executedQuery) {
-        if (executedQuery.getExitStatus() == SearchExit.Status.OFFLINE)
-            return executedQuery.getUsername() + StringConstants.OFFLINE_DESCRIPTOR;
+    /**
+     * Generates a message for createPlaylist command.
+     * @param username The name of the user that gave the command
+     * @param nr Number of results returned
+     * @param atExit The exit code sent by manager
+     * @return A specific message
+     */
+    public String generateMessage(final String username, final int nr,
+                                  final SearchExit.Status atExit) {
+        if (atExit == SearchExit.Status.OFFLINE) {
+            return username + StringConstants.OFFLINE_DESCRIPTOR;
+        }
 
-        int n = executedQuery.getResults().size();
-        return "Search returned " + n + " results";
+        return "Search returned " + nr + " results";
     }
 }

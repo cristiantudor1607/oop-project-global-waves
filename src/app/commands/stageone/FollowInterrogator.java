@@ -12,18 +12,20 @@ public class FollowInterrogator extends CommandObject {
     @JsonIgnore
     private FollowExit.Status exitStatus;
 
+    /**
+     * Executes the follow command.
+     */
     @Override
     public void execute() {
-        approval = manager.requestApprovalForAction(this);
-        if (!approval) {
-            exitStatus = FollowExit.Status.OFFLINE;
-            return;
-        }
-
         exitStatus = manager.requestFollowAction(this);
         manager.setLastActionTime(timestamp);
     }
 
+    /**
+     * After calling {@code execute} method, the output of the command can be
+     * generated using this method.
+     * @return A JsonNode containing the output data
+     */
     @Override
     public JsonNode formatOutput() {
         return (new FollowOutput(this)).generateOutputNode();

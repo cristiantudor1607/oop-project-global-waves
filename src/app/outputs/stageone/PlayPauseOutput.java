@@ -17,6 +17,12 @@ public class PlayPauseOutput extends CommandOutputFormatter {
         message = generateMessage(user, executedQuery.getExitStatus());
     }
 
+    /**
+     * Generates a message for playPause command.
+     * @param username The name of the user that gave the command
+     * @param atExit The exit code sent by manager
+     * @return A specific message
+     */
     public String generateMessage(final String username, final PlayPauseExit.Status atExit) {
         return switch (atExit) {
             case RESUMED -> StringConstants.RESUMED;

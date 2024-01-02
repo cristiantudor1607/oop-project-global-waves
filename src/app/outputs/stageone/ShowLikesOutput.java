@@ -10,7 +10,7 @@ import java.util.List;
 public class ShowLikesOutput extends CommandOutputFormatter {
     private List<String> result;
 
-    public ShowLikesOutput(ShowLikesInterrogator executedQuery) {
+    public ShowLikesOutput(final ShowLikesInterrogator executedQuery) {
         command = "showPreferredSongs";
         user = executedQuery.getUsername();
         timestamp = executedQuery.getTimestamp();

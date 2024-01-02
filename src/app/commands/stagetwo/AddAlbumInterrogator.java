@@ -19,16 +19,23 @@ public class AddAlbumInterrogator extends CommandObject {
     private int releaseYear;
     private String description;
     private List<Song> songs;
-
     @JsonIgnore
     private AddAlbumExit.Status exitStatus;
 
+    /**
+     * Executes the addAlbum command.
+     */
     @Override
     public void execute() {
         exitStatus = manager.requestAddingAlbum(this);
         manager.setLastActionTime(timestamp);
     }
 
+    /**
+     * After calling {@code execute} method, the output of the command can be
+     * generated using this method.
+     * @return A JsonNode containing the output data
+     */
     @Override
     public JsonNode formatOutput() {
         return (new AddAlbumOutput(this)).generateOutputNode();

@@ -8,15 +8,21 @@ import lombok.Getter;
 
 @Getter
 public class SwitchVisibilityOutput extends CommandOutputFormatter {
-    private String message;
+    private final String message;
 
-    public SwitchVisibilityOutput(VisibilityInterrogator executedQuery) {
+    public SwitchVisibilityOutput(final VisibilityInterrogator executedQuery) {
         command = "switchVisibility";
         user = executedQuery.getUsername();
         timestamp = executedQuery.getTimestamp();
         message = generateMessage(user, executedQuery.getExitStatus());
     }
 
+    /**
+     * Generates a message for switchVisibility command.
+     * @param username The name of the user that gave the command
+     * @param atExit The exit code sent by manager
+     * @return A specific message
+     */
     public String generateMessage(final String username,
                                   final SwitchVisibilityExit.Status atExit) {
         return switch (atExit) {

@@ -12,13 +12,19 @@ import lombok.Getter;
 public class SelectOutput extends CommandOutputFormatter {
     private final String message;
 
-    public SelectOutput(SelectInterrogator executedSelect) {
+    public SelectOutput(final SelectInterrogator executedSelect) {
         command = "select";
         user = executedSelect.getUsername();
         timestamp = executedSelect.getTimestamp();
         message = generateMessage(executedSelect);
     }
 
+    /**
+     * Generates a message for select command.
+     * @param executedSelect The executed select command. It packages all data needed to
+     *                       generate the output
+     * @return A specific message
+     */
     public String generateMessage(final SelectInterrogator executedSelect) {
         SelectExit.Status atExit = executedSelect.getExitStatus();
 

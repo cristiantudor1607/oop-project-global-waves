@@ -13,12 +13,20 @@ public class ChangePageOutput extends CommandOutputFormatter {
         command = "changePage";
         user = executedQuery.getUsername();
         timestamp = executedQuery.getTimestamp();
-        message = selectMessage(user, executedQuery.getOutput());
+        message = generateMessage(user, executedQuery.getOutput());
     }
 
-    public String selectMessage(final String username, final String output) {
-        if (output == null)
+    /**
+     * Selects between the message sent by manager and the offline default message, in
+     * order to generate the output for changePage command.
+     * @param username The name of the user that gave the command
+     * @param output The output message sent by manager
+     * @return A specific message
+     */
+    public String generateMessage(final String username, final String output) {
+        if (output == null) {
             return username + StringConstants.OFFLINE_DESCRIPTOR;
+        }
 
         return output;
     }

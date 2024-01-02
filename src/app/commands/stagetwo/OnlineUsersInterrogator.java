@@ -6,20 +6,29 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import app.outputs.stageone.StatisticsOutput;
 import app.parser.commands.templates.CommandObject;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
-@Getter
+@Getter @Setter
 public class OnlineUsersInterrogator extends CommandObject {
     @JsonIgnore
-    List<String> results;
+    private List<String> results;
 
+    /**
+     * Executes the getOnlineUsers command.
+     */
     @Override
     public void execute() {
         results = manager.requestOnlineUsers();
         manager.setLastActionTime(timestamp);
     }
 
+    /**
+     * After calling {@code execute} method, the output of the command can be
+     * generated using this method.
+     * @return A JsonNode containing the output data
+     */
     @Override
     public JsonNode formatOutput() {
         // Link https://www.baeldung.com/java-jackson-remove-json-elements

@@ -14,11 +14,17 @@ public class FollowOutput extends CommandOutputFormatter {
         command = "follow";
         user = executedQuery.getUsername();
         timestamp = executedQuery.getTimestamp();
-        message = getExitMessage(user, executedQuery.getExitStatus());
+        message = generateMessage(user, executedQuery.getExitStatus());
     }
 
-    public String getExitMessage(final String username, final FollowExit.Status exitStatus) {
-        return switch (exitStatus) {
+    /**
+     * Generates a message for follow command.
+     * @param username The name of the user that gave the command
+     * @param atExit The exit code sent by manager
+     * @return A specific message
+     */
+    public String generateMessage(final String username, final FollowExit.Status atExit) {
+        return switch (atExit) {
             case FOLLOWED -> "Playlist followed successfully.";
             case UNFOLLOWED -> "Playlist unfollowed successfully.";
             case NOT_A_PLAYLIST -> "The selected source is not a playlist.";

@@ -93,7 +93,7 @@ public class Host extends User {
     @Override
     public Announcement getAnnouncement(final String announceName) {
         for (Announcement announce: selfPage.getAnnouncements()) {
-            if (announce.getName().equals(announceName)) {
+            if (announce.name().equals(announceName)) {
                 return announce;
             }
         }

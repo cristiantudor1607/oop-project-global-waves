@@ -12,19 +12,20 @@ public class CreatePlaylistInterrogator extends CommandObject {
     private String playlistName;
     @JsonIgnore private CreationExit.Status exitStatus;
 
-
+    /**
+     * Executes the createPlaylist command.
+     */
     @Override
     public void execute() {
-        approval = manager.requestApprovalForAction(this);
-        if (!approval) {
-            exitStatus = CreationExit.Status.OFFLINE;
-            return;
-        }
-
         exitStatus = manager.requestPlaylistCreation(this);
         manager.setLastActionTime(timestamp);
     }
 
+    /**
+     * After calling {@code execute} method, the output of the command can be
+     * generated using this method.
+     * @return A JsonNode containing the output data
+     */
     @Override
     public JsonNode formatOutput() {
         return (new CreatePlaylistOutput(this)).generateOutputNode();

@@ -16,7 +16,8 @@ public class AlbumStats {
         name = album.getName();
         songs = new ArrayList<>();
 
-        for (AudioFile song: album.getSongs())
+        for (AudioFile song: album.getSongs()) {
             songs.add(song.getName());
+        }
     }
 }

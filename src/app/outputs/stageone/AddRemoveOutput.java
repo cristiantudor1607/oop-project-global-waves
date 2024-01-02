@@ -8,7 +8,7 @@ import lombok.Getter;
 
 @Getter
 public class AddRemoveOutput extends CommandOutputFormatter {
-    private String message;
+    private final String message;
 
     public AddRemoveOutput(final AddRemoveInterrogator executedQuery) {
         command = "addRemoveInPlaylist";
@@ -17,6 +17,12 @@ public class AddRemoveOutput extends CommandOutputFormatter {
         message = generateMessage(executedQuery.getUsername(), executedQuery.getExitStatus());
     }
 
+    /**
+     * Generates the exit message for addRemoveInPlaylist command.
+     * @param username The name of the user that gave the command
+     * @param atExit The exit code sent by manager
+     * @return A specific message
+     */
     public String generateMessage(final String username, final AddRemoveExit.Status atExit) {
         return switch (atExit) {
             case ADDED -> StringConstants.ADDED_TO_PLAYLIST;

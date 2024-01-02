@@ -15,8 +15,15 @@ public class SwitchConnectionOutput extends CommandOutputFormatter {
         message = generateMessage(executedQuery.getUsername(), executedQuery.getExitStatus());
     }
 
-    public String generateMessage(final String username, SwitchConnectionExit.Status exitStatus) {
-        return switch (exitStatus) {
+    /**
+     * Generates a message for switchConnectionStatus command.
+     * @param username The name of the user that gave the command
+     * @param atExit The exit code sent by manager
+     * @return A specific message
+     */
+    public String generateMessage(final String username,
+                                  final SwitchConnectionExit.Status atExit) {
+        return switch (atExit) {
             case INVALID_USERNAME -> "The username " + username + " doesn't exist.";
             case NOT_NORMAL -> username + " is not a normal user.";
             case SUCCESS -> username + " has changed status successfully.";

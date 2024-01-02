@@ -12,19 +12,20 @@ public class LikeInterrogator extends CommandObject {
     @JsonIgnore
     private LikeExit.Status exitStatus;
 
+    /**
+     * Executes the like command.
+     */
     @Override
     public void execute() {
-        approval = manager.requestApprovalForAction(this);
-        if (!approval) {
-            exitStatus = LikeExit.Status.OFFLINE;
-            return;
-        }
-
         exitStatus = manager.requestLikeAction(this);
-
         manager.setLastActionTime(timestamp);
     }
 
+    /**
+     * After calling {@code execute} method, the output of the command can be
+     * generated using this method.
+     * @return A JsonNode containing the output data
+     */
     @Override
     public JsonNode formatOutput() {
         return (new LikeOutput(this)).generateOutputNode();

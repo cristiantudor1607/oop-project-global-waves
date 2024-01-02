@@ -13,18 +13,20 @@ public class AddRemoveInterrogator extends CommandObject {
     @JsonIgnore
     private AddRemoveExit.Status exitStatus;
 
+    /**
+     * Executes the addRemoveInPlaylist command
+     */
     @Override
     public void execute() {
-        approval = manager.requestApprovalForAction(this);
-        if (!approval) {
-            exitStatus = AddRemoveExit.Status.OFFLINE;
-            return;
-        }
-
         exitStatus = manager.requestAddRemove(this);
         manager.setLastActionTime(timestamp);
     }
 
+    /**
+     * After calling {@code execute} method, the output of the command can be
+     * generated using this method.
+     * @return A JsonNode containing the output data
+     */
     @Override
     public JsonNode formatOutput() {
         return (new AddRemoveOutput(this)).generateOutputNode();

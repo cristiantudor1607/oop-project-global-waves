@@ -3,7 +3,6 @@ package app.commands.stageone;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonNode;
 import app.outputs.stageone.ForwardBackwardOutput;
-import app.utilities.constants.StringConstants;
 import app.parser.commands.templates.CommandObject;
 import lombok.Getter;
 
@@ -12,18 +11,20 @@ public class BackwardInterrogator extends CommandObject {
     @JsonIgnore
     private String message;
 
+    /**
+     * Executes the backward command.
+     */
     @Override
     public void execute() {
-        approval = manager.requestApprovalForAction(this);
-        if (!approval) {
-            message = username + StringConstants.OFFLINE_DESCRIPTOR;
-            return;
-        }
-
         message = manager.requestBackward(this);
         manager.setLastActionTime(timestamp);
     }
 
+    /**
+     * After calling {@code execute} method, the output of the command can be
+     * generated using this method.
+     * @return A JsonNode containing the output data
+     */
     @Override
     public JsonNode formatOutput() {
         return (new ForwardBackwardOutput(this)).generateOutputNode();

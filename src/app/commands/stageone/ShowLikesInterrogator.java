@@ -13,6 +13,9 @@ public class ShowLikesInterrogator extends CommandObject {
     @JsonIgnore
     private List<String> songNames;
 
+    /**
+     * Executes the showPreferredSongs command.
+     */
     @Override
     public void execute() {
         songNames = manager.requestLikedSongs(username);
@@ -20,6 +23,11 @@ public class ShowLikesInterrogator extends CommandObject {
         manager.setLastActionTime(timestamp);
     }
 
+    /**
+     * After calling {@code execute} method, the output of the command can be
+     * generated using this method.
+     * @return A JsonNode containing the output data
+     */
     @Override
     public JsonNode formatOutput() {
         return (new ShowLikesOutput(this)).generateOutputNode();

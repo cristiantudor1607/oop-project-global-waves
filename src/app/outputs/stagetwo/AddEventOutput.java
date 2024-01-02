@@ -16,6 +16,12 @@ public class AddEventOutput extends CommandOutputFormatter {
         message = generateMessage(user, executedQuery.getExitStatus());
     }
 
+    /**
+     * Generates a message for addEvent command.
+     * @param username The name of the user that gave the command
+     * @param atExit The exit code sent by manager
+     * @return A specific message
+     */
     public String generateMessage(final String username, final AddEventExit.Status atExit) {
         return switch (atExit) {
             case SUCCESS -> username + " has added new event successfully.";
