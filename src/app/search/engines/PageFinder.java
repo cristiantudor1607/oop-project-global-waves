@@ -54,7 +54,7 @@ public class PageFinder extends SearchEngine<Page> {
             return null;
         }
 
-        FilterType.Type filterType = FilterType.parseString(key, typeOfUser);
+        FilterType.Type filterType = FilterType.parseNameFilter(key, typeOfUser);
 
         if (filterType == FilterType.Type.ARTIST_USERNAME) {
             return new ArtistPageFilter(values.get(0));

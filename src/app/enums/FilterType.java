@@ -64,13 +64,24 @@ public final class FilterType {
         return Type.UNKNOWN;
     }
 
-    public static Type parseString(final String filterAsString, final SearchType.Type type) {
+    /**
+     * Converts the given string to a FilterType enum. It is designed to be used for "name" filter,
+     * which have 3 different meanings: artist username, host username, or an entity name.
+     * @param filterAsString The name of the type
+     * @param type The type of search
+     * @return The specific filter type, or {@code UNKNOWN}, if the filter isn't "name"
+     */
+    public static Type parseNameFilter(final String filterAsString, final SearchType.Type type) {
         if (type == SearchType.Type.ARTIST && filterAsString.equals("name")) {
             return Type.ARTIST_USERNAME;
         }
 
         if (type == SearchType.Type.HOST && filterAsString.equals("name")) {
             return Type.HOST_USERNAME;
+        }
+
+        if (filterAsString.equals("name")) {
+            return Type.NAME;
         }
 
         return Type.UNKNOWN;

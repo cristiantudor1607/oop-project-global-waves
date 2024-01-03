@@ -6,7 +6,12 @@ import app.utilities.HistoryEntry;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 @Getter
 public class Player {
@@ -16,7 +21,8 @@ public class Player {
         SELECTED,
         UNUSED,
     }
-    private final static int SECONDS = 90;
+    private final int seconds = 90;
+    private final int statesNo = 3;
 
     private final Map<PlayableEntity, HistoryEntry> history;
     private List<Integer> playingOrder;
@@ -79,12 +85,19 @@ public class Player {
      * It goes from 0 to 1, from 1 to 2, and form 2 to 0
      */
     public void changeRepeatState() {
-        repeat = (repeat + 1) % 3;
+        repeat = (repeat + 1) % statesNo;
     }
 
+    /**
+     * Shuffles the collection, if there is a playlist playing.
+     * @param seed The seed for randomness
+     * @return {@code true}, if there is a playlist playing, and it was shuffled, {@code false}
+     * otherwise
+     */
     public boolean shuffle(final int seed) {
-        if (!selectedSource.isPlaylist())
+        if (!selectedSource.isPlaylist()) {
             return false;
+        }
 
         int currentElement = playingOrder.get(currentIndex);
 
@@ -94,9 +107,15 @@ public class Player {
         return true;
     }
 
+    /**
+     * Unshuffles the collection, if there is a playlist playing.
+     * @return {@code true}, if there is a playlist playing, and it was unshuffled, {@code false}
+     * otherwise
+     */
     public boolean unshuffle() {
-        if (!selectedSource.isPlaylist())
+        if (!selectedSource.isPlaylist()) {
             return false;
+        }
 
         int currentElement = playingOrder.get(currentIndex);
         playingOrder = getDefaultOrder(playingOrder.size());
@@ -122,8 +141,9 @@ public class Player {
      * Stops the player and saves a record in history, if necessary
      */
     public void stopPlayer() {
-        if (selectedSource == null)
+        if (selectedSource == null) {
             return;
+        }
 
         if (selectedSource.needsHistoryTrack()) {
             history.put(selectedSource, new HistoryEntry(playingFile, remainedTime));
@@ -139,8 +159,9 @@ public class Player {
      */
     public int getNextAudioFileIndex() {
         // If repeat is 2, then return the same thing
-        if (repeat == 2)
+        if (repeat == 2) {
             return currentIndex;
+        }
 
         // If repeat is 1, and the source is a playlist, then check if
         // the index goes out of bounds. In this case, start over
@@ -162,8 +183,9 @@ public class Player {
         }
 
         // If repeat is 0, checks if it goes out of bounds. If true, return -1
-        if (currentIndex + 1 >= playingOrder.size())
+        if (currentIndex + 1 >= playingOrder.size()) {
             return -1;
+        }
 
         currentIndex += 1;
         return currentIndex;
@@ -181,7 +203,9 @@ public class Player {
         // If repeat is 1, and the source is a playlist, then check if the index goes out
         // of bounds. In this case, get the ending song
         if (repeat == 1 && selectedSource.isPlaylist()) {
-            if (currentIndex - 1 < 0) return currentIndex;
+            if (currentIndex - 1 < 0) {
+                return currentIndex;
+            }
 
             currentIndex -= 1;
             return currentIndex;
@@ -195,13 +219,19 @@ public class Player {
         }
 
         // If repeat is 0, checks if it goes out of bounds. If true, return -1
-        if (currentIndex - 1 < 0)
+        if (currentIndex - 1 < 0) {
             return -1;
+        }
 
         currentIndex -= 1;
         return currentIndex;
     }
 
+    /**
+     * PLays the next audio file, if possible.
+     * @return {@code true}, if it successfully changed to the next file, {@code false},
+     * if there is no next file
+     */
     public boolean playNext() {
         int nextIndex = getNextAudioFileIndex();
         if (nextIndex == -1) {
@@ -217,14 +247,21 @@ public class Player {
         return true;
     }
 
-    public boolean playPrev(final int timeDiff) {
+    /**
+     * Plays the previous file, or it goes to the beginning of current track.
+     * @param timeDiff The time difference between previous action and current action.
+     *                 It matters, because if there are 2 {@code playPrev} one after another,
+     *                 the second one brings the previous file to the player, otherwise,
+     *                 the current file is played from the beginning.
+     */
+    public void playPrev(final int timeDiff) {
         remainedTime -= timeDiff;
 
         // If at least one second has passed, play again the current track
         if (remainedTime < playingFile.getDuration()) {
             state = PlayerStatus.PLAYING;
             remainedTime = playingFile.getDuration();
-            return true;
+            return;
         }
 
         // Save the old index
@@ -238,7 +275,7 @@ public class Player {
             state = PlayerStatus.PLAYING;
             remainedTime = playingFile.getDuration();
             currentIndex = indexSave;
-            return true;
+            return;
         }
 
         int realIndex = playingOrder.get(currentIndex);
@@ -246,63 +283,73 @@ public class Player {
         playingFile = selectedSource.getAudioFileAtIndex(realIndex);
         remainedTime = playingFile.getDuration();
         state = PlayerStatus.PLAYING;
-        return true;
     }
 
+    /**
+     * Goes forward by 90 seconds, or plays the next file, if there are no 90
+     * seconds remained from current one.
+     */
     public void skip() {
         // If there are less than 90 seconds remaining, start the next episode
-        if (remainedTime <= SECONDS) {
+        if (remainedTime <= seconds) {
             int nextIndex = getNextAudioFileIndex();
-            if (nextIndex == -1) {
+            if (nextIndex != -1) {
+                int realIndex = playingOrder.get(nextIndex);
+                playingFile = selectedSource.getAudioFileAtIndex(realIndex);
+                remainedTime = playingFile.getDuration();
+                state = PlayerStatus.PLAYING;
+            } else {
                 resetPlayer();
-                return;
             }
 
-            int realIndex = playingOrder.get(nextIndex);
-            playingFile = selectedSource.getAudioFileAtIndex(realIndex);
-            remainedTime = playingFile.getDuration();
-            state = PlayerStatus.PLAYING;
             return;
         }
 
-        remainedTime -= SECONDS;
+        remainedTime -= seconds;
     }
 
+    /**
+     * Goes backward by 90 seconds, or plays the file from the beginning, if there
+     * are no 90 seconds passed.
+     */
     public void rewound() {
-        if (playingFile.getDuration() - remainedTime < SECONDS)
+        if (playingFile.getDuration() - remainedTime < seconds) {
             remainedTime = playingFile.getDuration();
-        else
-            remainedTime += SECONDS;
+        } else {
+            remainedTime += seconds;
+        }
     }
 
 
     /**
-     * Removes the entity's history record from player's history tracker
+     * Removes the entity's history record from player's history tracker.
      * @param entity The entity to be removed
      */
-    public void removeFromHistory(PlayableEntity entity) {
-        if (hasHistoryEntry(entity))
+    public void removeFromHistory(final PlayableEntity entity) {
+        if (hasHistoryEntry(entity)) {
             history.remove(entity);
+        }
     }
 
     /**
-     * Checks if the entity is being tracked by the player history
+     * Checks if the entity is being tracked by the player history.
      * @param entity The entity to be checked
      * @return true, if the entity has a history record, false otherwise
      */
-    public boolean hasHistoryEntry(PlayableEntity entity) {
+    public boolean hasHistoryEntry(final PlayableEntity entity) {
         return history.containsKey(entity);
     }
 
     /**
-     * Loads the entity data from history
+     * Loads the entity data from history.
      * @param entity The entity to be loaded
-     * @return true, if loading was successfully, false otherwise
+     * @return {@code true}, if loading was successfully, {@code false} otherwise
      */
-    public boolean loadFromHistory(PlayableEntity entity) {
+    public boolean loadFromHistory(final PlayableEntity entity) {
         HistoryEntry historyEntry = history.get(entity);
-        if (historyEntry == null)
+        if (historyEntry == null) {
             return false;
+        }
 
         // Mark entity as selected source
         select(entity);
@@ -327,24 +374,25 @@ public class Player {
     }
 
     /**
-     * Select a source
+     * Select a source.
      * @param selectedEntity The entity to be selected
      */
-    public void select(PlayableEntity selectedEntity) {
+    public void select(final PlayableEntity selectedEntity) {
         this.selectedSource = selectedEntity;
         state = PlayerStatus.SELECTED;
     }
 
     /**
-     * Loads the entity into the player and starts playing.
+     * Loads the entity and starts playing.
      *
      * @param entity The entity to be loaded
      */
-    public void load(PlayableEntity entity) {
+    public void load(final PlayableEntity entity) {
         // Try to load from history
         boolean success = loadFromHistory(entity);
-        if (success)
+        if (success) {
             return;
+        }
 
         select(entity);
 
@@ -364,43 +412,52 @@ public class Player {
         play();
     }
 
+    /**
+     * Returns the default order for playing any collection.
+     * @param size The size of the collection
+     * @return A list with all numbers from {@code 0} to {@code size - 1}, in ascending order
+     */
     public List<Integer> getDefaultOrder(final int size) {
         return HelperTool.getInstance().getIndexesList(size);
     }
 
     /**
-     * Checks if the player has an empty source loaded
-     * @return true, if there is a playlist or an album loaded, and it doesn't
-     * contain any song, or false otherwise
+     * Checks if the player has an empty source loaded.
+     * @return {@code true}, if there is a playlist or an album loaded, and it doesn't
+     * contain any song, or {@code false} otherwise
      */
     public boolean hasEmptySource() {
         return selectedSource.isEmptyPlayableFile();
     }
 
     /**
-     * Checks if the player has a source at least selected
-     * @return true, if the player has a source selected or loaded, false otherwise
+     * Checks if the player has no source at least selected.
+     * @return {@code true}, if the player has no source selected, {@code false} otherwise
      */
     public boolean hasNoSource() {
         return selectedSource == null;
     }
 
     /**
-     * Checks if the player has a source selected
-     * @return true, if the player has a source selected, false otherwise
+     * Checks if the player has a source selected.
+     * @return {@code true}, if the player has a source selected, {@code false} otherwise
      */
     public boolean hasSourceSelected() {
         return state == PlayerStatus.SELECTED;
     }
 
     /**
-     * Checks if the player has a source loaded
-     * @return true, if the player has a source loaded, false otherwise
+     * Checks if the player has a source loaded.
+     * @return {@code true}, if the player has a source loaded, {@code false} otherwise
      */
     public boolean hasSourceLoaded() {
         return state == PlayerStatus.PLAYING || state == PlayerStatus.PAUSED;
     }
 
+    /**
+     * Updates the remained playing time after a time skip.
+     * @param timeDiff The time passed
+     */
     private void updateTimings(final int timeDiff) {
         if (remainedTime - timeDiff > 0) {
             remainedTime -= timeDiff;
@@ -439,41 +496,51 @@ public class Player {
 
     }
 
+    /**
+     * Updates the player after a time skip, if it isn't stopped.
+     * @param timeDiff The time passed
+     */
     public void updatePlayer(final int timeDiff) {
-        if (state == PlayerStatus.UNUSED || state == PlayerStatus.PAUSED ||
-                state == PlayerStatus.SELECTED )
+        if (state == PlayerStatus.UNUSED || state == PlayerStatus.PAUSED
+                || state == PlayerStatus.SELECTED) {
             return;
+        }
 
         updateTimings(timeDiff);
     }
 
 
     /**
-     * Checks if the player is playing the album, or something from the album
+     * Checks if the player is playing the album, or something from the album.
      * @param album The album
-     * @return true, if the player has loaded the album, or a song from album,
-     * false otherwise
+     * @return {@code true}, if the player has loaded the album, or a song from album,
+     * {@code false} otherwise
      */
-    public boolean isPlayingFromAlbum(Album album) {
+    public boolean isPlayingFromAlbum(final Album album) {
         // if there's nothing selected
-        if (selectedSource == null)
+        if (selectedSource == null) {
             return false;
+        }
 
         // If there's an album playing
         Album possiblyPlayingAlbum = selectedSource.getCurrentAlbum();
-        if (possiblyPlayingAlbum != null)
-            if (possiblyPlayingAlbum.equals(album))
+        if (possiblyPlayingAlbum != null) {
+            if (possiblyPlayingAlbum.equals(album)) {
                 return true;
+            }
+        }
 
         // Check if there's something playing
         AudioFile file = selectedSource.getFirstAudioFile();
-        if (file == null)
+        if (file == null) {
             return false;
+        }
 
         // Check if there's a Song playing
         Song possiblyPlayingSong = file.getCurrentSong();
-        if (possiblyPlayingSong != null)
+        if (possiblyPlayingSong != null) {
             return possiblyPlayingSong.getAlbum().equals(album.getName());
+        }
 
         return false;
     }

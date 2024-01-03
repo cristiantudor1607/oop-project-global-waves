@@ -21,37 +21,61 @@ public class Episode extends AudioFile {
         this.description = description;
     }
 
-    public Episode(EpisodeInput input) {
+    public Episode(final EpisodeInput input) {
         name = input.getName();
         duration = input.getDuration();
         description = input.getDescription();
     }
 
     /**
-     * Checks if the current instance of the class can be liked
-     * @return false
+     * Checks if {@code this} is a Song
+     * @return {@code true}, if it is a song, {@code false} otherwise
      */
     @Override
     public boolean isSong() {
         return false;
     }
 
+    /**
+     * If {@code this} is a song, return its instance.
+     * @return {@code this}, if it is a song, {@code null} otherwise
+     */
     @Override
     public Song getCurrentSong() {
         return null;
     }
 
-
+    /**
+     * Compares this episode with the specified object. The result is true if and only if
+     * the argument is not null and is an Episode object that represents the same episode
+     * as this object.
+     *
+     * @param o The object to compare this episode against
+     * @return {@code true}, if the given object represents the same episode as this
+     * episode, {@code false} otherwise
+     */
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Episode)) return false;
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Episode)) {
+            return false;
+        }
         Episode episode = (Episode) o;
-        return name.equals(episode.name) && duration == episode.duration;
+        return name.equals(episode.name) && duration == episode.duration
+                && description.equals(episode.description);
     }
 
+    /**
+     * Returns a hashcode value for this episode. If two objects are equal according to the
+     * equals method, then calling the hashCode method on each of the two objects must produce the
+     * same integer result.
+     *
+     * @return A hashcode value for this episode
+     */
     @Override
     public int hashCode() {
-        return Objects.hash(getDescription());
+        return Objects.hash(getName(), getDuration(), getDescription());
     }
 }

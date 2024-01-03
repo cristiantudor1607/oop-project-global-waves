@@ -45,7 +45,7 @@ public interface PlayableEntity {
     int getIndexOfFile(AudioFile file);
 
     /**
-     * Gets the first file in collection
+     * Returns the first file in collection
      * @return The first file of the entity
      */
     AudioFile getFirstAudioFile();
@@ -57,42 +57,43 @@ public interface PlayableEntity {
     String getPublicIdentity();
 
     /**
-     * Returns the repeatValue formatted as String
+     * Returns the repeatValue formatted as String value
      * @param repeatValue The repeatValue to be converted
-     * @return formatted repeatValue, null if repeatValue < 0 or repeatValue > 2
+     * @return The corespondent string, or {@code null} if {@code repeatValue < 0} or
+     * {@code repeatValue > 2}
      */
     String getRepeatStateName(int repeatValue);
 
     /**
      * Checks if the entity is an empty file. Only a playlist can be empty,
      * if it doesn't have any song.
-     * @return true, if it is an empty file, false otherwise
+     * @return {@code true}, if it is an empty file, {@code false} otherwise
      */
     boolean isEmptyPlayableFile();
 
     /**
      * Checks if the entity is a playlist
-     * @return true, if it is a playlist or an album, false otherwise
+     * @return {@code true}, if it is a playlist or an album, {@code false} otherwise
      */
     boolean isPlaylist();
 
     /**
      * Checks if the entity contains at least one audio file owned by the user
      * @param username The username of the user
-     * @return true, if it contains, false otherwise
+     * @return {@code true}, if it contains, {@code false} otherwise
      */
     boolean hasAudiofileFromUser(String username);
 
     /**
      * Checks if the entity needs to save its data to a history record
-     * @return true, if it needs, false otherwise
+     * @return {@code true}, if it needs, {@code false} otherwise
      */
     boolean needsHistoryTrack();
 
     /**
      * Checks if the forward and backward commands can be applied on the
      * entity
-     * @return true, if they can be applied, false otherwise
+     * @return {@code true}, if they can be applied, {@code false} otherwise
      */
     boolean cantGoForwardOrBackward();
 

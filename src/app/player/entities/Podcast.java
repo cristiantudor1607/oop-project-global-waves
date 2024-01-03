@@ -2,7 +2,6 @@ package app.player.entities;
 
 import fileio.input.EpisodeInput;
 import fileio.input.PodcastInput;
-import app.exitstats.stageone.ShuffleExit;
 import app.properties.OwnedEntity;
 import app.properties.PlayableEntity;
 import lombok.Getter;
@@ -34,141 +33,194 @@ public class Podcast implements PlayableEntity, OwnedEntity {
             Episode myEpisode = new Episode(inputFormatEpisode);
             episodes.add(myEpisode);
         }
-
     }
 
-    @Override
-    public int getIndexOfFile(AudioFile file) {
-        return episodes.indexOf((Episode) file);
-    }
-
-    @Override
-    public AudioFile getAudioFileAtIndex(int index) {
-        if (index >= episodes.size())
-            return null;
-
-        return episodes.get(index);
-    }
-
+    /**
+     * Returns the size of the entity. <b>Size of an entity is defined as number of audio files
+     * encapsulated by the entity.</b>
+     * @return The size of the entity
+     */
     @Override
     public int getSize() {
         return episodes.size();
     }
 
     /**
-     * Returns the episode that has to be played after the specified one
-     * @param currentEpisode The episode currently playing
-     * @return The next episode if it exists, null otherwise
+     * Returns the duration of the entity
+     * @return The duration of the entity
      */
-    public AudioFile getNextEpisode(final AudioFile currentEpisode) {
-        int currentIndex = episodes.indexOf((Episode) currentEpisode);
-
-        if (currentIndex >= episodes.size() - 1)
-            return null;
-
-        return episodes.get(currentIndex + 1);
-    }
-
-    /**
-     * Returns the episode that has to be played before the specified one
-     * @param currentEpisode The episode currently playing
-     * @return The previous episode, if it exists, null, otherwise
-     */
-    public AudioFile getPrevEpisode(final AudioFile currentEpisode) {
-        int currentIndex = episodes.indexOf((Episode) currentEpisode);
-
-        if (currentIndex == 0)
-            return null;
-
-        return episodes.get(currentIndex - 1);
-    }
-
-    /**
-     * Returns a String that specifies the repeat state, based on the repeatValue
-     * @param repeatValue The current repeat state
-     * @return a String, if 0 <= repeatValue < 3, null, otherwise
-     */
-    @Override
-    public String getRepeatStateName(final int repeatValue) {
-        switch (repeatValue) {
-            case 0 -> {
-                return "No Repeat";
-            }
-            case 1 -> {
-                return "Repeat Once";
-            }
-            case 2 -> {
-                return "Repeat Infinite";
-            }
-            default -> {
-                return null;
-            }
-        }
-    }
-
-    @Override
-    public boolean isEmptyPlayableFile() {
-        return false;
-    }
-
-    @Override
-    public AudioFile getFirstAudioFile() {
-        return episodes.get(0);
-    }
-
     @Override
     public int getDuration() {
-        return episodes.get(0).getDuration();
+        int sum = 0;
+
+        for (Episode e: episodes) {
+            sum += e.getDuration();
+        }
+
+        return sum;
     }
 
-    @Override
-    public boolean needsHistoryTrack() {
-        return true;
-    }
-
-    @Override
-    public boolean cantGoForwardOrBackward() {
-        return false;
-    }
-
-    @Override
-    public Playlist getCurrentPlaylist() {
-        return null;
-    }
-
-    @Override
-    public String getPublicIdentity() {
-        return owner;
-    }
-
-    @Override
-    public boolean hasAudiofileFromUser(String username) {
-        return owner.equals(username);
-    }
-
-    @Override
-    public Album getCurrentAlbum() {
-        return null;
-    }
-
+    /**
+     * Returns the creation time of the entity. For podcasts, this feature isn't implemented yet.
+     * @return The creation time, if the entity stores it, or 0 otherwise
+     */
     @Override
     public int getCreationTime() {
         return 0;
     }
 
+    /**
+     * Returns the AudioFile at the specified index
+     * @param index The index of the file
+     * @return {@code null}, if the index is out of bounds, the {@code AudioFile} otherwise
+     */
+    @Override
+    public AudioFile getAudioFileAtIndex(final int index) {
+        if (index >= episodes.size()) {
+            return null;
+        }
+
+        return episodes.get(index);
+    }
+
+    /**
+     * Returns the index of the file in the collection / entity.
+     * @param file The file to be inspected.
+     * @return The index of the file, or {@code -1 } if it doesn't contain the file
+     */
+    @Override
+    public int getIndexOfFile(final AudioFile file) {
+        return episodes.indexOf((Episode) file);
+    }
+
+    /**
+     * Returns the first file in collection
+     * @return The first file of the entity
+     */
+    @Override
+    public AudioFile getFirstAudioFile() {
+        return episodes.get(0);
+    }
+
+    /**
+     * Returns the owner of the podcast.
+     * @return The owner of the podcast
+     */
+    @Override
+    public String getPublicIdentity() {
+        return owner;
+    }
+
+    /**
+     * Returns the repeatValue formatted as String value
+     * @param repeatValue The repeatValue to be converted
+     * @return The corespondent string, or {@code null} if {@code repeatValue < 0} or
+     * {@code repeatValue > 2}
+     */
+    @Override
+    public String getRepeatStateName(final int repeatValue) {
+        return switch (repeatValue) {
+            case 0 -> "No Repeat";
+            case 1 -> "Repeat Once";
+            case 2 -> "Repeat Infinite";
+            default -> null;
+        };
+    }
+
+    /**
+     * Checks if the entity is an empty file. Only a playlist can be empty,
+     * if it doesn't have any song.
+     * @return {@code true}, if it is an empty file, {@code false} otherwise
+     */
+    @Override
+    public boolean isEmptyPlayableFile() {
+        return false;
+    }
+
+    /**
+     * Checks if the entity is a playlist.
+     * @return {@code true}, if it is a playlist or an album, {@code false} otherwise
+     */
     @Override
     public boolean isPlaylist() {
         return false;
     }
 
+    /**
+     * Checks if the entity contains at least one audio file owned by the user
+     * @param username The username of the user
+     * @return {@code true}, if it contains, {@code false} otherwise
+     */
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Podcast)) return false;
+    public boolean hasAudiofileFromUser(final String username) {
+        return owner.equals(username);
+    }
+
+    /**
+     * Checks if the entity needs to save its data to a history record
+     * @return {@code true}, if it needs, {@code false} otherwise
+     */
+    @Override
+    public boolean needsHistoryTrack() {
+        return true;
+    }
+
+    /**
+     * Checks if the forward and backward commands can be applied on the
+     * entity
+     * @return {@code true}, if they can be applied, {@code false} otherwise
+     */
+    @Override
+    public boolean cantGoForwardOrBackward() {
+        return false;
+    }
+
+    /**
+     * If {@code this} is a playlist, returns its instance.
+     * @return {@code this}, if it is a playlist, {@code null} otherwise
+     */
+    @Override
+    public Playlist getCurrentPlaylist() {
+        return null;
+    }
+
+    /**
+     * If {@code this} is an album, returns its instance.
+     * @return {@code this}, if it is an album, {@code null} otherwise
+     */
+    @Override
+    public Album getCurrentAlbum() {
+        return null;
+    }
+
+    /**
+     * Compares this podcast with the specified object. The result is true if and only if
+     * the argument is not null and is a Podcast object that represents the same podcast
+     * as this object.
+     *
+     * @param o The object to compare this podcast against
+     * @return {@code true}, if the given object represents the same podcast as this
+     * podcast, {@code false} otherwise
+     */
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Podcast)) {
+            return false;
+        }
         Podcast podcast = (Podcast) o;
         return name.equals(podcast.name) && owner.equals(podcast.owner);
     }
 
+    /**
+     * Returns a hashcode value for this podcast. If two objects are equal according to the
+     * equals method, then calling the hashCode method on each of the two objects must produce the
+     * same integer result.
+     *
+     * @return A hashcode value for this podcast
+     */
     @Override
     public int hashCode() {
         return Objects.hash(getName(), getOwner());
