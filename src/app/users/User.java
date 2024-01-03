@@ -1,7 +1,10 @@
 package app.users;
 
 import app.player.entities.*;
+import app.properties.NamedObject;
 import app.properties.PlayableEntity;
+import app.utilities.HelperTool;
+import app.utilities.SortByIntegerValue;
 import fileio.input.UserInput;
 import app.pages.features.Announcement;
 import app.pages.features.Event;
@@ -16,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 @Getter
-public class User {
+public class User implements NamedObject {
     public enum ConnectionStatus {
         ONLINE,
         OFFLINE,
@@ -61,6 +64,63 @@ public class User {
         status = ConnectionStatus.ONLINE;
         likes = new ArrayList<>();
         following = new ArrayList<>();
+    }
+
+    /**
+     * Returns the user statistics.
+     * @return A map which stores the criteria as the key, and a list of tuples of object name
+     * and listen count as value, if there isn't specified otherwise. <br>
+     * For users, the criteria are:
+     * <ul>
+     *     <li>topArtist</li>
+     *     <li>topGenres</li>
+     *     <li>topSongs</li>
+     *     <li>topAlbums</li>
+     *     <li>topEpisodes</li>
+     * </ul>
+     * For artists, the criteria are:
+     * <ul>
+     *     <li>topAlbum</li>
+     *     <li>topSongs</li>
+     *     <li>topFans: <b>for this criteria, the list will contains tuples with irrelevant
+     *     integer values</b></li>
+     *     <li>listeners: <b>for this criteria, the list will contain only 1 tuple, with
+     *     irrelevant string value</b></li>
+     * </ul>
+     * For hosts, the criteria are:
+     * <ul>
+     *     <li>topEpisodes</li>
+     *     <li>listeners:  <b>for this criteria, the list will contain only 1 tuple, with
+     *     irrelevant string value</b></li>
+     * </ul>
+     *
+     */
+    public Map<String, List<Map.Entry<String, Integer>>> getStatistics() {
+        HelperTool tool = HelperTool.getInstance();
+
+        Map<String, List<Map.Entry<String, Integer>>> statistics  = new HashMap<>();
+
+        List<Map.Entry<String, Integer>> artists = tool.unrollHistoryData(artistHistory);
+        artists.sort(new SortByIntegerValue<>());
+        statistics.put("topArtists", artists);
+
+        List<Map.Entry<String, Integer>> genres = new ArrayList<>(genreHistory.entrySet());
+        genres.sort(new SortByIntegerValue<>());
+        statistics.put("topGenres", genres);
+
+        List<Map.Entry<String, Integer>> songs = tool.unrollHistoryData(songHistory);
+        songs.sort(new SortByIntegerValue<>());
+        statistics.put("topSongs", genres);
+
+        List<Map.Entry<String, Integer>> albums = tool.unrollHistoryData(albumHistory);
+        albums.sort(new SortByIntegerValue<>());
+        statistics.put("topAlbums", albums);
+
+        List<Map.Entry<String, Integer>> episodes = tool.unrollHistoryData(episodeHistory);
+        episodes.sort(new SortByIntegerValue<>());
+        statistics.put("topEpisodes", episodes);
+
+        return statistics;
     }
 
     /**
@@ -355,4 +415,12 @@ public class User {
         return false;
     }
 
+    /**
+     * Returns the username
+     * @return The username
+     */
+    @Override
+    public String getName() {
+        return username;
+    }
 }

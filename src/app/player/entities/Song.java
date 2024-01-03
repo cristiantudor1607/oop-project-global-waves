@@ -276,8 +276,7 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
             return false;
         }
         Song song = (Song) o;
-        return artist.equals(song.getArtist()) && name.equals(song.getName())
-                && album.equals(song.getAlbum());
+        return artist.equals(song.getArtist()) && name.equals(song.getName());
     }
 
     /**
@@ -289,7 +288,7 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
      */
     @Override
     public int hashCode() {
-        return Objects.hash(getArtist(), getName(), getAlbum());
+        return Objects.hash(getArtist(), getName());
     }
 
 

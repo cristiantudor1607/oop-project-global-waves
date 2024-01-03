@@ -1,5 +1,6 @@
 package app.player.entities;
 
+import app.properties.NamedObject;
 import app.properties.OwnedEntity;
 import app.properties.PlayableEntity;
 import app.users.User;

@@ -4,12 +4,7 @@ import app.player.entities.Album;
 import app.player.entities.AudioFile;
 import app.player.entities.Playlist;
 
-public interface PlayableEntity {
-    /**
-     * Returns the name of the entity
-     * @return The name of the entity
-     */
-    String getName();
+public interface PlayableEntity extends NamedObject {
 
     /**
      * Returns the size of the entity. <b>Size of an entity is defined as number of audio files

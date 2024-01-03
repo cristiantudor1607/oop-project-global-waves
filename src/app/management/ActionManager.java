@@ -65,13 +65,7 @@ import app.pages.Page;
 import app.pages.ContentVisitor;
 import app.properties.PlayableEntity;
 import app.users.User;
-import app.utilities.DateMapper;
-import app.utilities.HelperTool;
-import app.utilities.SortAlphabetical;
-import app.utilities.SortByArtistLikes;
-import app.utilities.SortByCreationTime;
-import app.utilities.SortByNumberOfLikes;
-import app.utilities.SortByPlaylistLikes;
+import app.utilities.*;
 import app.utilities.constants.StringConstants;
 import lombok.Getter;
 import lombok.NonNull;
@@ -1394,6 +1388,17 @@ public final class ActionManager {
         artists.forEach(artist -> names.add(artist.getUsername()));
 
         return names;
+    }
+
+    /**
+     * Retrieves the user statistics.
+     * @param username The user to be inspected
+     * @return A map containing the statistics.
+     */
+    public Map<String, List<Map.Entry<String, Integer>>> requestWrap(final String username) {
+        User user = getProfileByUsername(username);
+
+        return user == null ? null : user.getStatistics();
     }
 
     /**

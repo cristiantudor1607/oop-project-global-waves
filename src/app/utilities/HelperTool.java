@@ -2,10 +2,13 @@ package app.utilities;
 
 import app.player.entities.Playlist;
 import app.player.entities.Song;
+import app.properties.NamedObject;
 import app.users.User;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public final class HelperTool {
     private static HelperTool instance = null;
@@ -127,5 +130,21 @@ public final class HelperTool {
         }
 
         return false;
+    }
+
+    /**
+     * Takes a map which stores named objects and a counter, and converts it to
+     * a list of entries, in order to be sorted.
+     * @param history The map to be converted
+     * @return A list containing all entries from the given map
+     */
+    public <T extends NamedObject> List<Map.Entry<String, Integer>>
+    unrollHistoryData(final Map<T, Integer> history) {
+        List<Map.Entry<String, Integer>> list = new ArrayList<>();
+        for (Map.Entry<T, Integer> pair : history.entrySet()) {
+            list.add(new AbstractMap.SimpleEntry<>(pair.getKey().getName(), pair.getValue()));
+        }
+
+        return list;
     }
 }

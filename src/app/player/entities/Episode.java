@@ -1,5 +1,6 @@
 package app.player.entities;
 
+import app.properties.NamedObject;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import fileio.input.EpisodeInput;
@@ -9,7 +10,7 @@ import lombok.Setter;
 import java.util.Objects;
 
 @Getter @Setter
-public class Episode extends AudioFile {
+public class Episode extends AudioFile implements NamedObject {
     private String description;
 
     @JsonCreator

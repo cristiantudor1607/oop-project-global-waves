@@ -1,5 +1,6 @@
 package app.player.entities;
 
+import app.properties.NamedObject;
 import lombok.Getter;
 import lombok.Setter;
 
