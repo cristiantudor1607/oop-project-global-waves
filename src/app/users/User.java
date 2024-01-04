@@ -7,8 +7,10 @@ import app.player.entities.Playlist;
 import app.player.entities.Podcast;
 import app.player.entities.Song;
 import app.properties.NamedObject;
+import app.properties.PlayableEntity;
 import app.utilities.HelperTool;
 import app.utilities.SortByIntegerValue;
+import app.utilities.constants.StatisticsConstants;
 import fileio.input.UserInput;
 import app.pages.features.Announcement;
 import app.pages.features.Event;
@@ -40,11 +42,12 @@ public class User implements NamedObject {
     private List<Playlist> following;
 
     // Statistics maps
-    private Map<String, Integer> artistHistory;
-    private Map<Song, Integer> songHistory;
+    private Map<User, Integer> artistHistory;
+    protected Map<Song, Integer> songHistory;
     private Map<String, Integer> genreHistory;
-    private Map<String, Integer> albumHistory;
-    private Map<Episode, Integer> episodeHistory;
+    protected Map<Album, Integer> albumHistory;
+    protected Map<Episode, Integer> episodeHistory;
+    protected Map<User, Integer> listeners;
 
     public User() { }
 
@@ -63,6 +66,7 @@ public class User implements NamedObject {
         genreHistory = new HashMap<>();
         albumHistory = new HashMap<>();
         episodeHistory = new HashMap<>();
+        listeners = new HashMap<>();
     }
 
     public User(final String username, final int age, final String city) {
@@ -74,6 +78,13 @@ public class User implements NamedObject {
         status = ConnectionStatus.ONLINE;
         likes = new ArrayList<>();
         following = new ArrayList<>();
+
+        artistHistory = new HashMap<>();
+        songHistory = new HashMap<>();
+        genreHistory = new HashMap<>();
+        albumHistory = new HashMap<>();
+        episodeHistory = new HashMap<>();
+        listeners = new HashMap<>();
     }
 
     public User(final String username) {
@@ -116,27 +127,42 @@ public class User implements NamedObject {
 
         Map<String, List<Map.Entry<String, Integer>>> statistics  = new HashMap<>();
 
-        List<Map.Entry<String, Integer>> artists = new ArrayList<>(artistHistory.entrySet());
+        List<Map.Entry<String, Integer>> artists = tool.unrollHistoryData(artistHistory);
         artists.sort(new SortByIntegerValue<>());
-        statistics.put("topArtists", artists);
+        statistics.put(StatisticsConstants.TOP_ARTISTS, artists);
 
         List<Map.Entry<String, Integer>> genres = new ArrayList<>(genreHistory.entrySet());
         genres.sort(new SortByIntegerValue<>());
-        statistics.put("topGenres", genres);
+        statistics.put(StatisticsConstants.TOP_GENRES, genres);
 
         List<Map.Entry<String, Integer>> songs = tool.unrollHistoryData(songHistory);
         songs.sort(new SortByIntegerValue<>());
-        statistics.put("topSongs", genres);
+        statistics.put(StatisticsConstants.TOP_SONGS, songs);
 
-        List<Map.Entry<String, Integer>> albums = new ArrayList<>(albumHistory.entrySet());
+        List<Map.Entry<String, Integer>> albums = tool.unrollHistoryData(albumHistory);
         albums.sort(new SortByIntegerValue<>());
-        statistics.put("topAlbums", albums);
+        statistics.put(StatisticsConstants.TOP_ALBUMS, albums);
 
         List<Map.Entry<String, Integer>> episodes = tool.unrollHistoryData(episodeHistory);
         episodes.sort(new SortByIntegerValue<>());
-        statistics.put("topEpisodes", episodes);
+        statistics.put(StatisticsConstants.TOP_EPISODES, episodes);
 
         return statistics;
+    }
+
+    /**
+     * Tracks the data for a new playing entity / collection. If has no effect if
+     * the entity isn't an album.
+     * @param collection The collection to be tracked
+     */
+    public void trackEntity(final PlayableEntity collection) {
+        Album album = collection.getCurrentAlbum();
+        if (album == null) {
+            return;
+        }
+
+        trackAlbum(album);
+
     }
 
     /**
@@ -148,8 +174,8 @@ public class User implements NamedObject {
             Song song = file.getCurrentSong();
             trackSong(song);
             trackGenre(song.getGenre());
-            trackArtist(song.getArtistName());
-            trackAlbum(song.getAlbumName());
+            trackArtist(song.getArtistLink());
+            trackAlbum(song.getAlbumLink());
         } else {
             Episode episode = file.getCurrentEpisode();
             trackEpisode(episode);
@@ -196,32 +222,42 @@ public class User implements NamedObject {
             genreHistory.put(genre, 0);
         }
 
-        genreHistory.computeIfPresent(genre, (key, value) -> value++);
+        int listens = genreHistory.get(genre);
+        genreHistory.put(genre, ++listens);
     }
 
     /**
      * Tracks the number of listens for specified artist.
      * @param artist The artist to be tracked
      */
-    public void trackArtist(final String artist) {
+    public void trackArtist(final User artist) {
         if (!artistHistory.containsKey(artist)) {
             artistHistory.put(artist, 0);
         }
 
-        artistHistory.computeIfPresent(artist, (key, value) -> value++);
+        int listens = artistHistory.get(artist);
+        artistHistory.put(artist, ++listens);
     }
 
     /**
      * Tracks the number of listens for specified album.
      * @param album The album to be tracked
      */
-    public void trackAlbum(final String album) {
+    public void trackAlbum(final Album album) {
         if (!albumHistory.containsKey(album)) {
             albumHistory.put(album, 0);
         }
 
-        albumHistory.computeIfPresent(album, (key, value) -> value++);
+        int listens = albumHistory.get(album);
+        albumHistory.put(album, ++listens);
     }
+
+    /**
+     * Tracks the specified user number of listeners from artist pov. If {@code this}
+     * isn't an artist, it does nothing.
+     * @param user The user to be tracked.
+     */
+    public void trackUser(final User user) { }
 
     /**
      * Returns the page of the user.

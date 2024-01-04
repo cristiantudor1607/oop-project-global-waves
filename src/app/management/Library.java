@@ -5,6 +5,7 @@ import app.player.entities.Playlist;
 import app.player.entities.Podcast;
 import app.player.entities.Song;
 import app.users.Host;
+import app.utilities.HelperTool;
 import app.utilities.UnreachableSectionException;
 import fileio.input.LibraryInput;
 import fileio.input.PodcastInput;
@@ -329,10 +330,10 @@ public final class Library {
         ArrayList<PodcastInput> inputs = library.getPodcasts();
         for (PodcastInput inputFormatPodcast: inputs) {
             // Convert the podcast
-            Podcast myPodcastFormat = new Podcast(inputFormatPodcast);
+            Podcast myPodcast = new Podcast(inputFormatPodcast);
 
             // Create the host if it doesn't exist
-            String username = myPodcastFormat.getOwner();
+            String username = myPodcast.getOwner();
             if (getHostByUsername(username) == null) {
                 Host newHost = new Host(username);
                 hosts.add(newHost);
@@ -340,16 +341,19 @@ public final class Library {
 
             User host = getHostByUsername(username);
             if (host == null) {
-                throw new UnreachableSectionException("Unreachable error!");
+                throw new UnreachableSectionException("Ignore this because it can't happen");
             }
 
-            host.addPodcast(myPodcastFormat);
+            HelperTool.getInstance().setHostLinks(myPodcast.getEpisodes(), host);
+            HelperTool.getInstance().setPodcastLink(myPodcast.getEpisodes(), myPodcast);
+            host.addPodcast(myPodcast);
+
             if (!podcasts.containsKey(username)) {
                 podcasts.put(username, new ArrayList<>());
             }
 
-            podcasts.get(username).add(myPodcastFormat);
-            inputPodcasts.add(myPodcastFormat);
+            podcasts.get(username).add(myPodcast);
+            inputPodcasts.add(myPodcast);
         }
     }
 

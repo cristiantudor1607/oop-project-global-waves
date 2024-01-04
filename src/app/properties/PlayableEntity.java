@@ -73,6 +73,12 @@ public interface PlayableEntity extends NamedObject {
     boolean isPlaylist();
 
     /**
+     * Checks if the entity is an album
+     * @return {@code true}, if it is an album, {@code false} otherwise
+     */
+    boolean isAlbum();
+
+    /**
      * Checks if the entity contains at least one audio file owned by the user
      * @param username The username of the user
      * @return {@code true}, if it contains, {@code false} otherwise

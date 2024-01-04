@@ -1,5 +1,7 @@
 package app.player.entities;
 
+import app.users.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import fileio.input.EpisodeInput;
 import fileio.input.PodcastInput;
 import app.properties.OwnedEntity;
@@ -143,6 +145,15 @@ public class Podcast implements PlayableEntity, OwnedEntity {
      */
     @Override
     public boolean isPlaylist() {
+        return false;
+    }
+
+    /**
+     * Checks if the entity is an album
+     * @return {@code true}, if it is an album, {@code false} otherwise
+     */
+    @Override
+    public boolean isAlbum() {
         return false;
     }
 

@@ -64,6 +64,15 @@ public class Album extends Playlist {
     }
 
     /**
+     * Checks if the entity is an album
+     * @return {@code true}, if it is an album, {@code false} otherwise
+     */
+    @Override
+    public boolean isAlbum() {
+        return true;
+    }
+
+    /**
      * If {@code this} is an album, returns its instance.
      * @return {@code this}, if it is an album, {@code null} otherwise
      */

@@ -1,10 +1,7 @@
 package app.utilities;
 
-import app.player.entities.Album;
-import app.player.entities.Playlist;
-import app.player.entities.Song;
+import app.player.entities.*;
 import app.properties.NamedObject;
-import app.users.Artist;
 import app.users.User;
 
 import java.util.AbstractMap;
@@ -70,21 +67,39 @@ public final class HelperTool {
     }
 
     /**
-     * Sets the links to the artist for each song in list to {@code link}
+     * Sets the links to the artist for each song in list.
      * @param songs The songs whose link should be set
      * @param link The link to the artist
      */
     public void setArtistLinks(final List<Song> songs, final User link) {
-        songs.forEach(song -> song.setUserLink(link));
+        songs.forEach(song -> song.setArtistLink(link));
     }
 
     /**
-     * Sets the link to the album for each song in the list to {@code link}
+     * Sets the link to the album for each song in list.
      * @param songs The songs whose link should be set
      * @param link The link to the album
      */
     public void setAlbumLinks(final List<Song> songs, final Album link) {
         songs.forEach(song -> song.setAlbumLink(link));
+    }
+
+    /**
+     * Sets the links to the host for each episode in list.
+     * @param episodes The episodes whose link should be set
+     * @param link The link to the host
+     */
+    public void setHostLinks(final List<Episode> episodes, final User link) {
+        episodes.forEach(episode -> episode.setHostLink(link));
+    }
+
+    /**
+     * Sets the link to the podcast for each episode in list.
+     * @param episodes The episodes whose link should be set
+     * @param link The link to the podcast
+     */
+    public void setPodcastLink(final List<Episode> episodes, final Podcast link) {
+        episodes.forEach(episode -> episode.setPodcastLink(link));
     }
 
     /**

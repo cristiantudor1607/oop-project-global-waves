@@ -80,7 +80,7 @@ public final class Main {
         ObjectMapper objectMapper = new ObjectMapper();
         LibraryInput library = objectMapper.readValue(new File(LIBRARY_PATH), LibraryInput.class);
         ArrayNode outputs = objectMapper.createArrayNode();
-        // TODO: Remove this
+        // ERASE THIS
         System.out.println("test: " + filePathInput);
 
         Library database = Library.getInstance();

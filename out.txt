@@ -1,8 +1,4 @@
 [ {
-  "command" : "getAllUsers",
-  "timestamp" : 1,
-  "result" : [ "alice22", "bob35", "carol19", "david27", "emily30", "frank21", "grace25", "henry26", "irene33", "jack29", "Joe Rogan", "Sarah Koenig", "Jad Abumrad and Robert Krulwich", "Guy Raz", "TED", "Wendy Zukerman", "The New York Times", "PJ Vogt and Alex Goldman", "Shankar Vedantam", "Ashley Flowers and Brit Prawat", "Michelle Obama", "Trevor Noah", "Conan O'Brien", "Dr. Laurie Santos", "Ben Shapiro", "The New Yorker" ]
-}, {
   "command" : "addUser",
   "user" : "The Beatles",
   "timestamp" : 1,
@@ -434,4 +430,71 @@
   "user" : "alice22",
   "timestamp" : 12393,
   "message" : "Playback loaded successfully."
-}, null, null ]
+}, {
+  "command" : "wrapped",
+  "user" : "Pink Floyd",
+  "timestamp" : 12427,
+  "result" : {
+    "topAlbums" : { },
+    "topSongs" : { },
+    "topFans" : [ ],
+    "listeners" : 0
+  }
+}, {
+  "command" : "wrapped",
+  "user" : "alice22",
+  "timestamp" : 12527,
+  "result" : {
+    "topArtists" : {
+      "Pink Floyd" : 42
+    },
+    "topGenres" : {
+      "progressive rock" : 42
+    },
+    "topSongs" : {
+      "Time" : 1,
+      "Hey You" : 1,
+      "Any Colour You Like" : 1,
+      "Speak to Me" : 1,
+      "Empty Spaces" : 1,
+      "The Thin Ice" : 1,
+      "The Great Gig in the Sky" : 1,
+      "Lost for Words" : 1,
+      "Breathe (In the Air)" : 1,
+      "On the Run" : 1,
+      "Wearing the Inside Out" : 1,
+      "What Do You Want From Me" : 1,
+      "Keep Talking" : 1,
+      "Another Brick in the Wall Part 2" : 1,
+      "The Happiest Days of Our Lives" : 1,
+      "Another Brick in the Wall Part 3" : 1,
+      "In the Flesh?" : 1,
+      "Welcome to the Machine" : 1,
+      "A Great Day for Freedom" : 1,
+      "Goodbye Blue Sky" : 1,
+      "Have a Cigar" : 1,
+      "Don't Leave Me Now" : 1,
+      "Wish You Were Here" : 1,
+      "High Hopes" : 1,
+      "Mother" : 1,
+      "Shine on You Crazy Diamond" : 1,
+      "Cluster One" : 1,
+      "Poles Apart" : 1,
+      "One of My Turns" : 1,
+      "Money" : 1,
+      "Goodbye Cruel World" : 2,
+      "Young Lust" : 2,
+      "Another Brick in the Wall Part 1" : 2,
+      "Marooned" : 2,
+      "Take It Back" : 2,
+      "Coming Back to Life" : 2
+    },
+    "topAlbums" : {
+      "Wish You Were Here" : 5,
+      "The Dark Side of the Moon" : 8,
+      "The Division Bell" : 15,
+      "The Wall" : 18
+    },
+    "topEpisodes" : { }
+  }
+} ]

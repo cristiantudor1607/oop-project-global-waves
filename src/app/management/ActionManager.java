@@ -60,6 +60,8 @@ import app.player.entities.Playlist;
 import app.player.entities.Podcast;
 import app.player.entities.SearchBar;
 import app.player.entities.Song;
+import app.statistics.StatisticsFactorySingleton;
+import app.statistics.StatisticsTemplate;
 import app.users.AdminBot;
 import app.pages.Page;
 import app.pages.ContentVisitor;
@@ -1395,12 +1397,13 @@ public final class ActionManager {
     /**
      * Retrieves the user statistics.
      * @param username The user to be inspected
-     * @return A map containing the statistics.
+     * @return A Statistics class packaging all the data, or {@code null}, if the
+     * user doesn't exist
      */
-    public Map<String, List<Map.Entry<String, Integer>>> requestWrap(final String username) {
-        User user = getProfileByUsername(username);
-
-        return user == null ? null : user.getStatistics();
+    public StatisticsTemplate requestWrap(final String username) {
+        User user = adminBot.getUserByUsername(username);
+        return user == null ? null : StatisticsFactorySingleton
+                .getInstance().createStatistics(user);
     }
 
     /**

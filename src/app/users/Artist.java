@@ -5,15 +5,21 @@ import app.pages.features.Event;
 import app.pages.features.Merch;
 import app.pages.ArtistPage;
 import app.pages.Page;
+import app.utilities.HelperTool;
+import app.utilities.SortByIntegerValue;
+import app.utilities.constants.StatisticsConstants;
 import lombok.Getter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Getter
 public class Artist extends User {
     private final List<Album> albums;
     private final ArtistPage selfPage;
+
 
     public Artist(final String username, final int age, final String city) {
         super(username, age, city);
@@ -25,6 +31,64 @@ public class Artist extends User {
         super(username);
         albums = new ArrayList<>();
         selfPage = new ArtistPage(this);
+    }
+
+    /**
+     * Returns the user statistics.
+     * @return A map which stores the criteria as the key, and a list of tuples of object name
+     * and listen count as value, if there isn't specified otherwise. <br>
+     * For users, the criteria are:
+     * <ul>
+     *     <li>topArtist</li>
+     *     <li>topGenres</li>
+     *     <li>topSongs</li>
+     *     <li>topAlbums</li>
+     *     <li>topEpisodes</li>
+     * </ul>
+     * For artists, the criteria are:
+     * <ul>
+     *     <li>topAlbum</li>
+     *     <li>topSongs</li>
+     *     <li>topFans: <b>for this criteria, the list will contains tuples with irrelevant
+     *     integer values</b></li>
+     *     <li>listeners: <b>for this criteria, the list will contain only 1 tuple, with
+     *     irrelevant string value</b></li>
+     * </ul>
+     * For hosts, the criteria are:
+     * <ul>
+     *     <li>topEpisodes</li>
+     *     <li>listeners:  <b>for this criteria, the list will contain only 1 tuple, with
+     *     irrelevant string value</b></li>
+     * </ul>
+     *
+     */
+    @Override
+    public Map<String, List<Map.Entry<String, Integer>>> getStatistics() {
+        HelperTool tool = HelperTool.getInstance();
+        Map<String, List<Map.Entry<String, Integer>>> statistics  = new HashMap<>();
+
+        List<Map.Entry<String, Integer>> albums = tool.unrollHistoryData(albumHistory);
+        albums.sort(new SortByIntegerValue<>());
+        statistics.put(StatisticsConstants.TOP_ALBUMS, albums);
+
+        List<Map.Entry<String, Integer>> songs = tool.unrollHistoryData(songHistory);
+        songs.sort(new SortByIntegerValue<>());
+        statistics.put(StatisticsConstants.TOP_SONGS, songs);
+
+        List<Map.Entry<String, Integer>> fans = tool.unrollHistoryData(listeners);
+        fans.sort(new SortByIntegerValue<>());
+        statistics.put(StatisticsConstants.TOP_FANS, fans);
+
+        return statistics;
+    }
+
+    @Override
+    public void trackUser(final User user) {
+        if (!listeners.containsKey(user)) {
+            listeners.put(user, 0);
+        }
+
+        listeners.computeIfPresent(user, (key, value) -> value++);
     }
 
     /**

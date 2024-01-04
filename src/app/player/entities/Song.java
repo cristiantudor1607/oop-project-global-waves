@@ -1,6 +1,6 @@
 package app.player.entities;
 
-import app.users.Artist;
+import app.users.User;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -18,6 +18,8 @@ import java.util.Objects;
 public class Song extends AudioFile implements PlayableEntity, Comparable<Song> {
     @JsonIgnore
     private Album albumLink;
+    @JsonIgnore
+    private User artistLink;
 
     @JsonProperty("album")
     private String albumName;
@@ -187,6 +189,15 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
      */
     @Override
     public boolean isPlaylist() {
+        return false;
+    }
+
+    /**
+     * Checks if the entity is an album
+     * @return {@code true}, if it is an album, {@code false} otherwise
+     */
+    @Override
+    public boolean isAlbum() {
         return false;
     }
 

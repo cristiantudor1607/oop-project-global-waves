@@ -413,6 +413,10 @@ public class Player {
         shuffle = false;
         repeat = 0;
         play();
+
+        // LANDMARK
+        user.trackEntity(selectedSource);
+        user.trackFile(playingFile);
     }
 
     /**
@@ -481,6 +485,9 @@ public class Player {
             playingFile = selectedSource.getAudioFileAtIndex(realIndex);
             remainedTime = playingFile.getDuration();
             state = PlayerStatus.PLAYING;
+
+            // LANDMARK
+            user.trackFile(playingFile);
             return;
         }
 
@@ -495,6 +502,9 @@ public class Player {
             int realIndex = playingOrder.get(nextIndex);
             playingFile = selectedSource.getAudioFileAtIndex(realIndex);
             remainedTime += playingFile.getDuration();
+
+            // LANDMARK
+            user.trackFile(playingFile);
         }
 
     }
@@ -515,7 +525,7 @@ public class Player {
 
     /**
      * Checks if the player is playing the album, or something from the album.
-     * @param album The album
+     * @param album The album to have something playing
      * @return {@code true}, if the player has loaded the album, or a song from album,
      * {@code false} otherwise
      */

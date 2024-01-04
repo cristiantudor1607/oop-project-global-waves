@@ -26,6 +26,15 @@ public class Host extends User {
         selfPage = new HostPage(this);
     }
 
+    @Override
+    public void trackUser(final User user) {
+        if (!listeners.containsKey(user)) {
+            listeners.put(user, 0);
+        }
+
+        listeners.computeIfPresent(user, (key, value) -> value++);
+    }
+
     /**
      * Returns the page of the host.
      * @return The page of the host

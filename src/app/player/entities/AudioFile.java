@@ -8,8 +8,6 @@ import lombok.Setter;
 
 @Getter @Setter
 public abstract class AudioFile {
-    @JsonIgnore
-    protected User userLink;
     protected String name;
     protected int duration;
 

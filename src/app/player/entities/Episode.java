@@ -1,7 +1,9 @@
 package app.player.entities;
 
 import app.properties.NamedObject;
+import app.users.User;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import fileio.input.EpisodeInput;
 import lombok.Getter;
@@ -11,6 +13,10 @@ import java.util.Objects;
 
 @Getter @Setter
 public class Episode extends AudioFile implements NamedObject {
+    @JsonIgnore
+    private User hostLink;
+    @JsonIgnore
+    private Podcast podcastLink;
     private String description;
 
     @JsonCreator

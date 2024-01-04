@@ -1,15 +1,19 @@
 package app.commands.stagethree;
 
+import app.outputs.stagethree.WrappedOutput;
 import app.parser.commands.templates.CommandObject;
+import app.statistics.StatisticsTemplate;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonNode;
+import lombok.Getter;
 
 import java.util.List;
 import java.util.Map;
 
+@Getter
 public class WrappedInterrogator extends CommandObject {
     @JsonIgnore
-    Map<String, List<Map.Entry<String, Integer>>> statistics;
+    private StatisticsTemplate statistics;
 
     /**
      * Executes the Wrapped command.
@@ -28,6 +32,6 @@ public class WrappedInterrogator extends CommandObject {
      */
     @Override
     public JsonNode formatOutput() {
-        return null;
+        return (new WrappedOutput(this)).generateOutputNode();
     }
 }
