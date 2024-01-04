@@ -13,6 +13,6 @@ public class SortByIntegerValue<T> implements Comparator<Map.Entry<T, Integer>> 
     @Override
     public int compare(final Map.Entry<T, Integer> o1,
                        final Map.Entry<T, Integer> o2) {
-        return o1.getValue() - o2.getValue();
+        return o2.getValue() - o1.getValue();
     }
 }

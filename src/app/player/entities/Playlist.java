@@ -167,10 +167,12 @@ public class Playlist implements PlayableEntity, OwnedEntity {
             return -1;
         }
 
-        AtomicInteger sum = new AtomicInteger();
-        songs.forEach(song -> sum.addAndGet(song.getDuration()));
+        int sum = 0;
+        for (Song s: songs) {
+            sum += s.getDuration();
+        }
 
-        return sum.get();
+        return sum;
     }
 
     /**

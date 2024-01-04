@@ -7,8 +7,8 @@ import app.player.entities.Playlist;
 import app.player.entities.Podcast;
 import app.player.entities.Song;
 import app.properties.NamedObject;
-import app.properties.PlayableEntity;
-import app.utilities.HelperTool;
+import app.statistics.Genre;
+import app.statistics.StatisticsUtils;
 import app.utilities.SortByIntegerValue;
 import app.utilities.constants.StatisticsConstants;
 import fileio.input.UserInput;
@@ -19,10 +19,7 @@ import app.pages.Page;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Getter
 public class User implements NamedObject {
@@ -44,10 +41,10 @@ public class User implements NamedObject {
     // Statistics maps
     private Map<User, Integer> artistHistory;
     protected Map<Song, Integer> songHistory;
-    private Map<String, Integer> genreHistory;
+    private Map<Genre, Integer> genreHistory;
     protected Map<Album, Integer> albumHistory;
     protected Map<Episode, Integer> episodeHistory;
-    protected Map<User, Integer> listeners;
+    protected Map<User, Integer> peopleHistory;
 
     public User() { }
 
@@ -66,7 +63,7 @@ public class User implements NamedObject {
         genreHistory = new HashMap<>();
         albumHistory = new HashMap<>();
         episodeHistory = new HashMap<>();
-        listeners = new HashMap<>();
+        peopleHistory = new HashMap<>();
     }
 
     public User(final String username, final int age, final String city) {
@@ -84,7 +81,7 @@ public class User implements NamedObject {
         genreHistory = new HashMap<>();
         albumHistory = new HashMap<>();
         episodeHistory = new HashMap<>();
-        listeners = new HashMap<>();
+        peopleHistory = new HashMap<>();
     }
 
     public User(final String username) {
@@ -111,58 +108,45 @@ public class User implements NamedObject {
      *     <li>topSongs</li>
      *     <li>topFans: <b>for this criteria, the list will contains tuples with irrelevant
      *     integer values</b></li>
-     *     <li>listeners: <b>for this criteria, the list will contain only 1 tuple, with
-     *     irrelevant string value</b></li>
+     *     <li>listeners: <b>the item will be missing. It can be calculated using the size of
+     *     topFans list</b></li>
      * </ul>
      * For hosts, the criteria are:
      * <ul>
      *     <li>topEpisodes</li>
      *     <li>listeners:  <b>for this criteria, the list will contain only 1 tuple, with
-     *     irrelevant string value</b></li>
+     *     irrelevant string value. It will be set by default to {@code "listeners"}</b></li>
      * </ul>
      *
      */
     public Map<String, List<Map.Entry<String, Integer>>> getStatistics() {
-        HelperTool tool = HelperTool.getInstance();
-
         Map<String, List<Map.Entry<String, Integer>>> statistics  = new HashMap<>();
 
-        List<Map.Entry<String, Integer>> artists = tool.unrollHistoryData(artistHistory);
-        artists.sort(new SortByIntegerValue<>());
+        List<Map.Entry<String, Integer>> artists = StatisticsUtils.parseHistory(artistHistory,
+                new SortByIntegerValue<>());
         statistics.put(StatisticsConstants.TOP_ARTISTS, artists);
 
-        List<Map.Entry<String, Integer>> genres = new ArrayList<>(genreHistory.entrySet());
-        genres.sort(new SortByIntegerValue<>());
+        List<Map.Entry<String, Integer>> genres = StatisticsUtils.parseHistory(genreHistory,
+                new SortByIntegerValue<>());
         statistics.put(StatisticsConstants.TOP_GENRES, genres);
 
-        List<Map.Entry<String, Integer>> songs = tool.unrollHistoryData(songHistory);
-        songs.sort(new SortByIntegerValue<>());
+        List<Map.Entry<String, Integer>> songs = StatisticsUtils.parseHistory(songHistory,
+                new SortByIntegerValue<Song>().thenComparing((o1, o2) -> {
+                    String o1name = o1.getKey().getName();
+                    String o2name = o2.getKey().getName();
+                    return o1name.compareTo(o2name);
+                }));
         statistics.put(StatisticsConstants.TOP_SONGS, songs);
 
-        List<Map.Entry<String, Integer>> albums = tool.unrollHistoryData(albumHistory);
-        albums.sort(new SortByIntegerValue<>());
+        List<Map.Entry<String, Integer>> albums = StatisticsUtils.parseHistory(albumHistory,
+                new SortByIntegerValue<>());
         statistics.put(StatisticsConstants.TOP_ALBUMS, albums);
 
-        List<Map.Entry<String, Integer>> episodes = tool.unrollHistoryData(episodeHistory);
-        episodes.sort(new SortByIntegerValue<>());
+        List<Map.Entry<String, Integer>> episodes = StatisticsUtils.parseHistory(episodeHistory,
+                new SortByIntegerValue<>());
         statistics.put(StatisticsConstants.TOP_EPISODES, episodes);
 
         return statistics;
-    }
-
-    /**
-     * Tracks the data for a new playing entity / collection. If has no effect if
-     * the entity isn't an album.
-     * @param collection The collection to be tracked
-     */
-    public void trackEntity(final PlayableEntity collection) {
-        Album album = collection.getCurrentAlbum();
-        if (album == null) {
-            return;
-        }
-
-        trackAlbum(album);
-
     }
 
     /**
@@ -171,11 +155,18 @@ public class User implements NamedObject {
      */
     public void trackFile(final AudioFile file) {
         if (file.isSong()) {
+            // Track activity for user
             Song song = file.getCurrentSong();
             trackSong(song);
-            trackGenre(song.getGenre());
+            trackGenre(new Genre(song.getGenre()));
             trackArtist(song.getArtistLink());
             trackAlbum(song.getAlbumLink());
+
+            // Track activity for artist
+            User artist = song.getArtistLink();
+            artist.trackAlbum(song.getAlbumLink());
+            artist.trackSong(song);
+            artist.trackFan(this);
         } else {
             Episode episode = file.getCurrentEpisode();
             trackEpisode(episode);
@@ -217,7 +208,7 @@ public class User implements NamedObject {
      * Tracks the number of listens for specified genre
      * @param genre The genre to be tracked
      */
-    public void trackGenre(final String genre) {
+    public void trackGenre(final Genre genre) {
         if (!genreHistory.containsKey(genre)) {
             genreHistory.put(genre, 0);
         }
@@ -257,7 +248,7 @@ public class User implements NamedObject {
      * isn't an artist, it does nothing.
      * @param user The user to be tracked.
      */
-    public void trackUser(final User user) { }
+    public void trackFan(final User user) { }
 
     /**
      * Returns the page of the user.

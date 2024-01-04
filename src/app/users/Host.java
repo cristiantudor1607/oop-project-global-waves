@@ -27,12 +27,13 @@ public class Host extends User {
     }
 
     @Override
-    public void trackUser(final User user) {
-        if (!listeners.containsKey(user)) {
-            listeners.put(user, 0);
+    public void trackFan(final User user) {
+        if (!peopleHistory.containsKey(user)) {
+            peopleHistory.put(user, 0);
         }
 
-        listeners.computeIfPresent(user, (key, value) -> value++);
+        int listens = peopleHistory.get(user);
+        peopleHistory.put(user, ++listens);
     }
 
     /**

@@ -5,7 +5,8 @@ import app.pages.features.Event;
 import app.pages.features.Merch;
 import app.pages.ArtistPage;
 import app.pages.Page;
-import app.utilities.HelperTool;
+import app.player.entities.Song;
+import app.statistics.StatisticsUtils;
 import app.utilities.SortByIntegerValue;
 import app.utilities.constants.StatisticsConstants;
 import lombok.Getter;
@@ -64,31 +65,35 @@ public class Artist extends User {
      */
     @Override
     public Map<String, List<Map.Entry<String, Integer>>> getStatistics() {
-        HelperTool tool = HelperTool.getInstance();
         Map<String, List<Map.Entry<String, Integer>>> statistics  = new HashMap<>();
 
-        List<Map.Entry<String, Integer>> albums = tool.unrollHistoryData(albumHistory);
-        albums.sort(new SortByIntegerValue<>());
+        List<Map.Entry<String, Integer>> albums = StatisticsUtils.parseHistory(albumHistory,
+                new SortByIntegerValue<>());
         statistics.put(StatisticsConstants.TOP_ALBUMS, albums);
 
-        List<Map.Entry<String, Integer>> songs = tool.unrollHistoryData(songHistory);
-        songs.sort(new SortByIntegerValue<>());
+        List<Map.Entry<String, Integer>> songs = StatisticsUtils.parseHistory(songHistory,
+                new SortByIntegerValue<Song>().thenComparing((o1, o2) -> {
+                    String o1name = o1.getKey().getName();
+                    String o2name = o2.getKey().getName();
+                    return o1name.compareTo(o2name);
+                }));
         statistics.put(StatisticsConstants.TOP_SONGS, songs);
 
-        List<Map.Entry<String, Integer>> fans = tool.unrollHistoryData(listeners);
-        fans.sort(new SortByIntegerValue<>());
+        List<Map.Entry<String, Integer>> fans = StatisticsUtils.parseHistory(peopleHistory,
+                new SortByIntegerValue<>());
         statistics.put(StatisticsConstants.TOP_FANS, fans);
 
         return statistics;
     }
 
     @Override
-    public void trackUser(final User user) {
-        if (!listeners.containsKey(user)) {
-            listeners.put(user, 0);
+    public void trackFan(final User user) {
+        if (!peopleHistory.containsKey(user)) {
+            peopleHistory.put(user, 0);
         }
 
-        listeners.computeIfPresent(user, (key, value) -> value++);
+        int listens = peopleHistory.get(user);
+        peopleHistory.put(user, ++listens);
     }
 
     /**

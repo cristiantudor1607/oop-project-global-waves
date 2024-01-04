@@ -180,4 +180,15 @@ public final class HelperTool {
 
         return list;
     }
+
+    public <T extends NamedObject> List<Map.Entry<String, Integer>>
+    extractNames(final List<Map.Entry<T, Integer>> namedList) {
+        List<Map.Entry<String, Integer>> list = new ArrayList<>();
+        namedList.forEach(tIntegerEntry -> {
+            list.add(new AbstractMap.SimpleEntry<>(tIntegerEntry.getKey().getName(),
+                    tIntegerEntry.getValue()));
+        });
+
+        return list;
+    }
 }

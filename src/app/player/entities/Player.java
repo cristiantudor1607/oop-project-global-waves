@@ -415,7 +415,7 @@ public class Player {
         play();
 
         // LANDMARK
-        user.trackEntity(selectedSource);
+        //user.trackEntity(selectedSource);
         user.trackFile(playingFile);
     }
 
@@ -492,7 +492,7 @@ public class Player {
         }
 
         // If the time difference is a bigger "hole" in time
-        while (remainedTime < 0) {
+        while (remainedTime <= 0) {
             int nextIndex = getNextAudioFileIndex();
             if (nextIndex == -1) {
                 resetPlayer();
