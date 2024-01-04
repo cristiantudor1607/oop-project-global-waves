@@ -1,8 +1,10 @@
 package app.utilities;
 
+import app.player.entities.Album;
 import app.player.entities.Playlist;
 import app.player.entities.Song;
 import app.properties.NamedObject;
+import app.users.Artist;
 import app.users.User;
 
 import java.util.AbstractMap;
@@ -64,9 +66,25 @@ public final class HelperTool {
      * @param timestamp The creation time of the songs
      */
     public void setCreationTimestamp(final List<Song> songs, final int timestamp) {
-        for (Song s : songs) {
-            s.setCreationTime(timestamp);
-        }
+        songs.forEach(song -> song.setCreationTime(timestamp));
+    }
+
+    /**
+     * Sets the links to the artist for each song in list to {@code link}
+     * @param songs The songs whose link should be set
+     * @param link The link to the artist
+     */
+    public void setArtistLinks(final List<Song> songs, final User link) {
+        songs.forEach(song -> song.setUserLink(link));
+    }
+
+    /**
+     * Sets the link to the album for each song in the list to {@code link}
+     * @param songs The songs whose link should be set
+     * @param link The link to the album
+     */
+    public void setAlbumLinks(final List<Song> songs, final Album link) {
+        songs.forEach(song -> song.setAlbumLink(link));
     }
 
     /**

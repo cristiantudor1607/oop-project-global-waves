@@ -21,6 +21,12 @@ public class Artist extends User {
         selfPage = new ArtistPage(this);
     }
 
+    public Artist(final String username) {
+        super(username);
+        albums = new ArrayList<>();
+        selfPage = new ArtistPage(this);
+    }
+
     /**
      * Returns the page of the artist.
      * @return The page of the artist

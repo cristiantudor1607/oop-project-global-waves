@@ -20,6 +20,12 @@ public class Host extends User {
         selfPage = new HostPage(this);
     }
 
+    public Host(final String username) {
+        super(username);
+        podcasts = new ArrayList<>();
+        selfPage = new HostPage(this);
+    }
+
     /**
      * Returns the page of the host.
      * @return The page of the host

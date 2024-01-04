@@ -19,7 +19,7 @@ public class ArtistFilter implements Filter<Song> {
      */
     @Override
     public boolean matches(final Song matchingObject) {
-        String songArtist = matchingObject.getArtist();
+        String songArtist = matchingObject.getArtistName();
         return songArtist.equals(artist);
     }
 }

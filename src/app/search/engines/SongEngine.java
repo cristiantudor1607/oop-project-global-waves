@@ -74,10 +74,10 @@ public class SongEngine extends SearchEngine<Song> {
     public List<Song> collectResults() {
         List<Song> results = new ArrayList<>();
 
-        List<Song> preloadedSongs = Library.getInstance().getSongs();
+        List<Song> preloadedSongs = Library.getInstance().getAds();
         results.addAll(findInList(preloadedSongs));
 
-        Map<String, List<Song>> addedSongs = Library.getInstance().getAddedSongs();
+        Map<String, List<Song>> addedSongs = Library.getInstance().getSongs();
         for (List<Song> value: addedSongs.values()) {
             results.addAll(findInList(value));
         }

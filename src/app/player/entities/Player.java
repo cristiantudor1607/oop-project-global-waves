@@ -1,5 +1,6 @@
 package app.player.entities;
 
+import app.users.User;
 import app.utilities.HelperTool;
 import app.properties.PlayableEntity;
 import app.utilities.HistoryEntry;
@@ -24,6 +25,7 @@ public class Player {
     private final int seconds = 90;
     private final int statesNo = 3;
 
+    private final User user;
     private final Map<PlayableEntity, HistoryEntry> history;
     private List<Integer> playingOrder;
     private PlayableEntity selectedSource;
@@ -36,7 +38,8 @@ public class Player {
     private int remainedTime;
     private int currentIndex;
 
-    public Player() {
+    public Player(final User user) {
+        this.user = user;
         history = new HashMap<>();
         playingOrder = new ArrayList<>();
         state = PlayerStatus.UNUSED;
@@ -539,7 +542,7 @@ public class Player {
         // Check if there's a Song playing
         Song possiblyPlayingSong = file.getCurrentSong();
         if (possiblyPlayingSong != null) {
-            return possiblyPlayingSong.getAlbum().equals(album.getName());
+            return possiblyPlayingSong.getAlbumName().equals(album.getName());
         }
 
         return false;

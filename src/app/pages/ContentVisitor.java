@@ -157,7 +157,7 @@ public class ContentVisitor implements Visitor {
 
             songsFormat.append(songs.get(i).getName())
                     .append(" - ")
-                    .append(songs.get(i).getArtist());
+                    .append(songs.get(i).getArtistName());
         }
 
         StringBuilder playlistsFormat = new StringBuilder();

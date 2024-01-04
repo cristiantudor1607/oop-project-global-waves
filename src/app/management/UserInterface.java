@@ -28,7 +28,7 @@ public class UserInterface {
         homePage = new HomePage(user);
         likedContentPage = new LikedContentPage(user);
         currentPage = homePage;
-        player = new Player();
+        player = new Player(user);
     }
 
     /**

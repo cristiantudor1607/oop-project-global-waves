@@ -48,9 +48,9 @@ public class PodcastEngine extends SearchEngine<Podcast> {
     @Override
     public List<Podcast> collectResults() {
         Library database = Library.getInstance();
-        List<Podcast> matchedPodcasts = new ArrayList<>(database.getPodcasts());
+        List<Podcast> matchedPodcasts = new ArrayList<>(database.getInputPodcasts());
 
-        for (List<Podcast> podcasts: database.getAddedPodcasts().values()) {
+        for (List<Podcast> podcasts: database.getPodcasts().values()) {
             matchedPodcasts.addAll(podcasts);
         }
 

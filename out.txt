@@ -1,4 +1,8 @@
 [ {
+  "command" : "getAllUsers",
+  "timestamp" : 1,
+  "result" : [ "alice22", "bob35", "carol19", "david27", "emily30", "frank21", "grace25", "henry26", "irene33", "jack29", "Joe Rogan", "Sarah Koenig", "Jad Abumrad and Robert Krulwich", "Guy Raz", "TED", "Wendy Zukerman", "The New York Times", "PJ Vogt and Alex Goldman", "Shankar Vedantam", "Ashley Flowers and Brit Prawat", "Michelle Obama", "Trevor Noah", "Conan O'Brien", "Dr. Laurie Santos", "Ben Shapiro", "The New Yorker" ]
+}, {
   "command" : "addUser",
   "user" : "The Beatles",
   "timestamp" : 1,

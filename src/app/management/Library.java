@@ -4,6 +4,8 @@ import app.player.entities.Album;
 import app.player.entities.Playlist;
 import app.player.entities.Podcast;
 import app.player.entities.Song;
+import app.users.Host;
+import app.utilities.UnreachableSectionException;
 import fileio.input.LibraryInput;
 import fileio.input.PodcastInput;
 import fileio.input.SongInput;
@@ -22,16 +24,16 @@ public final class Library {
     private static Library instance = null;
 
     @Getter
-    private final List<Song> songs;
+    private final List<Song> ads;
 
     @Getter
-    private final Map<String, List<Song>> addedSongs;
+    private final Map<String, List<Song>> songs;
 
     @Getter
-    private final List<Podcast> podcasts;
+    private final List<Podcast> inputPodcasts;
 
     @Getter
-    private final Map<String, List<Podcast>> addedPodcasts;
+    private final Map<String, List<Podcast>> podcasts;
 
     @Getter
     private final List<User> users;
@@ -47,10 +49,10 @@ public final class Library {
 
 
     private Library() {
-        songs = new ArrayList<>();
-        addedSongs = new HashMap<>();
-        podcasts = new ArrayList<>();
-        addedPodcasts = new HashMap<>();
+        ads = new ArrayList<>();
+        songs = new HashMap<>();
+        inputPodcasts = new ArrayList<>();
+        podcasts = new HashMap<>();
         users = new ArrayList<>();
         artists = new ArrayList<>();
         hosts = new ArrayList<>();
@@ -75,6 +77,63 @@ public final class Library {
      */
     public static void deleteInstance() {
         instance = null;
+    }
+
+    /**
+     * Checks if the username is taken.
+     * @param username The username to be checked
+     * @return {@code true}, if the username is taken, {@code false} otherwise
+     */
+    public boolean usernameIsTaken(final String username) {
+        for (User user: users) {
+            if (username.equals(user.getUsername())) {
+                return true;
+            }
+        }
+
+        for (User artist: artists) {
+            if (username.equals(artist.getUsername())) {
+                return true;
+            }
+        }
+
+        for (User host: hosts) {
+            if (username.equals(host.getUsername())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Returns the artist with the given username.
+     * @param username The username of the artist
+     * @return The artist, if it exists, {@code null} otherwise
+     */
+    public User getArtistByUsername(final String username) {
+        for (User matchArtist: artists) {
+            if (matchArtist.getUsername().equals(username)) {
+                return matchArtist;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Returns the host with the given username.
+     * @param username The username of the host
+     * @return The host, if it exists, {@code null} otherwise
+     */
+    public User getHostByUsername(final String username) {
+        for (User matchHost: hosts) {
+            if (matchHost.getUsername().equals(username)) {
+                return matchHost;
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -154,8 +213,8 @@ public final class Library {
      * @param albumName The name of the album where the songs belong
      */
     public void removeSongsFromAlbum(final String artistName, final String albumName) {
-        addedSongs.get(artistName).removeIf(songFromArtist ->
-                songFromArtist.getAlbum().equals(albumName));
+        songs.get(artistName).removeIf(songFromArtist ->
+                songFromArtist.getAlbumName().equals(albumName));
     }
 
     /**
@@ -165,7 +224,7 @@ public final class Library {
      */
     public void removeSongsFromLiked(final String albumName) {
         users.forEach((user -> user.getLikes()
-                .removeIf(likedSong -> likedSong.getAlbum().equals(albumName))));
+                .removeIf(likedSong -> likedSong.getAlbumName().equals(albumName))));
     }
 
     /**
@@ -235,7 +294,7 @@ public final class Library {
         }
 
         if (oldUser.isHost()) {
-            addedPodcasts.remove(oldUser.getUsername());
+            podcasts.remove(oldUser.getUsername());
             hosts.remove(oldUser);
         }
     }
@@ -256,10 +315,9 @@ public final class Library {
      */
     public void loadSongs(final LibraryInput library) {
         ArrayList<SongInput> inputs = library.getSongs();
-        for (SongInput inputFormatSong: inputs) {
-            /* Convert SongInput to Song, and add it to the List */
-            Song mySongFormat = new Song(inputFormatSong);
-            songs.add(mySongFormat);
+        for (SongInput inputSong: inputs) {
+            Song mySongFormat = new Song(inputSong);
+            ads.add(mySongFormat);
         }
     }
 
@@ -267,11 +325,31 @@ public final class Library {
      * Converts all input podcasts to the new format and stores them in the library.
      * @param library The library that contains podcasts as PodcastInput class instances
      */
-    public void loadPodcasts(final LibraryInput library) {
+    public void loadPodcasts(final LibraryInput library) throws UnreachableSectionException {
         ArrayList<PodcastInput> inputs = library.getPodcasts();
         for (PodcastInput inputFormatPodcast: inputs) {
+            // Convert the podcast
             Podcast myPodcastFormat = new Podcast(inputFormatPodcast);
-            podcasts.add(myPodcastFormat);
+
+            // Create the host if it doesn't exist
+            String username = myPodcastFormat.getOwner();
+            if (getHostByUsername(username) == null) {
+                Host newHost = new Host(username);
+                hosts.add(newHost);
+            }
+
+            User host = getHostByUsername(username);
+            if (host == null) {
+                throw new UnreachableSectionException("Unreachable error!");
+            }
+
+            host.addPodcast(myPodcastFormat);
+            if (!podcasts.containsKey(username)) {
+                podcasts.put(username, new ArrayList<>());
+            }
+
+            podcasts.get(username).add(myPodcastFormat);
+            inputPodcasts.add(myPodcastFormat);
         }
     }
 
@@ -306,7 +384,11 @@ public final class Library {
     public void convertInputLibrary(final LibraryInput library) {
         loadUsers(library);
         loadSongs(library);
-        loadPodcasts(library);
+        try {
+            loadPodcasts(library);
+        } catch (UnreachableSectionException ignored) {
+
+        }
         initPlaylists();
     }
 

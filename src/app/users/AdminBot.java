@@ -45,33 +45,23 @@ public class AdminBot extends Admin {
     }
 
     /**
-     * Returns the artist with the given username.
+     * Returns the artist with the given username. Wrapper over the same method
+     * from {@code Library} class.
      * @param username The username of the artist
      * @return The artist, if it exists, {@code null} otherwise
      */
     public User getArtistByUsername(final String username) {
-        for (User matchArtist: database.getArtists()) {
-            if (matchArtist.getUsername().equals(username)) {
-                return matchArtist;
-            }
-        }
-
-        return null;
+        return database.getArtistByUsername(username);
     }
 
     /**
-     * Returns the host with the given username.
+     * Returns the host with the given username. Wrapper over the same method
+     * from {@code Library} class.
      * @param username The username of the host
      * @return The host, if it exists, {@code null} otherwise
      */
     public User getHostByUsername(final String username) {
-        for (User matchHost: database.getHosts()) {
-            if (matchHost.getUsername().equals(username)) {
-                return matchHost;
-            }
-        }
-
-        return null;
+        return database.getHostByUsername(username);
     }
 
     /**
@@ -109,9 +99,9 @@ public class AdminBot extends Admin {
      * @return A list of songs
      */
     public List<Song> getAllSongs() {
-        List<Song> songs = new ArrayList<>(database.getSongs());
+        List<Song> songs = new ArrayList<>(database.getAds());
 
-        for (List<Song> listOfSongs : database.getAddedSongs().values()) {
+        for (List<Song> listOfSongs : database.getSongs().values()) {
             songs.addAll(listOfSongs);
         }
 
@@ -120,30 +110,13 @@ public class AdminBot extends Admin {
 
 
     /**
-     * Checks if the username exists.
+     * Checks if the username exists. Wrapper over the {@code usernameIsTaken} method
+     * from {@code Library} class.
      * @param username The username to be checked
      * @return {@code true}, if the username is taken, {@code false} otherwise
      */
     public boolean checkUsername(final String username) {
-        for (User normalUser: database.getUsers()) {
-            if (normalUser.getUsername().equals(username)) {
-                return true;
-            }
-        }
-
-        for (User artist: database.getArtists()) {
-            if (artist.getUsername().equals(username)) {
-                return true;
-            }
-        }
-
-        for (User host: database.getHosts()) {
-            if (host.getUsername().equals(username)) {
-                return true;
-            }
-        }
-
-        return false;
+        return database.usernameIsTaken(username);
     }
 
     /**
@@ -359,7 +332,7 @@ public class AdminBot extends Admin {
      * @param songs The songs to be added
      */
     public void addSongsToLibrary(final String artist, final List<Song> songs) {
-        List<Song> artistSongs = database.getAddedSongs()
+        List<Song> artistSongs = database.getSongs()
                 .computeIfAbsent(artist, k -> new ArrayList<>());
 
         artistSongs.addAll(songs);
@@ -371,7 +344,7 @@ public class AdminBot extends Admin {
      * @param podcast The podcast to be added
      */
     public void addPodcastToLibrary(final String host, final Podcast podcast) {
-        List<Podcast> hostPodcasts = database.getAddedPodcasts()
+        List<Podcast> hostPodcasts = database.getPodcasts()
                 .computeIfAbsent(host, k -> new ArrayList<>());
 
         hostPodcasts.add(podcast);

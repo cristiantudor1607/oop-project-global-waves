@@ -902,6 +902,8 @@ public final class ActionManager {
                 releaseYear, creationTime, songs);
         // Add album to user albums
         artist.addAlbum(artistNewAlbum);
+        tool.setArtistLinks(songs, artist);
+        tool.setAlbumLinks(songs, artistNewAlbum);
 
         return AddAlbumExit.Status.SUCCESS;
     }

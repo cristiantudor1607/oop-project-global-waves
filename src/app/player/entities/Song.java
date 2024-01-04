@@ -1,5 +1,6 @@
 package app.player.entities;
 
+import app.users.Artist;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,12 +16,17 @@ import java.util.Objects;
 
 @Getter @Setter
 public class Song extends AudioFile implements PlayableEntity, Comparable<Song> {
-    private String album;
+    @JsonIgnore
+    private Album albumLink;
+
+    @JsonProperty("album")
+    private String albumName;
     private List<String> tags;
     private String lyrics;
     private String genre;
     private int releaseYear;
-    private String artist;
+    @JsonProperty("artist")
+    private String artistName;
     @JsonIgnore
     private int creationTime;
     @JsonIgnore
@@ -31,20 +37,20 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
     @JsonCreator
     public Song(@JsonProperty("name") final String name,
                 @JsonProperty("duration") final int duration,
-                @JsonProperty("album") final String album,
+                @JsonProperty("album") final String albumName,
                 @JsonProperty("tags") final List<String> tags,
                 @JsonProperty("lyrics") final String lyrics,
                 @JsonProperty("genre") final String genre,
                 @JsonProperty("releaseYear") final int releaseYear,
-                @JsonProperty("artist") final String artist) {
+                @JsonProperty("artist") final String artistName) {
         this.name = name;
         this.duration = duration;
-        this.album = album;
+        this.albumName = albumName;
         this.tags = tags;
         this.lyrics = lyrics;
         this.genre = genre;
         this.releaseYear = releaseYear;
-        this.artist = artist;
+        this.artistName = artistName;
         creationTime = 0;
         likesNumber = 0;
         playlistsInclusionCounter = 0;
@@ -53,7 +59,7 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
     public Song(final SongInput input) {
         name = input.getName();
         duration = input.getDuration();
-        album = input.getAlbum();
+        albumName = input.getAlbum();
 
         /* Make a deep copy of the tags ArrayList */
         tags = new ArrayList<>();
@@ -64,7 +70,7 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
         lyrics = input.getLyrics();
         genre = input.getGenre();
         releaseYear = input.getReleaseYear();
-        artist = input.getArtist();
+        artistName = input.getArtist();
         creationTime = 0;
         likesNumber = 0;
     }
@@ -146,7 +152,7 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
      */
     @Override
     public String getPublicIdentity() {
-        return artist;
+        return artistName;
     }
 
     /**
@@ -191,7 +197,7 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
      */
     @Override
     public boolean hasAudiofileFromUser(final String username) {
-        return artist.equals(username);
+        return artistName.equals(username);
     }
 
     /**
@@ -276,7 +282,7 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
             return false;
         }
         Song song = (Song) o;
-        return artist.equals(song.getArtist()) && name.equals(song.getName());
+        return artistName.equals(song.getArtistName()) && name.equals(song.getName());
     }
 
     /**
@@ -288,7 +294,7 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
      */
     @Override
     public int hashCode() {
-        return Objects.hash(getArtist(), getName());
+        return Objects.hash(getArtistName(), getName());
     }
 
 

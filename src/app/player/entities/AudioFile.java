@@ -1,11 +1,15 @@
 package app.player.entities;
 
 import app.properties.NamedObject;
+import app.users.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
 public abstract class AudioFile {
+    @JsonIgnore
+    protected User userLink;
     protected String name;
     protected int duration;
 

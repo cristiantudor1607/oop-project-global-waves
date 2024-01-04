@@ -9,12 +9,14 @@ import java.util.Objects;
 public class Album extends Playlist {
     private final String artist;
     private final String description;
+    private boolean noDescription;
     private final int releaseYear;
 
     public Album(final String artist, final String name, final String description,
                  final int releaseYear, final int creationTime) {
         super(artist, name, creationTime);
         this.description = description;
+        noDescription = false;
         this.artist = artist;
         this.releaseYear = releaseYear;
     }

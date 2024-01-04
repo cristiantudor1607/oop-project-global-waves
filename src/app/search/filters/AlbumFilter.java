@@ -19,7 +19,7 @@ public class AlbumFilter implements Filter<Song> {
      */
     @Override
     public boolean matches(final Song matchingObject) {
-        String songAlbum = matchingObject.getAlbum();
+        String songAlbum = matchingObject.getAlbumName();
 
         return songAlbum.equals(album);
     }

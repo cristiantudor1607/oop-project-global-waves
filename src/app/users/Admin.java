@@ -88,7 +88,7 @@ public class Admin extends User {
     public void removePodcast(@NonNull final Podcast oldPodcast) {
         String hostName = oldPodcast.getOwner();
 
-        database.getAddedPodcasts().get(hostName).remove(oldPodcast);
+        database.getPodcasts().get(hostName).remove(oldPodcast);
     }
 
     /**
