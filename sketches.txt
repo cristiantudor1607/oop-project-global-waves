@@ -52,3 +52,10 @@ New load: Marooned
 Playing at load: Marooned from album The Division Bell
 New load: Another Brick in the Wall Part 1
 Playing at load: Another Brick in the Wall Part 1 from album The Wall
+
+7523 -> cauta song "Carol"
+ordinea mea : [ "Carol", "Caroline No", "Carol", "Carol", "Carol (Single Version)" ]
+ordinea care trebuie : [ "Carol", "Carol", "Carol (Single Version)", "Caroline No", "Carol" ]
+il selecteaza pe primul, care s-ar putea sa nu fie acelasi carol
+
+-> SCHIMBA SORTAREA INVERSA DE LA INTEGER VALUE

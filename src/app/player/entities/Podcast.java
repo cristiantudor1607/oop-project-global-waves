@@ -63,11 +63,24 @@ public class Podcast implements PlayableEntity, OwnedEntity {
     }
 
     /**
-     * Returns the creation time of the entity. For podcasts, this feature isn't implemented yet.
-     * @return The creation time, if the entity stores it, or 0 otherwise
+     * Returns the identification number of the entity. It is usually an id
+     * associated to the entity at creation.
+     * @return An identification number bigger than {@code 0}, if the entity has
+     * one, {@code 0} otherwise
      */
     @Override
-    public int getCreationTime() {
+    public int getIdentificationNumber() {
+        return 0;
+    }
+
+    /**
+     * Returns the identification number of the user that added the entity, if the
+     * entity needs to be sorted by the time when user registered.
+     * @return An identification number bigger than {@code 0}, if the entities needs to be
+     * sorted by this criterion, {@code 0} otherwise. <b>For podcasts, it returns 0.</b>
+     */
+    @Override
+    public int getCreatorIdForSorting() {
         return 0;
     }
 

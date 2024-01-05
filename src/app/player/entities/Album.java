@@ -1,33 +1,76 @@
 package app.player.entities;
 
+import app.management.IDContainer;
+import app.users.User;
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Getter
 public class Album extends Playlist {
+    private final int id;
+    private final User artistLink;
     private final String artist;
     private final String description;
-    private boolean noDescription;
+    private final boolean noDescription;
     private final int releaseYear;
 
-    public Album(final String artist, final String name, final String description,
-                 final int releaseYear, final int creationTime) {
-        super(artist, name, creationTime);
-        this.description = description;
-        noDescription = false;
-        this.artist = artist;
-        this.releaseYear = releaseYear;
+    public static class Builder {
+        private final String name;
+        private final String artist;
+        private final int creationTime;
+        private List<Song> songs;
+        private User artistLink;
+        private String description;
+        private int releaseYear;
+
+        public Builder(final String name, final String artist, final int creationTime) {
+            this.name = name;
+            this.artist = artist;
+            this.creationTime = creationTime;
+        }
+
+        public Builder description(final String description) {
+            this.description = description;
+            return this;
+        }
+
+        public Builder songs(final List<Song> songs) {
+            this.songs = new ArrayList<>();
+            this.songs.addAll(songs);
+            return this;
+        }
+
+        public Builder releaseYear(final int releaseYear) {
+            this.releaseYear = releaseYear;
+            return this;
+        }
+
+        public Builder artistLink(final User artistLink) {
+            this.artistLink = artistLink;
+            return this;
+        }
+
+        public Album build() {
+            return new Album(this);
+        }
+
     }
 
-    public Album(final String artist, final String name, final String description,
-                 final int releaseYear, final int creationTime, final List<Song> songs) {
-        // Create the album without songs
-        this(artist, name, description, releaseYear, creationTime);
+    private Album(final Builder builder) {
+        super(builder.name, builder.artist, builder.creationTime);
 
-        // Add the songs
-        songs.forEach(s -> this.getSongs().add(s));
+        IDContainer idContainer = IDContainer.getInstance();
+        id = idContainer.useAlbumId();
+
+        artist = builder.artist;
+        description = builder.description;
+        noDescription = description == null;
+        releaseYear = builder.releaseYear;
+        artistLink = builder.artistLink;
+        setSongs(builder.songs);
     }
 
     /**
@@ -42,6 +85,28 @@ public class Album extends Playlist {
         }
 
         return false;
+    }
+
+    /**
+     * Returns the identification number of the entity. It is usually an id
+     * associated to the entity at creation.
+     * @return An identification number bigger than {@code 0}, if the entity has
+     * one, {@code 0} otherwise
+     */
+    @Override
+    public int getIdentificationNumber() {
+        return id;
+    }
+
+    /**
+     * Returns the identification number of the user that added the entity, if the
+     * entity needs to be sorted by the time when user registered.
+     * @return An identification number bigger than {@code 0}, if the entities needs to be
+     * sorted by this criterion, {@code 0} otherwise. <b>For podcasts, it returns 0.</b>
+     */
+    @Override
+    public int getCreatorIdForSorting() {
+        return artistLink.getId();
     }
 
     /**

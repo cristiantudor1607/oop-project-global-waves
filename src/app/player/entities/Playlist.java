@@ -1,6 +1,5 @@
 package app.player.entities;
 
-import app.properties.NamedObject;
 import app.properties.OwnedEntity;
 import app.properties.PlayableEntity;
 import app.users.User;
@@ -9,9 +8,9 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
-@Getter @Setter
+@Getter
+@Setter
 public class Playlist implements PlayableEntity, OwnedEntity {
     private final String name;
     private final String owner;
@@ -21,7 +20,7 @@ public class Playlist implements PlayableEntity, OwnedEntity {
     private List<User> followers;
 
 
-    public Playlist(final String owner, final String name, final int creationTime) {
+    public Playlist(final String name, final String owner, final int creationTime) {
         this.name = name;
         this.owner = owner;
         this.creationTime = creationTime;
@@ -155,6 +154,29 @@ public class Playlist implements PlayableEntity, OwnedEntity {
     @Override
     public int getSize() {
         return songs.size();
+    }
+
+    /**
+     * Returns the identification number of the entity. It is usually an id
+     * associated to the entity at creation.
+     * @return An identification number bigger than {@code 0}, if the entity has
+     * one, {@code 0} otherwise
+     */
+    @Override
+    public int getIdentificationNumber() {
+        // TODO: add id for playlist
+        return creationTime;
+    }
+
+    /**
+     * Returns the identification number of the user that added the entity, if the
+     * entity needs to be sorted by the time when user registered.
+     * @return An identification number bigger than {@code 0}, if the entities needs to be
+     * sorted by this criterion, {@code 0} otherwise. <b>For playlists, it returns 0.</b>
+     */
+    @Override
+    public int getCreatorIdForSorting() {
+        return 0;
     }
 
     /**

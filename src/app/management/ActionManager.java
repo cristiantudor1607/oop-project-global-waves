@@ -72,6 +72,7 @@ import app.utilities.constants.StringConstants;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import org.checkerframework.checker.units.qual.A;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -900,12 +901,17 @@ public final class ActionManager {
         // Add new songs to library
         adminBot.addSongsToLibrary(artistName, songs);
         // Create the album object
-        Album artistNewAlbum = new Album(artistName, albumName, description,
-                releaseYear, creationTime, songs);
+        Album album = new Album.Builder(albumName, artistName, creationTime)
+                .description(description)
+                .releaseYear(releaseYear)
+                .songs(songs)
+                .artistLink(artist)
+                .build();
+
         // Add album to user albums
-        artist.addAlbum(artistNewAlbum);
+        artist.addAlbum(album);
         tool.setArtistLinks(songs, artist);
-        tool.setAlbumLinks(songs, artistNewAlbum);
+        tool.setAlbumLinks(songs, album);
 
         return AddAlbumExit.Status.SUCCESS;
     }
@@ -1298,7 +1304,7 @@ public final class ActionManager {
     public List<String> requestTopFiveSongs() {
         List<Song> songs = adminBot.getAllSongs();
         songs.sort(new SortByNumberOfLikes().reversed()
-                .thenComparing(new SortByCreationTime()));
+                .thenComparing(new SortByUniqueId()));
         tool.truncateResults(songs);
 
         List<String> names = new ArrayList<>();

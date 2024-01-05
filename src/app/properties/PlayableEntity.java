@@ -20,10 +20,20 @@ public interface PlayableEntity extends NamedObject {
     int getDuration();
 
     /**
-     * Returns the creation time of the entity
-     * @return The creation time, if the entity stores it, or 0 otherwise
+     * Returns the identification number of the entity. It is usually an id
+     * associated to the entity at creation.
+     * @return An identification number bigger than {@code 0}, if the entity has
+     * one, {@code 0} otherwise
      */
-    int getCreationTime();
+    int getIdentificationNumber();
+
+    /**
+     * Returns the identification number of the user that added the entity, if the
+     * entity needs to be sorted by the time when user registered.
+     * @return An identification number bigger than {@code 0}, if the entities needs to be
+     * sorted by this criterion, {@code 0} otherwise
+     */
+    int getCreatorIdForSorting();
 
     /**
      * Returns the AudioFile at the specified index

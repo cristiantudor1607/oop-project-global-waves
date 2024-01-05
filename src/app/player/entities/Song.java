@@ -1,5 +1,6 @@
 package app.player.entities;
 
+import app.management.IDContainer;
 import app.users.User;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -20,6 +21,8 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
     private Album albumLink;
     @JsonIgnore
     private User artistLink;
+    @JsonIgnore
+    private int id;
 
     @JsonProperty("album")
     private String albumName;
@@ -56,6 +59,9 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
         creationTime = 0;
         likesNumber = 0;
         playlistsInclusionCounter = 0;
+
+        IDContainer idContainer = IDContainer.getInstance();
+        id = idContainer.useSongId();
     }
 
     public Song(final SongInput input) {
@@ -113,6 +119,28 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
     @Override
     public int getSize() {
         return 1;
+    }
+
+    /**
+     * Returns the identification number of the entity. It is usually an id
+     * associated to the entity at creation.
+     * @return An identification number bigger than {@code 0}, if the entity has
+     * one, {@code 0} otherwise
+     */
+    @Override
+    public int getIdentificationNumber() {
+        return id;
+    }
+
+    /**
+     * Returns the identification number of the user that added the entity, if the
+     * entity needs to be sorted by the time when user registered.
+     * @return An identification number bigger than {@code 0}, if the entities needs to be
+     * sorted by this criterion, {@code 0} otherwise. <b>For songs, it returns 0.</b>
+     */
+    @Override
+    public int getCreatorIdForSorting() {
+        return 0;
     }
 
     /**

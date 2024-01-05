@@ -1,5 +1,6 @@
 package main;
 
+import app.management.IDContainer;
 import checker.Checker;
 import checker.CheckerConstants;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -112,5 +113,6 @@ public final class Main {
 
         ActionManager.deleteInstance();
         Library.deleteInstance();
+        // TODO: delete instance of id container
     }
 }

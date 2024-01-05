@@ -1,5 +1,6 @@
 package app.users;
 
+import app.management.IDContainer;
 import app.player.entities.Album;
 import app.player.entities.AudioFile;
 import app.player.entities.Episode;
@@ -28,6 +29,7 @@ public class User implements NamedObject {
         OFFLINE,
     }
 
+    private int id;
     private String username;
     private int age;
     private boolean noAge;
@@ -64,6 +66,9 @@ public class User implements NamedObject {
         albumHistory = new HashMap<>();
         episodeHistory = new HashMap<>();
         peopleHistory = new HashMap<>();
+
+        IDContainer idContainer = IDContainer.getInstance();
+        id = idContainer.useUserId();
     }
 
     public User(final String username, final int age, final String city) {
@@ -82,6 +87,9 @@ public class User implements NamedObject {
         albumHistory = new HashMap<>();
         episodeHistory = new HashMap<>();
         peopleHistory = new HashMap<>();
+
+        IDContainer idContainer = IDContainer.getInstance();
+        id = idContainer.useUserId();
     }
 
     public User(final String username) {
@@ -158,7 +166,7 @@ public class User implements NamedObject {
             // Track activity for user
             Song song = file.getCurrentSong();
             trackSong(song);
-            trackGenre(new Genre(song.getGenre()));
+            trackGenre(new Genre(song.getGenre().toLowerCase()));
             trackArtist(song.getArtistLink());
             trackAlbum(song.getAlbumLink());
 

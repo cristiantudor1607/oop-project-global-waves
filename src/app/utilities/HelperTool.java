@@ -109,7 +109,7 @@ public final class HelperTool {
      */
     public void sortPlaylistsByFollowers(final List<Playlist> playlists) {
         playlists.sort(new SortByFollowers().reversed()
-                .thenComparing(new SortByCreationTime()));
+                .thenComparing(new SortByUniqueId()));
     }
 
     /**

@@ -198,7 +198,7 @@ public class AdminBot extends Admin {
      * @param time The time when playlist is created
      */
     public void createPlaylist(final String owner, final String playlistName, final int time) {
-        Playlist newOwnerPlaylist = new Playlist(owner, playlistName, time);
+        Playlist newOwnerPlaylist = new Playlist(playlistName, owner, time);
         database.addPlaylist(owner, newOwnerPlaylist);
     }
 

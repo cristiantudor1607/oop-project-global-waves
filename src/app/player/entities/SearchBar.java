@@ -11,7 +11,8 @@ import app.search.engines.PlaylistEngine;
 import app.search.engines.PodcastEngine;
 import app.search.engines.SearchEngine;
 import app.search.engines.SongEngine;
-import app.utilities.SortByCreationTime;
+import app.utilities.SortByCreatorId;
+import app.utilities.SortByUniqueId;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
@@ -91,7 +92,7 @@ public class SearchBar {
         if (engine != null) {
             typeOfSearch = SearchResult.PLAYABLE_ENTITY;
             results = engine.collectResults();
-            results.sort(new SortByCreationTime());
+            results.sort(new SortByCreatorId().thenComparing(new SortByUniqueId()));
         }
 
         if (pager != null) {

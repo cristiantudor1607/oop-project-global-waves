@@ -30,7 +30,7 @@ public final class Test {
 
 //            Scanner scanner = new Scanner(System.in);
 //            String fileName = scanner.next();
-            String fileName = "test00_etapa3_wrapped_one_user_one_artist.json";
+            String fileName = "test01_etapa3_wrapped_one_user_n_artist.json";
             for (File file : inputDir) {
                 if (file.getName().equalsIgnoreCase(fileName)) {
                     Main.action(fileName, CheckerConstants.OUT_FILE);
