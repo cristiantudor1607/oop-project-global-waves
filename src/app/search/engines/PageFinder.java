@@ -7,6 +7,7 @@ import app.search.filters.Filter;
 import app.search.filters.HostPageFilter;
 import app.management.Library;
 import app.pages.Page;
+import app.search.filters.UnknownFilter;
 import lombok.NonNull;
 
 import java.util.List;
@@ -64,7 +65,7 @@ public class PageFinder extends SearchEngine<Page> {
             return new HostPageFilter(values.get(0));
         }
 
-        return null;
+        return new UnknownFilter<>();
     }
 
     /**

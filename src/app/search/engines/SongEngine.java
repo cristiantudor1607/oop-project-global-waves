@@ -56,7 +56,7 @@ public class SongEngine extends SearchEngine<Song> {
         return switch (FilterType.parseString(key)) {
             case NAME -> new NameFilter<>(values.get(0));
             case ALBUM -> new AlbumFilter(values.get(0));
-            case ARTIST -> new ArtistFilter(values.get(0));
+            case ARTIST, OWNER -> new ArtistFilter(values.get(0));
             case LYRICS -> new LyricsFilter(values.get(0));
             case TAGS -> new TagsFilter(values);
             case GENRE -> new GenreFilter(values.get(0));
