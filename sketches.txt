@@ -99,3 +99,54 @@ New play for (Nice Dream) by jack29
 
 ALICE -> 12
 JACK -> 12
+
+
+Created user The Beatles with id 27
+Created user Michael Jackson with id 28
+Created user Nothing But Thieves with id 29
+Created user Bob Dylan with id 30
+Created user Madonna with id 31
+Created user Queen with id 32
+Created user The Rolling Stones with id 33
+Created user David Bowie with id 34
+Created user Prince with id 35
+Created user Whitney Houston with id 36
+Created user Elton John with id 37
+Created user Led Zeppelin with id 38
+Created user Stevie Wonder with id 39
+Created user BeyoncÃ© with id 40
+Created user Pink Floyd with id 41
+Created user U2 with id 42
+Created user The Beach Boys with id 43
+Created user Frank Sinatra with id 44
+Created user Johnny Cash with id 45
+Created user Adele with id 46
+Created user Bruce Springsteen with id 47
+Created user Jimi Hendrix with id 48
+Created user Nirvana with id 49
+Created user Dire Straits with id 50
+Created user Imagine Dragons with id 51
+Created user Eminem with id 52
+Created user ABBA with id 53
+Created user Ray Charles with id 54
+Created user The Eagles with id 55
+Created user Bob Marley with id 56
+Created user Taylor Swift with id 57
+Created user Aretha Franklin with id 58
+Created user The Who with id 59
+Created user Rihanna with id 60
+Created user Marvin Gaye with id 61
+Created user Fleetwood Mac with id 62
+Created user James Brown with id 63
+Created user Radiohead with id 64
+Created user The Doors with id 65
+Created user Jay-Z with id 66
+Created user Eric Clapton with id 67
+Created user Joni Mitchell with id 68
+Created user Chuck Berry with id 69
+Created user The Police with id 70
+
+192990
+
+
+Created user Bob Marley with id 56

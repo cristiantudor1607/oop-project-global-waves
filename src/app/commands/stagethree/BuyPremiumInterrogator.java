@@ -1,26 +1,20 @@
 package app.commands.stagethree;
 
-import app.outputs.stagethree.WrappedOutput;
+import app.exitstats.stagethree.ChangeSubscriptionExit;
+import app.outputs.stagethree.BuyPremiumOutput;
 import app.parser.commands.templates.CommandObject;
-import app.statistics.StatisticsTemplate;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.Getter;
 
-import java.util.List;
-import java.util.Map;
-
 @Getter
-public class WrappedInterrogator extends CommandObject {
-    @JsonIgnore
-    private StatisticsTemplate statistics;
-
+public class BuyPremiumInterrogator extends CommandObject {
+    private ChangeSubscriptionExit.Status exitStatus;
     /**
-     * Executes the wrapped command.
+     * Executes the buyPremium command.
      */
     @Override
     public void execute() {
-        statistics = manager.requestWrap(username);
+        exitStatus = manager.requestBuyPremium(username);
         manager.setLastActionTime(timestamp);
     }
 
@@ -32,6 +26,6 @@ public class WrappedInterrogator extends CommandObject {
      */
     @Override
     public JsonNode formatOutput() {
-        return (new WrappedOutput(this)).generateOutputNode();
+        return (new BuyPremiumOutput(this)).generateOutputNode();
     }
 }

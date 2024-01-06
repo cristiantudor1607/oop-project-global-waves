@@ -416,7 +416,7 @@ public class Player {
 
         // LANDMARK
         user.trackFile(playingFile);
-        System.out.println("New play for " + playingFile.getName() + " by " + user.getName());
+        //System.out.println("New play for " + playingFile.getName() + " by " + user.getName());
     }
 
     /**
@@ -488,7 +488,7 @@ public class Player {
 
             // LANDMARK
             user.trackFile(playingFile);
-            System.out.println("New play for " + playingFile.getName() + " by " + user.getName());
+            //System.out.println("New play for " + playingFile.getName() + " by " + user.getName());
             return;
         }
 
@@ -506,7 +506,7 @@ public class Player {
 
             // LANDMARK
             user.trackFile(playingFile);
-            System.out.println("New play for " + playingFile.getName() + " by " + user.getName());
+            //System.out.println("New play for " + playingFile.getName() + " by " + user.getName());
         }
 
     }

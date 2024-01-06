@@ -14,6 +14,7 @@ public final class Test {
     private static final String test0 = "test00_etapa3_wrapped_one_user_one_artist.json";
     private static final String test1 = "test01_etapa3_wrapped_one_user_n_artist.json";
     private static final String test2 = "test02_etapa3_wrapped_n_user_one_artist.json";
+    private static final String test3 = "test03_etapa3_wrapped_n_user_n_artist.json";
 
     /**
      * for coding style
@@ -34,7 +35,7 @@ public final class Test {
 
 //            Scanner scanner = new Scanner(System.in);
 //            String fileName = scanner.next();
-            String fileName = test1;
+            String fileName = test2;
             for (File file : inputDir) {
                 if (file.getName().equalsIgnoreCase(fileName)) {
                     Main.action(fileName, CheckerConstants.OUT_FILE);

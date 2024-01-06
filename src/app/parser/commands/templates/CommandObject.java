@@ -20,6 +20,7 @@ import app.commands.stageone.StatusInterrogator;
 import app.commands.stageone.TopFivePlaylistsInterrogator;
 import app.commands.stageone.TopFiveSongsInterrogator;
 import app.commands.stageone.VisibilityInterrogator;
+import app.commands.stagethree.BuyPremiumInterrogator;
 import app.commands.stagethree.WrappedInterrogator;
 import app.commands.stagetwo.AddAlbumInterrogator;
 import app.commands.stagetwo.AddAnnouncementInterrogator;
@@ -103,7 +104,7 @@ import java.util.Map;
         @JsonSubTypes.Type(value = WrappedInterrogator.class, name = "wrapped"),
         @JsonSubTypes.Type(value = EmptyCommand.class, name = "buyMerch"),
         @JsonSubTypes.Type(value = EmptyCommand.class, name = "seeMerch"),
-        @JsonSubTypes.Type(value = EmptyCommand.class, name = "buyPremium"),
+        @JsonSubTypes.Type(value = BuyPremiumInterrogator.class, name = "buyPremium"),
         @JsonSubTypes.Type(value = EmptyCommand.class, name = "cancelPremium"),
         @JsonSubTypes.Type(value = EmptyCommand.class, name = "adBreak"),
         @JsonSubTypes.Type(value = EmptyCommand.class, name = "subscribe"),

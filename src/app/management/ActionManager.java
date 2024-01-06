@@ -38,6 +38,7 @@ import app.exitstats.stageone.PlayPauseExit;
 import app.exitstats.stageone.SelectExit;
 import app.exitstats.stageone.ShuffleExit;
 import app.exitstats.stageone.SwitchVisibilityExit;
+import app.exitstats.stagethree.ChangeSubscriptionExit;
 import app.exitstats.stagetwo.AddAlbumExit;
 import app.exitstats.stagetwo.AddAnnouncementExit;
 import app.exitstats.stagetwo.AddEventExit;
@@ -815,6 +816,7 @@ public final class ActionManager {
             userInterfaces.put(username, new UserInterface(newUser));
         }
 
+        System.out.println("Created user " + username + " with id " + newUser.getId());
         return AddUserExit.Status.SUCCESS;
     }
 
@@ -1410,6 +1412,27 @@ public final class ActionManager {
         User user = adminBot.getUserByUsername(username);
         return user == null ? null : StatisticsFactorySingleton
                 .getInstance().createStatistics(user);
+    }
+
+    /**
+     * Changes the user subscription to premium, if possible.
+     * @param username The username of the user
+     * @return {@code SUCCESS}, if the subscription was changed successfully to
+     * premium, {@code DOESNT_EXIST}, if the user with the given username doesn't exist
+     * in the database, or {@code ALREADY_SUBS}, if the user is already a premium user
+     */
+    public ChangeSubscriptionExit.Status requestBuyPremium(final String username) {
+        User profile = getProfileByUsername(username);
+        if (profile == null) {
+            return ChangeSubscriptionExit.Status.DOESNT_EXIST;
+        }
+
+        if (profile.isPremium()) {
+            return ChangeSubscriptionExit.Status.ALREADY_SUBS;
+        }
+
+        profile.makePremium();
+        return ChangeSubscriptionExit.Status.SUCCESS;
     }
 
     /**

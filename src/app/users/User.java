@@ -12,6 +12,7 @@ import app.properties.UniqueIdPossessor;
 import app.statistics.Genre;
 import app.statistics.StatisticsUtils;
 import app.utilities.SortByIntegerValue;
+import app.utilities.SortByKeyName;
 import app.utilities.constants.StatisticsConstants;
 import fileio.input.UserInput;
 import app.pages.features.Announcement;
@@ -30,24 +31,36 @@ public class User implements NamePossessor, UniqueIdPossessor {
         OFFLINE,
     }
 
+    // TODO: Add a special subscription type for admins
+    public enum SubscriptionType {
+        FREE,
+        PREMIUM,
+        PROVIDER
+    }
+
+    // Essential info
     private int id;
     private String username;
     private int age;
-    private boolean noAge;
     private String city;
-    private boolean noCity;
     private ConnectionStatus status;
+    @Setter
+    private SubscriptionType subscription;
     private List<Song> likes;
     @Setter
     private List<Playlist> following;
 
-    // Statistics maps
+    // Statistics info
     private Map<User, Integer> artistHistory;
     protected Map<Song, Integer> songHistory;
     private Map<Genre, Integer> genreHistory;
     protected Map<Album, Integer> albumHistory;
     protected Map<Episode, Integer> episodeHistory;
     protected Map<User, Integer> peopleHistory;
+
+    // Extra info, in case age or city weren't set, and they are used
+    private boolean noAge;
+    private boolean noCity;
 
     public User() { }
 
@@ -58,6 +71,7 @@ public class User implements NamePossessor, UniqueIdPossessor {
         city = input.getCity();
         noCity = false;
         status = ConnectionStatus.ONLINE;
+        subscription = SubscriptionType.FREE;
         likes = new ArrayList<>();
         following = new ArrayList<>();
 
@@ -79,6 +93,7 @@ public class User implements NamePossessor, UniqueIdPossessor {
         this.city = city;
         noCity = false;
         status = ConnectionStatus.ONLINE;
+        subscription = SubscriptionType.FREE;
         likes = new ArrayList<>();
         following = new ArrayList<>();
 
@@ -132,7 +147,8 @@ public class User implements NamePossessor, UniqueIdPossessor {
         Map<String, List<Map.Entry<String, Integer>>> statistics  = new HashMap<>();
 
         List<Map.Entry<String, Integer>> artists = StatisticsUtils.parseHistory(artistHistory,
-                new SortByIntegerValue<>());
+                new SortByIntegerValue<User>()
+                        .thenComparing(new SortByKeyName<>()));
         statistics.put(StatisticsConstants.TOP_ARTISTS, artists);
 
         List<Map.Entry<String, Integer>> genres = StatisticsUtils.parseHistory(genreHistory,
@@ -364,6 +380,30 @@ public class User implements NamePossessor, UniqueIdPossessor {
         } else {
             bringOnline();
         }
+    }
+
+    /**
+     * Checks if the user is a premium user.
+     * @return {@code true}, if the user have a premium account, {@code false} otherwise
+     */
+    public boolean isPremium() {
+        return subscription == SubscriptionType.PREMIUM;
+    }
+
+    // TODO: Overwrite method for artist and host
+    /**
+     * Makes the user a premium user.
+     */
+    public void makePremium() {
+        subscription = SubscriptionType.PREMIUM;
+    }
+
+    // TODO: Overwrite method for artist and host
+    /**
+     * Makes the user a free user.
+     */
+    public void cancelPremium() {
+        subscription = SubscriptionType.FREE;
     }
 
     /**

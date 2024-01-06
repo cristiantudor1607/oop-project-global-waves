@@ -21,12 +21,14 @@ public class Artist extends User {
 
     public Artist(final String username, final int age, final String city) {
         super(username, age, city);
+        setSubscription(SubscriptionType.PROVIDER);
         albums = new ArrayList<>();
         selfPage = new ArtistPage(this);
     }
 
     public Artist(final String username) {
         super(username);
+        setSubscription(SubscriptionType.PROVIDER);
         albums = new ArrayList<>();
         selfPage = new ArtistPage(this);
     }

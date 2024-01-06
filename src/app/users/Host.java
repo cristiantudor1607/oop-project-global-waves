@@ -16,12 +16,14 @@ public class Host extends User {
 
     public Host(final String username, final int age, final String city) {
         super(username, age, city);
+        setSubscription(SubscriptionType.PROVIDER);
         podcasts = new ArrayList<>();
         selfPage = new HostPage(this);
     }
 
     public Host(final String username) {
         super(username);
+        setSubscription(SubscriptionType.PROVIDER);
         podcasts = new ArrayList<>();
         selfPage = new HostPage(this);
     }
