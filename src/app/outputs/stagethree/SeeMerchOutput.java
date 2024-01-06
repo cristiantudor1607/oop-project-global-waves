@@ -1,24 +1,26 @@
 package app.outputs.stagethree;
 
-import app.commands.stagethree.WrappedInterrogator;
+import app.commands.stagethree.SeeMerchInterrogator;
 import app.parser.commands.templates.CommandOutputFormatter;
-import app.statistics.StatisticsTemplate;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.Getter;
 
-@Getter
-public class WrappedOutput extends CommandOutputFormatter {
-    @JsonIgnore
-    private final StatisticsTemplate result;
+import java.util.List;
 
-    public WrappedOutput(final WrappedInterrogator executedQuery) {
-        command = "wrapped";
+@Getter
+public class SeeMerchOutput extends CommandOutputFormatter {
+    @JsonIgnore
+    private final List<String> result;
+
+    public SeeMerchOutput(final SeeMerchInterrogator executedQuery) {
+        command = "seeMerch";
         user = executedQuery.getUsername();
         timestamp = executedQuery.getTimestamp();
-        result = executedQuery.getStatistics();
+        result = executedQuery.getItems();
     }
 
     /**
@@ -34,12 +36,11 @@ public class WrappedOutput extends CommandOutputFormatter {
         mainNode.put("user", user);
         mainNode.put("timestamp", timestamp);
 
-        String message = result.getSpecificMessage();
-        if (message == null) {
-            JsonNode resultNode = result.generateStatisticsNode();
+        if (result != null) {
+            ArrayNode resultNode = mapper.valueToTree(result);
             mainNode.set("result", resultNode);
         } else {
-            mainNode.put("message", message);
+            mainNode.put("message", "The username " + user + " doesn't exist.");
         }
 
         return mainNode;

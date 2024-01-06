@@ -9,6 +9,7 @@ import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Getter
 public class ArtistPage extends Page {
@@ -58,5 +59,25 @@ public class ArtistPage extends Page {
     @Override
     public String getUsername() {
         return getArtistName();
+    }
+
+    /**
+     * Returns an {@code Optional} containing the artist.
+     * @return An {@code Optional} containing the artist
+     */
+    public Optional<User> getArtist() {
+        return Optional.of(artist);
+    }
+
+    /**
+     * Returns the merch with the given name, if it exists.
+     * @param name The name of the merch
+     * @return An {@code Optional} describing the merch, if it exists, or an empty
+     * {@code Optional} otherwise
+     */
+    @Override
+    public Optional<Merch> getMerchByName(final String name) {
+        return merchandising.stream()
+                .filter(merch -> merch.name().equals(name)).findFirst();
     }
 }

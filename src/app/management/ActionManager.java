@@ -15,6 +15,7 @@ import app.commands.stageone.SearchInterrogator;
 import app.commands.stageone.SelectInterrogator;
 import app.commands.stageone.ShuffleInterrogator;
 import app.commands.stageone.VisibilityInterrogator;
+import app.commands.stagethree.BuyMerchInterrogator;
 import app.commands.stagetwo.AddAlbumInterrogator;
 import app.commands.stagetwo.AddAnnouncementInterrogator;
 import app.commands.stagetwo.AddEventInterrogator;
@@ -38,6 +39,7 @@ import app.exitstats.stageone.PlayPauseExit;
 import app.exitstats.stageone.SelectExit;
 import app.exitstats.stageone.ShuffleExit;
 import app.exitstats.stageone.SwitchVisibilityExit;
+import app.exitstats.stagethree.BuyMerchExit;
 import app.exitstats.stagethree.ChangeSubscriptionExit;
 import app.exitstats.stagetwo.AddAlbumExit;
 import app.exitstats.stagetwo.AddAnnouncementExit;
@@ -75,10 +77,8 @@ import lombok.NonNull;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 @Getter @Setter
@@ -1237,6 +1237,81 @@ public final class ActionManager {
     }
 
     /**
+     * Changes the user subscription to premium, if possible.
+     * @param username The username of the user
+     * @return {@code SUCCESS}, if the subscription was changed successfully to
+     * premium, {@code DOESNT_EXIST}, if the user with the given username doesn't exist
+     * in the database, or {@code ALREADY_SUBS}, if the user is already a premium user
+     */
+    public ChangeSubscriptionExit.Status requestBuyPremium(final String username) {
+        User profile = getProfileByUsername(username);
+        if (profile == null) {
+            return ChangeSubscriptionExit.Status.DOESNT_EXIST;
+        }
+
+        if (profile.isPremium()) {
+            return ChangeSubscriptionExit.Status.ALREADY_SUBS;
+        }
+
+        profile.makePremium();
+        return ChangeSubscriptionExit.Status.SUCCESS;
+    }
+
+    /**
+     * Changes the user subscription to free, if possible.
+     * @param username The username of the user
+     * @return {@code SUCCESS}, if the subscription was changed successfully to free,
+     * {@code DOESNT_EXIST}, if the user with the given username doesn't exist in database,
+     * or {@code ALREADY_SUBS}, if the user is already a free user
+     */
+    public ChangeSubscriptionExit.Status requestCancelPremium(final String username) {
+        User profile = getProfileByUsername(username);
+        if (profile == null) {
+            return ChangeSubscriptionExit.Status.DOESNT_EXIST;
+        }
+
+        if (!profile.isPremium()) {
+            return ChangeSubscriptionExit.Status.ALREADY_SUBS;
+        }
+
+        profile.cancelPremium();
+        return ChangeSubscriptionExit.Status.SUCCESS;
+    }
+
+    public BuyMerchExit.Status requestBuyMerch(final BuyMerchInterrogator execQuery) {
+        String username = execQuery.getUsername();
+        String merchName = execQuery.getName();
+
+        User profile = getProfileByUsername(username);
+        if (profile == null) {
+            return BuyMerchExit.Status.USER_DOESNT_EXIST;
+        }
+
+        Optional<User> artistOptional = userInterfaces.get(username)
+                .getCurrentPage()
+                .getArtist();
+
+        if (artistOptional.isEmpty()) {
+            return BuyMerchExit.Status.NOT_ON_ARTIST_PAGE;
+        }
+
+        User artist = artistOptional.get();
+
+        Page currentPage = getPageByUsername(username);
+        Optional<Merch> merchOptional  = Objects.requireNonNull(currentPage)
+                .getMerchByName(merchName);
+        if (merchOptional.isEmpty()) {
+            return BuyMerchExit.Status.MERCH_DOESNT_EXIST;
+        }
+
+        Merch boughtMerch = merchOptional.get();
+        artist.addMerchRevenue(boughtMerch.price());
+        profile.buyMerch(boughtMerch);
+
+        return BuyMerchExit.Status.SUCCESS;
+    }
+
+    /**
      * Changes the user currentPage to specified page.
      * @param execQuery The changePage Command that sent the request. It packages the
      *                  <b>username</b> and the <b>nextPage name</b>, used by manager
@@ -1419,45 +1494,21 @@ public final class ActionManager {
     }
 
     /**
-     * Changes the user subscription to premium, if possible.
-     * @param username The username of the user
-     * @return {@code SUCCESS}, if the subscription was changed successfully to
-     * premium, {@code DOESNT_EXIST}, if the user with the given username doesn't exist
-     * in the database, or {@code ALREADY_SUBS}, if the user is already a premium user
+     * Returns a list contains the names of all merchandise items bought by user.
+     * @param username The username
+     * @return A list with the merch names
      */
-    public ChangeSubscriptionExit.Status requestBuyPremium(final String username) {
+    public List<String> requestMerchandisingItems(final String username) {
         User profile = getProfileByUsername(username);
         if (profile == null) {
-            return ChangeSubscriptionExit.Status.DOESNT_EXIST;
+            return null;
         }
 
-        if (profile.isPremium()) {
-            return ChangeSubscriptionExit.Status.ALREADY_SUBS;
-        }
+        List<Merch> items = profile.getBoughtItems();
 
-        profile.makePremium();
-        return ChangeSubscriptionExit.Status.SUCCESS;
-    }
-
-    /**
-     * Changes the user subscription to free, if possible.
-     * @param username The username of the user
-     * @return {@code SUCCESS}, if the subscription was changed successfully to free,
-     * {@code DOESNT_EXIST}, if the user with the given username doesn't exist in database,
-     * or {@code ALREADY_SUBS}, if the user is already a free user
-     */
-    public ChangeSubscriptionExit.Status requestCancelPremium(final String username) {
-        User profile = getProfileByUsername(username);
-        if (profile == null) {
-            return ChangeSubscriptionExit.Status.DOESNT_EXIST;
-        }
-
-        if (!profile.isPremium()) {
-            return ChangeSubscriptionExit.Status.ALREADY_SUBS;
-        }
-
-        profile.cancelPremium();
-        return ChangeSubscriptionExit.Status.SUCCESS;
+        return items.stream()
+                .map(Merch::name)
+                .toList();
     }
 
     /**

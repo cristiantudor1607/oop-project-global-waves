@@ -34,6 +34,14 @@ public class Artist extends User {
     }
 
     /**
+     * Adds a new amount to the merchRevenue of the artist.
+     * @param amount The amount paid
+     */
+    public void addMerchRevenue(final int amount) {
+        merchRevenue += amount;
+    }
+
+    /**
      * Returns the user statistics.
      * @return A map which stores the criteria as the key, and a list of tuples of object name
      * and listen count as value, if there isn't specified otherwise. <br>

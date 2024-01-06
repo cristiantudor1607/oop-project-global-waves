@@ -32,6 +32,15 @@ public class UserInterface {
     }
 
     /**
+     * Checks if the user is currently on an artist page.
+     * @return {@code true}, if the user is on an artist page, {@code false} otherwise
+     */
+    public boolean isOnArtistPage() {
+        String username = currentPage.getArtistName();
+        return username != null;
+    }
+
+    /**
      * Sets the currentPage to Home
      */
     public void goToHomePage() {

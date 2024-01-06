@@ -49,6 +49,10 @@ public class User implements NamePossessor, UniqueIdPossessor {
     private List<Song> likes;
     @Setter
     private List<Playlist> following;
+    private List<Merch> boughtItems;
+
+    // Monetization info for artists
+    protected int merchRevenue;
 
     // Statistics info
     private Map<User, Integer> artistHistory;
@@ -65,6 +69,9 @@ public class User implements NamePossessor, UniqueIdPossessor {
     public User() { }
 
     public User(final UserInput input) {
+        IDContainer idContainer = IDContainer.getInstance();
+        id = idContainer.useUserId();
+
         username = input.getUsername();
         age = input.getAge();
         noAge = false;
@@ -75,18 +82,21 @@ public class User implements NamePossessor, UniqueIdPossessor {
         likes = new ArrayList<>();
         following = new ArrayList<>();
 
+        merchRevenue = 0;
+        boughtItems = new LinkedList<>();
+
         artistHistory = new HashMap<>();
         songHistory = new HashMap<>();
         genreHistory = new HashMap<>();
         albumHistory = new HashMap<>();
         episodeHistory = new HashMap<>();
         peopleHistory = new HashMap<>();
-
-        IDContainer idContainer = IDContainer.getInstance();
-        id = idContainer.useUserId();
     }
 
     public User(final String username, final int age, final String city) {
+        IDContainer idContainer = IDContainer.getInstance();
+        id = idContainer.useUserId();
+
         this.username = username;
         this.age = age;
         noAge = false;
@@ -97,21 +107,36 @@ public class User implements NamePossessor, UniqueIdPossessor {
         likes = new ArrayList<>();
         following = new ArrayList<>();
 
+        merchRevenue = 0;
+        boughtItems = new LinkedList<>();
+
         artistHistory = new HashMap<>();
         songHistory = new HashMap<>();
         genreHistory = new HashMap<>();
         albumHistory = new HashMap<>();
         episodeHistory = new HashMap<>();
         peopleHistory = new HashMap<>();
-
-        IDContainer idContainer = IDContainer.getInstance();
-        id = idContainer.useUserId();
     }
 
     public User(final String username) {
         this(username, 0, null);
         noAge = true;
         noCity = true;
+    }
+
+    /**
+     * Adds a new amount to the merchRevenue of the artist. For normal users and hosts,
+     * it has no effect.
+     * @param amount The amount paid
+     */
+    public void addMerchRevenue(final int amount) { }
+
+    /**
+     * Adds a new merch to the {@code boughtItems} list.
+     * @param merch The merch to be added
+     */
+    public void buyMerch(final Merch merch) {
+        boughtItems.add(merch);
     }
 
     /**
