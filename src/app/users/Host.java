@@ -4,10 +4,12 @@ import app.pages.features.Announcement;
 import app.player.entities.Podcast;
 import app.pages.HostPage;
 import app.pages.Page;
+import app.statistics.StatisticsUtils;
+import app.utilities.SortByIntegerValue;
+import app.utilities.constants.StatisticsConstants;
 import lombok.Getter;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Getter
 public class Host extends User {
@@ -26,6 +28,51 @@ public class Host extends User {
         setSubscription(SubscriptionType.PROVIDER);
         podcasts = new ArrayList<>();
         selfPage = new HostPage(this);
+    }
+
+    /**
+     * Returns the user statistics.
+     * @return A map which stores the criteria as the key, and a list of tuples of object name
+     * and listen count as value, if there isn't specified otherwise. <br>
+     * For users, the criteria are:
+     * <ul>
+     *     <li>topArtist</li>
+     *     <li>topGenres</li>
+     *     <li>topSongs</li>
+     *     <li>topAlbums</li>
+     *     <li>topEpisodes</li>
+     * </ul>
+     * For artists, the criteria are:
+     * <ul>
+     *     <li>topAlbum</li>
+     *     <li>topSongs</li>
+     *     <li>topFans: <b>for this criterion, the list will contains tuples with irrelevant
+     *     Integer values</b></li>
+     *     <li>listeners: <b>for this criterion, the list will contains only 1 tuple,
+     *     with irrelevant String value. It will be set by default to {@code "listeners"}</b></li>
+     * </ul>
+     * For hosts, the criteria are:
+     * <ul>
+     *     <li>topEpisodes</li>
+     *     <<li>listeners: <b>for this criterion, the list will contains only 1 tuple,
+     *     with irrelevant String value. It will be set by default to {@code "listeners"}</b></li>
+     * </ul>
+     *
+     */
+    @Override
+    public Map<String, List<Map.Entry<String, Integer>>> getStatistics() {
+        Map<String, List<Map.Entry<String, Integer>>> statistics  = new HashMap<>();
+
+        List<Map.Entry<String, Integer>> episodes = StatisticsUtils.parseHistory(episodeHistory,
+                new SortByIntegerValue<>());
+        statistics.put(StatisticsConstants.TOP_EPISODES, episodes);
+
+        int listenersNumber = peopleHistory.size();
+        List<Map.Entry<String, Integer>> listenersMapList = new ArrayList<>();
+        listenersMapList.add(new AbstractMap.SimpleEntry<>("listeners", listenersNumber));
+        statistics.put(StatisticsConstants.LISTENERS, listenersMapList);
+
+        return statistics;
     }
 
     @Override

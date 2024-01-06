@@ -3,10 +3,16 @@ package app.statistics;
 import app.properties.NamePossessor;
 import app.utilities.HelperTool;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-public class StatisticsUtils {
-    private static final HelperTool tool = HelperTool.getInstance();
+public final class StatisticsUtils {
+    private static final HelperTool TOOL = HelperTool.getInstance();
+
+    private StatisticsUtils() { }
 
     /**
      * Takes a history of any named objects, and returns the most listened objects.
@@ -31,7 +37,7 @@ public class StatisticsUtils {
 
         List<Map.Entry<String, Integer>> unrolled = new ArrayList<>(combinedMap.entrySet());
         unrolled.sort(compareFunc);
-        tool.truncateResults(unrolled);
+        TOOL.truncateResults(unrolled);
         return unrolled;
     }
 
@@ -49,7 +55,7 @@ public class StatisticsUtils {
                  final Comparator<Map.Entry<T, Integer>> compareFunc) {
         List<Map.Entry<T, Integer>> unrolled = new ArrayList<>(history.entrySet());
         unrolled.sort(compareFunc);
-        tool.truncateResults(unrolled);
-        return tool.extractNames(unrolled);
+        TOOL.truncateResults(unrolled);
+        return TOOL.extractNames(unrolled);
     }
 }

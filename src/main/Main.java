@@ -1,6 +1,5 @@
 package main;
 
-import app.management.IDContainer;
 import checker.Checker;
 import checker.CheckerConstants;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -111,8 +110,8 @@ public final class Main {
         ObjectWriter objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
         objectWriter.writeValue(new File(filePathOutput), outputs);
 
-        ActionManager.deleteInstance();
-        Library.deleteInstance();
+        ActionManager.resetInstance();
+        Library.resetInstance();
         // TODO: delete instance of id container
     }
 }

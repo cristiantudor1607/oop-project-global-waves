@@ -73,7 +73,6 @@ import app.utilities.constants.StringConstants;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import org.checkerframework.checker.units.qual.A;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -119,10 +118,10 @@ public final class ActionManager {
      * Resets the instance. It breaks the singleton pattern, but it's designed only for its
      * specific usage inside the action method from main, to separate data for each test. For
      * example, if users were added in a previous test, they won't be visible within other
-     * test. If there wasn't the constraint to work only inside the action method, deleteInstance
+     * test. If there wasn't the constraint to work only inside the action method, resetInstance
      * method won't be necessary.
      */
-    public static void deleteInstance() {
+    public static void resetInstance() {
         instance = null;
     }
 
@@ -816,7 +815,12 @@ public final class ActionManager {
             userInterfaces.put(username, new UserInterface(newUser));
         }
 
-        System.out.println("Created user " + username + " with id " + newUser.getId());
+        if (newUser.isHost()) {
+            adminBot.movePodcastsFromDefaultToHost(newUser);
+        }
+
+        // debugmessage: Remove this
+        //System.out.println("Created user " + username + " with id " + newUser.getId());
         return AddUserExit.Status.SUCCESS;
     }
 
@@ -1432,6 +1436,27 @@ public final class ActionManager {
         }
 
         profile.makePremium();
+        return ChangeSubscriptionExit.Status.SUCCESS;
+    }
+
+    /**
+     * Changes the user subscription to free, if possible.
+     * @param username The username of the user
+     * @return {@code SUCCESS}, if the subscription was changed successfully to free,
+     * {@code DOESNT_EXIST}, if the user with the given username doesn't exist in database,
+     * or {@code ALREADY_SUBS}, if the user is already a free user
+     */
+    public ChangeSubscriptionExit.Status requestCancelPremium(final String username) {
+        User profile = getProfileByUsername(username);
+        if (profile == null) {
+            return ChangeSubscriptionExit.Status.DOESNT_EXIST;
+        }
+
+        if (!profile.isPremium()) {
+            return ChangeSubscriptionExit.Status.ALREADY_SUBS;
+        }
+
+        profile.cancelPremium();
         return ChangeSubscriptionExit.Status.SUCCESS;
     }
 

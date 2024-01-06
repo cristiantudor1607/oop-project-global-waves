@@ -1,0 +1,31 @@
+package app.commands.stagethree;
+
+import app.exitstats.stagethree.ChangeSubscriptionExit;
+import app.outputs.stagethree.CancelPremiumOutput;
+import app.parser.commands.templates.CommandObject;
+import com.fasterxml.jackson.databind.JsonNode;
+import lombok.Getter;
+
+@Getter
+public class CancelPremiumInterrogator extends CommandObject {
+    private ChangeSubscriptionExit.Status exitStatus;
+    /**
+     * Executes the cancelPremium command.
+     */
+    @Override
+    public void execute() {
+        exitStatus = manager.requestCancelPremium(username);
+        manager.setLastActionTime(timestamp);
+    }
+
+    /**
+     * After calling {@code execute} method, the output of the command can be
+     * generated using this method.
+     *
+     * @return A JsonNode containing the output data
+     */
+    @Override
+    public JsonNode formatOutput() {
+        return (new CancelPremiumOutput(this).generateOutputNode());
+    }
+}

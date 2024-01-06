@@ -150,3 +150,84 @@ Created user The Police with id 70
 
 
 Created user Bob Marley with id 56
+
+Podcast The Joe Rogan Experience from Joe Rogan
+Podcast Serial from Sarah Koenig
+Podcast Radiolab from Jad Abumrad and Robert Krulwich
+Podcast How I Built This from Guy Raz
+Podcast TED Talks Daily from TED
+Podcast Science Vs from Wendy Zukerman
+Podcast The Daily from The New York Times
+Podcast Reply All from PJ Vogt and Alex Goldman
+Podcast TED Radio Hour from Guy Raz
+Podcast Hidden Brain from Shankar Vedantam
+Podcast Crime Junkie from Ashley Flowers and Brit Prawat
+Podcast The Michelle Obama Podcast from Michelle Obama
+Podcast The Daily Show With Trevor Noah from Trevor Noah
+Podcast TED-Ed: Lessons Worth Sharing from TED
+Podcast Science Vs from Wendy Zukerman
+Podcast Hidden Brain from Shankar Vedantam
+Podcast Conan O'Brien Needs A Friend from Conan O'Brien
+Podcast The Happiness Lab from Dr. Laurie Santos
+Podcast The Ben Shapiro Show from Ben Shapiro
+Podcast The New Yorker: Fiction from The New Yorker
+That's all
+Podcast The Joe Rogan Experience from Joe Rogan
+Podcast Serial from Sarah Koenig
+Podcast How I Built This from Guy Raz
+Podcast TED Talks Daily from TED
+Podcast Science Vs from Wendy Zukerman
+Podcast The Daily from The New York Times
+Podcast Reply All from PJ Vogt and Alex Goldman
+Podcast TED Radio Hour from Guy Raz
+Podcast Hidden Brain from Shankar Vedantam
+Podcast Crime Junkie from Ashley Flowers and Brit Prawat
+Podcast The Michelle Obama Podcast from Michelle Obama
+Podcast The Daily Show With Trevor Noah from Trevor Noah
+Podcast TED-Ed: Lessons Worth Sharing from TED
+Podcast Science Vs from Wendy Zukerman
+Podcast Hidden Brain from Shankar Vedantam
+Podcast Conan O'Brien Needs A Friend from Conan O'Brien
+Podcast The Happiness Lab from Dr. Laurie Santos
+Podcast The Ben Shapiro Show from Ben Shapiro
+Podcast The New Yorker: Fiction from The New Yorker
+That's all
+Created user Jad Abumrad and Robert Krulwich with id 11
+Podcast Serial from Sarah Koenig
+Podcast How I Built This from Guy Raz
+Podcast TED Talks Daily from TED
+Podcast Science Vs from Wendy Zukerman
+Podcast The Daily from The New York Times
+Podcast Reply All from PJ Vogt and Alex Goldman
+Podcast TED Radio Hour from Guy Raz
+Podcast Hidden Brain from Shankar Vedantam
+Podcast Crime Junkie from Ashley Flowers and Brit Prawat
+Podcast The Michelle Obama Podcast from Michelle Obama
+Podcast The Daily Show With Trevor Noah from Trevor Noah
+Podcast TED-Ed: Lessons Worth Sharing from TED
+Podcast Science Vs from Wendy Zukerman
+Podcast Hidden Brain from Shankar Vedantam
+Podcast Conan O'Brien Needs A Friend from Conan O'Brien
+Podcast The Happiness Lab from Dr. Laurie Santos
+Podcast The Ben Shapiro Show from Ben Shapiro
+Podcast The New Yorker: Fiction from The New Yorker
+That's all
+Created user Joe Rogan with id 12
+Podcast Serial from Sarah Koenig
+Podcast TED Talks Daily from TED
+Podcast Science Vs from Wendy Zukerman
+Podcast The Daily from The New York Times
+Podcast Reply All from PJ Vogt and Alex Goldman
+Podcast Hidden Brain from Shankar Vedantam
+Podcast Crime Junkie from Ashley Flowers and Brit Prawat
+Podcast The Michelle Obama Podcast from Michelle Obama
+Podcast The Daily Show With Trevor Noah from Trevor Noah
+Podcast TED-Ed: Lessons Worth Sharing from TED
+Podcast Science Vs from Wendy Zukerman
+Podcast Hidden Brain from Shankar Vedantam
+Podcast Conan O'Brien Needs A Friend from Conan O'Brien
+Podcast The Happiness Lab from Dr. Laurie Santos
+Podcast The Ben Shapiro Show from Ben Shapiro
+Podcast The New Yorker: Fiction from The New Yorker
+That's all
+Created user Guy Raz with id 13

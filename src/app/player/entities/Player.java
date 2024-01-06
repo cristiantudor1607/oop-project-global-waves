@@ -373,6 +373,7 @@ public class Player {
         // Remove the history record of the entity
         removeFromHistory(entity);
 
+        user.trackFile(playingFile);
         return true;
     }
 

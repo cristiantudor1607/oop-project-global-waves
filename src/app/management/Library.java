@@ -4,9 +4,6 @@ import app.player.entities.Album;
 import app.player.entities.Playlist;
 import app.player.entities.Podcast;
 import app.player.entities.Song;
-import app.users.Host;
-import app.utilities.HelperTool;
-import app.utilities.UnreachableSectionException;
 import fileio.input.LibraryInput;
 import fileio.input.PodcastInput;
 import fileio.input.SongInput;
@@ -20,39 +17,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+@Getter
 public final class Library {
     private static Library instance = null;
-
-    @Getter
     private final List<Song> ads;
-
-    @Getter
-    private final Map<String, List<Song>> songs;
-
-    @Getter
-    private final List<Podcast> inputPodcasts;
-
-    @Getter
-    private final Map<String, List<Podcast>> podcasts;
-
-    @Getter
+    private final List<Podcast> defaultPodcasts;
     private final List<User> users;
-
-    @Getter
     private final List<User> artists;
-
-    @Getter
     private final List<User> hosts;
-
-    @Getter
+    private final Map<String, List<Song>> songs;
+    private final Map<String, List<Podcast>> podcasts;
     private final Map<String, List<Playlist>> playlists;
 
 
     private Library() {
         ads = new ArrayList<>();
         songs = new HashMap<>();
-        inputPodcasts = new ArrayList<>();
+        defaultPodcasts = new ArrayList<>();
         podcasts = new HashMap<>();
         users = new ArrayList<>();
         artists = new ArrayList<>();
@@ -76,7 +57,7 @@ public final class Library {
      * Resets the instance. It breaks a little bit the rules of singleton, but it's designed
      * for a specific usage, at the end of action, to prevent loading the library multiple times.
      */
-    public static void deleteInstance() {
+    public static void resetInstance() {
         instance = null;
     }
 
@@ -326,34 +307,11 @@ public final class Library {
      * Converts all input podcasts to the new format and stores them in the library.
      * @param library The library that contains podcasts as PodcastInput class instances
      */
-    public void loadPodcasts(final LibraryInput library) throws UnreachableSectionException {
+    public void loadPodcasts(final LibraryInput library) {
         ArrayList<PodcastInput> inputs = library.getPodcasts();
         for (PodcastInput inputFormatPodcast: inputs) {
-            // Convert the podcast
-            Podcast myPodcast = new Podcast(inputFormatPodcast);
-
-            // Create the host if it doesn't exist
-            String username = myPodcast.getOwner();
-            if (getHostByUsername(username) == null) {
-                Host newHost = new Host(username);
-                hosts.add(newHost);
-            }
-
-            User host = getHostByUsername(username);
-            if (host == null) {
-                throw new UnreachableSectionException("Ignore this because it can't happen");
-            }
-
-            HelperTool.getInstance().setHostLinks(myPodcast.getEpisodes(), host);
-            HelperTool.getInstance().setPodcastLink(myPodcast.getEpisodes(), myPodcast);
-            host.addPodcast(myPodcast);
-
-            if (!podcasts.containsKey(username)) {
-                podcasts.put(username, new ArrayList<>());
-            }
-
-            podcasts.get(username).add(myPodcast);
-            inputPodcasts.add(myPodcast);
+            Podcast myPodcastFormat = new Podcast(inputFormatPodcast);
+            defaultPodcasts.add(myPodcastFormat);
         }
     }
 
@@ -388,11 +346,7 @@ public final class Library {
     public void convertInputLibrary(final LibraryInput library) {
         loadUsers(library);
         loadSongs(library);
-        try {
-            loadPodcasts(library);
-        } catch (UnreachableSectionException ignored) {
-
-        }
+        loadPodcasts(library);
         initPlaylists();
     }
 

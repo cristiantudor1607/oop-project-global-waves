@@ -202,8 +202,16 @@ public class User implements NamePossessor, UniqueIdPossessor {
             artist.trackSong(song);
             artist.trackFan(this);
         } else {
+            // Track activity for user
             Episode episode = file.getCurrentEpisode();
             trackEpisode(episode);
+
+            // Track activity for host
+            User host = episode.getHostLink();
+            if (host != null) {
+                host.trackEpisode(episode);
+                host.trackFan(this);
+            }
         }
     }
 

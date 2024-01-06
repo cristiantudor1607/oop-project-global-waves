@@ -368,4 +368,27 @@ public class AdminBot extends Admin {
         return false;
     }
 
+    /**
+     * Moves default podcasts owned by host to its profile. It adds the podcasts to the
+     * host's list and removes them from defaultPodcasts.
+     * @param host The host whose podcasts should be moved
+     */
+    public void movePodcastsFromDefaultToHost(final User host) {
+        String username = host.getUsername();
+        database.getDefaultPodcasts().forEach(podcast -> {
+            if (podcast.getOwner().equals(username)) {
+                tool.setHostLinks(podcast.getEpisodes(), host);
+                tool.setPodcastLink(podcast.getEpisodes(), podcast);
+                host.addPodcast(podcast);
+                database.getPodcasts()
+                        .computeIfAbsent(username, k -> new ArrayList<>())
+                        .add(podcast);
+            }
+        });
+
+        database.getDefaultPodcasts()
+                .removeIf(podcast -> podcast.getOwner().equals(username));
+
+    }
+
 }
