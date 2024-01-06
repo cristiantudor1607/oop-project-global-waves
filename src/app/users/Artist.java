@@ -11,10 +11,7 @@ import app.utilities.SortByIntegerValue;
 import app.utilities.constants.StatisticsConstants;
 import lombok.Getter;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Getter
 public class Artist extends User {
@@ -67,8 +64,8 @@ public class Artist extends User {
     public Map<String, List<Map.Entry<String, Integer>>> getStatistics() {
         Map<String, List<Map.Entry<String, Integer>>> statistics  = new HashMap<>();
 
-        List<Map.Entry<String, Integer>> albums = StatisticsUtils.parseHistory(albumHistory,
-                new SortByIntegerValue<>());
+        List<Map.Entry<String, Integer>> albums =
+                StatisticsUtils.combineAndParseHistory(albumHistory, new SortByIntegerValue<>());
         statistics.put(StatisticsConstants.TOP_ALBUMS, albums);
 
         List<Map.Entry<String, Integer>> songs = StatisticsUtils.parseHistory(songHistory,
@@ -79,11 +76,30 @@ public class Artist extends User {
                 }));
         statistics.put(StatisticsConstants.TOP_SONGS, songs);
 
+        int listenersNumber = peopleHistory.size();
+        List<Map.Entry<String, Integer>> listenersMapList = new ArrayList<>();
+        listenersMapList.add(new AbstractMap.SimpleEntry<>("listeners", listenersNumber));
+        statistics.put(StatisticsConstants.LISTENERS, listenersMapList);
+
         List<Map.Entry<String, Integer>> fans = StatisticsUtils.parseHistory(peopleHistory,
-                new SortByIntegerValue<>());
+                new SortByIntegerValue<User>()
+                        .thenComparing((o1, o2) -> {
+                            int id1 = o1.getKey().getIdentificationNumber();
+                            int id2 = o2.getKey().getIdentificationNumber();
+                            return id1 - id2;
+                        }));
         statistics.put(StatisticsConstants.TOP_FANS, fans);
 
         return statistics;
+    }
+
+    /**
+     * Checks if user has something in history.
+     * @return {@code true}, if {@code this} user has history, {@code false} otherwise
+     */
+    @Override
+    public boolean hasHistoryData() {
+        return !albumHistory.isEmpty() || !songHistory.isEmpty() || !peopleHistory.isEmpty();
     }
 
     @Override

@@ -10154,8 +10154,8 @@
   "result" : {
     "topAlbums" : {
       "Greatest Hits" : 70,
-      "L.A. Woman" : 48,
       "Strange Days" : 48,
+      "L.A. Woman" : 48,
       "The Doors" : 46
     },
     "topSongs" : {
@@ -57697,8 +57697,8 @@
   "result" : {
     "topAlbums" : {
       "Experience Hendrix: The Best of Jimi Hendrix" : 118,
-      "Are You Experienced" : 45,
       "Electric Ladyland" : 45,
+      "Are You Experienced" : 45,
       "Are You Experienced?" : 18
     },
     "topSongs" : {
@@ -79915,11 +79915,11 @@
       "You'll Never Stand Alone" : 20
     },
     "topAlbums" : {
+      "Greatest Hits" : 159,
       "Pet Sounds" : 122,
       "Experience Hendrix: The Best of Jimi Hendrix" : 118,
       "Celebration (Double Disc Version)" : 112,
-      "Berry Is On Top" : 111,
-      "Good Girl Gone Bad: Reloaded" : 107
+      "Berry Is On Top" : 111
     },
     "topEpisodes" : { }
   }

@@ -1,7 +1,7 @@
 package app.utilities;
 
 import app.player.entities.*;
-import app.properties.NamedObject;
+import app.properties.NamePossessor;
 import app.users.User;
 
 import java.util.AbstractMap;
@@ -171,7 +171,7 @@ public final class HelperTool {
      * @param history The map to be converted
      * @return A list containing all entries from the given map
      */
-    public <T extends NamedObject> List<Map.Entry<String, Integer>>
+    public <T extends NamePossessor> List<Map.Entry<String, Integer>>
     unrollHistoryData(final Map<T, Integer> history) {
         List<Map.Entry<String, Integer>> list = new ArrayList<>();
         for (Map.Entry<T, Integer> pair : history.entrySet()) {
@@ -181,7 +181,7 @@ public final class HelperTool {
         return list;
     }
 
-    public <T extends NamedObject> List<Map.Entry<String, Integer>>
+    public <T extends NamePossessor> List<Map.Entry<String, Integer>>
     extractNames(final List<Map.Entry<T, Integer>> namedList) {
         List<Map.Entry<String, Integer>> list = new ArrayList<>();
         namedList.forEach(tIntegerEntry -> {

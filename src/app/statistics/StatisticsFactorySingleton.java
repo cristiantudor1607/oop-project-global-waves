@@ -18,6 +18,14 @@ public class StatisticsFactorySingleton {
         return instance;
     }
 
+    private NoDataStatistics createNoDataStatistics(final User user) {
+        String username = user.getUsername();
+
+        return NoDataStatistics.builder()
+                .message(StatisticsConstants.NoDataMessage(username))
+                .build();
+    }
+
     private UserStatistics createUserStatistics(final User user) {
         Map<String, List<Map.Entry<String, Integer>>> stats = user.getStatistics();
 
@@ -65,7 +73,7 @@ public class StatisticsFactorySingleton {
         stats.get(StatisticsConstants.TOP_FANS)
                 .forEach(pair -> topFans.add(pair.getKey()));
 
-        int listeners = topFans.size();
+        int listeners = stats.get(StatisticsConstants.LISTENERS).get(0).getValue();
 
         return ArtistStatistics.builder()
                 .topAlbums(topAlbums)
@@ -80,7 +88,10 @@ public class StatisticsFactorySingleton {
     }
 
     public StatisticsTemplate createStatistics(final User user) {
-        Map<String, List<Map.Entry<String, Integer>>> stats = user.getStatistics();
+        if (!user.hasHistoryData()) {
+            return createNoDataStatistics(user);
+        }
+
         if (user.isNormalUser()) {
             return createUserStatistics(user);
         } else if (user.isArtist()) {

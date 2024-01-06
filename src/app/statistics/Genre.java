@@ -1,10 +1,10 @@
 package app.statistics;
 
-import app.properties.NamedObject;
+import app.properties.NamePossessor;
 
 import java.util.Objects;
 
-public record Genre(String genre) implements NamedObject {
+public record Genre(String genre) implements NamePossessor {
 
     /**
      * Returns the name given to object

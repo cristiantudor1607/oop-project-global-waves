@@ -1,6 +1,7 @@
 package app.properties;
 
-public interface NamedObject {
+@FunctionalInterface
+public interface NamePossessor {
     /**
      * Returns the name given to object
      * @return The name of the object

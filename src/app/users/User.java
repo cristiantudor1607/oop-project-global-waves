@@ -7,7 +7,8 @@ import app.player.entities.Episode;
 import app.player.entities.Playlist;
 import app.player.entities.Podcast;
 import app.player.entities.Song;
-import app.properties.NamedObject;
+import app.properties.NamePossessor;
+import app.properties.UniqueIdPossessor;
 import app.statistics.Genre;
 import app.statistics.StatisticsUtils;
 import app.utilities.SortByIntegerValue;
@@ -23,7 +24,7 @@ import lombok.Setter;
 import java.util.*;
 
 @Getter
-public class User implements NamedObject {
+public class User implements NamePossessor, UniqueIdPossessor {
     public enum ConnectionStatus {
         ONLINE,
         OFFLINE,
@@ -114,16 +115,16 @@ public class User implements NamedObject {
      * <ul>
      *     <li>topAlbum</li>
      *     <li>topSongs</li>
-     *     <li>topFans: <b>for this criteria, the list will contains tuples with irrelevant
-     *     integer values</b></li>
-     *     <li>listeners: <b>the item will be missing. It can be calculated using the size of
-     *     topFans list</b></li>
+     *     <li>topFans: <b>for this criterion, the list will contains tuples with irrelevant
+     *     Integer values</b></li>
+     *     <li>listeners: <b>for this criterion, the list will contains only 1 tuple,
+     *     with irrelevant String value. It will be set by default to {@code "listeners"}</b></li>
      * </ul>
      * For hosts, the criteria are:
      * <ul>
      *     <li>topEpisodes</li>
-     *     <li>listeners:  <b>for this criteria, the list will contain only 1 tuple, with
-     *     irrelevant string value. It will be set by default to {@code "listeners"}</b></li>
+     *     <<li>listeners: <b>for this criterion, the list will contains only 1 tuple,
+     *     with irrelevant String value. It will be set by default to {@code "listeners"}</b></li>
      * </ul>
      *
      */
@@ -146,8 +147,8 @@ public class User implements NamedObject {
                 }));
         statistics.put(StatisticsConstants.TOP_SONGS, songs);
 
-        List<Map.Entry<String, Integer>> albums = StatisticsUtils.parseHistory(albumHistory,
-                new SortByIntegerValue<>());
+        List<Map.Entry<String, Integer>> albums =
+                StatisticsUtils.combineAndParseHistory(albumHistory, new SortByIntegerValue<>());
         statistics.put(StatisticsConstants.TOP_ALBUMS, albums);
 
         List<Map.Entry<String, Integer>> episodes = StatisticsUtils.parseHistory(episodeHistory,
@@ -155,6 +156,15 @@ public class User implements NamedObject {
         statistics.put(StatisticsConstants.TOP_EPISODES, episodes);
 
         return statistics;
+    }
+
+    /**
+     * Checks if user has something in history.
+     * @return {@code true}, if {@code this} user has history, {@code false} otherwise
+     */
+    public boolean hasHistoryData() {
+        return !artistHistory.isEmpty() || !songHistory.isEmpty() || !albumHistory.isEmpty()
+                || !genreHistory.isEmpty() || !episodeHistory.isEmpty();
     }
 
     /**
@@ -180,7 +190,6 @@ public class User implements NamedObject {
             trackEpisode(episode);
         }
     }
-
 
     /**
      * Tracks the number of listens for the specified song.
@@ -527,5 +536,14 @@ public class User implements NamedObject {
     @Override
     public String getName() {
         return username;
+    }
+
+    /**
+     * Returns the id associated with the user at first login on platform.
+     * @return An identification number bigger than {@code 0}
+     */
+    @Override
+    public int getIdentificationNumber() {
+        return id;
     }
 }

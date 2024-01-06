@@ -29,8 +29,13 @@ public class WrappedOutput extends CommandOutputFormatter {
         mainNode.put("user", user);
         mainNode.put("timestamp", timestamp);
 
-        JsonNode resultNode = result.generateStatisticsNode();
-        mainNode.set("result", resultNode);
+        String message = result.getSpecificMessage();
+        if (message == null) {
+            JsonNode resultNode = result.generateStatisticsNode();
+            mainNode.set("result", resultNode);
+        } else {
+            mainNode.put("message", message);
+        }
 
         return mainNode;
     }

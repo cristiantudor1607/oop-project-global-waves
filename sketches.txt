@@ -59,3 +59,43 @@ ordinea care trebuie : [ "Carol", "Carol", "Carol (Single Version)", "Caroline N
 il selecteaza pe primul, care s-ar putea sa nu fie acelasi carol
 
 -> SCHIMBA SORTAREA INVERSA DE LA INTEGER VALUE
+
+New play for Planet Telex by alice22
+New play for Airbag by jack29
+New play for You by david27
+New play for Reckoner by henry26
+New play for Just by irene33
+New play for Exit Music (for a Film) by emily30
+New play for Exit Music (for a Film) by grace25
+New play for Paranoid Android by jack29
+New play for Creep by david27
+New play for The Bends by alice22
+New play for Subterranean Homesick Alien by henry26
+New play for How Do You? by david27
+New play for Subterranean Homesick Alien by jack29
+New play for Exit Music (for a Film) by jack29
+New play for Let Down by jack29
+New play for Stop Whispering by david27
+New play for Thinking About You by david27
+New play for Anyone Can Play Guitar by david27
+New play for High and Dry by alice22
+New play for Fake Plastic Trees by alice22
+New play for Bones by alice22
+New play for (Nice Dream) by alice22
+New play for Weird Fishes/Arpeggi by david27
+New play for Karma Police by jack29
+New play for Just by alice22
+New play for 15 Step by jack29
+New play for Bodysnatchers by jack29
+New play for Nude by jack29
+New play for Weird Fishes/Arpeggi by jack29
+New play for All I Need by jack29
+New play for My Iron Lung by alice22
+New play for Bullet Proof..I Wish I Was by alice22
+New play for Black Star by alice22
+New play for Sulk by alice22
+New play for Street Spirit (Fade Out) by alice22
+New play for (Nice Dream) by jack29
+
+ALICE -> 12
+JACK -> 12

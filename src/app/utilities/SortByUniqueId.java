@@ -1,10 +1,10 @@
 package app.utilities;
 
-import app.properties.PlayableEntity;
+import app.properties.UniqueIdPossessor;
 
 import java.util.Comparator;
 
-public class SortByUniqueId implements Comparator<PlayableEntity> {
+public class SortByUniqueId implements Comparator<UniqueIdPossessor> {
     /**
      * Compares the ids of the entities. The result says what entity was created
      * first. It should be called only on entities of the same type.
@@ -17,7 +17,7 @@ public class SortByUniqueId implements Comparator<PlayableEntity> {
      * same id.
      */
     @Override
-    public int compare(final PlayableEntity o1, final PlayableEntity o2) {
+    public int compare(final UniqueIdPossessor o1, final UniqueIdPossessor o2) {
         return o1.getIdentificationNumber() - o2.getIdentificationNumber();
     }
 }
