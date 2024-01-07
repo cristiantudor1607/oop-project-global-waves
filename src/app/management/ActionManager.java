@@ -15,6 +15,7 @@ import app.commands.stageone.SearchInterrogator;
 import app.commands.stageone.SelectInterrogator;
 import app.commands.stageone.ShuffleInterrogator;
 import app.commands.stageone.VisibilityInterrogator;
+import app.commands.stagethree.AdBreakInterrogator;
 import app.commands.stagethree.BuyMerchInterrogator;
 import app.commands.stagetwo.AddAlbumInterrogator;
 import app.commands.stagetwo.AddAnnouncementInterrogator;
@@ -39,6 +40,7 @@ import app.exitstats.stageone.PlayPauseExit;
 import app.exitstats.stageone.SelectExit;
 import app.exitstats.stageone.ShuffleExit;
 import app.exitstats.stageone.SwitchVisibilityExit;
+import app.exitstats.stagethree.AdBreakExit;
 import app.exitstats.stagethree.BuyMerchExit;
 import app.exitstats.stagethree.ChangeSubscriptionExit;
 import app.exitstats.stagetwo.AddAlbumExit;
@@ -1278,6 +1280,14 @@ public final class ActionManager {
         return ChangeSubscriptionExit.Status.SUCCESS;
     }
 
+    /**
+     * Checks if the merch can be bought, and buys it if possible.
+     * @param execQuery The buyMerch command that sent the request. It packages all
+     *                  the data the manager needs to check and buy the merch. <b>Only
+     *                  the username and the name of the merch are used.</b>
+     * @return {@code SUCCESS}, if the merch was bought successfully, the reason why it
+     * couldn't buy, otherwise
+     */
     public BuyMerchExit.Status requestBuyMerch(final BuyMerchInterrogator execQuery) {
         String username = execQuery.getUsername();
         String merchName = execQuery.getName();
@@ -1309,6 +1319,21 @@ public final class ActionManager {
         profile.buyMerch(boughtMerch);
 
         return BuyMerchExit.Status.SUCCESS;
+    }
+
+    public AdBreakExit.Status requestAdBreak(final AdBreakInterrogator execQuery) {
+        String username = execQuery.getUsername();
+
+        Player player = getPlayerByUsername(username);
+        if (player == null) {
+            return AdBreakExit.Status.DOESNT_EXIST;
+        }
+
+        if (!player.isPlaying()) {
+            return AdBreakExit.Status.NOT_PLAYING;
+        }
+
+        return AdBreakExit.Status.SUCCESS;
     }
 
     /**

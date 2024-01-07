@@ -286,6 +286,16 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
     }
 
     /**
+     * Checks if {@code this is an ad}. An <b>ad</b> is defined as a song
+     * with the <b>advertisement</b> genre.
+     * @return {@code true}, if {@code this} is an ad, {@code false} otherwise
+     */
+    @Override
+    public boolean isAd() {
+        return genre.equalsIgnoreCase("advertisement");
+    }
+
+    /**
      * If {@code this} is a song, return its instance.
      * @return {@code this}, if it is a song, {@code null} otherwise
      */

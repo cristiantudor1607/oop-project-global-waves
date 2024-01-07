@@ -7,6 +7,7 @@ import app.player.entities.Episode;
 import app.player.entities.Playlist;
 import app.player.entities.Podcast;
 import app.player.entities.Song;
+import app.player.entities.monetization.MoneyTracker;
 import app.properties.NamePossessor;
 import app.properties.UniqueIdPossessor;
 import app.statistics.Genre;
@@ -51,8 +52,12 @@ public class User implements NamePossessor, UniqueIdPossessor {
     private List<Playlist> following;
     private List<Merch> boughtItems;
 
+    // Histories for monetization
+    private MoneyTracker moneyTracker;
+
     // Monetization info for artists
     protected int merchRevenue;
+    protected Map<Song, Integer> songsIncome;
 
     // Statistics info
     private Map<User, Integer> artistHistory;
@@ -81,9 +86,11 @@ public class User implements NamePossessor, UniqueIdPossessor {
         subscription = SubscriptionType.FREE;
         likes = new ArrayList<>();
         following = new ArrayList<>();
+        boughtItems = new LinkedList<>();
+        moneyTracker = new MoneyTracker();
 
         merchRevenue = 0;
-        boughtItems = new LinkedList<>();
+        songsIncome = new HashMap<>();
 
         artistHistory = new HashMap<>();
         songHistory = new HashMap<>();
@@ -106,9 +113,11 @@ public class User implements NamePossessor, UniqueIdPossessor {
         subscription = SubscriptionType.FREE;
         likes = new ArrayList<>();
         following = new ArrayList<>();
+        boughtItems = new LinkedList<>();
+        moneyTracker = new MoneyTracker();
 
         merchRevenue = 0;
-        boughtItems = new LinkedList<>();
+        songsIncome = new HashMap<>();
 
         artistHistory = new HashMap<>();
         songHistory = new HashMap<>();
@@ -220,6 +229,9 @@ public class User implements NamePossessor, UniqueIdPossessor {
             trackGenre(new Genre(song.getGenre().toLowerCase()));
             trackArtist(song.getArtistLink());
             trackAlbum(song.getAlbumLink());
+
+            // Track monetization data
+            moneyTracker.enqueueSong(song);
 
             // Track activity for artist
             User artist = song.getArtistLink();
@@ -429,6 +441,7 @@ public class User implements NamePossessor, UniqueIdPossessor {
      */
     public void makePremium() {
         subscription = SubscriptionType.PREMIUM;
+        moneyTracker.makePremium();
     }
 
     // TODO: Overwrite method for artist and host
@@ -437,6 +450,7 @@ public class User implements NamePossessor, UniqueIdPossessor {
      */
     public void cancelPremium() {
         subscription = SubscriptionType.FREE;
+        moneyTracker.makeFree();
     }
 
     /**

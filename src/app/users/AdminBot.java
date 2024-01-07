@@ -374,6 +374,7 @@ public class AdminBot extends Admin {
      * @param host The host whose podcasts should be moved
      */
     public void movePodcastsFromDefaultToHost(final User host) {
+        // TODO: Use an iterator instead of forEach here
         String username = host.getUsername();
         database.getDefaultPodcasts().forEach(podcast -> {
             if (podcast.getOwner().equals(username)) {

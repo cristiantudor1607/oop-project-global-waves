@@ -75,6 +75,16 @@ public class Host extends User {
         return statistics;
     }
 
+    /**
+     * Checks if user has something in history.
+     * @return {@code true}, if {@code this} user has history, {@code false} otherwise
+     */
+    @Override
+    public boolean hasHistoryData() {
+        // FIXME: If something is wrong, it can be from here
+        return !peopleHistory.isEmpty() || !episodeHistory.isEmpty();
+    }
+
     @Override
     public void trackFan(final User user) {
         if (!peopleHistory.containsKey(user)) {

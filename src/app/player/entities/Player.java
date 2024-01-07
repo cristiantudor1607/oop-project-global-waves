@@ -30,6 +30,7 @@ public class Player {
     private List<Integer> playingOrder;
     private PlayableEntity selectedSource;
     private AudioFile playingFile;
+    private AudioFile nextAd;
     private Player.PlayerStatus state;
     private int repeat;
     @Setter
@@ -46,6 +47,26 @@ public class Player {
         freeze = false;
         currentIndex = -1;
     }
+
+    /**
+     * Enqueues the ad to the next list. <b>The next list does not exist for this
+     * implementation of the player, it's just a logical concept.</b> It will play the ad
+     * after the current song.
+     * @param ad The ad to be played
+     */
+    public void enqueueAdBreak(final AudioFile ad) {
+        nextAd = ad;
+    }
+
+    /**
+     * Checks if there is an ad waiting to be played next.
+     * @return {@code true}, if there is an ad that should be played, {@code false}
+     * otherwise
+     */
+    public boolean hasAdBreakNext() {
+        return nextAd != null;
+    }
+
 
     /**
      * Puts the player in playing state

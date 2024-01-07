@@ -25,4 +25,13 @@ public abstract class AudioFile {
      * @return {@code this}, if it is an episode, {@code null} otherwise
      */
     public abstract Episode getCurrentEpisode();
+
+    /**
+     * Checks if {@code this is an ad}. An <b>ad</b> is defined as a song
+     * with the <b>advertisement</b> genre.
+     * @return {@code true}, if {@code this} is an ad, {@code false} otherwise
+     */
+    public boolean isAd() {
+        return false;
+    }
 }
