@@ -1,19 +1,25 @@
 package app.commands.stagethree;
 
+import app.exitstats.stagethree.AdBreakExit;
+import app.outputs.stagethree.AdBreakOutput;
 import app.parser.commands.templates.CommandObject;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.Getter;
 
 @Getter
 public class AdBreakInterrogator extends CommandObject {
     private int price;
+    @JsonIgnore
+    private AdBreakExit.Status exitStatus;
 
     /**
      * Executes the adBreak command.
      */
     @Override
     public void execute() {
-
+        exitStatus = manager.requestAdBreak(this);
+        manager.setLastActionTime(timestamp);
     }
 
     /**
@@ -24,6 +30,6 @@ public class AdBreakInterrogator extends CommandObject {
      */
     @Override
     public JsonNode formatOutput() {
-        return null;
+        return new AdBreakOutput(this).generateOutputNode();
     }
 }

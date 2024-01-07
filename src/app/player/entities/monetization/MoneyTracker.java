@@ -4,12 +4,10 @@ import app.player.entities.Song;
 import app.users.User;
 import lombok.Getter;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Getter
 public class MoneyTracker {
-    private Song ad;
     private int adPrice;
 
     private User.SubscriptionType subscription;
@@ -22,6 +20,29 @@ public class MoneyTracker {
         subscription = User.SubscriptionType.FREE;
         freeSongs = new ArrayList<>();
         premiumSongs = new ArrayList<>();
+    }
+
+    /**
+     * Insert a new price for the songs from free song history. It calculates
+     * the price for each song and sends the money to the artists. Finally, it resets
+     * the free song history.
+     * @param price The price of the ad
+     */
+    public void adBreak(final int price) {
+        adPrice = price;
+
+        Double singleIncome = MonetizationUtils.getIncomePerSong(adPrice, freeSongs.size());
+        Map<Song, Integer> playingTimes = MonetizationUtils.mapSongsForIncomes(freeSongs);
+        Map<Song, Double> incomes = MonetizationUtils
+                .calculateIncomesPerSong(playingTimes, singleIncome);
+
+        // Send the money to the artist
+        incomes.forEach((song, income) -> {
+            User artist = song.getArtistLink();
+            artist.receiveMoneyFromSong(song, income);
+        });
+
+        resetFreeSongsHistory();
     }
 
     /**
@@ -49,16 +70,6 @@ public class MoneyTracker {
      */
     public void makePremium() {
         subscription = User.SubscriptionType.PREMIUM;
-    }
-
-    /**
-     * Adds a new ad to the money tracker.
-     * @param nextAd The ad to be enqueued
-     * @param price The price of the ad
-     */
-    public void insertAd(final Song nextAd, final int price) {
-        ad = nextAd;
-        adPrice = price;
     }
 
     /**
@@ -91,5 +102,30 @@ public class MoneyTracker {
         premiumSongs.clear();
     }
 
-
+    /**
+     * Maps the songs to calculate the incomes for each song. They're mapped by the number of
+     * songs listened from an artist. If there are multiple songs from an artist, the entry will
+     * have the same value, but different keys. <br>
+     * For example, if the user listened to:
+     * <ul>
+     *     <li>Hey Love from Stevie Wonder - <b>2 times</b></li>
+     *     <li>Let's Go Crazy [Explicit] from Prince - <b>3 times</b></li>
+     *     <li>Come One from The Rolling Stones - <b>2 times</b></li>
+     *     <li>It's All Over Now from The Rolling Stones - <b>2 times</b></li>
+     * </ul>
+     * Then the resulting map will look like:
+     * <ul>
+     *     <li>Hey Love from Stevie Wonder - <b>2</b></li>
+     *     <li>Let's Go Crazy [Explicit] from Prince - <b>3</b></li>
+     *     <li>Come One from The Rolling Stones - <b>4</b></li>
+     *     <li>It's All Over Now from The Rolling Stones - <b>4</b></li>
+     * </ul>
+     * Because the user played <b>4</b> songs added by The Rolling Stones, each song will be mapped
+     * with <b>4</b> as value.
+     * @param songs The song history as a list.
+     * @return A Map containing the songs mapped as in the example above
+     */
+    public Map<Song, Integer> mapSongsForIncomes(final List<Song> songs) {
+        return null;
+    }
 }

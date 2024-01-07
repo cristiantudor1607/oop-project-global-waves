@@ -8,6 +8,7 @@ import app.utilities.HelperTool;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class AdminBot extends Admin {
     private final HelperTool tool;
@@ -390,6 +391,17 @@ public class AdminBot extends Admin {
         database.getDefaultPodcasts()
                 .removeIf(podcast -> podcast.getOwner().equals(username));
 
+    }
+
+    /**
+     * Returns the first ad found in library.
+     * @return An {@code Optional} containing the ad, if it was found,
+     * an empty {@code Optional} otherwise
+     */
+    public Optional<Song> getFirstAd() {
+        return database.getAds().stream()
+                .filter(song -> song.getGenre().equalsIgnoreCase("advertisement"))
+                .findFirst();
     }
 
 }

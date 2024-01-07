@@ -56,8 +56,9 @@ public class User implements NamePossessor, UniqueIdPossessor {
     private MoneyTracker moneyTracker;
 
     // Monetization info for artists
-    protected int merchRevenue;
-    protected Map<Song, Integer> songsIncome;
+    protected Double merchRevenue;
+    protected Double songRevenue;
+    protected Map<Song, Double> songsIncome;
 
     // Statistics info
     private Map<User, Integer> artistHistory;
@@ -89,7 +90,8 @@ public class User implements NamePossessor, UniqueIdPossessor {
         boughtItems = new LinkedList<>();
         moneyTracker = new MoneyTracker();
 
-        merchRevenue = 0;
+        merchRevenue = 0.0;
+        songRevenue = 0.0;
         songsIncome = new HashMap<>();
 
         artistHistory = new HashMap<>();
@@ -116,7 +118,8 @@ public class User implements NamePossessor, UniqueIdPossessor {
         boughtItems = new LinkedList<>();
         moneyTracker = new MoneyTracker();
 
-        merchRevenue = 0;
+        merchRevenue = 0.0;
+        songRevenue = 0.0;
         songsIncome = new HashMap<>();
 
         artistHistory = new HashMap<>();
@@ -131,21 +134,6 @@ public class User implements NamePossessor, UniqueIdPossessor {
         this(username, 0, null);
         noAge = true;
         noCity = true;
-    }
-
-    /**
-     * Adds a new amount to the merchRevenue of the artist. For normal users and hosts,
-     * it has no effect.
-     * @param amount The amount paid
-     */
-    public void addMerchRevenue(final int amount) { }
-
-    /**
-     * Adds a new merch to the {@code boughtItems} list.
-     * @param merch The merch to be added
-     */
-    public void buyMerch(final Merch merch) {
-        boughtItems.add(merch);
     }
 
     /**
@@ -209,12 +197,54 @@ public class User implements NamePossessor, UniqueIdPossessor {
     }
 
     /**
+     * Checks if {@code this} has monetization data. A user has monetization data only if
+     * it is an artist, and it has at least one song that was played.
+     * @return {@code true}, if the artist monetization data, {@code false} otherwise
+     */
+    public boolean hasMonetizationData() {
+        return false;
+    }
+
+    /**
+     * Returns the most profitable song of the artist.
+     * @return {@code null}, if there aren't songs from artist that were played at least
+     * one time, or if {@code this} isn't an artist, the song that brought the biggest income,
+     * otherwise
+     */
+    public Song getMostProfitableSong() {
+        return null;
+    }
+
+    /**
+     * Adds a new amount to the songRevenue of the artist and tracks the money obtained
+     * from song. For normal users and hosts, it does nothing.
+     * @param song The song
+     * @param amount The money obtained from song
+     */
+    public void receiveMoneyFromSong(final Song song, final Double amount) { }
+
+    /**
      * Checks if user has something in history.
      * @return {@code true}, if {@code this} user has history, {@code false} otherwise
      */
     public boolean hasHistoryData() {
         return !artistHistory.isEmpty() || !songHistory.isEmpty() || !albumHistory.isEmpty()
                 || !genreHistory.isEmpty() || !episodeHistory.isEmpty();
+    }
+
+    /**
+     * Adds a new amount to the merchRevenue of the artist. For normal users and hosts,
+     * it has no effect.
+     * @param amount The amount paid
+     */
+    public void receiveMoneyFromMerch(final Double amount) { }
+
+    /**
+     * Adds a new merch to the {@code boughtItems} list.
+     * @param merch The merch to be added
+     */
+    public void buyMerch(final Merch merch) {
+        boughtItems.add(merch);
     }
 
     /**

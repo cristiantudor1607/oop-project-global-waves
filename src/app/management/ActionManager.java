@@ -80,7 +80,6 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.*;
-import java.util.stream.Collectors;
 
 
 @Getter @Setter
@@ -1315,7 +1314,7 @@ public final class ActionManager {
         }
 
         Merch boughtMerch = merchOptional.get();
-        artist.addMerchRevenue(boughtMerch.price());
+        artist.receiveMoneyFromMerch((double) boughtMerch.price());
         profile.buyMerch(boughtMerch);
 
         return BuyMerchExit.Status.SUCCESS;
@@ -1323,15 +1322,26 @@ public final class ActionManager {
 
     public AdBreakExit.Status requestAdBreak(final AdBreakInterrogator execQuery) {
         String username = execQuery.getUsername();
+        int price = execQuery.getPrice();
 
         Player player = getPlayerByUsername(username);
-        if (player == null) {
+        User user = getProfileByUsername(username);
+        if (player == null || user == null) {
             return AdBreakExit.Status.DOESNT_EXIST;
         }
 
         if (!player.isPlaying()) {
             return AdBreakExit.Status.NOT_PLAYING;
         }
+
+        Optional<Song> adOptional = adminBot.getFirstAd();
+        if (adOptional.isEmpty()) {
+            return AdBreakExit.Status.UNKNOWN;
+        }
+
+        Song ad = adOptional.get();
+        player.insertAdBreak(ad);
+        user.getMoneyTracker().adBreak(price);
 
         return AdBreakExit.Status.SUCCESS;
     }

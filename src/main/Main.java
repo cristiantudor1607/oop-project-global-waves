@@ -1,5 +1,6 @@
 package main;
 
+import app.outputs.stagethree.EndProgramOutput;
 import checker.Checker;
 import checker.CheckerConstants;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -106,6 +107,9 @@ public final class Main {
             JsonNode output = c.formatOutput();
             outputs.add(output);
         }
+
+        JsonNode monetizationOutput = new EndProgramOutput().generateOutputNode();
+        outputs.add(monetizationOutput);
 
         ObjectWriter objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
         objectWriter.writeValue(new File(filePathOutput), outputs);

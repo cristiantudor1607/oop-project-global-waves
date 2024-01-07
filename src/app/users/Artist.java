@@ -11,7 +11,11 @@ import app.utilities.SortByIntegerValue;
 import app.utilities.constants.StatisticsConstants;
 import lombok.Getter;
 
-import java.util.*;
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Getter
 public class Artist extends User {
@@ -31,14 +35,6 @@ public class Artist extends User {
         setSubscription(SubscriptionType.PROVIDER);
         albums = new ArrayList<>();
         selfPage = new ArtistPage(this);
-    }
-
-    /**
-     * Adds a new amount to the merchRevenue of the artist.
-     * @param amount The amount paid
-     */
-    public void addMerchRevenue(final int amount) {
-        merchRevenue += amount;
     }
 
     /**
@@ -104,6 +100,64 @@ public class Artist extends User {
     }
 
     /**
+     * Checks if {@code this} has monetization data. A user has monetization data only if
+     * it is an artist, and it has at least one song that was played.
+     * @return {@code true}, if the artist monetization data, {@code false} otherwise
+     */
+    @Override
+    public boolean hasMonetizationData() {
+        return !songsIncome.isEmpty() || merchRevenue != 0;
+    }
+
+    /**
+     * Adds a new amount to the songRevenue of the artist and tracks the money obtained
+     * from song.
+     * @param song The song
+     * @param amount The money obtained from song
+     */
+    @Override
+    public void receiveMoneyFromSong(final Song song, final Double amount) {
+        songRevenue += amount;
+        if (!songsIncome.containsKey(song)) {
+            songsIncome.put(song, 0.0);
+        }
+
+        Double income = songsIncome.get(song);
+        songsIncome.put(song, income + amount);
+    }
+
+    /**
+     * Adds a new amount to the merchRevenue of the artist.
+     * @param amount The amount paid
+     */
+    public void receiveMoneyFromMerch(final Double amount) {
+        merchRevenue += amount;
+    }
+
+    /**
+     * Returns the most profitable song of the artist.
+     * @return {@code null}, if there aren't songs from artist that were played at least
+     * one time, or the song that brought the biggest income otherwise
+     */
+    public Song getMostProfitableSong() {
+        if (songsIncome.isEmpty()) {
+            return null;
+        }
+
+        double income = 0;
+        Song foundSong = null;
+        for (Map.Entry<Song, Double> entry : songsIncome.entrySet()) {
+            double songIncome = entry.getValue();
+            if (songIncome > income) {
+                income = songIncome;
+                foundSong = entry.getKey();
+            }
+        }
+
+        return income > 0 ? foundSong : null;
+    }
+
+    /**
      * Checks if user has something in history.
      * @return {@code true}, if {@code this} user has history, {@code false} otherwise
      */
@@ -120,6 +174,19 @@ public class Artist extends User {
 
         int listens = peopleHistory.get(user);
         peopleHistory.put(user, ++listens);
+    }
+
+    /**
+     * Tracks the number of listens for the specified song.
+     * @param song The song to be tracked
+     */
+    @Override
+    public void trackSong(final Song song) {
+        super.trackSong(song);
+
+        if (!songsIncome.containsKey(song)) {
+            songsIncome.put(song, 0.0);
+        }
     }
 
     /**

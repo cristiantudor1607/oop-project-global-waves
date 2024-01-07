@@ -54,7 +54,7 @@ public class Player {
      * after the current song.
      * @param ad The ad to be played
      */
-    public void enqueueAdBreak(final AudioFile ad) {
+    public void insertAdBreak(final AudioFile ad) {
         nextAd = ad;
     }
 
@@ -314,6 +314,12 @@ public class Player {
      * seconds remained from current one.
      */
     public void skip() {
+        if (playingFile.isAd()) {
+            // debugmessage: Remove this message after you are sure
+            System.out.println("Ad playing!");
+            return;
+        }
+
         // If there are less than 90 seconds remaining, start the next episode
         if (remainedTime <= seconds) {
             int nextIndex = getNextAudioFileIndex();
@@ -495,8 +501,19 @@ public class Player {
 
         remainedTime -= timeDiff;
 
+        // TODO: Ar merge stearsa partea asta
         // After the time difference, the player reaches the end of the file
         if (remainedTime == 0) {
+            // The currentIndex remains set if getNextAudioFileIndex or
+            // getPrevAudioFileIndex aren't called
+            if (hasAdBreakNext()) {
+                // LANDMARK: AD
+                playingFile = nextAd;
+                remainedTime = nextAd.getDuration();
+                nextAd = null;
+                return;
+            }
+
             int nextIndex = getNextAudioFileIndex();
             if (nextIndex == -1) {
                 resetPlayer();
@@ -516,6 +533,14 @@ public class Player {
 
         // If the time difference is a bigger "hole" in time
         while (remainedTime <= 0) {
+            if (hasAdBreakNext()) {
+                // LANDMARK: AD
+                playingFile = nextAd;
+                remainedTime += nextAd.getDuration();
+                nextAd = null;
+                continue;
+            }
+
             int nextIndex = getNextAudioFileIndex();
             if (nextIndex == -1) {
                 resetPlayer();
