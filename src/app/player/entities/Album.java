@@ -10,7 +10,6 @@ import java.util.Objects;
 
 @Getter
 public class Album extends Playlist {
-    private final int id;
     private final User artistLink;
     private final String artist;
     private final String description;
@@ -60,10 +59,9 @@ public class Album extends Playlist {
     }
 
     private Album(final Builder builder) {
-        super(builder.name, builder.artist, builder.creationTime);
-
-        IDContainer idContainer = IDContainer.getInstance();
-        id = idContainer.useAlbumId();
+        super(IDContainer.getInstance().useAlbumId());
+        name = builder.name;
+        creationTime = builder.creationTime;
 
         artist = builder.artist;
         description = builder.description;
@@ -95,7 +93,7 @@ public class Album extends Playlist {
      */
     @Override
     public int getIdentificationNumber() {
-        return id;
+        return getId();
     }
 
     /**

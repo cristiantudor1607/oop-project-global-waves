@@ -1,8 +1,8 @@
 package app.outputs.stagethree;
 
 import app.parser.commands.templates.CommandOutputFormatter;
-import app.player.entities.monetization.MonetizationStat;
-import app.player.entities.monetization.MonetizationStatisticsFormatter;
+import app.monetization.MonetizationStat;
+import app.monetization.MonetizationStatisticsFormatter;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;

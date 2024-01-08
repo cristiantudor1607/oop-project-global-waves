@@ -1,13 +1,15 @@
 package app.users;
 
 import app.management.IDContainer;
+import app.notifications.Inbox;
+import app.notifications.Notifier;
 import app.player.entities.Album;
 import app.player.entities.AudioFile;
 import app.player.entities.Episode;
 import app.player.entities.Playlist;
 import app.player.entities.Podcast;
 import app.player.entities.Song;
-import app.player.entities.monetization.MoneyTracker;
+import app.monetization.MoneyTracker;
 import app.properties.NamePossessor;
 import app.properties.UniqueIdPossessor;
 import app.statistics.Genre;
@@ -68,6 +70,10 @@ public class User implements NamePossessor, UniqueIdPossessor {
     protected Map<Episode, Integer> episodeHistory;
     protected Map<User, Integer> peopleHistory;
 
+    // Inbox and Notifier for notification management
+    private Inbox inbox;
+    protected Notifier notifier;
+
     // Extra info, in case age or city weren't set, and they are used
     private boolean noAge;
     private boolean noCity;
@@ -100,6 +106,9 @@ public class User implements NamePossessor, UniqueIdPossessor {
         albumHistory = new HashMap<>();
         episodeHistory = new HashMap<>();
         peopleHistory = new HashMap<>();
+
+        inbox = new Inbox();
+        notifier = new Notifier();
     }
 
     public User(final String username, final int age, final String city) {
@@ -128,6 +137,9 @@ public class User implements NamePossessor, UniqueIdPossessor {
         albumHistory = new HashMap<>();
         episodeHistory = new HashMap<>();
         peopleHistory = new HashMap<>();
+
+        inbox = new Inbox();
+        notifier = new Notifier();
     }
 
     public User(final String username) {
@@ -260,9 +272,6 @@ public class User implements NamePossessor, UniqueIdPossessor {
             trackArtist(song.getArtistLink());
             trackAlbum(song.getAlbumLink());
 
-            // Track monetization data
-            moneyTracker.enqueueSong(song);
-
             // Track activity for artist
             User artist = song.getArtistLink();
             artist.trackAlbum(song.getAlbumLink());
@@ -281,6 +290,13 @@ public class User implements NamePossessor, UniqueIdPossessor {
             }
         }
     }
+
+    /**
+     * Adds a new entry to the songsIncome map, with the default value 0.0.
+     * It works only for artists. It does nothing for users and hosts.
+     * @param song The song to be added
+     */
+    public void trackPossibleIncome(final Song song) { }
 
     /**
      * Tracks the number of listens for the specified song.

@@ -1,4 +1,4 @@
-package app.player.entities.monetization;
+package app.monetization;
 
 import app.player.entities.Song;
 import app.users.User;
@@ -16,8 +16,6 @@ public class MonetizationStat {
     public MonetizationStat(final User artist) {
         songRevenue = Math.round(artist.getSongRevenue() * 100.0) / 100.0;
         merchRevenue = Math.round(artist.getMerchRevenue() * 100.0) / 100.0;
-
-        ranking = 0;
 
         Song song = artist.getMostProfitableSong();
         if (song == null) {

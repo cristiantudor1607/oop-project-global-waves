@@ -1,4 +1,4 @@
-package app.player.entities.monetization;
+package app.monetization;
 
 import app.player.entities.Song;
 import app.users.User;
@@ -40,6 +40,7 @@ public class MoneyTracker {
         incomes.forEach((song, income) -> {
             User artist = song.getArtistLink();
             artist.receiveMoneyFromSong(song, income);
+            System.out.println(song.getName() + " by " + song.getArtistName() + " got " + income);
         });
 
         resetFreeSongsHistory();

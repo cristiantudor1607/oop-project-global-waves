@@ -177,17 +177,16 @@ public class Artist extends User {
     }
 
     /**
-     * Tracks the number of listens for the specified song.
-     * @param song The song to be tracked
+     * Adds a new entry to the songsIncome map, with the default value 0.0.
+     * It works only for artists. It does nothing for users and hosts.
+     * @param song The song to be added
      */
-    @Override
-    public void trackSong(final Song song) {
-        super.trackSong(song);
-
+    public void trackPossibleIncome(final Song song) {
         if (!songsIncome.containsKey(song)) {
             songsIncome.put(song, 0.0);
         }
     }
+
 
     /**
      * Returns the page of the artist.

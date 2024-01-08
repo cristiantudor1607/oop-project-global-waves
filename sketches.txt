@@ -1,233 +1,698 @@
-New load: Wish You Were Here
-Playing at load: Shine on You Crazy Diamond from album Wish You Were Here
-Playing next (timeskip): Welcome to the Machine
-Playing next (timeskip): Have a Cigar
-New load: The Wall
-Playing at load: In the Flesh? from album The Wall
-Playing next (timeskip): The Thin Ice
-Playing next (timeskip): Another Brick in the Wall Part 1
-Playing next (timeskip): The Happiest Days of Our Lives
-Playing next (timeskip): Another Brick in the Wall Part 2
-Playing next (timeskip): Mother
-Playing next (timeskip): Goodbye Blue Sky
-Playing next (timeskip): Empty Spaces
-Playing next (timeskip): Young Lust
-Playing next (timeskip): One of My Turns
-Playing next (timeskip): Don't Leave Me Now
-Playing next (timeskip): Another Brick in the Wall Part 3
-Playing next (timeskip): Goodbye Cruel World
-Playing next (timeskip): Hey You
-New load: The Dark Side of the Moon
-Playing at load: Speak to Me from album The Dark Side of the Moon
-Playing next (timeskip): Breathe (In the Air)
-Playing next (timeskip): On the Run
-Playing next (timeskip): Time
-Playing next (timeskip): The Great Gig in the Sky
-Playing next (timeskip): Money
-New load: The Division Bell
-Playing at load: Cluster One from album The Division Bell
-Playing next (timeskip): What Do You Want From Me
-Playing next (timeskip): Poles Apart
-Playing next (timeskip): Marooned
-Playing next (timeskip): A Great Day for Freedom
-Playing next (timeskip): Wearing the Inside Out
-Playing next (timeskip): Take It Back
-Playing next (timeskip): Coming Back to Life
-Playing next (timeskip): Keep Talking
-Playing next (timeskip): Lost for Words
-Playing next (timeskip): High Hopes
-New load: Take It Back
-Playing at load: Take It Back from album The Division Bell
-New load: Wish You Were Here
-Playing at load: Wish You Were Here from album Wish You Were Here
-New load: Young Lust
-Playing at load: Young Lust from album The Wall
-New load: Any Colour You Like
-Playing at load: Any Colour You Like from album The Dark Side of the Moon
-New load: Goodbye Cruel World
-Playing at load: Goodbye Cruel World from album The Wall
-New load: Coming Back to Life
-Playing at load: Coming Back to Life from album The Division Bell
-New load: Marooned
-Playing at load: Marooned from album The Division Bell
-New load: Another Brick in the Wall Part 1
-Playing at load: Another Brick in the Wall Part 1 from album The Wall
+/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/java -javaagent:/Applications/IntelliJ IDEA.app/Contents/lib/idea_rt.jar=58883:/Applications/IntelliJ IDEA.app/Contents/bin -Dfile.encoding=UTF-8 -classpath /Users/cristian-andreitudor/oop-project-2023-main/etapa3/out/production/etapa3:/Users/cristian-andreitudor/oop-project-2023-main/etapa3/lib/jackson-annotations-2.13.3.jar:/Users/cristian-andreitudor/oop-project-2023-main/etapa3/lib/jackson-databind-2.13.3.jar:/Users/cristian-andreitudor/oop-project-2023-main/etapa3/lib/lombok.jar:/Users/cristian-andreitudor/oop-project-2023-main/etapa3/lib/jackson-core-2.13.3.jar:/Users/cristian-andreitudor/oop-project-2023-main/etapa3/lib/checkstyle-8.36.2-all.jar main.Test
+test: test05_etapa3_monetization_free.json
+Ad Break
+price = 500
+songs = 5
 
-7523 -> cauta song "Carol"
-ordinea mea : [ "Carol", "Caroline No", "Carol", "Carol", "Carol (Single Version)" ]
-ordinea care trebuie : [ "Carol", "Carol", "Carol (Single Version)", "Caroline No", "Carol" ]
-il selecteaza pe primul, care s-ar putea sa nu fie acelasi carol
+Song Tuesday Heartbreak from Stevie Wonder received 100.0
+Song You Are the Sunshine of My Life from Stevie Wonder received 100.0
+Song You've Got It Bad Girl from Stevie Wonder received 100.0
+Song Maybe Your Baby from Stevie Wonder received 100.0
+Song You and I from Stevie Wonder received 100.0
+Ad Break
+price = 420
+songs = 5
 
--> SCHIMBA SORTAREA INVERSA DE LA INTEGER VALUE
+Song You Are The Sunshine Of My Life - Single Version With Horns from Stevie Wonder received 168.0
+Song Hey Love from Stevie Wonder received 168.0
+Song Joy Inside My Tears from Stevie Wonder received 84.0
+Ad Break
+price = 700
+songs = 4
 
-New play for Planet Telex by alice22
-New play for Airbag by jack29
-New play for You by david27
-New play for Reckoner by henry26
-New play for Just by irene33
-New play for Exit Music (for a Film) by emily30
-New play for Exit Music (for a Film) by grace25
-New play for Paranoid Android by jack29
-New play for Creep by david27
-New play for The Bends by alice22
-New play for Subterranean Homesick Alien by henry26
-New play for How Do You? by david27
-New play for Subterranean Homesick Alien by jack29
-New play for Exit Music (for a Film) by jack29
-New play for Let Down by jack29
-New play for Stop Whispering by david27
-New play for Thinking About You by david27
-New play for Anyone Can Play Guitar by david27
-New play for High and Dry by alice22
-New play for Fake Plastic Trees by alice22
-New play for Bones by alice22
-New play for (Nice Dream) by alice22
-New play for Weird Fishes/Arpeggi by david27
-New play for Karma Police by jack29
-New play for Just by alice22
-New play for 15 Step by jack29
-New play for Bodysnatchers by jack29
-New play for Nude by jack29
-New play for Weird Fishes/Arpeggi by jack29
-New play for All I Need by jack29
-New play for My Iron Lung by alice22
-New play for Bullet Proof..I Wish I Was by alice22
-New play for Black Star by alice22
-New play for Sulk by alice22
-New play for Street Spirit (Fade Out) by alice22
-New play for (Nice Dream) by jack29
+Song Visions from Stevie Wonder received 175.0
+Song I Was Made to Love Her from Stevie Wonder received 175.0
+Song My Cherie Amour from Stevie Wonder received 175.0
+Song He's Misstra Know It All from Stevie Wonder received 175.0
+Ad Break
+price = 130
+songs = 12
 
-ALICE -> 12
-JACK -> 12
+Song Isn't She Lovely from Stevie Wonder received 10.833333333333334
+Song Pastime Paradise from Stevie Wonder received 10.833333333333334
+Song Love's in Need of Love Today from Stevie Wonder received 10.833333333333334
+Song Knocks Me Off My Feet from Stevie Wonder received 10.833333333333334
+Song Joy Inside My Tears from Stevie Wonder received 10.833333333333334
+Song Summer Soft from Stevie Wonder received 10.833333333333334
+Song Have a Talk with God from Stevie Wonder received 10.833333333333334
+Song Village Ghetto Land from Stevie Wonder received 10.833333333333334
+Song I Wish from Stevie Wonder received 10.833333333333334
+Song Ordinary Pain from Stevie Wonder received 10.833333333333334
+Song Sir Duke from Stevie Wonder received 10.833333333333334
+Song Contusion from Stevie Wonder received 10.833333333333334
+Ad Break
+price = 370
+songs = 1
+
+Song I Just Called To Say I Love You - Single Version from Stevie Wonder received 370.0
+Ad Break
+price = 40
+songs = 2
+
+Song Too High from Stevie Wonder received 20.0
+Song Another Star from Stevie Wonder received 20.0
+Ad Break
+price = 300
+songs = 18
+
+Song Fingertips, Part 2 - Live At The Regal Theater/1963/ Single Version from Stevie Wonder received 16.666666666666668
+Song Signed, Sealed, Delivered (I'm Yours) from Stevie Wonder received 16.666666666666668
+Song I Was Made to Love Her from Stevie Wonder received 16.666666666666668
+Song For Once in My Life from Stevie Wonder received 16.666666666666668
+Song Visions from Stevie Wonder received 16.666666666666668
+Song My Cherie Amour from Stevie Wonder received 16.666666666666668
+Song You Are The Sunshine Of My Life - Single Version With Horns from Stevie Wonder received 16.666666666666668
+Song Golden Lady from Stevie Wonder received 33.333333333333336
+Song Higher Ground - Single Version from Stevie Wonder received 16.666666666666668
+Song You Haven't Done Nothin' from Stevie Wonder received 16.666666666666668
+Song Boogie On Reggae Woman - Single Version from Stevie Wonder received 16.666666666666668
+Song Uptight (Everything's Alright) - Single Version from Stevie Wonder received 16.666666666666668
+Song Too High from Stevie Wonder received 16.666666666666668
+Song Hey Love from Stevie Wonder received 16.666666666666668
+Song Living for the City from Stevie Wonder received 33.333333333333336
+Song Superstition - Single Version from Stevie Wonder received 16.666666666666668
+Ad Break
+price = 30
+songs = 3
+
+Song Blame It on the Sun from Stevie Wonder received 10.0
+Song Village Ghetto Land from Stevie Wonder received 10.0
+Song Big Brother from Stevie Wonder received 10.0
+Ad Break
+price = 610
+songs = 8
+
+Song Tuesday Heartbreak from Stevie Wonder received 76.25
+Song Visions from Stevie Wonder received 76.25
+Song Higher Ground - Single Version from Stevie Wonder received 152.5
+Song Maybe Your Baby from Stevie Wonder received 76.25
+Song Living for the City from Stevie Wonder received 76.25
+Song He's Misstra Know It All from Stevie Wonder received 76.25
+Song Big Brother from Stevie Wonder received 76.25
+Ad Break
+price = 500
+songs = 3
+
+Song You've Got It Bad Girl from Stevie Wonder received 166.66666666666666
+Song Don't You Worry 'Bout a Thing from Stevie Wonder received 166.66666666666666
+Song You and I from Stevie Wonder received 166.66666666666666
+Ad Break
+price = 370
+songs = 1
+
+Song All in Love Is Fair from Stevie Wonder received 370.0
+Ad Break
+price = 650
+songs = 1
+
+Song He's Misstra Know It All from Stevie Wonder received 650.0
+Ad Break
+price = 620
+songs = 12
+
+Song Life Can Be So Nice from Prince received 51.666666666666664
+Song Mountains from Prince received 51.666666666666664
+Song All Day Sucker from Stevie Wonder received 51.666666666666664
+Song Girls & Boys from Prince received 51.666666666666664
+Song Under the Cherry Moon from Prince received 51.666666666666664
+Song Christopher Tracy's Parade from Prince received 51.666666666666664
+Song I Wonder U from Prince received 51.666666666666664
+Song Venus de Milo from Prince received 51.666666666666664
+Song Maybe Your Baby from Stevie Wonder received 51.666666666666664
+Song Have a Talk with God from Stevie Wonder received 51.666666666666664
+Song You Haven't Done Nothin' from Stevie Wonder received 51.666666666666664
+Song New Position from Prince received 51.666666666666664
+Ad Break
+price = 580
+songs = 7
+
+Song All The Critics Love U In New York from Prince received 82.85714285714286
+Song Lady Cab Driver from Prince received 82.85714285714286
+Song God - Vocal Version from Prince received 82.85714285714286
+Song Little Red Corvette [Explicit] from Prince received 82.85714285714286
+Song Under the Cherry Moon from Prince received 82.85714285714286
+Song Automatic from Prince received 82.85714285714286
+Song Purple Rain from Prince received 82.85714285714286
+Ad Break
+price = 890
+songs = 21
+
+Song Raspberry Beret from Prince received 42.38095238095238
+Song Let's Go Crazy [Explicit] from Prince received 42.38095238095238
+Song Ebony Eyes from Stevie Wonder received 42.38095238095238
+Song God - Love Theme From Purple Rain 12" Instrumental Version from Prince received 42.38095238095238
+Song 1999 [Edit] from Prince received 42.38095238095238
+Song U Got The Look from Prince received 42.38095238095238
+Song Diamonds And Pearls (Edit) from Prince received 42.38095238095238
+Song Thieves in the Temple from Prince received 42.38095238095238
+Song Cream (Without Rap Monologue) from Prince received 42.38095238095238
+Song Purple Rain from Prince received 84.76190476190476
+Song Kiss from Prince received 42.38095238095238
+Song Alphabet St. [Explicit] from Prince received 42.38095238095238
+Song Gett Off [explicit] from Prince received 42.38095238095238
+Song When Doves Cry from Prince received 42.38095238095238
+Song Little Red Corvette [Explicit] from Prince received 42.38095238095238
+Song Sign 'O' The Times from Prince received 42.38095238095238
+Song I Wanna Be Your Lover [Single Version] from Prince received 42.38095238095238
+Song Blame It on the Sun from Stevie Wonder received 42.38095238095238
+Song I Would Die 4 U from Prince received 42.38095238095238
+Song Money Don't Matter 2 Night from Prince received 42.38095238095238
+Ad Break
+price = 630
+songs = 1
+
+Song Free from Prince received 630.0
+Ad Break
+price = 160
+songs = 2
+
+Song God - Love Theme From Purple Rain 12" Instrumental Version from Prince received 80.0
+Song Christopher Tracy's Parade from Prince received 80.0
+Ad Break
+price = 160
+songs = 2
+
+Song Little Red Corvette [Explicit] from Prince received 80.0
+Song Kiss from Prince received 80.0
+Ad Break
+price = 500
+songs = 15
+
+Song D.M.S.R. from Prince received 33.333333333333336
+Song International Lover from Prince received 66.66666666666667
+Song God - Love Theme From Purple Rain 12" Instrumental Version from Prince received 33.333333333333336
+Song Automatic from Prince received 33.333333333333336
+Song Venus de Milo from Prince received 33.333333333333336
+Song Let's Pretend We're Married from Prince received 33.333333333333336
+Song 1999 from Prince received 33.333333333333336
+Song Delirious from Prince received 33.333333333333336
+Song All The Critics Love U In New York from Prince received 33.333333333333336
+Song Free from Prince received 33.333333333333336
+Song Lady Cab Driver from Prince received 33.333333333333336
+Song Something In The Water (Does Not Compute) from Prince received 33.333333333333336
+Song All in Love Is Fair from Stevie Wonder received 33.333333333333336
+Song Little Red Corvette from Prince received 33.333333333333336
+Ad Break
+price = 20
+songs = 1
+
+Song Let's Pretend We're Married from Prince received 20.0
+Ad Break
+price = 340
+songs = 1
+
+Song All The Critics Love U In New York from Prince received 340.0
+Ad Break
+price = 170
+songs = 3
+
+Song D.M.S.R. from Prince received 56.666666666666664
+Song All The Critics Love U In New York from Prince received 56.666666666666664
+Song U Got The Look from Prince received 56.666666666666664
+Ad Break
+price = 600
+songs = 1
+
+Song Alphabet St. [Explicit] from Prince received 600.0
+Ad Break
+price = 360
+songs = 10
+
+Song D.M.S.R. from Prince received 36.0
+Song Beast of Burden from The Rolling Stones received 36.0
+Song Lady Cab Driver from Prince received 36.0
+Song Respectable from The Rolling Stones received 36.0
+Song Miss You from The Rolling Stones received 36.0
+Song When the Whip Comes Down from The Rolling Stones received 36.0
+Song Just My Imagination (Running Away With Me) from The Rolling Stones received 36.0
+Song Lies from The Rolling Stones received 36.0
+Song Some Girls from The Rolling Stones received 36.0
+Song It's Not Easy from The Rolling Stones received 36.0
+Ad Break
+price = 470
+songs = 26
+
+Song Country Woman from The Rolling Stones received 18.076923076923077
+Song Come On from The Rolling Stones received 18.076923076923077
+Song Midnight Rambler from The Rolling Stones received 18.076923076923077
+Song Live With Me from The Rolling Stones received 18.076923076923077
+Song Anotherloverholenyohead from Prince received 18.076923076923077
+Song Have You Seen Your Mother, Baby, Standing in the Shadow? from The Rolling Stones received 18.076923076923077
+Song (I Can't Get No) Satisfaction from The Rolling Stones received 18.076923076923077
+Song Time Is on My Side from The Rolling Stones received 18.076923076923077
+Song Get Off of My Cloud from The Rolling Stones received 18.076923076923077
+Song Lady Jane from The Rolling Stones received 18.076923076923077
+Song It's All Over Now from The Rolling Stones received 18.076923076923077
+Song Love in Vain from The Rolling Stones received 18.076923076923077
+Song Carol from The Rolling Stones received 18.076923076923077
+Song Under My Thumb from The Rolling Stones received 18.076923076923077
+Song 19th Nervous Breakdown from The Rolling Stones received 18.076923076923077
+Song Little Red Rooster from The Rolling Stones received 18.076923076923077
+Song I Wanna Be Your Man from The Rolling Stones received 18.076923076923077
+Song Out of Time from The Rolling Stones received 18.076923076923077
+Song Not Fade Away from The Rolling Stones received 18.076923076923077
+Song Respectable from The Rolling Stones received 18.076923076923077
+Song The Last Time from The Rolling Stones received 18.076923076923077
+Song Gimme Shelter from The Rolling Stones received 36.15384615384615
+Song Paint It Black from The Rolling Stones received 18.076923076923077
+Song Let It Bleed from The Rolling Stones received 18.076923076923077
+Song As Tears Go By from The Rolling Stones received 18.076923076923077
+Ad Break
+price = 30
+songs = 1
+
+Song Mother's Little Helper from The Rolling Stones received 30.0
+Ad Break
+price = 560
+songs = 1
+
+Song Out of Time from The Rolling Stones received 560.0
+Ad Break
+price = 710
+songs = 4
+
+Song Lady Jane from The Rolling Stones received 177.5
+Song Little Red Rooster from The Rolling Stones received 177.5
+Song Love in Vain from The Rolling Stones received 177.5
+Song Let It Bleed from The Rolling Stones received 177.5
+Ad Break
+price = 830
+songs = 3
+
+Song Some Girls from The Rolling Stones received 276.6666666666667
+Song Going Home from The Rolling Stones received 276.6666666666667
+Song Mother's Little Helper from The Rolling Stones received 276.6666666666667
+Ad Break
+price = 220
+songs = 2
+
+Song Shattered from The Rolling Stones received 110.0
+Song Monkey Man from The Rolling Stones received 110.0
+Ad Break
+price = 790
+songs = 2
+
+Song High and Dry from The Rolling Stones received 395.0
+Song Gimme Shelter from The Rolling Stones received 395.0
+Ad Break
+price = 500
+songs = 1
+
+Song Not Fade Away from The Rolling Stones received 500.0
+Ad Break
+price = 890
+songs = 1
+
+Song Miss You from The Rolling Stones received 890.0
+Ad Break
+price = 750
+songs = 6
+
+Song Flight 505 from The Rolling Stones received 125.0
+Song Blue Boy from Joni Mitchell received 125.0
+Song Live With Me from The Rolling Stones received 125.0
+Song Stupid Girl from The Rolling Stones received 125.0
+Song You Got the Silver from The Rolling Stones received 125.0
+Song Out of Time from The Rolling Stones received 125.0
+Ad Break
+price = 230
+songs = 3
+
+Song The Circle Game from Joni Mitchell received 76.66666666666667
+Song Big Yellow Taxi from Joni Mitchell received 76.66666666666667
+Song The Arrangement from Joni Mitchell received 76.66666666666667
+Ad Break
+price = 60
+songs = 2
+
+Song The Arrangement from Joni Mitchell received 30.0
+Song Morning Morgantown from Joni Mitchell received 30.0
+Ad Break
+price = 890
+songs = 2
+
+Song The Arrangement from Joni Mitchell received 445.0
+Song Morning Morgantown from Joni Mitchell received 445.0
+Ad Break
+price = 560
+songs = 19
+
+Song Honky Tonk Women from The Rolling Stones received 29.473684210526315
+Song Woodstock from Joni Mitchell received 29.473684210526315
+Song The Arrangement from Joni Mitchell received 29.473684210526315
+Song Rainy Night House from Joni Mitchell received 29.473684210526315
+Song Out of Time from The Rolling Stones received 29.473684210526315
+Song Morning Morgantown from Joni Mitchell received 58.94736842105263
+Song For Free from Joni Mitchell received 58.94736842105263
+Song Blue Boy from Joni Mitchell received 58.94736842105263
+Song Ladies of the Canyon from Joni Mitchell received 58.94736842105263
+Song The Circle Game from Joni Mitchell received 29.473684210526315
+Song You Can't Always Get What You Want from The Rolling Stones received 29.473684210526315
+Song Willy from Joni Mitchell received 29.473684210526315
+Song Big Yellow Taxi from Joni Mitchell received 29.473684210526315
+Song Conversation from Joni Mitchell received 29.473684210526315
+Song The Priest from Joni Mitchell received 29.473684210526315
+Ad Break
+price = 790
+songs = 3
+
+Song Willy from Joni Mitchell received 526.6666666666666
+Song The Arrangement from Joni Mitchell received 263.3333333333333
+Ad Break
+price = 820
+songs = 4
+
+Song Blue Boy from Joni Mitchell received 205.0
+Song Ladies of the Canyon from Joni Mitchell received 205.0
+Song The Arrangement from Joni Mitchell received 205.0
+Song Rainy Night House from Joni Mitchell received 205.0
+Ad Break
+price = 350
+songs = 1
+
+Song For Free from Joni Mitchell received 350.0
+Ad Break
+price = 740
+songs = 1
+
+Song Woodstock from Joni Mitchell received 740.0
+Ad Break
+price = 560
+songs = 2
+
+Song Morning Morgantown from Joni Mitchell received 280.0
+Song The Priest from Joni Mitchell received 280.0
+
+Process finished with exit code 0
+
+New play for Fingertips, Part 2 - Live At The Regal Theater/1963/ Single Version by grace25
+New play for You Are the Sunshine of My Life by irene33
+New play for Love's in Need of Love Today by david27
+New play for Uptight (Everything's Alright) - Single Version by grace25
+New play for Hey Love by grace25
+New play for I Was Made to Love Her by grace25
+New play for For Once in My Life by grace25
+New play for My Cherie Amour by grace25
+New play for Signed, Sealed, Delivered (I'm Yours) by grace25
+New play for You Are The Sunshine Of My Life - Single Version With Horns by grace25
+New play for Maybe Your Baby by irene33
+New play for You and I by irene33
+New play for Tuesday Heartbreak by irene33
+New play for You've Got It Bad Girl by irene33
+New play for Have a Talk with God by david27
+New play for Village Ghetto Land by david27
+New play for Contusion by david27
+New play for Sir Duke by david27
+New play for I Wish by david27
+Ad break for irene33 with price 500
+New play for Superstition - Single Version by grace25
+New play for You Are The Sunshine Of My Life - Single Version With Horns by irene33
+New play for Knocks Me Off My Feet by david27
+New play for Hey Love by irene33
+New play for Higher Ground - Single Version by grace25
+New play for Joy Inside My Tears by irene33
+New play for Living for the City by grace25
+New play for Pastime Paradise by david27
+New play for You Are The Sunshine Of My Life - Single Version With Horns by irene33
+New play for You Haven't Done Nothin' by grace25
+New play for Summer Soft by david27
+New play for Hey Love by irene33
+New play for Boogie On Reggae Woman - Single Version by grace25
+New play for Ordinary Pain by david27
+Ad break for irene33 with price 420
+New play for Too High by grace25
+New play for Visions by irene33
+New play for He's Misstra Know It All by irene33
+New play for Visions by grace25
+New play for Isn't She Lovely by david27
+New play for I Was Made to Love Her by irene33
+New play for My Cherie Amour by irene33
+New play for Joy Inside My Tears by david27
+Ad break for irene33 with price 700
+New play for I Just Called To Say I Love You - Single Version by irene33
+Ad break for david27 with price 130
+New play for Higher Ground - Single Version by david27
+New play for Living for the City by grace25
+Ad break for irene33 with price 370
+New play for Another Star by irene33
+New play for Living for the City by david27
+New play for Higher Ground - Single Version by david27
+New play for Too High by irene33
+New play for Golden Lady by grace25
+Ad break for irene33 with price 40
+New play for Visions by david27
+New play for Village Ghetto Land by irene33
+New play for Blame It on the Sun by irene33
+New play for Golden Lady by grace25
+New play for Tuesday Heartbreak by david27
+New play for Big Brother by irene33
+New play for He's Misstra Know It All by david27
+Ad break for grace25 with price 300
+New play for You and I by grace25
+Ad break for irene33 with price 30
+New play for Ebony Eyes by irene33
+New play for Big Brother by david27
+New play for You've Got It Bad Girl by grace25
+New play for Blame It on the Sun by irene33
+New play for Maybe Your Baby by david27
+New play for I Wanna Be Your Lover [Single Version] by irene33
+New play for Don't You Worry 'Bout a Thing by grace25
+Ad break for david27 with price 610
+New play for All in Love Is Fair by david27
+New play for 1999 [Edit] by irene33
+Ad break for grace25 with price 500
+New play for He's Misstra Know It All by grace25
+Ad break for david27 with price 370
+New play for All in Love Is Fair by david27
+New play for Little Red Corvette [Explicit] by irene33
+Ad break for grace25 with price 650
+New play for 1999 by david27
+New play for All Day Sucker by grace25
+New play for When Doves Cry by irene33
+New play for Let's Go Crazy [Explicit] by irene33
+New play for Little Red Corvette by david27
+New play for Maybe Your Baby by grace25
+New play for Purple Rain by irene33
+New play for Have a Talk with God by grace25
+New play for Delirious by david27
+New play for You Haven't Done Nothin' by grace25
+New play for I Would Die 4 U by irene33
+New play for Christopher Tracy's Parade by grace25
+New play for New Position by grace25
+New play for I Wonder U by grace25
+New play for Under the Cherry Moon by grace25
+New play for Girls & Boys by grace25
+New play for Life Can Be So Nice by grace25
+New play for Venus de Milo by grace25
+New play for Mountains by grace25
+New play for Raspberry Beret by irene33
+New play for Kiss by irene33
+New play for Sign 'O' The Times by irene33
+New play for Let's Pretend We're Married by david27
+New play for D.M.S.R. by david27
+Ad break for grace25 with price 620
+New play for God - Vocal Version by grace25
+New play for U Got The Look by irene33
+New play for Alphabet St. [Explicit] by irene33
+New play for Automatic by david27
+New play for Under the Cherry Moon by grace25
+New play for Automatic by grace25
+New play for Thieves in the Temple by irene33
+New play for Gett Off [explicit] by irene33
+New play for Purple Rain by grace25
+New play for Cream (Without Rap Monologue) by irene33
+New play for Something In The Water (Does Not Compute) by david27
+New play for All The Critics Love U In New York by grace25
+New play for Diamonds And Pearls (Edit) by irene33
+New play for Free by david27
+New play for Little Red Corvette [Explicit] by grace25
+New play for Money Don't Matter 2 Night by irene33
+New play for Purple Rain by irene33
+New play for Lady Cab Driver by david27
+New play for Lady Cab Driver by grace25
+New play for God - Love Theme From Purple Rain 12" Instrumental Version by irene33
+Ad break for grace25 with price 580
+Ad break for irene33 with price 890
+New play for God - Love Theme From Purple Rain 12" Instrumental Version by grace25
+New play for Free by irene33
+New play for All The Critics Love U In New York by david27
+Ad break for irene33 with price 630
+New play for Thieves in the Temple by irene33
+New play for Christopher Tracy's Parade by grace25
+New play for U Got The Look by irene33
+Ad break for grace25 with price 160
+New play for Little Red Corvette [Explicit] by grace25
+New play for Christopher Tracy's Parade by irene33
+New play for God - Love Theme From Purple Rain 12" Instrumental Version by irene33
+New play for International Lover by david27
+New play for Kiss by grace25
+Ad break for grace25 with price 160
+New play for Anotherloverholenyohead by grace25
+New play for Come On by grace25
+New play for Little Red Corvette [Explicit] by irene33
+New play for D.M.S.R. by irene33
+New play for I Wanna Be Your Man by grace25
+New play for Not Fade Away by grace25
+New play for God - Love Theme From Purple Rain 12" Instrumental Version by david27
+New play for Carol by grace25
+New play for 1999 [Edit] by irene33
+New play for Venus de Milo by david27
+New play for Purple Rain by irene33
+New play for International Lover by david27
+New play for It's All Over Now by grace25
+New play for Little Red Rooster by grace25
+New play for Let's Go Crazy [Explicit] by irene33
+New play for Venus de Milo by irene33
+New play for Sign 'O' The Times by irene33
+Ad break for david27 with price 500
+New play for Let's Pretend We're Married by david27
+New play for Time Is on My Side by grace25
+Ad break for david27 with price 20
+New play for D.M.S.R. by irene33
+New play for All The Critics Love U In New York by david27
+New play for The Last Time by grace25
+New play for (I Can't Get No) Satisfaction by grace25
+Ad break for david27 with price 340
+New play for U Got The Look by david27
+New play for D.M.S.R. by david27
+New play for Mother's Little Helper by irene33
+New play for Get Off of My Cloud by grace25
+New play for 19th Nervous Breakdown by grace25
+New play for Stupid Girl by irene33
+New play for All The Critics Love U In New York by david27
+New play for As Tears Go By by grace25
+New play for Lady Jane by irene33
+Ad break for david27 with price 170
+New play for Alphabet St. [Explicit] by david27
+Ad break for david27 with price 600
+New play for Lady Cab Driver by david27
+New play for Under My Thumb by grace25
+New play for Lady Jane by grace25
+New play for Under My Thumb by irene33
+New play for Doncha Bother Me by irene33
+New play for D.M.S.R. by david27
+New play for Out of Time by grace25
+New play for Going Home by irene33
+New play for Miss You by david27
+New play for Paint It Black by grace25
+New play for Flight 505 by irene33
+New play for Lady Jane by irene33
+New play for Have You Seen Your Mother, Baby, Standing in the Shadow? by grace25
+New play for Gimme Shelter by grace25
+New play for When the Whip Comes Down by david27
+New play for The Last Time by irene33
+New play for Just My Imagination (Running Away With Me) by irene33
+New play for Love in Vain by grace25
+New play for Just My Imagination (Running Away With Me) by david27
+New play for Live With Me by irene33
+New play for Flight 505 by irene33
+New play for Country Woman by grace25
+New play for Lady Jane by irene33
+New play for Shattered by irene33
+New play for Live With Me by grace25
+New play for Some Girls by david27
+New play for Lady Jane by irene33
+New play for Rainy Night House by irene33
+New play for Let It Bleed by grace25
+New play for The Arrangement by irene33
+New play for Lies by david27
+New play for The Circle Game by irene33
+New play for Respectable by david27
+New play for It's Not Easy by david27
+New play for Ladies of the Canyon by irene33
+New play for Beast of Burden by david27
+New play for The Arrangement by irene33
+New play for Midnight Rambler by grace25
+New play for Gimme Shelter by grace25
+New play for Willy by irene33
+New play for Big Yellow Taxi by irene33
+New play for Respectable by grace25
+Ad break for david27 with price 360
+New play for Love in Vain by david27
+Ad break for grace25 with price 470
+New play for Mother's Little Helper by grace25
+New play for Rainy Night House by irene33
+New play for Lady Jane by david27
+Ad break for grace25 with price 30
+New play for Out of Time by grace25
+New play for Little Red Rooster by david27
+Ad break for grace25 with price 560
+New play for Let It Bleed by david27
+New play for Some Girls by grace25
+New play for Mother's Little Helper by grace25
+Ad break for david27 with price 710
+New play for Shattered by david27
+New play for Going Home by grace25
+New play for Monkey Man by david27
+Ad break for grace25 with price 830
+New play for Live With Me by grace25
+Ad break for david27 with price 220
+New play for Gimme Shelter by david27
+New play for Stupid Girl by grace25
+New play for You Got the Silver by grace25
+New play for High and Dry by david27
+Ad break for david27 with price 790
+New play for Not Fade Away by david27
+New play for Flight 505 by grace25
+Ad break for david27 with price 500
+New play for Miss You by david27
+New play for Out of Time by grace25
+Ad break for david27 with price 890
+New play for Out of Time by david27
+New play for Blue Boy by grace25
+Ad break for grace25 with price 750
+New play for The Circle Game by grace25
+New play for Honky Tonk Women by david27
+New play for You Can't Always Get What You Want by david27
+New play for The Arrangement by grace25
+New play for Big Yellow Taxi by grace25
+Ad break for grace25 with price 230
+New play for Morning Morgantown by grace25
+New play for The Arrangement by grace25
+Ad break for grace25 with price 60
+New play for Morning Morgantown by grace25
+New play for The Arrangement by grace25
+Ad break for grace25 with price 890
+New play for The Priest by grace25
+New play for Conversation by grace25
+New play for Big Yellow Taxi by grace25
+New play for Morning Morgantown by grace25
+New play for Morning Morgantown by david27
+New play for For Free by david27
+New play for Conversation by david27
+New play for Ladies of the Canyon by david27
+New play for Willy by david27
+New play for The Arrangement by david27
+New play for Rainy Night House by david27
+New play for The Priest by david27
+New play for Blue Boy by david27
+New play for Big Yellow Taxi by david27
+New play for Woodstock by david27
+New play for The Circle Game by david27
+New play for Blue Boy by david27
+New play for Morning Morgantown by david27
+New play for Ladies of the Canyon by david27
+New play for For Free by david27
+Ad break for david27 with price 560
+New play for The Arrangement by david27
+New play for Willy by david27
+New play for Willy by david27
+Ad break for david27 with price 790
+New play for The Arrangement by david27
+New play for Blue Boy by david27
+New play for Ladies of the Canyon by david27
+New play for Rainy Night House by david27
+Ad break for david27 with price 820
+New play for For Free by david27
+Ad break for david27 with price 350
+New play for Woodstock by david27
+Ad break for david27 with price 740
+New play for Morning Morgantown by david27
+New play for The Priest by david27
+Ad break for david27 with price 560
+New play for Woodstock by david27
 
 
-Created user The Beatles with id 27
-Created user Michael Jackson with id 28
-Created user Nothing But Thieves with id 29
-Created user Bob Dylan with id 30
-Created user Madonna with id 31
-Created user Queen with id 32
-Created user The Rolling Stones with id 33
-Created user David Bowie with id 34
-Created user Prince with id 35
-Created user Whitney Houston with id 36
-Created user Elton John with id 37
-Created user Led Zeppelin with id 38
-Created user Stevie Wonder with id 39
-Created user BeyoncÃ© with id 40
-Created user Pink Floyd with id 41
-Created user U2 with id 42
-Created user The Beach Boys with id 43
-Created user Frank Sinatra with id 44
-Created user Johnny Cash with id 45
-Created user Adele with id 46
-Created user Bruce Springsteen with id 47
-Created user Jimi Hendrix with id 48
-Created user Nirvana with id 49
-Created user Dire Straits with id 50
-Created user Imagine Dragons with id 51
-Created user Eminem with id 52
-Created user ABBA with id 53
-Created user Ray Charles with id 54
-Created user The Eagles with id 55
-Created user Bob Marley with id 56
-Created user Taylor Swift with id 57
-Created user Aretha Franklin with id 58
-Created user The Who with id 59
-Created user Rihanna with id 60
-Created user Marvin Gaye with id 61
-Created user Fleetwood Mac with id 62
-Created user James Brown with id 63
-Created user Radiohead with id 64
-Created user The Doors with id 65
-Created user Jay-Z with id 66
-Created user Eric Clapton with id 67
-Created user Joni Mitchell with id 68
-Created user Chuck Berry with id 69
-Created user The Police with id 70
-
-192990
-
-
-Created user Bob Marley with id 56
-
-Podcast The Joe Rogan Experience from Joe Rogan
-Podcast Serial from Sarah Koenig
-Podcast Radiolab from Jad Abumrad and Robert Krulwich
-Podcast How I Built This from Guy Raz
-Podcast TED Talks Daily from TED
-Podcast Science Vs from Wendy Zukerman
-Podcast The Daily from The New York Times
-Podcast Reply All from PJ Vogt and Alex Goldman
-Podcast TED Radio Hour from Guy Raz
-Podcast Hidden Brain from Shankar Vedantam
-Podcast Crime Junkie from Ashley Flowers and Brit Prawat
-Podcast The Michelle Obama Podcast from Michelle Obama
-Podcast The Daily Show With Trevor Noah from Trevor Noah
-Podcast TED-Ed: Lessons Worth Sharing from TED
-Podcast Science Vs from Wendy Zukerman
-Podcast Hidden Brain from Shankar Vedantam
-Podcast Conan O'Brien Needs A Friend from Conan O'Brien
-Podcast The Happiness Lab from Dr. Laurie Santos
-Podcast The Ben Shapiro Show from Ben Shapiro
-Podcast The New Yorker: Fiction from The New Yorker
-That's all
-Podcast The Joe Rogan Experience from Joe Rogan
-Podcast Serial from Sarah Koenig
-Podcast How I Built This from Guy Raz
-Podcast TED Talks Daily from TED
-Podcast Science Vs from Wendy Zukerman
-Podcast The Daily from The New York Times
-Podcast Reply All from PJ Vogt and Alex Goldman
-Podcast TED Radio Hour from Guy Raz
-Podcast Hidden Brain from Shankar Vedantam
-Podcast Crime Junkie from Ashley Flowers and Brit Prawat
-Podcast The Michelle Obama Podcast from Michelle Obama
-Podcast The Daily Show With Trevor Noah from Trevor Noah
-Podcast TED-Ed: Lessons Worth Sharing from TED
-Podcast Science Vs from Wendy Zukerman
-Podcast Hidden Brain from Shankar Vedantam
-Podcast Conan O'Brien Needs A Friend from Conan O'Brien
-Podcast The Happiness Lab from Dr. Laurie Santos
-Podcast The Ben Shapiro Show from Ben Shapiro
-Podcast The New Yorker: Fiction from The New Yorker
-That's all
-Created user Jad Abumrad and Robert Krulwich with id 11
-Podcast Serial from Sarah Koenig
-Podcast How I Built This from Guy Raz
-Podcast TED Talks Daily from TED
-Podcast Science Vs from Wendy Zukerman
-Podcast The Daily from The New York Times
-Podcast Reply All from PJ Vogt and Alex Goldman
-Podcast TED Radio Hour from Guy Raz
-Podcast Hidden Brain from Shankar Vedantam
-Podcast Crime Junkie from Ashley Flowers and Brit Prawat
-Podcast The Michelle Obama Podcast from Michelle Obama
-Podcast The Daily Show With Trevor Noah from Trevor Noah
-Podcast TED-Ed: Lessons Worth Sharing from TED
-Podcast Science Vs from Wendy Zukerman
-Podcast Hidden Brain from Shankar Vedantam
-Podcast Conan O'Brien Needs A Friend from Conan O'Brien
-Podcast The Happiness Lab from Dr. Laurie Santos
-Podcast The Ben Shapiro Show from Ben Shapiro
-Podcast The New Yorker: Fiction from The New Yorker
-That's all
-Created user Joe Rogan with id 12
-Podcast Serial from Sarah Koenig
-Podcast TED Talks Daily from TED
-Podcast Science Vs from Wendy Zukerman
-Podcast The Daily from The New York Times
-Podcast Reply All from PJ Vogt and Alex Goldman
-Podcast Hidden Brain from Shankar Vedantam
-Podcast Crime Junkie from Ashley Flowers and Brit Prawat
-Podcast The Michelle Obama Podcast from Michelle Obama
-Podcast The Daily Show With Trevor Noah from Trevor Noah
-Podcast TED-Ed: Lessons Worth Sharing from TED
-Podcast Science Vs from Wendy Zukerman
-Podcast Hidden Brain from Shankar Vedantam
-Podcast Conan O'Brien Needs A Friend from Conan O'Brien
-Podcast The Happiness Lab from Dr. Laurie Santos
-Podcast The Ben Shapiro Show from Ben Shapiro
-Podcast The New Yorker: Fiction from The New Yorker
-That's all
-Created user Guy Raz with id 13
+13115 load Gimme Shelter ( 279 )
+13254 load High And Dry ( 189 )
+13338 adBreak

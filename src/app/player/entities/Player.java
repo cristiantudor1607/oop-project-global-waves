@@ -514,6 +514,13 @@ public class Player {
                 return;
             }
 
+            // Enqueue the song for monetization
+            Song playingSong = playingFile.getCurrentSong();
+            if (playingSong != null && !playingSong.isAd()) {
+                user.getMoneyTracker().enqueueSong(playingSong);
+                playingSong.getArtistLink().trackPossibleIncome(playingSong);
+            }
+
             int nextIndex = getNextAudioFileIndex();
             if (nextIndex == -1) {
                 resetPlayer();
@@ -539,6 +546,13 @@ public class Player {
                 remainedTime += nextAd.getDuration();
                 nextAd = null;
                 continue;
+            }
+
+            // Enqueue the song for monetization
+            Song playingSong = playingFile.getCurrentSong();
+            if (playingSong != null && !playingSong.isAd()) {
+                user.getMoneyTracker().enqueueSong(playingSong);
+                playingSong.getArtistLink().trackPossibleIncome(playingSong);
             }
 
             int nextIndex = getNextAudioFileIndex();

@@ -1,6 +1,6 @@
 package app.utilities;
 
-import app.player.entities.monetization.MonetizationStat;
+import app.monetization.MonetizationStat;
 
 import java.util.Comparator;
 import java.util.Map;

@@ -1,5 +1,6 @@
 package app.player.entities;
 
+import app.management.IDContainer;
 import app.properties.OwnedEntity;
 import app.properties.PlayableEntity;
 import app.users.User;
@@ -12,21 +13,64 @@ import java.util.List;
 @Getter
 @Setter
 public class Playlist implements PlayableEntity, OwnedEntity {
-    private final String name;
-    private final String owner;
-    private final int creationTime;
+    private final int id;
+    protected String name;
+    protected String owner;
+    protected int creationTime;
     private boolean visible;
     private List<Song> songs;
     private List<User> followers;
 
+    // A link to the owner of the playlist
+    private User ownerLink;
 
-    public Playlist(final String name, final String owner, final int creationTime) {
-        this.name = name;
-        this.owner = owner;
-        this.creationTime = creationTime;
+    public static class Builder {
+        private String name;
+        private String owner;
+        private int creationTime;
+        private User ownerLink;
+
+        public Builder name(final String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder owner(final String owner) {
+            this.owner = owner;
+            return this;
+        }
+
+        public Builder creationTime(final int creationTime) {
+            this.creationTime = creationTime;
+            return this;
+        }
+
+        public Builder ownerLink(final User ownerLink) {
+            this.ownerLink = ownerLink;
+            return this;
+        }
+
+        public Playlist build() {
+            return new Playlist(this);
+        }
+    }
+
+    private Playlist(final Builder builder) {
+        name = builder.name;
+        owner = builder.owner;
+        creationTime = builder.creationTime;
+        ownerLink = builder.ownerLink;
+
         visible = true;
         songs = new ArrayList<>();
         followers = new ArrayList<>();
+
+        IDContainer idContainer = IDContainer.getInstance();
+        id = idContainer.usePlaylistId();
+    }
+
+    protected Playlist(final int id) {
+        this.id = id;
     }
 
     /**

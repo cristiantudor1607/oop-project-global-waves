@@ -1,4 +1,4 @@
-package app.player.entities.monetization;
+package app.monetization;
 
 import app.player.entities.Song;
 

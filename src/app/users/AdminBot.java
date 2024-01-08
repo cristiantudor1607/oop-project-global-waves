@@ -199,7 +199,15 @@ public class AdminBot extends Admin {
      * @param time The time when playlist is created
      */
     public void createPlaylist(final String owner, final String playlistName, final int time) {
-        Playlist newOwnerPlaylist = new Playlist(playlistName, owner, time);
+        User ownerProfile = getUserByUsername(owner);
+
+        Playlist newOwnerPlaylist = new Playlist.Builder()
+                .name(playlistName)
+                .owner(owner)
+                .creationTime(time)
+                .ownerLink(ownerProfile)
+                .build();
+
         database.addPlaylist(owner, newOwnerPlaylist);
     }
 
