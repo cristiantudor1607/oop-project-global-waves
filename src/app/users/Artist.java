@@ -150,6 +150,15 @@ public class Artist extends User {
         Song foundSong = null;
         for (Map.Entry<Song, Double> entry : songsIncome.entrySet()) {
             double songIncome = entry.getValue();
+            // If the incomes are equal, take the one lexicographically less
+            if (songIncome == income && foundSong != null) {
+                String currentSongName = entry.getKey().getName();
+                String foundSongName = foundSong.getName();
+                if (currentSongName.compareTo(foundSongName) < 0) {
+                    foundSong = entry.getKey();
+                }
+            }
+
             if (songIncome > income) {
                 income = songIncome;
                 foundSong = entry.getKey();
@@ -168,6 +177,19 @@ public class Artist extends User {
         return !albumHistory.isEmpty() || !songHistory.isEmpty() || !peopleHistory.isEmpty();
     }
 
+    /**
+     * Tracks the number of listens for the specified song.
+     * @param song The song to be tracked
+     */
+    @Override
+    public void trackSong(Song song) {
+        super.trackSong(song);
+
+        if (!songsIncome.containsKey(song)) {
+            songsIncome.put(song, 0.0);
+        }
+    }
+
     @Override
     public void trackFan(final User user) {
         if (!peopleHistory.containsKey(user)) {
@@ -177,18 +199,6 @@ public class Artist extends User {
         int listens = peopleHistory.get(user);
         peopleHistory.put(user, ++listens);
     }
-
-    /**
-     * Adds a new entry to the songsIncome map, with the default value 0.0.
-     * It works only for artists. It does nothing for users and hosts.
-     * @param song The song to be added
-     */
-    public void trackPossibleIncome(final Song song) {
-        if (!songsIncome.containsKey(song)) {
-            songsIncome.put(song, 0.0);
-        }
-    }
-
 
     /**
      * Returns the page of the artist.

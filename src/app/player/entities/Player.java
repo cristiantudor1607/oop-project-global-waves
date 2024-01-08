@@ -159,6 +159,9 @@ public class Player {
         repeat = 0;
         shuffle = false;
         remainedTime = 0;
+
+        // LANDMARK: Maybe this works for ads
+        nextAd = null;
     }
 
     /**
@@ -508,17 +511,11 @@ public class Player {
             // getPrevAudioFileIndex aren't called
             if (hasAdBreakNext()) {
                 // LANDMARK: AD
+                user.getMoneyTracker().adBreak();
                 playingFile = nextAd;
                 remainedTime = nextAd.getDuration();
                 nextAd = null;
                 return;
-            }
-
-            // Enqueue the song for monetization
-            Song playingSong = playingFile.getCurrentSong();
-            if (playingSong != null && !playingSong.isAd()) {
-                user.getMoneyTracker().enqueueSong(playingSong);
-                playingSong.getArtistLink().trackPossibleIncome(playingSong);
             }
 
             int nextIndex = getNextAudioFileIndex();
@@ -542,6 +539,7 @@ public class Player {
         while (remainedTime <= 0) {
             if (hasAdBreakNext()) {
                 // LANDMARK: AD
+                user.getMoneyTracker().adBreak();
                 playingFile = nextAd;
                 remainedTime += nextAd.getDuration();
                 nextAd = null;
@@ -549,12 +547,6 @@ public class Player {
             }
 
             // Enqueue the song for monetization
-            Song playingSong = playingFile.getCurrentSong();
-            if (playingSong != null && !playingSong.isAd()) {
-                user.getMoneyTracker().enqueueSong(playingSong);
-                playingSong.getArtistLink().trackPossibleIncome(playingSong);
-            }
-
             int nextIndex = getNextAudioFileIndex();
             if (nextIndex == -1) {
                 resetPlayer();

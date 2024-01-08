@@ -1350,7 +1350,7 @@ public final class ActionManager {
 
         Song ad = adOptional.get();
         player.insertAdBreak(ad);
-        user.getMoneyTracker().adBreak(price);
+        user.getMoneyTracker().insertPrice(price);
 
         return AdBreakExit.Status.SUCCESS;
     }

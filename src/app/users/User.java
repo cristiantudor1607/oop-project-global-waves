@@ -308,6 +308,9 @@ public class User implements NamePossessor, UniqueIdPossessor {
             trackArtist(song.getArtistLink());
             trackAlbum(song.getAlbumLink());
 
+            // Track activity for monetization
+            moneyTracker.enqueueSong(song);
+
             // Track activity for artist
             User artist = song.getArtistLink();
             artist.trackAlbum(song.getAlbumLink());
@@ -326,13 +329,6 @@ public class User implements NamePossessor, UniqueIdPossessor {
             }
         }
     }
-
-    /**
-     * Adds a new entry to the songsIncome map, with the default value 0.0.
-     * It works only for artists. It does nothing for users and hosts.
-     * @param song The song to be added
-     */
-    public void trackPossibleIncome(final Song song) { }
 
     /**
      * Tracks the number of listens for the specified song.

@@ -23,14 +23,18 @@ public class MoneyTracker {
     }
 
     /**
-     * Insert a new price for the songs from free song history. It calculates
-     * the price for each song and sends the money to the artists. Finally, it resets
-     * the free song history.
+     * Inserts a new price when an adBreak is added to the queue.
      * @param price The price of the ad
      */
-    public void adBreak(final int price) {
+    public void insertPrice(final int price) {
         adPrice = price;
+    }
 
+    /**
+     * Calculates the price for each song and sends the money to the artists.
+     * When finished, it rests the free songs history.
+     */
+    public void adBreak() {
         Double singleIncome = MonetizationUtils.getIncomePerSong(adPrice, freeSongs.size());
         Map<Song, Integer> playingTimes = MonetizationUtils.mapSongsForIncomes(freeSongs);
         Map<Song, Double> incomes = MonetizationUtils
@@ -40,7 +44,6 @@ public class MoneyTracker {
         incomes.forEach((song, income) -> {
             User artist = song.getArtistLink();
             artist.receiveMoneyFromSong(song, income);
-            System.out.println(song.getName() + " by " + song.getArtistName() + " got " + income);
         });
 
         resetFreeSongsHistory();

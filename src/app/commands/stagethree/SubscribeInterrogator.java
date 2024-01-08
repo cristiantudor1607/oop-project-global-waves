@@ -16,9 +16,6 @@ public class SubscribeInterrogator extends CommandObject {
      */
     @Override
     public void execute() {
-        // ERASE
-        if (timestamp == 92)
-            System.out.println();
         exitContainer = manager.requestSubscribe(username);
         manager.setLastActionTime(timestamp);
     }
