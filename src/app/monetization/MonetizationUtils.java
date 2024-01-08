@@ -1,6 +1,7 @@
 package app.monetization;
 
 import app.player.entities.Song;
+import app.users.User;
 
 import java.util.HashMap;
 import java.util.List;
@@ -56,5 +57,23 @@ public class MonetizationUtils {
         });
 
         return incomes;
+    }
+
+    /**
+     * Calculates the price for each song in the history and sends the money to the artists.
+     * @param credit The total amount of money to be split equally per song
+     * @param songHistory The song history
+     */
+    public static void paySongs(final int credit, final List<Song> songHistory) {
+        Double singleIncome = getIncomePerSong(credit, songHistory.size());
+        Map<Song, Integer> songPlayTimesMap = mapSongsForIncomes(songHistory);
+
+        Map<Song, Double> incomes = calculateIncomesPerSong(songPlayTimesMap, singleIncome);
+
+        // Send the money to the artist
+        incomes.forEach((song, income) -> {
+            User artist = song.getArtistLink();
+            artist.receiveMoneyFromSong(song, income);
+        });
     }
 }

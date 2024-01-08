@@ -31,22 +31,35 @@ public class MoneyTracker {
     }
 
     /**
-     * Calculates the price for each song and sends the money to the artists.
-     * When finished, it rests the free songs history.
+     * Calculates the price for each song listened while being a free user
+     * and sends the money to the artists.
+     * When finished, it resets the free song history.
      */
     public void adBreak() {
-        Double singleIncome = MonetizationUtils.getIncomePerSong(adPrice, freeSongs.size());
-        Map<Song, Integer> playingTimes = MonetizationUtils.mapSongsForIncomes(freeSongs);
-        Map<Song, Double> incomes = MonetizationUtils
-                .calculateIncomesPerSong(playingTimes, singleIncome);
+        if (subscription != User.SubscriptionType.FREE) {
+            return;
+        }
 
-        // Send the money to the artist
-        incomes.forEach((song, income) -> {
-            User artist = song.getArtistLink();
-            artist.receiveMoneyFromSong(song, income);
-        });
+        MonetizationUtils.paySongs(adPrice, freeSongs);
 
+        // Reset the song history
         resetFreeSongsHistory();
+    }
+
+    /**
+     * Calculates the price for each song listened while being a premium user and
+     * sends the money to the artists.
+     * When finished, it resets the premium song history.
+     */
+    public void payByPremiumAccount() {
+        if (subscription != User.SubscriptionType.PREMIUM) {
+            return;
+        }
+
+        MonetizationUtils.paySongs(premiumCredit, premiumSongs);
+
+        // Reset the song history
+        resetPremiumSongsHistory();
     }
 
     /**

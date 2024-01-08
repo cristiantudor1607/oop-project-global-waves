@@ -15,6 +15,7 @@ import app.properties.NamePossessor;
 import app.properties.UniqueIdPossessor;
 import app.statistics.Genre;
 import app.statistics.StatisticsUtils;
+import app.utilities.SortAlphabeticallyByKey;
 import app.utilities.SortByIntegerValue;
 import app.utilities.SortByKeyName;
 import app.utilities.constants.StatisticsConstants;
@@ -187,7 +188,7 @@ public class User implements NamePossessor, UniqueIdPossessor {
         statistics.put(StatisticsConstants.TOP_ARTISTS, artists);
 
         List<Map.Entry<String, Integer>> genres = StatisticsUtils.parseHistory(genreHistory,
-                new SortByIntegerValue<>());
+                new SortByIntegerValue<Genre>().thenComparing(new SortByKeyName<>()));
         statistics.put(StatisticsConstants.TOP_GENRES, genres);
 
         List<Map.Entry<String, Integer>> songs = StatisticsUtils.parseHistory(songHistory,
@@ -198,8 +199,10 @@ public class User implements NamePossessor, UniqueIdPossessor {
                 }));
         statistics.put(StatisticsConstants.TOP_SONGS, songs);
 
-        List<Map.Entry<String, Integer>> albums =
-                StatisticsUtils.combineAndParseHistory(albumHistory, new SortByIntegerValue<>());
+        List<Map.Entry<String, Integer>> albums = StatisticsUtils
+                .combineAndParseAlbumHistory(albumHistory,
+                new SortByIntegerValue<String>()
+                        .thenComparing(Map.Entry::getKey));
         statistics.put(StatisticsConstants.TOP_ALBUMS, albums);
 
         List<Map.Entry<String, Integer>> episodes = StatisticsUtils.parseHistory(episodeHistory,
@@ -528,6 +531,7 @@ public class User implements NamePossessor, UniqueIdPossessor {
      */
     public void cancelPremium() {
         subscription = SubscriptionType.FREE;
+        moneyTracker.payByPremiumAccount();
         moneyTracker.makeFree();
     }
 

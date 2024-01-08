@@ -73,7 +73,7 @@ public class Artist extends User {
         Map<String, List<Map.Entry<String, Integer>>> statistics  = new HashMap<>();
 
         List<Map.Entry<String, Integer>> albums =
-                StatisticsUtils.combineAndParseHistory(albumHistory, new SortByIntegerValue<>());
+                StatisticsUtils.combineAndParseAlbumHistory(albumHistory, new SortByIntegerValue<>());
         statistics.put(StatisticsConstants.TOP_ALBUMS, albums);
 
         List<Map.Entry<String, Integer>> songs = StatisticsUtils.parseHistory(songHistory,

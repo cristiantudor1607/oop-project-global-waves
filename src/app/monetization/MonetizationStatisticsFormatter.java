@@ -15,6 +15,16 @@ public class MonetizationStatisticsFormatter {
     }
 
     /**
+     * Pays the artists for the songs listened by premium users by
+     * the end of the program.
+     */
+    public void makeFinalPayment() {
+        database.getUsers().forEach(user -> {
+            user.getMoneyTracker().payByPremiumAccount();
+        });
+    }
+
+    /**
      * Creates a monetization summary entry for the given user.
      * @param artist The user whose summary is created
      * @return {@code null}, if the user isn't an artist, or it doesn't have at least one
@@ -67,6 +77,7 @@ public class MonetizationStatisticsFormatter {
      * @return A map with the monetization stats for all artists.
      */
     public Map<String, MonetizationStat> getMonetizationStatistics() {
+        makeFinalPayment();
         List<Map.Entry<String, MonetizationStat>> statsList = getAndSortMonetization();
 
         Map<String, MonetizationStat> result = new HashMap<>();

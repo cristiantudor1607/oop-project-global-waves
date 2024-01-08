@@ -1278,6 +1278,7 @@ public final class ActionManager {
         }
 
         profile.cancelPremium();
+        profile.getMoneyTracker().payByPremiumAccount();
         return ChangeSubscriptionExit.Status.SUCCESS;
     }
 

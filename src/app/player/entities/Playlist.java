@@ -3,6 +3,7 @@ package app.player.entities;
 import app.management.IDContainer;
 import app.properties.OwnedEntity;
 import app.properties.PlayableEntity;
+import app.properties.UniqueIdPossessor;
 import app.users.User;
 import lombok.Getter;
 import lombok.Setter;

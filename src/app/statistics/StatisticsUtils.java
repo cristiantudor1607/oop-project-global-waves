@@ -1,6 +1,7 @@
 package app.statistics;
 
 import app.properties.NamePossessor;
+import app.properties.PlayableEntity;
 import app.utilities.HelperTool;
 
 import java.util.ArrayList;
@@ -26,8 +27,8 @@ public final class StatisticsUtils {
      *           interface, in order to call the {@code getName} method.
      */
     public static <T extends NamePossessor> List<Map.Entry<String, Integer>>
-    combineAndParseHistory(final Map<T, Integer> history,
-                           final Comparator<Map.Entry<String, Integer>> compareFunc) {
+    combineAndParseAlbumHistory(final Map<T, Integer> history,
+                                final Comparator<Map.Entry<String, Integer>> compareFunc) {
         Map<String, Integer> combinedMap = new HashMap<>();
         history.forEach((object, counter) -> {
             String name = object.getName();
