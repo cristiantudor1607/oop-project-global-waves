@@ -43,6 +43,7 @@ import app.exitstats.stageone.SwitchVisibilityExit;
 import app.exitstats.stagethree.AdBreakExit;
 import app.exitstats.stagethree.BuyMerchExit;
 import app.exitstats.stagethree.ChangeSubscriptionExit;
+import app.exitstats.stagethree.SubscribeExit;
 import app.exitstats.stagetwo.AddAlbumExit;
 import app.exitstats.stagetwo.AddAnnouncementExit;
 import app.exitstats.stagetwo.AddEventExit;
@@ -54,6 +55,7 @@ import app.exitstats.stagetwo.RemoveAnnouncementExit;
 import app.exitstats.stagetwo.RemoveEventExit;
 import app.exitstats.stagetwo.RemovePodcastExit;
 import app.exitstats.stagetwo.SwitchConnectionExit;
+import app.notifications.Notification;
 import app.pages.features.Announcement;
 import app.pages.features.Event;
 import app.pages.features.Merch;
@@ -1320,6 +1322,13 @@ public final class ActionManager {
         return BuyMerchExit.Status.SUCCESS;
     }
 
+    /**
+     * Inserts a new ad break into the player, if possible.
+     * @param execQuery The adBreak command that sent the request. It packages all the
+     *                  data the manager needs, <b>the username</b> and <b>the price</b>.
+     * @return {@code SUCCESS}, if the ad break was added successfully, the reason why it
+     * couldn't insert the ad, otherwise
+     */
     public AdBreakExit.Status requestAdBreak(final AdBreakInterrogator execQuery) {
         String username = execQuery.getUsername();
         int price = execQuery.getPrice();
@@ -1344,6 +1353,59 @@ public final class ActionManager {
         user.getMoneyTracker().adBreak(price);
 
         return AdBreakExit.Status.SUCCESS;
+    }
+
+    /**
+     * Subscribe / unsubscribe the user to the artist ot host from current page, if possible.
+     * @param username The user that sent the request by an interrogator
+     * @return A SubscribeExit container, which holds the exit status, the name of the user that
+     * gave the command, and optionally, the name of the artist / host
+     */
+    public SubscribeExit requestSubscribe(final String username) {
+        User user = getProfileByUsername(username);
+        Page currentPage = getPageByUsername(username);
+        if (currentPage == null || user == null) {
+            return SubscribeExit.builder()
+                    .username(username)
+                    .status(SubscribeExit.Status.DOESNT_EXIST)
+                    .build();
+        }
+
+        Optional<User> pageOwnerOptional = currentPage.getPublicUser();
+        if (pageOwnerOptional.isEmpty()) {
+            return SubscribeExit.builder()
+                    .username(username)
+                    .status(SubscribeExit.Status.NOT_ON_PAGE)
+                    .build();
+        }
+
+        User pageOwner = pageOwnerOptional.get();
+        if (user.isSubscriber(pageOwner)) {
+            user.unsubscribe(pageOwner);
+            return SubscribeExit.builder()
+                    .username(username)
+                    .publicName(pageOwner.getUsername())
+                    .status(SubscribeExit.Status.UNSUBSCRIBED)
+                    .build();
+        } else {
+            user.subscribe(pageOwner);
+            return SubscribeExit.builder()
+                    .username(username)
+                    .publicName(pageOwner.getUsername())
+                    .status(SubscribeExit.Status.SUBSCRIBED)
+                    .build();
+        }
+    }
+
+    /**
+     * Returns the notifications of the user with the given username.
+     * @param username The user that sent the request
+     * @return A list of notifications
+     */
+    public List<Notification> requestNotifications(final String username) {
+        User user = getProfileByUsername(username);
+
+        return Objects.requireNonNull(user).readAndGetNotifications();
     }
 
     /**

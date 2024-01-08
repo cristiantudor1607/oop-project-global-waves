@@ -7,6 +7,7 @@ import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Getter
 public class HostPage extends Page {
@@ -46,5 +47,16 @@ public class HostPage extends Page {
     @Override
     public String getUsername() {
         return getHostName();
+    }
+
+    /**
+     * Returns the artist, if {@code this} is an artist page, the host if {@code this}
+     * is a host page, or nothing otherwise
+     * @return An {@code Optional} containing the public person, if {@code this}
+     * is an artist page, or a host page, an empty {@code Optional} otherwise
+     */
+    @Override
+    public Optional<User> getPublicUser() {
+        return Optional.of(host);
     }
 }

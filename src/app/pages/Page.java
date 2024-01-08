@@ -53,6 +53,16 @@ public abstract class Page implements Visitable {
     }
 
     /**
+     * Returns the artist, if {@code this} is an artist page, the host if {@code this}
+     * is a host page, or nothing otherwise
+     * @return An {@code Optional} containing the public person, if {@code this}
+     * is an artist page, or a host page, an empty {@code Optional} otherwise
+     */
+    public Optional<User> getPublicUser() {
+        return Optional.empty();
+    }
+
+    /**
      * Returns the merch with the given name, for artist pages, if the artist has one.
      * @param name The name of the merch
      * @return An {@code Optional} describing the merch, if {@code this} is an artist page,

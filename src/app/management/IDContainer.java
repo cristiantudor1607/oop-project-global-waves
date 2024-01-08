@@ -7,12 +7,14 @@ public class IDContainer {
     private int albumId;
     private int userId;
     private int playlistId;
+    private int inboxId;
 
     private IDContainer() {
         songId = 1;
         albumId = 1;
         userId = 1;
         playlistId = 1;
+        inboxId = 1;
     }
 
     public static IDContainer getInstance() {
@@ -60,5 +62,14 @@ public class IDContainer {
     public int usePlaylistId() {
         playlistId++;
         return playlistId - 1;
+    }
+
+    /**
+     * Uses the current inboxId. After calling this method, the id can never be used again.
+     * @return The inbox id
+     */
+    public int useInboxId() {
+        inboxId++;
+        return inboxId - 1;
     }
 }

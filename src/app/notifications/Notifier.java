@@ -2,6 +2,7 @@ package app.notifications;
 
 import app.properties.Observable;
 import app.properties.Observer;
+import app.users.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,17 @@ public class Notifier implements Observable<Notification> {
 
     public Notifier() {
         observers = new ArrayList<>();
+    }
+
+    /**
+     * Checks if the notifier sends notifications to the user.
+     * @param user The user to be checked
+     * @return {@code true}, if the user is getting notified, {@code false}
+     * otherwise
+     */
+    public boolean hasSubscriber(final User user) {
+        Inbox inbox = user.getInbox();
+        return observers.contains(inbox);
     }
 
     /**

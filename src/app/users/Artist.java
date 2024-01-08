@@ -1,5 +1,6 @@
 package app.users;
 
+import app.notifications.Notification;
 import app.player.entities.Album;
 import app.pages.features.Event;
 import app.pages.features.Merch;
@@ -8,6 +9,7 @@ import app.pages.Page;
 import app.player.entities.Song;
 import app.statistics.StatisticsUtils;
 import app.utilities.SortByIntegerValue;
+import app.utilities.constants.NotificationConstants;
 import app.utilities.constants.StatisticsConstants;
 import lombok.Getter;
 
@@ -219,6 +221,7 @@ public class Artist extends User {
      */
     @Override
     public boolean addAlbum(final Album newAlbum) {
+        notifier.insertInfo(new Notification(newAlbum));
         return albums.add(newAlbum);
     }
 
@@ -255,6 +258,7 @@ public class Artist extends User {
      */
     @Override
     public void addEvent(final Event newEvent) {
+        notifier.insertInfo(new Notification(getUsername(), NotificationConstants.NEW_EVENT));
         selfPage.getEvents().add(newEvent);
     }
 
@@ -293,6 +297,7 @@ public class Artist extends User {
      */
     @Override
     public void addMerch(final Merch newMerch) {
+        notifier.insertInfo(new Notification(getUsername(), NotificationConstants.NEW_MERCH));
         selfPage.getMerchandising().add(newMerch);
     }
 

@@ -16,6 +16,7 @@ public final class Test {
     private static final String test2 = "test02_etapa3_wrapped_n_user_one_artist.json";
     private static final String test3 = "test03_etapa3_wrapped_n_user_n_artist.json";
     private static final String test5 = "test05_etapa3_monetization_free.json";
+    private static final String test7 = "test07_etapa3_notifications_simple.json";
     private static final String test9 = "test09_etapa3_merch_buy.json";
     private static final String test10 = "test10_etapa3_wrapped_host.json";
 
@@ -38,7 +39,7 @@ public final class Test {
 
 //            Scanner scanner = new Scanner(System.in);
 //            String fileName = scanner.next();
-            String fileName = test5;
+            String fileName = test7;
             for (File file : inputDir) {
                 if (file.getName().equalsIgnoreCase(fileName)) {
                     Main.action(fileName, CheckerConstants.OUT_FILE);

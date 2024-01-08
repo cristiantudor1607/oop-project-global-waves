@@ -1,11 +1,13 @@
 package app.users;
 
+import app.notifications.Notification;
 import app.pages.features.Announcement;
 import app.player.entities.Podcast;
 import app.pages.HostPage;
 import app.pages.Page;
 import app.statistics.StatisticsUtils;
 import app.utilities.SortByIntegerValue;
+import app.utilities.constants.NotificationConstants;
 import app.utilities.constants.StatisticsConstants;
 import lombok.Getter;
 
@@ -147,6 +149,8 @@ public class Host extends User {
      */
     @Override
     public boolean addAnnouncement(final Announcement newAnnouncement) {
+        notifier.insertInfo(new Notification(getUsername(),
+                NotificationConstants.NEW_ANNOUNCEMENT));
         return selfPage.getAnnouncements().add(newAnnouncement);
     }
 

@@ -2,6 +2,7 @@ package app.users;
 
 import app.management.IDContainer;
 import app.notifications.Inbox;
+import app.notifications.Notification;
 import app.notifications.Notifier;
 import app.player.entities.Album;
 import app.player.entities.AudioFile;
@@ -206,6 +207,41 @@ public class User implements NamePossessor, UniqueIdPossessor {
         statistics.put(StatisticsConstants.TOP_EPISODES, episodes);
 
         return statistics;
+    }
+
+    /**
+     * Returns the notifications of the user and mark them as read.
+     * @return A list of notifications
+     */
+    public List<Notification> readAndGetNotifications() {
+        return inbox.readNotifications();
+    }
+
+    /**
+     * Subscribes to the given user.
+     * @param user The user to get subscribed to
+     */
+    public void subscribe(final User user) {
+        user.getNotifier().attach(inbox);
+    }
+
+    /**
+     * Unsubscribes from the given user.
+     * @param user The user to be unsubscribed from
+     */
+    public void unsubscribe(final User user) {
+        // TODO: Clear inbox
+        user.getNotifier().detach(inbox);
+    }
+
+    /**
+     * Checks if {@code this} user is a subscriber of the given user.
+     * @param user The user to be checked
+     * @return {@code true}, if the {@code this} user is a subscriber of the given
+     * user, {@code false} otherwise
+     */
+    public boolean isSubscriber(final User user) {
+        return user.getNotifier().hasSubscriber(this);
     }
 
     /**
