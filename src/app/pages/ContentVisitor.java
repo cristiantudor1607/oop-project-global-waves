@@ -20,29 +20,50 @@ public class ContentVisitor implements Visitor {
      */
     @Override
     public String visit(final HomePage page) {
-        List<Song> recommendedSongs = page.getRecommendedSongs();
-        List<Playlist> recommendedPlaylists = page.getRecommendedPlaylists();
+        List<Song> likedSongs = page.getLikedSongs();
+        List<Playlist> followingPlaylists = page.getFollowingPlaylists();
 
-        StringBuilder songNames = new StringBuilder();
-        for (int i = 0; i < recommendedSongs.size(); i++) {
-            if (i != 0) {
-                songNames.append(", ");
-            }
+        List<Song> recommendedSongs = page.getSongRecommendations();
+        List<Playlist> recommendedPlaylists = page.getPlaylistRecommendation();
 
-            songNames.append(recommendedSongs.get(i).getName());
-        }
+//        StringBuilder songNames = new StringBuilder();
+//        for (int i = 0; i < likedSongs.size(); i++) {
+//            if (i != 0) {
+//                songNames.append(", ");
+//            }
+//
+//            songNames.append(likedSongs.get(i).getName());
+//        }
+        String liked = "Liked songs:\n\t%s"
+                .formatted(likedSongs.stream()
+                        .map(Song::getName)
+                        .toList());
 
         StringBuilder playlistNames = new StringBuilder();
-        for (int i = 0; i < recommendedPlaylists.size(); i++) {
+        for (int i = 0; i < followingPlaylists.size(); i++) {
             if (i != 0) {
                 playlistNames.append(", ");
             }
 
-            playlistNames.append(recommendedPlaylists.get(i).getName());
+            playlistNames.append(followingPlaylists.get(i).getName());
         }
 
-        return "Liked songs:\n\t[" + songNames + "]\n\nFollowed playlists:\n\t["
-                + playlistNames + "]";
+        String following = "Followed playlists:\n\t%s"
+                .formatted(followingPlaylists.stream()
+                        .map(Playlist::getName)
+                        .toList());
+
+        String songRecoms = "Song recommendations:\n\t%s"
+                .formatted(recommendedSongs.stream()
+                        .map(Song::getName)
+                        .toList());
+
+        String playlistRecoms = "Playlists recommendations:\n\t%s"
+                .formatted(recommendedPlaylists.stream()
+                        .map(Playlist::getName)
+                        .toList());
+
+        return liked + "\n\n" + following + "\n\n" + songRecoms + "\n\n" + playlistRecoms;
     }
 
     /**

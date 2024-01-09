@@ -8,10 +8,12 @@ import app.utilities.HelperTool;
 import app.properties.Visitor;
 import app.utilities.SortByNumberOfLikes;
 import app.utilities.SortByPlaylistLikes;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 public class HomePage extends Page {
     private final List<Song> likedSongs;
     private final List<Playlist> followingPlaylists;
@@ -32,7 +34,7 @@ public class HomePage extends Page {
      * Returns the recommended songs.
      * @return A list of songs
      */
-    public List<Song> getRecommendedSongs() {
+    public List<Song> getLikedSongs() {
         // Make a shallow copy of the likedSongs list, because we want to sort
         // the songs, but don't disturb their order in User. That would happen
         // because likedSongs it's just a reference to the liked songs list from
@@ -48,8 +50,8 @@ public class HomePage extends Page {
      * Returns the recommended playlists.
      * @return A list of recommended playlists.
      */
-    public List<Playlist> getRecommendedPlaylists() {
-        // We make a shallow copy. The explanation is the same as in the getRecommendedSongs
+    public List<Playlist> getFollowingPlaylists() {
+        // We make a shallow copy. The explanation is the same as in the getLikedSongs
         // case
         List<Playlist> copy = new ArrayList<>(followingPlaylists);
 
