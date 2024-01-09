@@ -105,7 +105,7 @@ public class MoneyTracker {
     }
 
     /**
-     * Enqueues a new song to the free song history.
+     * Enqueues a new song to the premium song history.
      * @param song The song to be enqueued
      */
     public void enqueuePremiumSong(final Song song) {
@@ -117,32 +117,5 @@ public class MoneyTracker {
      */
     public void resetPremiumSongsHistory() {
         premiumSongs.clear();
-    }
-
-    /**
-     * Maps the songs to calculate the incomes for each song. They're mapped by the number of
-     * songs listened from an artist. If there are multiple songs from an artist, the entry will
-     * have the same value, but different keys. <br>
-     * For example, if the user listened to:
-     * <ul>
-     *     <li>Hey Love from Stevie Wonder - <b>2 times</b></li>
-     *     <li>Let's Go Crazy [Explicit] from Prince - <b>3 times</b></li>
-     *     <li>Come One from The Rolling Stones - <b>2 times</b></li>
-     *     <li>It's All Over Now from The Rolling Stones - <b>2 times</b></li>
-     * </ul>
-     * Then the resulting map will look like:
-     * <ul>
-     *     <li>Hey Love from Stevie Wonder - <b>2</b></li>
-     *     <li>Let's Go Crazy [Explicit] from Prince - <b>3</b></li>
-     *     <li>Come One from The Rolling Stones - <b>4</b></li>
-     *     <li>It's All Over Now from The Rolling Stones - <b>4</b></li>
-     * </ul>
-     * Because the user played <b>4</b> songs added by The Rolling Stones, each song will be mapped
-     * with <b>4</b> as value.
-     * @param songs The song history as a list.
-     * @return A Map containing the songs mapped as in the example above
-     */
-    public Map<Song, Integer> mapSongsForIncomes(final List<Song> songs) {
-        return null;
     }
 }

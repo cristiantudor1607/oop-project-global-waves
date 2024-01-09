@@ -30,43 +30,4 @@ public class UserInterface {
         currentPage = homePage;
         player = new Player(user);
     }
-
-    /**
-     * Checks if the user is currently on an artist page.
-     * @return {@code true}, if the user is on an artist page, {@code false} otherwise
-     */
-    public boolean isOnArtistPage() {
-        String username = currentPage.getArtistName();
-        return username != null;
-    }
-
-    /**
-     * Sets the currentPage to Home
-     */
-    public void goToHomePage() {
-        currentPage = homePage;
-    }
-
-    /**
-     * Sets the current page to LikedContentPage
-     */
-    public void goToLikedContentPage() {
-        currentPage = likedContentPage;
-    }
-
-    /**
-     * Sets the artist page as current page
-     * @param artistPage Any page of an artist that exists
-     */
-    public void goToArtistPage(@NonNull final ArtistPage artistPage) {
-        currentPage = artistPage;
-    }
-
-    /**
-     * Sets the host page as current page
-     * @param hostPage Any page of a host that exists
-     */
-    public void goToHostPage(@NonNull final HostPage hostPage) {
-        currentPage = hostPage;
-    }
 }

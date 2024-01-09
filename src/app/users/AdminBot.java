@@ -5,6 +5,8 @@ import app.player.entities.Playlist;
 import app.player.entities.Podcast;
 import app.player.entities.Song;
 import app.utilities.HelperTool;
+import app.utilities.SortByCreatorId;
+import app.utilities.SortByUniqueId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -410,6 +412,26 @@ public class AdminBot extends Admin {
         return database.getAds().stream()
                 .filter(song -> song.getGenre().equalsIgnoreCase("advertisement"))
                 .findFirst();
+    }
+
+    /**
+     * Returns a list with all database songs that have the same genre. The list is sorted
+     * by song's id.
+     * @param genre The genre of the songs.
+     * @return A list with all songs from same genre found in library.
+     */
+    public List<Song> getSongsFromSameGenre(final String genre) {
+        List<Song> foundSongs = new ArrayList<>();
+        database.getSongs().forEach((ignored, songList) -> {
+            List<Song> currEntrySongs = songList.stream()
+                    .filter(song -> song.getGenre().equalsIgnoreCase(genre))
+                    .toList();
+            foundSongs.addAll(currEntrySongs);
+        });
+
+        foundSongs.sort(new SortByUniqueId());
+
+        return foundSongs;
     }
 
 }

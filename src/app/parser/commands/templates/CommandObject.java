@@ -108,7 +108,7 @@ import java.util.Map;
         @JsonSubTypes.Type(value = AdBreakInterrogator.class, name = "adBreak"),
         @JsonSubTypes.Type(value = SubscribeInterrogator.class, name = "subscribe"),
         @JsonSubTypes.Type(value = GetNotificationsInterrogator.class, name = "getNotifications"),
-        @JsonSubTypes.Type(value = EmptyCommand.class, name = "updateRecommendations"),
+        @JsonSubTypes.Type(value = UpdateRecomsInterrogator.class, name = "updateRecommendations"),
         @JsonSubTypes.Type(value = EmptyCommand.class, name = "loadRecommendations"),
         @JsonSubTypes.Type(value = EmptyCommand.class, name = "previousPage"),
         @JsonSubTypes.Type(value = EmptyCommand.class, name = "nextPage"),

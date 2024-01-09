@@ -17,6 +17,7 @@ import app.commands.stageone.ShuffleInterrogator;
 import app.commands.stageone.VisibilityInterrogator;
 import app.commands.stagethree.AdBreakInterrogator;
 import app.commands.stagethree.BuyMerchInterrogator;
+import app.commands.stagethree.UpdateRecomsInterrogator;
 import app.commands.stagetwo.AddAlbumInterrogator;
 import app.commands.stagetwo.AddAnnouncementInterrogator;
 import app.commands.stagetwo.AddEventInterrogator;
@@ -56,9 +57,12 @@ import app.exitstats.stagetwo.RemoveEventExit;
 import app.exitstats.stagetwo.RemovePodcastExit;
 import app.exitstats.stagetwo.SwitchConnectionExit;
 import app.notifications.Notification;
+import app.pages.HomePage;
 import app.pages.features.Announcement;
 import app.pages.features.Event;
 import app.pages.features.Merch;
+import app.pages.recommendations.Recommender;
+import app.pages.recommendations.RecommenderFactorySingleton;
 import app.parser.commands.templates.CommandObject;
 import app.player.entities.Album;
 import app.player.entities.AudioFile;
@@ -1407,6 +1411,43 @@ public final class ActionManager {
         User user = getProfileByUsername(username);
 
         return Objects.requireNonNull(user).readAndGetNotifications();
+    }
+
+    /**
+     * Updates the recommendations for the user that gave the command, if it is possible.
+     * @param execQuery The command that sent the request. It packages the <b>username</b>
+     *                  and the <b>recommendationType</b> needed by the manager.
+     * @return {@code SUCCESS}, if the recommendations were found, an enum describing the reason
+     * why it couldn't update, otherwise
+     */
+    public UpdateRecomsInterrogator.Status
+    requestUpdateRecoms(final UpdateRecomsInterrogator execQuery) {
+        User user = adminBot.getUserByUsername(execQuery.getUsername());
+
+        if (user == null) {
+            return UpdateRecomsInterrogator.Status.DOESNT_EXIST;
+        }
+
+        if (!user.isNormalUser()) {
+            return UpdateRecomsInterrogator.Status.NOT_NORMAL_USER;
+        }
+
+        String type = execQuery.getRecommendationType();
+        Player player = getPlayerByUsername(execQuery.getUsername());
+
+        Recommender recommender = RecommenderFactorySingleton
+                .getInstance()
+                .createRecommender(type, Objects.requireNonNull(player));
+
+        PlayableEntity foundRecoms = recommender.getRecommendation();
+        if (foundRecoms == null) {
+            return UpdateRecomsInterrogator.Status.NO_RECOMS;
+        }
+
+        Page homePage = userInterfaces.get(execQuery.getUsername()).getHomePage();
+        homePage.addRecommendation(foundRecoms);
+
+        return UpdateRecomsInterrogator.Status.SUCCESS;
     }
 
     /**

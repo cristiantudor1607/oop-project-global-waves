@@ -1,6 +1,7 @@
 package app.pages;
 
 import app.pages.features.Merch;
+import app.properties.PlayableEntity;
 import app.properties.Visitor;
 import app.properties.Visitable;
 import app.users.User;
@@ -72,4 +73,10 @@ public abstract class Page implements Visitable {
     public Optional<Merch> getMerchByName(final String name) {
         return Optional.empty();
     }
+
+    /**
+     * Adds a new recommendation to the page, if {@code this} page is a HomePage.
+     * @param recoms The new recommendation to be added
+     */
+    public void addRecommendation(final PlayableEntity recoms) { }
 }

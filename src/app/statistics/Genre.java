@@ -7,7 +7,7 @@ import java.util.Objects;
 public record Genre(String genre) implements NamePossessor {
 
     /**
-     * Returns the name given to object
+     * Returns the name given to object.
      *
      * @return The name of the object
      */
@@ -15,7 +15,6 @@ public record Genre(String genre) implements NamePossessor {
     public String getName() {
         return genre;
     }
-
 
     @Override
     public boolean equals(final Object o) {

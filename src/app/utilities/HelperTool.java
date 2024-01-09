@@ -4,11 +4,9 @@ import app.player.entities.*;
 import app.properties.NamePossessor;
 import app.users.User;
 
-import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+// TODO: Fa toate metodele statice
 public final class HelperTool {
     private static HelperTool instance = null;
     public static final int TRUNC_SIZE = 5;
@@ -190,5 +188,20 @@ public final class HelperTool {
         });
 
         return list;
+    }
+
+    /**
+     * Generates a random number, bigger than {@code lowerBound},
+     * and smaller than {@code upperBound}, based on the seed provided. <br>
+     * <b>{@code lowerBound} has to be smaller than {@code upperBound}</b>
+     * @param lowerBound The lower bound of the range
+     * @param upperBound The upper bound of the range
+     * @param seed The seed for randomizer
+     * @return An integer between {@code lowerBound} and {@code upperBound}.
+     */
+    public int generateRandomNumberInRange(final int lowerBound, final int upperBound,
+                                           final int seed) {
+        Random random = new Random(seed);
+        return random.nextInt(lowerBound, upperBound);
     }
 }

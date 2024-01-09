@@ -2,6 +2,7 @@ package app.pages;
 
 import app.player.entities.Playlist;
 import app.player.entities.Song;
+import app.properties.PlayableEntity;
 import app.users.User;
 import app.utilities.HelperTool;
 import app.properties.Visitor;
@@ -15,9 +16,16 @@ public class HomePage extends Page {
     private final List<Song> likedSongs;
     private final List<Playlist> followingPlaylists;
 
+    private final List<Song> songRecommendations;
+    private final List<Playlist> playlistRecommendation;
+    private PlayableEntity lastRecommendations;
+
     public HomePage(final User user) {
         likedSongs = user.getLikes();
         followingPlaylists = user.getFollowing();
+
+        songRecommendations = new ArrayList<>();
+        playlistRecommendation = new ArrayList<>();
     }
 
     /**
@@ -58,5 +66,26 @@ public class HomePage extends Page {
     @Override
     public String accept(final Visitor v) {
         return v.visit(this);
+    }
+
+    /**
+     * Adds a new recommendation to the page, if {@code this} page is a HomePage.
+     * @param recoms The new recommendation to be added
+     */
+    @Override
+    public void addRecommendation(final PlayableEntity recoms) {
+        if (recoms == null) {
+            return;
+        }
+
+        if (recoms.isPlaylist()) {
+            Playlist playlist = recoms.getCurrentPlaylist();
+            playlistRecommendation.add(playlist);
+            lastRecommendations = playlist;
+        } else {
+            Song song = recoms.getAudioFileAtIndex(0).getCurrentSong();
+            songRecommendations.add(song);
+            lastRecommendations = song;
+        }
     }
 }

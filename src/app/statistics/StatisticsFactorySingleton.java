@@ -27,6 +27,7 @@ public final class StatisticsFactorySingleton {
     }
 
     private NoDataStatistics createNoDataStatistics(final User user) {
+        // FIXME: Nu e nevoie de 3 metoda separate, dai un parametru in plus la metoda
         String username = user.getUsername();
         String userTypeMessage;
         if (user.isNormalUser()) {
