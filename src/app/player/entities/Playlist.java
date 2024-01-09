@@ -30,6 +30,7 @@ public class Playlist implements PlayableEntity, OwnedEntity {
         private String owner;
         private int creationTime;
         private User ownerLink;
+        private List<Song> songs;
 
         public Builder name(final String name) {
             this.name = name;
@@ -51,6 +52,11 @@ public class Playlist implements PlayableEntity, OwnedEntity {
             return this;
         }
 
+        public Builder songs(final List<Song> songs) {
+            this.songs = songs;
+            return this;
+        }
+
         public Playlist build() {
             return new Playlist(this);
         }
@@ -61,9 +67,12 @@ public class Playlist implements PlayableEntity, OwnedEntity {
         owner = builder.owner;
         creationTime = builder.creationTime;
         ownerLink = builder.ownerLink;
+        songs = builder.songs;
+        if (songs == null) {
+            songs = new ArrayList<>();
+        }
 
         visible = true;
-        songs = new ArrayList<>();
         followers = new ArrayList<>();
 
         IDContainer idContainer = IDContainer.getInstance();

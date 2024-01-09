@@ -178,6 +178,15 @@ public class Artist extends User {
     }
 
     /**
+     * Checks if the artist has at least one listened song.
+     * @return {@code true}, if the artist was listened, {@code false} otherwise.
+     */
+    @Override
+    public boolean wasListened() {
+        return !songHistory.isEmpty();
+    }
+
+    /**
      * Tracks the number of listens for the specified song.
      * @param song The song to be tracked
      */

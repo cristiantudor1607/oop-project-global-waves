@@ -284,6 +284,15 @@ public class User implements NamePossessor, UniqueIdPossessor {
     }
 
     /**
+     * Checks if the artist have at least one listened song.
+     * @return {@code true}, if the artist was listened, {@code false} otherwise. If the user
+     * isn't an artist, it returns {@code false}
+     */
+    public boolean wasListened() {
+        return false;
+    }
+
+    /**
      * Adds a new amount to the merchRevenue of the artist. For normal users and hosts,
      * it has no effect.
      * @param amount The amount paid

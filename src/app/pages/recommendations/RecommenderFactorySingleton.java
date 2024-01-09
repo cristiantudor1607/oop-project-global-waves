@@ -46,7 +46,7 @@ public class RecommenderFactorySingleton {
         }
 
         if (type.equals(RANDOM_PLAYLIST)) {
-            return new PlaylistRecommender();
+            return new PlaylistRecommender(player);
         }
 
         if (type.equals(FANS_PLAYLIST)) {

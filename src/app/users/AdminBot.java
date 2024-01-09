@@ -326,6 +326,7 @@ public class AdminBot extends Admin {
         return artist.getAlbums();
     }
 
+
     /**
      * Returns a list of all host podcasts.
      * @param username The username of the host
@@ -432,6 +433,18 @@ public class AdminBot extends Admin {
         foundSongs.sort(new SortByUniqueId());
 
         return foundSongs;
+    }
+
+    /**
+     * Returns a list with the artists that have at least one listened song.
+     *
+     * @return A list with the artist with listens
+     */
+    public List<User> getArtistWithListens() {
+        return database.getArtists()
+                .stream()
+                .filter(User::wasListened)
+                .toList();
     }
 
 }
