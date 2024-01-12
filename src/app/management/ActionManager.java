@@ -337,7 +337,7 @@ public final class ActionManager {
             }
             case PAGE -> {
                 Page foundPage = searchbar.getPageAtIndex(itemNumber - 1);
-                userUI.setCurrentPage(foundPage);
+                userUI.setPage(foundPage);
                 execQuery.setSelectedPage(foundPage);
                 yield SelectExit.Status.SELECTED_PAGE;
             }
@@ -1469,16 +1469,52 @@ public final class ActionManager {
         return switch (PageType.parseString(nextPage)) {
             case HOME -> {
                 Page homePage = ui.getHomePage();
-                ui.setCurrentPage(homePage);
+                ui.setPage(homePage);
                 yield username + " accessed Home successfully.";
             }
             case LIKED -> {
                 Page likedPage = ui.getLikedContentPage();
-                ui.setCurrentPage(likedPage);
+                ui.setPage(likedPage);
                 yield  username + " accessed LikedContent successfully.";
             }
             case UNKNOWN -> username + " is trying to access a non-existent page.";
         };
+    }
+
+    /**
+     * Sends the user to the previous page if there is one.
+     *
+     * @param username The user that sent the request
+     * @return A {@code String} describing success or failure
+     */
+    public String requestPrevPage(final String username) {
+        UserInterface ui = userInterfaces.get(username);
+        if (ui == null) {
+            return null;
+        }
+
+        boolean changedPage = ui.getPageHistory().visitPreviousPage();
+        return !changedPage ? "There are no pages left to go back." :
+                "The user " + username + " has navigated successfully to"
+                + " the previous page.";
+    }
+
+    /**
+     * Sends the user to the next page if there is one.
+     *
+     * @param username The user that sent the request.
+     * @return A {@code String} describing success or failure.
+     */
+    public String requestNextPage(final String username) {
+        UserInterface ui = userInterfaces.get(username);
+        if (ui == null) {
+            return null;
+        }
+
+        boolean changedPage = ui.getPageHistory().visitNextPage();
+        return !changedPage ? "There are no pages left to go forward." :
+                "The user " + username + " has navigated successfully to"
+                + " the next page.";
     }
 
     /**

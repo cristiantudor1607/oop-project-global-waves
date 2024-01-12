@@ -4,6 +4,7 @@ import app.management.IDContainer;
 import app.notifications.Inbox;
 import app.notifications.Notification;
 import app.notifications.Notifier;
+import app.pages.PageHistory;
 import app.player.entities.Album;
 import app.player.entities.AudioFile;
 import app.player.entities.Episode;

@@ -110,8 +110,8 @@ import java.util.Map;
         @JsonSubTypes.Type(value = GetNotificationsInterrogator.class, name = "getNotifications"),
         @JsonSubTypes.Type(value = UpdateRecomsInterrogator.class, name = "updateRecommendations"),
         @JsonSubTypes.Type(value = EmptyCommand.class, name = "loadRecommendations"),
-        @JsonSubTypes.Type(value = EmptyCommand.class, name = "previousPage"),
-        @JsonSubTypes.Type(value = EmptyCommand.class, name = "nextPage"),
+        @JsonSubTypes.Type(value = PrevPageInterrogator.class, name = "previousPage"),
+        @JsonSubTypes.Type(value = NextPageInterrogator.class, name = "nextPage"),
 })
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Getter @Setter

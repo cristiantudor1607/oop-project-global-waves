@@ -1,10 +1,6 @@
 package app.management;
 
-import app.pages.ArtistPage;
-import app.pages.HomePage;
-import app.pages.HostPage;
-import app.pages.LikedContentPage;
-import app.pages.Page;
+import app.pages.*;
 import app.player.entities.Player;
 import app.player.entities.SearchBar;
 import app.users.User;
@@ -18,8 +14,7 @@ public class UserInterface {
     private final SearchBar searchbar;
     private final Page homePage;
     private final Page likedContentPage;
-    @Setter
-    private Page currentPage;
+    private final PageHistory pageHistory;
     private final Player player;
 
     public UserInterface(final User user) {
@@ -27,7 +22,26 @@ public class UserInterface {
         searchbar = new SearchBar(user.getUsername());
         homePage = new HomePage(user);
         likedContentPage = new LikedContentPage(user);
-        currentPage = homePage;
         player = new Player(user);
+        pageHistory = new PageHistory();
+        pageHistory.visitPage(homePage);
+    }
+
+    /**
+     * Sets the current page to the given page.
+     *
+     * @param page The page to be visited
+     */
+    public void setPage(final Page page) {
+        pageHistory.visitPage(page);
+    }
+
+    /**
+     * Returns the current page of the user from the interface
+     * .
+     * @return The current page of the user.
+     */
+    public Page getCurrentPage() {
+        return pageHistory.getCurrentPage();
     }
 }
