@@ -1,13 +1,11 @@
 package app.pages.recommendations;
 
-import app.player.entities.Album;
 import app.player.entities.Player;
 import app.player.entities.Playlist;
 import app.player.entities.Song;
 import app.properties.PlayableEntity;
 import app.users.AdminBot;
 import app.users.User;
-import app.utilities.HelperTool;
 import app.utilities.SortAlphabeticallyByKey;
 import app.utilities.SortByIntegerValue;
 

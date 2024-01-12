@@ -25,8 +25,10 @@ public class SongRecommender extends Recommender {
 
     /**
      * Returns the found recommended song.
+     * It takes the genre of the current song, and makes a list of all songs from the same genre.
+     * It generates a random index and takes a random song.
      *
-     * @return The song recommended, if it can be found, {@code null otherwise}
+     * @return The song recommended if it can be found, {@code null otherwise}
      */
     @Override
     public PlayableEntity getRecommendation() {

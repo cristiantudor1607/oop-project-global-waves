@@ -9,6 +9,8 @@ import app.pages.Page;
 import app.player.entities.Song;
 import app.statistics.StatisticsUtils;
 import app.utilities.SortByIntegerValue;
+import app.utilities.SortByKeyName;
+import app.utilities.SortByUniqueId;
 import app.utilities.constants.NotificationConstants;
 import app.utilities.constants.StatisticsConstants;
 import lombok.Getter;
@@ -77,11 +79,7 @@ public class Artist extends User {
         statistics.put(StatisticsConstants.TOP_ALBUMS, albums);
 
         List<Map.Entry<String, Integer>> songs = StatisticsUtils.parseHistory(songHistory,
-                new SortByIntegerValue<Song>().thenComparing((o1, o2) -> {
-                    String o1name = o1.getKey().getName();
-                    String o2name = o2.getKey().getName();
-                    return o1name.compareTo(o2name);
-                }));
+                new SortByIntegerValue<Song>().thenComparing(new SortByKeyName<>()));
         statistics.put(StatisticsConstants.TOP_SONGS, songs);
 
         int listenersNumber = peopleHistory.size();
@@ -90,15 +88,36 @@ public class Artist extends User {
         statistics.put(StatisticsConstants.LISTENERS, listenersMapList);
 
         List<Map.Entry<String, Integer>> fans = StatisticsUtils.parseHistory(peopleHistory,
-                new SortByIntegerValue<User>()
-                        .thenComparing((o1, o2) -> {
-                            int id1 = o1.getKey().getIdentificationNumber();
-                            int id2 = o2.getKey().getIdentificationNumber();
-                            return id1 - id2;
-                        }));
+                new SortByIntegerValue<User>().thenComparing((o1, o2) -> {
+                    int id1 = o1.getKey().getIdentificationNumber();
+                    int id2 = o2.getKey().getIdentificationNumber();
+                    return id1 - id2;
+                }));
         statistics.put(StatisticsConstants.TOP_FANS, fans);
 
         return statistics;
+    }
+
+    /**
+     * Returns a list with the artist's top 5 fans.
+     * The fans ar sorted by the number of
+     * listens, and then after their arrival time on the platform.
+     *
+     * @return A list containing five users or fewer, with the fans sorted if the user is
+     * an artist, or {@code null} otherwise
+     */
+    @Override
+    public List<User> getTop5Fans() {
+        List<Map.Entry<User, Integer>> fans = new ArrayList<>(peopleHistory.entrySet());
+        return fans.stream().sorted(new SortByIntegerValue<User>()
+                .thenComparing((o1, o2) -> {
+                    int id1 = o1.getKey().getIdentificationNumber();
+                    int id2 = o2.getKey().getIdentificationNumber();
+                    return id1 - id2;
+                }))
+                .limit(5)
+                .map(Map.Entry::getKey)
+                .toList();
     }
 
     /**

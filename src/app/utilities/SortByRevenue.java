@@ -1,11 +1,11 @@
 package app.utilities;
 
-import app.monetization.MonetizationStat;
+import app.monetization.MonetizationSummary;
 
 import java.util.Comparator;
 import java.util.Map;
 
-public class SortByRevenue<T> implements Comparator<Map.Entry<T, MonetizationStat>> {
+public class SortByRevenue<T> implements Comparator<Map.Entry<T, MonetizationSummary>> {
     // TODO: Add doc
     /**
      * @param o1 the first object to be compared.
@@ -13,7 +13,7 @@ public class SortByRevenue<T> implements Comparator<Map.Entry<T, MonetizationSta
      * @return
      */
     @Override
-    public int compare(Map.Entry<T, MonetizationStat> o1, Map.Entry<T, MonetizationStat> o2) {
+    public int compare(Map.Entry<T, MonetizationSummary> o1, Map.Entry<T, MonetizationSummary> o2) {
         Double o1TotalRevenue = o1.getValue().getMerchRevenue()
                 + o1.getValue().getSongRevenue();
 

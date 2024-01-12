@@ -6,7 +6,7 @@ import java.util.Comparator;
 
 public class SortByNumberOfLikes implements Comparator<Song> {
     /**
-     * Compares the number of likes of the two songs.
+     * Compares the like's number of the two songs.
      * @param o1 The first song to be compared.
      * @param o2 The second song to be compared.
      * @return A positive integer, if the first one has more likes, {@code 0}, if they

@@ -50,7 +50,7 @@ public class RecommenderFactorySingleton {
         }
 
         if (type.equals(FANS_PLAYLIST)) {
-            return new FansPlaylistRecommender();
+            return new FansPlaylistRecommender(player);
         }
 
         return null;

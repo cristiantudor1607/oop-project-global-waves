@@ -30,12 +30,12 @@ public class MonetizationStatisticsFormatter {
      * @return {@code null}, if the user isn't an artist, or it doesn't have at least one
      * song played by someone or a merch bought by someone, the summary entry otherwise
      */
-    public Map.Entry<String, MonetizationStat> createMonetizationEntry(final User artist) {
+    public Map.Entry<String, MonetizationSummary> createMonetizationEntry(final User artist) {
         if (!artist.hasMonetizationData()) {
             return null;
         }
 
-        MonetizationStat artistStat = new MonetizationStat(artist);
+        MonetizationSummary artistStat = new MonetizationSummary(artist);
         String artistName = artist.getUsername();
 
         return new AbstractMap.SimpleEntry<>(artistName, artistStat);
@@ -48,12 +48,12 @@ public class MonetizationStatisticsFormatter {
      * It sorts the stats by total revenue, and for equal revenues, by artist username.
      * @return A map with the monetization stats for all artists.
      */
-    private List<Map.Entry<String, MonetizationStat>> getAndSortMonetization() {
+    private List<Map.Entry<String, MonetizationSummary>> getAndSortMonetization() {
         List<User> artists = database.getArtists();
 
-        List<Map.Entry<String, MonetizationStat>> stats = new ArrayList<>();
+        List<Map.Entry<String, MonetizationSummary>> stats = new ArrayList<>();
         for (User artist : artists) {
-            Map.Entry<String, MonetizationStat> entry = createMonetizationEntry(artist);
+            Map.Entry<String, MonetizationSummary> entry = createMonetizationEntry(artist);
             if (entry != null) {
                 stats.add(entry);
             }
@@ -76,11 +76,11 @@ public class MonetizationStatisticsFormatter {
      * played by someone, or one of their merch was bought by someone.
      * @return A map with the monetization stats for all artists.
      */
-    public Map<String, MonetizationStat> getMonetizationStatistics() {
+    public Map<String, MonetizationSummary> getMonetizationStatistics() {
         makeFinalPayment();
-        List<Map.Entry<String, MonetizationStat>> statsList = getAndSortMonetization();
+        List<Map.Entry<String, MonetizationSummary>> statsList = getAndSortMonetization();
 
-        Map<String, MonetizationStat> result = new HashMap<>();
+        Map<String, MonetizationSummary> result = new HashMap<>();
         statsList.forEach(entry -> {
             result.put(entry.getKey(), entry.getValue());
         });

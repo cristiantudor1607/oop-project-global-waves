@@ -1,7 +1,7 @@
 package app.outputs.stagethree;
 
 import app.parser.commands.templates.CommandOutputFormatter;
-import app.monetization.MonetizationStat;
+import app.monetization.MonetizationSummary;
 import app.monetization.MonetizationStatisticsFormatter;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,7 +12,7 @@ import java.util.Map;
 
 @Getter
 public class EndProgramOutput extends CommandOutputFormatter {
-    private final Map<String, MonetizationStat> result;
+    private final Map<String, MonetizationSummary> result;
 
     public EndProgramOutput() {
         command = "endProgram";

@@ -18,6 +18,7 @@ import app.statistics.StatisticsUtils;
 import app.utilities.SortAlphabeticallyByKey;
 import app.utilities.SortByIntegerValue;
 import app.utilities.SortByKeyName;
+import app.utilities.SortByNumberOfLikes;
 import app.utilities.constants.StatisticsConstants;
 import fileio.input.UserInput;
 import app.pages.features.Announcement;
@@ -183,8 +184,7 @@ public class User implements NamePossessor, UniqueIdPossessor {
         Map<String, List<Map.Entry<String, Integer>>> statistics  = new HashMap<>();
 
         List<Map.Entry<String, Integer>> artists = StatisticsUtils.parseHistory(artistHistory,
-                new SortByIntegerValue<User>()
-                        .thenComparing(new SortByKeyName<>()));
+                new SortByIntegerValue<User>().thenComparing(new SortByKeyName<>()));
         statistics.put(StatisticsConstants.TOP_ARTISTS, artists);
 
         List<Map.Entry<String, Integer>> genres = StatisticsUtils.parseHistory(genreHistory,
@@ -192,17 +192,12 @@ public class User implements NamePossessor, UniqueIdPossessor {
         statistics.put(StatisticsConstants.TOP_GENRES, genres);
 
         List<Map.Entry<String, Integer>> songs = StatisticsUtils.parseHistory(songHistory,
-                new SortByIntegerValue<Song>().thenComparing((o1, o2) -> {
-                    String o1name = o1.getKey().getName();
-                    String o2name = o2.getKey().getName();
-                    return o1name.compareTo(o2name);
-                }));
+                new SortByIntegerValue<Song>().thenComparing(new SortByKeyName<>()));
         statistics.put(StatisticsConstants.TOP_SONGS, songs);
 
         List<Map.Entry<String, Integer>> albums = StatisticsUtils
                 .combineAndParseAlbumHistory(albumHistory,
-                new SortByIntegerValue<String>()
-                        .thenComparing(Map.Entry::getKey));
+                new SortByIntegerValue<String>().thenComparing(Map.Entry::getKey));
         statistics.put(StatisticsConstants.TOP_ALBUMS, albums);
 
         List<Map.Entry<String, Integer>> episodes = StatisticsUtils.parseHistory(episodeHistory,
@@ -210,6 +205,32 @@ public class User implements NamePossessor, UniqueIdPossessor {
         statistics.put(StatisticsConstants.TOP_EPISODES, episodes);
 
         return statistics;
+    }
+
+    /**
+     * Returns a list with the artist's top 5 fans.
+     * The fans ar sorted by the number of
+     * listens, and then after their arrival time on the platform.
+     *
+     * @return A list containing five users or fewer, with the fans sorted if the user is
+     * an artist, or {@code null} otherwise
+     */
+    public List<User> getTop5Fans() {
+        return null;
+    }
+
+    /**
+     * Returns a list with all the songs user listened to, sorted by their number of
+     * likes.
+     *
+     * @return A list containing all the songs user listened to, sorted by their number of
+     * likes
+     */
+    public List<Song> getTopSongs() {
+        return songHistory.keySet()
+                .stream()
+                .sorted(new SortByNumberOfLikes())
+                .toList();
     }
 
     /**

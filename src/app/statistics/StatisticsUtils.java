@@ -48,8 +48,8 @@ public final class StatisticsUtils {
      * @param compareFunc The comparator
      * @return A list of {@code <String, Integer>} tuples, containing the first {@code 5} results,
      * or less if there aren't {@code 5} records in history.
-     * @param <T> The type of objects in history . They have to implement the {@code NamedObject}
-     *           interface, in order to call the {@code getName} method.
+     * @param <T> The type of objects in history. They have to implement the {@code NamedObject}
+     *           interface, to call the {@code getName} method.
      */
     public static <T extends NamePossessor> List<Map.Entry<String, Integer>>
     parseHistory(final Map<T, Integer> history,
