@@ -17,6 +17,7 @@ import app.commands.stageone.ShuffleInterrogator;
 import app.commands.stageone.VisibilityInterrogator;
 import app.commands.stagethree.AdBreakInterrogator;
 import app.commands.stagethree.BuyMerchInterrogator;
+import app.commands.stagethree.LoadRecomsInterrogator;
 import app.commands.stagethree.UpdateRecomsInterrogator;
 import app.commands.stagetwo.AddAlbumInterrogator;
 import app.commands.stagetwo.AddAnnouncementInterrogator;
@@ -64,13 +65,7 @@ import app.pages.features.Merch;
 import app.pages.recommendations.Recommender;
 import app.pages.recommendations.RecommenderFactorySingleton;
 import app.parser.commands.templates.CommandObject;
-import app.player.entities.Album;
-import app.player.entities.AudioFile;
-import app.player.entities.Player;
-import app.player.entities.Playlist;
-import app.player.entities.Podcast;
-import app.player.entities.SearchBar;
-import app.player.entities.Song;
+import app.player.entities.*;
 import app.statistics.StatisticsFactorySingleton;
 import app.statistics.StatisticsTemplate;
 import app.users.AdminBot;
@@ -359,7 +354,6 @@ public final class ActionManager {
 
         String username = execQuery.getUsername();
         Player userPlayer = getPlayerByUsername(username);
-        User profile = getProfileByUsername(username);
 
         if (!userPlayer.hasSourceSelected() || userPlayer.hasNoSource()) {
             return LoadExit.Status.NO_SOURCE_SELECTED;
@@ -1046,12 +1040,13 @@ public final class ActionManager {
             return AddPodcastExit.Status.DUPLICATE;
         }
 
-        // Create the new Podcast Object
-        Podcast hostPodcast = new Podcast(podcastName, hostName, execQuery.getEpisodes());
-        // Add Podcast to Library
-        adminBot.addPodcastToLibrary(hostName, hostPodcast);
-        // Add Podcast to user podcasts
-        host.addPodcast(hostPodcast);
+        List<Episode> episodes = execQuery.getEpisodes();
+        Podcast podcast = new Podcast(podcastName, hostName, episodes);
+        adminBot.addPodcastToLibrary(hostName, podcast);
+        host.addPodcast(podcast);
+
+        tool.setHostLinks(episodes, host);
+        tool.setPodcastLink(episodes, podcast);
 
         return AddPodcastExit.Status.SUCCESS;
     }
@@ -1423,7 +1418,6 @@ public final class ActionManager {
     public UpdateRecomsInterrogator.Status
     requestUpdateRecoms(final UpdateRecomsInterrogator execQuery) {
         User user = adminBot.getUserByUsername(execQuery.getUsername());
-
         if (user == null) {
             return UpdateRecomsInterrogator.Status.DOESNT_EXIST;
         }
@@ -1451,6 +1445,41 @@ public final class ActionManager {
     }
 
     /**
+     * Loads the last recommendation of the user that gave the command if possible.
+     *
+     * @param execQuery The command that sent the request.
+     *                  It contains the username
+     *                  used inside the method.
+     * @return {@code SUCCESS}, if the last recommendation was successfully loaded,
+     * {@code DOESNT_EXIST} if the user doesn't exist,
+     * {@code OFFLINE} if the user is offline,
+     * {@code NO_RECOMS} if the user doesn't have recommendations
+     */
+    public LoadRecomsInterrogator.Status
+    requestLoadRecoms(final LoadRecomsInterrogator execQuery) {
+        String username = execQuery.getUsername();
+        User user = adminBot.getUserByUsername(username);
+        if (user == null) {
+            return LoadRecomsInterrogator.Status.DOESNT_EXIST;
+        } else if (user.isOffline()) {
+            return LoadRecomsInterrogator.Status.OFFLINE;
+        }
+
+        Optional<PlayableEntity> lastRecomOpt = userInterfaces.get(username)
+                .getHomePage()
+                .getLastRecommendation();
+
+        if (lastRecomOpt.isEmpty()) {
+            return LoadRecomsInterrogator.Status.NO_RECOMS;
+        }
+
+        PlayableEntity lastRecom = lastRecomOpt.get();
+        userInterfaces.get(username).getPlayer().load(lastRecom);
+
+        return LoadRecomsInterrogator.Status.SUCCESS;
+    }
+
+    /**
      * Changes the user currentPage to specified page.
      * @param execQuery The changePage Command that sent the request. It packages the
      *                  <b>username</b> and the <b>nextPage name</b>, used by manager
@@ -1470,12 +1499,34 @@ public final class ActionManager {
             case HOME -> {
                 Page homePage = ui.getHomePage();
                 ui.setPage(homePage);
+                ui.getPageHistory().resetNextPages();
                 yield username + " accessed Home successfully.";
             }
             case LIKED -> {
                 Page likedPage = ui.getLikedContentPage();
                 ui.setPage(likedPage);
+                ui.getPageHistory().resetNextPages();
                 yield  username + " accessed LikedContent successfully.";
+            }
+            case ARTIST -> {
+                Page artistPage = ui.getPlayer().getCurrentPage();
+                if (!artistPage.isArtistPage()) {
+                    yield username + " is trying to access a non-existent page.";
+                }
+
+                ui.setPage(artistPage);
+                ui.getPageHistory().resetNextPages();
+                yield  username + " accessed Artist successfully.";
+            }
+            case HOST -> {
+                Page hostPage = ui.getPlayer().getCurrentPage();
+                if (!hostPage.isHostPage()) {
+                    yield username + " is trying to access a non-existent page.";
+                }
+
+                ui.setPage(hostPage);
+                ui.getPageHistory().resetNextPages();
+                yield  username + " accessed Host successfully.";
             }
             case UNKNOWN -> username + " is trying to access a non-existent page.";
         };

@@ -52,6 +52,16 @@ public class ArtistPage extends Page {
     }
 
     /**
+     * Validates if {@code this} is an artist page.
+     *
+     * @return {@code true}, if {@code this} is an artist page, {@code false} otherwise
+     */
+    @Override
+    public boolean isArtistPage() {
+        return true;
+    }
+
+    /**
      * Returns the page owner username, but only for public pages. It means that
      * it returns either the artist name, or the host name.
      * @return The artist name, or the host name, {@code null} otherwise

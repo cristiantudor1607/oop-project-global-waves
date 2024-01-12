@@ -1,5 +1,6 @@
 package app.player.entities;
 
+import app.pages.Page;
 import app.properties.NamePossessor;
 import app.users.User;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -59,6 +60,17 @@ public class Episode extends AudioFile implements NamePossessor {
     @Override
     public Episode getCurrentEpisode() {
         return this;
+    }
+
+    /**
+     * Returns the public page of the entity's creator.
+     *
+     * @return The artist page, if {@code this} is a song or the host page, if
+     * {@code this} is an episode
+     */
+    @Override
+    public Page getCreatorPage() {
+        return hostLink.getPage();
     }
 
     /**

@@ -1,5 +1,7 @@
-package app.commands.stagethree;
+package app.outputs.stagethree;
 
+import app.commands.stagethree.NextPageInterrogator;
+import app.commands.stagethree.PrevPageInterrogator;
 import app.parser.commands.templates.CommandOutputFormatter;
 import lombok.Getter;
 

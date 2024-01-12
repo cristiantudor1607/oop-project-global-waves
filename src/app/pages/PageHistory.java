@@ -33,11 +33,16 @@ public class PageHistory {
 
     /**
      * Visits a new page.
-     * Sets the {@code currentPage} to the given page.
+     * Sets the {@code currentPage} to the given page, and adds the current page
+     * to history.
      *
      * @param page The page to be visited
      */
     public void visitPage(final Page page) {
+        if (currentPage != null) {
+            prevPages.addLast(currentPage);
+        }
+
         currentPage = page;
     }
 

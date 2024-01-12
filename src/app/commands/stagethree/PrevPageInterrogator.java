@@ -1,5 +1,6 @@
 package app.commands.stagethree;
 
+import app.outputs.stagethree.PageNavigationOutput;
 import app.parser.commands.templates.CommandObject;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonNode;

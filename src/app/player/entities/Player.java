@@ -1,5 +1,6 @@
 package app.player.entities;
 
+import app.pages.Page;
 import app.users.User;
 import app.utilities.HelperTool;
 import app.properties.PlayableEntity;
@@ -611,5 +612,15 @@ public class Player {
         }
 
         return false;
+    }
+
+    /**
+     * Returns the page of the artist / host of the playing song / episode.
+     *
+     * @return The page of the artist / host, if there is something playing, {@code null}
+     * otherwise
+     */
+    public Page getCurrentPage() {
+        return playingFile == null ? null : playingFile.getCreatorPage();
     }
 }

@@ -1,5 +1,6 @@
 package app.player.entities;
 
+import app.pages.Page;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,6 +28,14 @@ public abstract class AudioFile {
     public abstract Episode getCurrentEpisode();
 
     /**
+     * Returns the public page of the entity's creator.
+     *
+     * @return The artist page, if {@code this} is a song or the host page, if
+     * {@code this} is an episode
+     */
+    public abstract Page getCreatorPage();
+
+    /**
      * Checks if {@code this is an ad}. An <b>ad</b> is defined as a song
      * with the <b>advertisement</b> genre.
      * @return {@code true}, if {@code this} is an ad, {@code false} otherwise
@@ -34,4 +43,5 @@ public abstract class AudioFile {
     public boolean isAd() {
         return false;
     }
+
 }

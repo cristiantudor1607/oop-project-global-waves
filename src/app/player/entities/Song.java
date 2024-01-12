@@ -1,6 +1,7 @@
 package app.player.entities;
 
 import app.management.IDContainer;
+import app.pages.Page;
 import app.users.User;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -314,6 +315,17 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
     }
 
     /**
+     * Returns the public page of the entity's creator.
+     *
+     * @return The artist page, if {@code this} is a song or the host page, if
+     * {@code this} is an episode
+     */
+    @Override
+    public Page getCreatorPage() {
+        return artistLink.getPage();
+    }
+
+    /**
      * Compares this song with the specified object. The result is true if and only if
      * the argument is not null and is a Song object that represents the same song
      * as this object.
@@ -327,10 +339,9 @@ public class Song extends AudioFile implements PlayableEntity, Comparable<Song> 
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Song)) {
+        if (!(o instanceof Song song)) {
             return false;
         }
-        Song song = (Song) o;
         return artistName.equals(song.getArtistName()) && name.equals(song.getName());
     }
 

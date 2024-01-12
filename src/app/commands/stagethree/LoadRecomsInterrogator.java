@@ -1,22 +1,28 @@
 package app.commands.stagethree;
 
-import app.outputs.stagethree.PageNavigationOutput;
+import app.outputs.stagethree.LoadRecomsOutput;
 import app.parser.commands.templates.CommandObject;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.Getter;
 
 @Getter
-public class NextPageInterrogator extends CommandObject {
-    @JsonIgnore
-    private String message;
+public class LoadRecomsInterrogator extends CommandObject {
+    public enum Status {
+        DOESNT_EXIST,
+        NO_RECOMS,
+        OFFLINE,
+        SUCCESS
+    }
 
+    @JsonIgnore
+    private Status exitStatus;
     /**
-     * Executes the nextPage command.
+     * Executes the loadRecommendations command.
      */
     @Override
     public void execute() {
-        message = manager.requestNextPage(username);
+        exitStatus = manager.requestLoadRecoms(this);
         manager.setLastActionTime(timestamp);
     }
 
@@ -28,6 +34,6 @@ public class NextPageInterrogator extends CommandObject {
      */
     @Override
     public JsonNode formatOutput() {
-        return new PageNavigationOutput(this).generateOutputNode();
+        return new LoadRecomsOutput(this).generateOutputNode();
     }
 }

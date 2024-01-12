@@ -26,27 +26,10 @@ public class ContentVisitor implements Visitor {
         List<Song> recommendedSongs = page.getSongRecommendations();
         List<Playlist> recommendedPlaylists = page.getPlaylistRecommendation();
 
-//        StringBuilder songNames = new StringBuilder();
-//        for (int i = 0; i < likedSongs.size(); i++) {
-//            if (i != 0) {
-//                songNames.append(", ");
-//            }
-//
-//            songNames.append(likedSongs.get(i).getName());
-//        }
         String liked = "Liked songs:\n\t%s"
                 .formatted(likedSongs.stream()
                         .map(Song::getName)
                         .toList());
-
-        StringBuilder playlistNames = new StringBuilder();
-        for (int i = 0; i < followingPlaylists.size(); i++) {
-            if (i != 0) {
-                playlistNames.append(", ");
-            }
-
-            playlistNames.append(followingPlaylists.get(i).getName());
-        }
 
         String following = "Followed playlists:\n\t%s"
                 .formatted(followingPlaylists.stream()
@@ -157,7 +140,7 @@ public class ContentVisitor implements Visitor {
         }
 
         return "Podcasts:\n\t[" + podcastFormat + "]\n\nAnnouncements:\n\t["
-                + announceFormat + "\n]";
+                + announceFormat + "]";
     }
 
     /**

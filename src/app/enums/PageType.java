@@ -6,6 +6,8 @@ public final class PageType {
     public enum Type {
         HOME,
         LIKED,
+        ARTIST,
+        HOST,
         UNKNOWN,
     }
 
@@ -24,6 +26,14 @@ public final class PageType {
 
         if (pageAsString.equals("LikedContent")) {
             return Type.LIKED;
+        }
+
+        if (pageAsString.equals("Artist")) {
+            return Type.ARTIST;
+        }
+
+        if (pageAsString.equals("Host")) {
+            return Type.HOST;
         }
 
         return Type.UNKNOWN;
