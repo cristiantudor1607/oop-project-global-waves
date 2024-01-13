@@ -11,16 +11,7 @@ import java.util.Scanner;
  * Use this if you want to test on a specific input file
  */
 public final class Test {
-    private static final String test0 = "test00_etapa3_wrapped_one_user_one_artist.json";
-    private static final String test1 = "test01_etapa3_wrapped_one_user_n_artist.json";
-    private static final String test2 = "test02_etapa3_wrapped_n_user_one_artist.json";
-    private static final String test3 = "test03_etapa3_wrapped_n_user_n_artist.json";
-    private static final String test4 = "test04_etapa3_monetization_premium.json";
-    private static final String test5 = "test05_etapa3_monetization_free.json";
-    private static final String test7 = "test07_etapa3_notifications_simple.json";
-    private static final String test9 = "test09_etapa3_merch_buy.json";
-    private static final String test10 = "test10_etapa3_wrapped_host.json";
-    private static final String test14 = "test14_etapa3_page_navigation.json";
+    private static final String test15 = "test15_etapa3_complex.json";
 
     /**
      * for coding style
@@ -41,7 +32,7 @@ public final class Test {
 
 //            Scanner scanner = new Scanner(System.in);
 //            String fileName = scanner.next();
-            String fileName = test14;
+            String fileName = test15;
             for (File file : inputDir) {
                 if (file.getName().equalsIgnoreCase(fileName)) {
                     Main.action(fileName, CheckerConstants.OUT_FILE);

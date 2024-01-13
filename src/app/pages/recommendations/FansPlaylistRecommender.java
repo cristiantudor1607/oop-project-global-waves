@@ -54,8 +54,9 @@ public class FansPlaylistRecommender extends Recommender{
             playlistSongs.addAll(fanSongs);
         });
 
-        // FIXME: Daca playlisturile au problema, trebuie sortata iar lista mare dupa numarul
-        // de likes
+        if (playlistSongs.isEmpty()) {
+            return null;
+        }
 
         String playlistName = artist.getUsername() + " Fan Club recommendations";
 

@@ -17,12 +17,24 @@ public class IDContainer {
         inboxId = 1;
     }
 
+    /**
+     * Returns the only instance of the class.
+     *
+     * @return The instance of the class
+     */
     public static IDContainer getInstance() {
         if (instance == null) {
             instance = new IDContainer();
         }
 
         return instance;
+    }
+
+    /**
+     * Resets the instance.
+     */
+    public static void resetInstance() {
+        instance = null;
     }
 
     /**

@@ -1,5 +1,6 @@
 package main;
 
+import app.management.IDContainer;
 import app.outputs.stagethree.EndProgramOutput;
 import checker.Checker;
 import checker.CheckerConstants;
@@ -116,6 +117,6 @@ public final class Main {
 
         ActionManager.resetInstance();
         Library.resetInstance();
-        // TODO: delete instance of id container
+        IDContainer.resetInstance();
     }
 }

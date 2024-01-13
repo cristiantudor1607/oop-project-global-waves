@@ -228,8 +228,7 @@ public class User implements NamePossessor, UniqueIdPossessor {
      * likes
      */
     public List<Song> getTopSongs() {
-        return songHistory.keySet()
-                .stream()
+        return likes.stream()
                 .sorted(new SortByNumberOfLikes())
                 .toList();
     }
