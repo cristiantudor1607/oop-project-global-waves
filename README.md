@@ -36,7 +36,7 @@ It stores the player, the searchbar, some data about pages navigation and a "lin
 > The link "type" of field can be easily identified in the songs, albums and episodes structure, introduced since 3.0.
 
 > **Note** : I'll start describing what's new on this version, but I'll return and explain some of the details about
-> the app overall.
+> the app overall if it is necessary.
 
 ## <font color="#5F8670"> What's modified? </font>
 * The identifiers: Since 3.0, a timestamp was assigned to each entity when it was created. From now on, a unique id is
