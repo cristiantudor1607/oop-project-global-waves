@@ -819,8 +819,6 @@ public final class ActionManager {
             adminBot.movePodcastsFromDefaultToHost(newUser);
         }
 
-        // debugmessage: Remove this
-        //System.out.println("Created user " + username + " with id " + newUser.getId());
         return AddUserExit.Status.SUCCESS;
     }
 

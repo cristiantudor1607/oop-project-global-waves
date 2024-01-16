@@ -15,12 +15,11 @@ import app.monetization.MoneyTracker;
 import app.properties.NamePossessor;
 import app.properties.UniqueIdPossessor;
 import app.statistics.Genre;
+import app.statistics.StatisticsFactorySingleton;
 import app.statistics.StatisticsUtils;
-import app.utilities.SortAlphabeticallyByKey;
 import app.utilities.SortByIntegerValue;
 import app.utilities.SortByKeyName;
 import app.utilities.SortByNumberOfLikes;
-import app.utilities.constants.StatisticsConstants;
 import fileio.input.UserInput;
 import app.pages.features.Announcement;
 import app.pages.features.Event;
@@ -29,7 +28,11 @@ import app.pages.Page;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 @Getter
 public class User implements NamePossessor, UniqueIdPossessor {
@@ -38,7 +41,6 @@ public class User implements NamePossessor, UniqueIdPossessor {
         OFFLINE,
     }
 
-    // TODO: Add a special subscription type for admins
     public enum SubscriptionType {
         FREE,
         PREMIUM,
@@ -185,25 +187,33 @@ public class User implements NamePossessor, UniqueIdPossessor {
         Map<String, List<Map.Entry<String, Integer>>> statistics  = new HashMap<>();
 
         List<Map.Entry<String, Integer>> artists = StatisticsUtils.parseHistory(artistHistory,
-                new SortByIntegerValue<User>().thenComparing(new SortByKeyName<>()));
-        statistics.put(StatisticsConstants.TOP_ARTISTS, artists);
+                new SortByIntegerValue<User>()
+                        .reversed()
+                        .thenComparing(new SortByKeyName<>()));
+        statistics.put(StatisticsFactorySingleton.TOP_ARTISTS, artists);
 
         List<Map.Entry<String, Integer>> genres = StatisticsUtils.parseHistory(genreHistory,
-                new SortByIntegerValue<Genre>().thenComparing(new SortByKeyName<>()));
-        statistics.put(StatisticsConstants.TOP_GENRES, genres);
+                new SortByIntegerValue<Genre>()
+                        .reversed()
+                        .thenComparing(new SortByKeyName<>()));
+        statistics.put(StatisticsFactorySingleton.TOP_GENRES, genres);
 
         List<Map.Entry<String, Integer>> songs = StatisticsUtils.parseHistory(songHistory,
-                new SortByIntegerValue<Song>().thenComparing(new SortByKeyName<>()));
-        statistics.put(StatisticsConstants.TOP_SONGS, songs);
+                new SortByIntegerValue<Song>()
+                        .reversed()
+                        .thenComparing(new SortByKeyName<>()));
+        statistics.put(StatisticsFactorySingleton.TOP_SONGS, songs);
 
         List<Map.Entry<String, Integer>> albums = StatisticsUtils
                 .combineAndParseAlbumHistory(albumHistory,
-                new SortByIntegerValue<String>().thenComparing(Map.Entry::getKey));
-        statistics.put(StatisticsConstants.TOP_ALBUMS, albums);
+                new SortByIntegerValue<String>()
+                        .reversed()
+                        .thenComparing(Map.Entry::getKey));
+        statistics.put(StatisticsFactorySingleton.TOP_ALBUMS, albums);
 
         List<Map.Entry<String, Integer>> episodes = StatisticsUtils.parseHistory(episodeHistory,
-                new SortByIntegerValue<>());
-        statistics.put(StatisticsConstants.TOP_EPISODES, episodes);
+                new SortByIntegerValue<Episode>().reversed());
+        statistics.put(StatisticsFactorySingleton.TOP_EPISODES, episodes);
 
         return statistics;
     }
@@ -254,7 +264,6 @@ public class User implements NamePossessor, UniqueIdPossessor {
      * @param user The user to be unsubscribed from
      */
     public void unsubscribe(final User user) {
-        // TODO: Clear inbox
         user.getNotifier().detach(inbox);
     }
 
@@ -546,7 +555,6 @@ public class User implements NamePossessor, UniqueIdPossessor {
         return subscription == SubscriptionType.PREMIUM;
     }
 
-    // TODO: Overwrite method for artist and host
     /**
      * Makes the user a premium user.
      */
@@ -555,7 +563,6 @@ public class User implements NamePossessor, UniqueIdPossessor {
         moneyTracker.makePremium();
     }
 
-    // TODO: Overwrite method for artist and host
     /**
      * Makes the user a free user.
      */

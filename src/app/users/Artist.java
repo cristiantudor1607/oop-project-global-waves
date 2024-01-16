@@ -7,11 +7,11 @@ import app.pages.features.Merch;
 import app.pages.ArtistPage;
 import app.pages.Page;
 import app.player.entities.Song;
+import app.statistics.StatisticsFactorySingleton;
 import app.statistics.StatisticsUtils;
 import app.utilities.SortByIntegerValue;
 import app.utilities.SortByKeyName;
 import app.utilities.constants.NotificationConstants;
-import app.utilities.constants.StatisticsConstants;
 import lombok.Getter;
 
 import java.util.AbstractMap;
@@ -74,25 +74,30 @@ public class Artist extends User {
         Map<String, List<Map.Entry<String, Integer>>> statistics  = new HashMap<>();
 
         List<Map.Entry<String, Integer>> albums =
-                StatisticsUtils.combineAndParseAlbumHistory(albumHistory, new SortByIntegerValue<>());
-        statistics.put(StatisticsConstants.TOP_ALBUMS, albums);
+                StatisticsUtils.combineAndParseAlbumHistory(albumHistory,
+                        new SortByIntegerValue<String>().reversed());
+        statistics.put(StatisticsFactorySingleton.TOP_ALBUMS, albums);
 
         List<Map.Entry<String, Integer>> songs = StatisticsUtils.parseHistory(songHistory,
-                new SortByIntegerValue<Song>().thenComparing(new SortByKeyName<>()));
-        statistics.put(StatisticsConstants.TOP_SONGS, songs);
+                new SortByIntegerValue<Song>()
+                        .reversed()
+                        .thenComparing(new SortByKeyName<>()));
+        statistics.put(StatisticsFactorySingleton.TOP_SONGS, songs);
 
         int listenersNumber = peopleHistory.size();
         List<Map.Entry<String, Integer>> listenersMapList = new ArrayList<>();
         listenersMapList.add(new AbstractMap.SimpleEntry<>("listeners", listenersNumber));
-        statistics.put(StatisticsConstants.LISTENERS, listenersMapList);
+        statistics.put(StatisticsFactorySingleton.LISTENERS, listenersMapList);
 
         List<Map.Entry<String, Integer>> fans = StatisticsUtils.parseHistory(peopleHistory,
-                new SortByIntegerValue<User>().thenComparing((o1, o2) -> {
+                new SortByIntegerValue<User>()
+                        .reversed()
+                        .thenComparing((o1, o2) -> {
                     int id1 = o1.getKey().getIdentificationNumber();
                     int id2 = o2.getKey().getIdentificationNumber();
                     return id1 - id2;
                 }));
-        statistics.put(StatisticsConstants.TOP_FANS, fans);
+        statistics.put(StatisticsFactorySingleton.TOP_FANS, fans);
 
         return statistics;
     }
@@ -109,11 +114,12 @@ public class Artist extends User {
     public List<User> getTop5Fans() {
         List<Map.Entry<User, Integer>> fans = new ArrayList<>(peopleHistory.entrySet());
         return fans.stream().sorted(new SortByIntegerValue<User>()
-                .thenComparing((o1, o2) -> {
-                    int id1 = o1.getKey().getIdentificationNumber();
-                    int id2 = o2.getKey().getIdentificationNumber();
-                    return id1 - id2;
-                }))
+                        .reversed()
+                        .thenComparing((o1, o2) -> {
+                            int id1 = o1.getKey().getIdentificationNumber();
+                            int id2 = o2.getKey().getIdentificationNumber();
+                            return id1 - id2;
+                        }))
                 .limit(5)
                 .map(Map.Entry::getKey)
                 .toList();

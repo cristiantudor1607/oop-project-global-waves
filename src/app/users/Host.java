@@ -2,16 +2,21 @@ package app.users;
 
 import app.notifications.Notification;
 import app.pages.features.Announcement;
+import app.player.entities.Episode;
 import app.player.entities.Podcast;
 import app.pages.HostPage;
 import app.pages.Page;
+import app.statistics.StatisticsFactorySingleton;
 import app.statistics.StatisticsUtils;
 import app.utilities.SortByIntegerValue;
 import app.utilities.constants.NotificationConstants;
-import app.utilities.constants.StatisticsConstants;
 import lombok.Getter;
 
-import java.util.*;
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Getter
 public class Host extends User {
@@ -66,13 +71,13 @@ public class Host extends User {
         Map<String, List<Map.Entry<String, Integer>>> statistics  = new HashMap<>();
 
         List<Map.Entry<String, Integer>> episodes = StatisticsUtils.parseHistory(episodeHistory,
-                new SortByIntegerValue<>());
-        statistics.put(StatisticsConstants.TOP_EPISODES, episodes);
+                new SortByIntegerValue<Episode>().reversed());
+        statistics.put(StatisticsFactorySingleton.TOP_EPISODES, episodes);
 
         int listenersNumber = peopleHistory.size();
         List<Map.Entry<String, Integer>> listenersMapList = new ArrayList<>();
         listenersMapList.add(new AbstractMap.SimpleEntry<>("listeners", listenersNumber));
-        statistics.put(StatisticsConstants.LISTENERS, listenersMapList);
+        statistics.put(StatisticsFactorySingleton.LISTENERS, listenersMapList);
 
         return statistics;
     }
@@ -83,7 +88,6 @@ public class Host extends User {
      */
     @Override
     public boolean hasHistoryData() {
-        // FIXME: If something is wrong, it can be from here
         return !peopleHistory.isEmpty() || !episodeHistory.isEmpty();
     }
 

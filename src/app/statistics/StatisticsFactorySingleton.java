@@ -1,7 +1,7 @@
 package app.statistics;
 
+import app.enums.UserType;
 import app.users.User;
-import app.utilities.constants.StatisticsConstants;
 
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -10,6 +10,14 @@ import java.util.Map;
 
 public final class StatisticsFactorySingleton {
     private static StatisticsFactorySingleton instance =  null;
+
+    public static final String TOP_ARTISTS = "topArtists";
+    public static final String TOP_GENRES = "topGenres";
+    public static final String TOP_SONGS = "topSongs";
+    public static final String TOP_ALBUMS = "topAlbums";
+    public static final String TOP_EPISODES = "topEpisodes";
+    public static final String TOP_FANS = "topFans";
+    public static final String LISTENERS = "listeners";
 
     private StatisticsFactorySingleton() { }
 
@@ -26,16 +34,32 @@ public final class StatisticsFactorySingleton {
         return instance;
     }
 
+    /**
+     * Generates the "No data to show" message for the given user.
+     *
+     * @param username The username
+     * @param type The type of the user. The types accepted are {@code USER}, {@code ARTIST},
+     *             {@code HOST}.
+     * @return The message, if the type is accepted, {@code null} otherwise
+     */
+    public static String NoDataMessage(final String username, final UserType.Type type) {
+        return switch (type) {
+            case USER -> "No data to show for user " + username + ".";
+            case HOST -> "No data to show for host " + username + ".";
+            case ARTIST -> "No data to show for artist " + username + ".";
+            default -> null;
+        };
+    }
+
     private NoDataStatistics createNoDataStatistics(final User user) {
-        // FIXME: Nu e nevoie de 3 metoda separate, dai un parametru in plus la metoda
         String username = user.getUsername();
         String userTypeMessage;
         if (user.isNormalUser()) {
-            userTypeMessage = StatisticsConstants.NoUserDataMessage(username);
+            userTypeMessage = NoDataMessage(username, UserType.Type.USER);
         } else if (user.isArtist()) {
-            userTypeMessage = StatisticsConstants.NoArtistDataMessage(username);
+            userTypeMessage = NoDataMessage(username, UserType.Type.ARTIST);
         } else {
-            userTypeMessage = StatisticsConstants.NoHostDataMessage(username);
+            userTypeMessage = NoDataMessage(username, UserType.Type.HOST);
         }
 
         return NoDataStatistics.builder()
@@ -47,23 +71,23 @@ public final class StatisticsFactorySingleton {
         Map<String, List<Map.Entry<String, Integer>>> stats = user.getStatistics();
 
         Map<String, Integer> topArtists = new LinkedHashMap<>();
-        stats.get(StatisticsConstants.TOP_ARTISTS)
+        stats.get(TOP_ARTISTS)
                 .forEach(pair -> topArtists.put(pair.getKey(), pair.getValue()));
 
         Map<String, Integer> topGenres = new LinkedHashMap<>();
-        stats.get(StatisticsConstants.TOP_GENRES)
+        stats.get(TOP_GENRES)
                 .forEach(pair -> topGenres.put(pair.getKey(), pair.getValue()));
 
         Map<String, Integer> topSongs = new LinkedHashMap<>();
-        stats.get(StatisticsConstants.TOP_SONGS)
+        stats.get(TOP_SONGS)
                 .forEach(pair -> topSongs.put(pair.getKey(), pair.getValue()));
 
         Map<String, Integer> topAlbums = new LinkedHashMap<>();
-        stats.get(StatisticsConstants.TOP_ALBUMS)
+        stats.get(TOP_ALBUMS)
                 .forEach(pair -> topAlbums.put(pair.getKey(), pair.getValue()));
 
         Map<String, Integer> topEpisodes = new LinkedHashMap<>();
-        stats.get(StatisticsConstants.TOP_EPISODES)
+        stats.get(TOP_EPISODES)
                 .forEach(pair -> topEpisodes.put(pair.getKey(), pair.getValue()));
 
         return UserStatistics.builder()
@@ -79,18 +103,18 @@ public final class StatisticsFactorySingleton {
         Map<String, List<Map.Entry<String, Integer>>> stats = user.getStatistics();
 
         Map<String, Integer> topAlbums = new LinkedHashMap<>();
-        stats.get(StatisticsConstants.TOP_ALBUMS)
+        stats.get(TOP_ALBUMS)
                 .forEach(pair -> topAlbums.put(pair.getKey(), pair.getValue()));
 
         Map<String, Integer> topSongs = new LinkedHashMap<>();
-        stats.get(StatisticsConstants.TOP_SONGS)
+        stats.get(TOP_SONGS)
                 .forEach(pair -> topSongs.put(pair.getKey(), pair.getValue()));
 
         List<String> topFans = new LinkedList<>();
-        stats.get(StatisticsConstants.TOP_FANS)
+        stats.get(TOP_FANS)
                 .forEach(pair -> topFans.add(pair.getKey()));
 
-        int listeners = stats.get(StatisticsConstants.LISTENERS).get(0).getValue();
+        int listeners = stats.get(LISTENERS).get(0).getValue();
 
         return ArtistStatistics.builder()
                 .topAlbums(topAlbums)
@@ -104,10 +128,10 @@ public final class StatisticsFactorySingleton {
         Map<String, List<Map.Entry<String, Integer>>> stats = user.getStatistics();
 
         Map<String, Integer> topEpisodes = new LinkedHashMap<>();
-        stats.get(StatisticsConstants.TOP_EPISODES)
+        stats.get(TOP_EPISODES)
                 .forEach(pair -> topEpisodes.put(pair.getKey(), pair.getValue()));
 
-        int listeners = stats.get(StatisticsConstants.LISTENERS).get(0).getValue();
+        int listeners = stats.get(LISTENERS).get(0).getValue();
 
         return HostStatistics.builder()
                 .topEpisodes(topEpisodes)

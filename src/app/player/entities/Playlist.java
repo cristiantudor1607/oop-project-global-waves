@@ -218,8 +218,7 @@ public class Playlist implements PlayableEntity, OwnedEntity {
      */
     @Override
     public int getIdentificationNumber() {
-        // TODO: add id for playlist
-        return creationTime;
+        return id;
     }
 
     /**

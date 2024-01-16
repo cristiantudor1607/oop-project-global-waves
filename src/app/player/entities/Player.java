@@ -160,8 +160,6 @@ public class Player {
         repeat = 0;
         shuffle = false;
         remainedTime = 0;
-
-        // LANDMARK: Maybe this works for ads
         nextAd = null;
     }
 
@@ -315,16 +313,13 @@ public class Player {
 
     /**
      * Goes forward by 90 seconds, or plays the next file, if there are no 90
-     * seconds remained from current one.
+     * seconds remained from the current one.
      */
     public void skip() {
         if (playingFile.isAd()) {
-            // debugmessage: Remove this message after you are sure
-            System.out.println("Ad playing!");
             return;
         }
 
-        // If there are less than 90 seconds remaining, start the next episode
         if (remainedTime <= seconds) {
             int nextIndex = getNextAudioFileIndex();
             if (nextIndex != -1) {
@@ -385,25 +380,18 @@ public class Player {
             return false;
         }
 
-        // Mark entity as selected source
         select(entity);
-        // Load the file to be played
         playingFile = historyEntry.getFile();
         remainedTime = historyEntry.getRemainedTime();
-        // Get the index of the file (actually it will only be an episode, so we
-        // don't need to worry about shuffling)
-        currentIndex = entity.getIndexOfFile(historyEntry.getFile());
-        // Set the playing order to default
-        playingOrder = getDefaultOrder(entity.getSize());
 
-        // Set the default options of loading, and play
+        currentIndex = entity.getIndexOfFile(historyEntry.getFile());
+
+        playingOrder = getDefaultOrder(entity.getSize());
         shuffle = false;
         repeat = 0;
         play();
 
-        // Remove the history record of the entity
         removeFromHistory(entity);
-
         user.trackFile(playingFile);
         return true;
     }
@@ -423,32 +411,24 @@ public class Player {
      * @param entity The entity to be loaded
      */
     public void load(final PlayableEntity entity) {
-        // Try to load from history
-        boolean success = loadFromHistory(entity);
-        if (success) {
+        boolean loaded = loadFromHistory(entity);
+        if (loaded) {
             return;
         }
 
         select(entity);
 
-        // Load the file
         playingFile = entity.getFirstAudioFile();
         remainedTime = playingFile.getDuration();
 
-        // Get the index of the file. It should be 0
         currentIndex = entity.getIndexOfFile(playingFile);
 
-        // Set the default order
         playingOrder = getDefaultOrder(entity.getSize());
-
-        // Set the default loading options
         shuffle = false;
         repeat = 0;
         play();
 
-        // LANDMARK
         user.trackFile(playingFile);
-        //System.out.println("New play for " + playingFile.getName() + " by " + user.getName());
     }
 
     /**
@@ -505,41 +485,8 @@ public class Player {
 
         remainedTime -= timeDiff;
 
-        // TODO: Ar merge stearsa partea asta
-        // After the time difference, the player reaches the end of the file
-        if (remainedTime == 0) {
-            // The currentIndex remains set if getNextAudioFileIndex or
-            // getPrevAudioFileIndex aren't called
-            if (hasAdBreakNext()) {
-                // LANDMARK: AD
-                user.getMoneyTracker().adBreak();
-                playingFile = nextAd;
-                remainedTime = nextAd.getDuration();
-                nextAd = null;
-                return;
-            }
-
-            int nextIndex = getNextAudioFileIndex();
-            if (nextIndex == -1) {
-                resetPlayer();
-                return;
-            }
-
-            int realIndex = playingOrder.get(nextIndex);
-            playingFile = selectedSource.getAudioFileAtIndex(realIndex);
-            remainedTime = playingFile.getDuration();
-            state = PlayerStatus.PLAYING;
-
-            // LANDMARK
-            user.trackFile(playingFile);
-            //System.out.println("New play for " + playingFile.getName() + " by " + user.getName());
-            return;
-        }
-
-        // If the time difference is a bigger "hole" in time
         while (remainedTime <= 0) {
             if (hasAdBreakNext()) {
-                // LANDMARK: AD
                 user.getMoneyTracker().adBreak();
                 playingFile = nextAd;
                 remainedTime += nextAd.getDuration();
@@ -558,15 +505,13 @@ public class Player {
             playingFile = selectedSource.getAudioFileAtIndex(realIndex);
             remainedTime += playingFile.getDuration();
 
-            // LANDMARK
             user.trackFile(playingFile);
-            //System.out.println("New play for " + playingFile.getName() + " by " + user.getName());
         }
 
     }
 
     /**
-     * Updates the player after a time skip, if it isn't stopped.
+     * Updates the player after a timeskip, if it isn't stopped.
      * @param timeDiff The time passed
      */
     public void updatePlayer(final int timeDiff) {
@@ -586,12 +531,10 @@ public class Player {
      * {@code false} otherwise
      */
     public boolean isPlayingFromAlbum(final Album album) {
-        // if there's nothing selected
         if (selectedSource == null) {
             return false;
         }
 
-        // If there's an album playing
         Album possiblyPlayingAlbum = selectedSource.getCurrentAlbum();
         if (possiblyPlayingAlbum != null) {
             if (possiblyPlayingAlbum.equals(album)) {
@@ -599,13 +542,12 @@ public class Player {
             }
         }
 
-        // Check if there's something playing
+
         AudioFile file = selectedSource.getFirstAudioFile();
         if (file == null) {
             return false;
         }
 
-        // Check if there's a Song playing
         Song possiblyPlayingSong = file.getCurrentSong();
         if (possiblyPlayingSong != null) {
             return possiblyPlayingSong.getAlbumName().equals(album.getName());

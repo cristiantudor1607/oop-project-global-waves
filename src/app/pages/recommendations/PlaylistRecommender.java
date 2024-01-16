@@ -60,7 +60,7 @@ public class PlaylistRecommender extends Recommender {
      */
     public List<String> getTopGenres(final int trunc) {
         return genreMap.entrySet().stream()
-                .sorted(new SortByIntegerValue<String>()
+                .sorted(new SortByIntegerValue<String>().reversed()
                         .thenComparing(new SortAlphabeticallyByKey<>()))
                 .limit(trunc)
                 .map(Map.Entry::getKey)
@@ -100,9 +100,8 @@ public class PlaylistRecommender extends Recommender {
     public List<Song> takeFirstByListens(final Map<Song, Integer> songs, final int num) {
         List<Map.Entry<Song, Integer>> unrolled = new ArrayList<>(songs.entrySet());
 
-        // FIXME: Daca nu merge adauga aici .thenComparing dupa nume
         return unrolled.stream()
-                .sorted(new SortByIntegerValue<>())
+                .sorted(new SortByIntegerValue<Song>().reversed())
                 .limit(num)
                 .map(Map.Entry::getKey)
                 .toList();
