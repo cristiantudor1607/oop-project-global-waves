@@ -53,6 +53,73 @@ and split into two separate **functional interfaces**, <font color="red">NamePos
 <font color="red">UniqueIdPossessor</font>. They act like a property of an object. The property to have a name and the
 one to have an id. I split the method in order to do something more generic, to avoid duplicating code.
 
+## <font color="#5F8670"> What's new? </font>
+> #### Wrap system
+> **GlobalWaves 3.0** uses different HashMaps to track the activity for each user. Each User has to implement the
+> **getStatistics** method. The output for this command is selected between multiple types of outputs:
+> <font color="red">UserStatistics, ArtistStatistics, HostStatistics or NoDataStatistics</font>.
+>
+> Each Statistics class is an inheritance of the <font color="red">StatisticsTemplate</font> abstract class, so I
+> considered appropriate to use a factory to reduce the number of possibles if statements.
+> 
+> Note that there is something that may seem unfamiliar: Why there is a <font color="red">Genre</font> class?
+> Why do we need a genre class if it's just a String?
+> 
+> Answer: I wanted to use the generic function I made for all **NamePossessor**, so I needed a wrapper for String.
+
+> #### Monetization system
+> **GlobalWaves 3.0** uses two entities for this requirement: A HashMap which stores the songs already paid, and a
+> <font color="red">MoneyTracker</font>, which clears the history and sends the money to the artists whenever is
+> awakened to do a payment.
+> 
+> The MoneyTracker uses the song link to the artist to send the money.
+> In order to track the song and to pay the song, a link to the user was also added in Player class.
+> 
+> The payment happens when an ad is played, not loaded!
+
+> #### Notification system
+> **GlobalWaves 3.0** uses an **Observer** pattern for notifications.
+> 
+> The Observer can be confusing at some points. It uses the generic **Observer** and **Observable** interfaces,
+> which can be used for anything, within the limits of the defined methods.
+> 
+> The type **T** from **Observer** and **Observable** means what the objects observe.
+> 
+> <font color="red">The Inbox</font> is the specific **Observer** used, and <font color="red">The Notifier </font>
+> is the **Observable** object. In our case, the **inbox** observes <font color="red">Notifications</font> and the
+> notifier sends **Notifications**.
+> 
+> Each User has attached an Inbox, to observe notifications, and a Notifier, to send notifications. It works silently.
+> They're shown only when the user requires.
+
+> #### Recommendations system
+> It uses a similar approach to the wrap system. There are three different classes inherited from
+> <font color="red">Recommender</font>, one for each type of recommendation. There is also a factory, which generates
+> a specific **Recommender** based on the type provided.
+> 
+> The recommendations are stored directly on the user's homepage.
+> 
+> **Remainder**: The User has a "link" to the page, and the page has a "link" to the user, so it doesn't matter where
+> they're stored, because the user can access them at any time.
+
+> #### Page Navigation system
+> **GlobalWaves 3.0** uses the <font color="red">Page History</font> mentioned earlier, to store the pages.
+>
+> It uses two dequeues and a reference to the current page. It isn't mandatory to use two dequeues, but that's the way
+> I wanted it to be. One queue for previous pages and one for the next pages. The current page remains outside until a
+> new page is visited.
+> 
+> The prev pages are pushed from end to start, and the next pages from start to end.
+> 
+> But why?: If you put together the two arrays and the current page in the middle, it gives the precise order.
+
+## <font color="#5F8670"> OOP Concepts Used </font>
+* Encapsulation.
+* Inheritance.
+* Polymorphism.
+* Abstraction.
+* Design Patterns (new design patterns since 3.0: **Builder**, **Factory**, **Observer**).
+* Not an OOP concept, but I have to mention Java Generics
 
 ## <font color="#5F8670"> Improvements </font>
 * (<font color="FF9800">enhancement</font>) Because there were introduced IDs, the **creationTime** remains unused,
@@ -60,6 +127,13 @@ and it should be removed. <font color="C3E2C2"> - open issue</font>
 * (<font color="FF9800">enhancement</font>) As **Florian-Luis Micu** suggested in **stage 2 feedback**, the exit-code
 enums should be moved as an inner class of the **interrogators**. I started doing this after the feedback, but there
 would have been a lot of work to move all of them. <font color="C3E2C2"> - open issue</font>
+* (<font color="FF9800">enhancement</font>) The tests didn't cover all the possible cases, and there are still some
+issues. For example, a song played / replayed after **prev** or **next** won't get paid. The same problem remains for **skip** and
+**rewound**. <font color="C3E2C2"> - open issue</font>
+
+## <font color="#5F8670"> ChatGPT Suggestions </font>
+Our AI friend helped me to understand the Streams, before I learned from OOP Labs.
+I asked for help refactoring some code using streams.
 
 
 
