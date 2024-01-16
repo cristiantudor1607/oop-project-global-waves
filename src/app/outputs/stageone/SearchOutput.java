@@ -2,7 +2,7 @@ package app.outputs.stageone;
 
 import app.exitstats.stageone.SearchExit;
 import app.commands.stageone.SearchInterrogator;
-import app.utilities.constants.StringConstants;
+import app.utilities.StringConstants;
 import app.parser.commands.templates.CommandOutputFormatter;
 import lombok.Getter;
 

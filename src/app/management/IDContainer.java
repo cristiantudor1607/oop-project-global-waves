@@ -1,7 +1,6 @@
 package app.management;
 
-public class IDContainer {
-
+public final class IDContainer {
     private static IDContainer instance;
     private int songId;
     private int albumId;
@@ -32,6 +31,10 @@ public class IDContainer {
 
     /**
      * Resets the instance.
+     * It is necessarily because the tests are called within a function,
+     * and they aren't verified separately.
+     * It doesn't respect the Singleton pattern at all, but it is designed just for this
+     * specific usage.
      */
     public static void resetInstance() {
         instance = null;

@@ -7,6 +7,7 @@ import java.util.Comparator;
 public class SortByPlaylistLikes implements Comparator<Playlist> {
     /**
      * Compares the number of likes of the 2 playlists.
+     *
      * @param o1 The first playlist to be compared
      * @param o2 The second playlist to be compared
      * @return A positive integer, if the first one has more likes, {@code 0},

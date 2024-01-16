@@ -11,7 +11,7 @@ import app.statistics.StatisticsFactorySingleton;
 import app.statistics.StatisticsUtils;
 import app.utilities.SortByIntegerValue;
 import app.utilities.SortByKeyName;
-import app.utilities.constants.NotificationConstants;
+import app.notifications.NotificationConstants;
 import lombok.Getter;
 
 import java.util.AbstractMap;
@@ -25,6 +25,7 @@ public class Artist extends User {
     private final List<Album> albums;
     private final ArtistPage selfPage;
 
+    private static final int LIMIT_SIZE = 5;
 
     public Artist(final String username, final int age, final String city) {
         super(username, age, city);
@@ -73,10 +74,10 @@ public class Artist extends User {
     public Map<String, List<Map.Entry<String, Integer>>> getStatistics() {
         Map<String, List<Map.Entry<String, Integer>>> statistics  = new HashMap<>();
 
-        List<Map.Entry<String, Integer>> albums =
+        List<Map.Entry<String, Integer>> albumsTop =
                 StatisticsUtils.combineAndParseAlbumHistory(albumHistory,
                         new SortByIntegerValue<String>().reversed());
-        statistics.put(StatisticsFactorySingleton.TOP_ALBUMS, albums);
+        statistics.put(StatisticsFactorySingleton.TOP_ALBUMS, albumsTop);
 
         List<Map.Entry<String, Integer>> songs = StatisticsUtils.parseHistory(songHistory,
                 new SortByIntegerValue<Song>()
@@ -120,7 +121,7 @@ public class Artist extends User {
                             int id2 = o2.getKey().getIdentificationNumber();
                             return id1 - id2;
                         }))
-                .limit(5)
+                .limit(LIMIT_SIZE)
                 .map(Map.Entry::getKey)
                 .toList();
     }
@@ -215,7 +216,7 @@ public class Artist extends User {
      * @param song The song to be tracked
      */
     @Override
-    public void trackSong(Song song) {
+    public void trackSong(final Song song) {
         super.trackSong(song);
 
         if (!songsIncome.containsKey(song)) {
@@ -223,6 +224,11 @@ public class Artist extends User {
         }
     }
 
+    /**
+     * Tracks the specified user number of listeners from artist pov. If {@code this}
+     * isn't an artist, it does nothing.
+     * @param user The user to be tracked.
+     */
     @Override
     public void trackFan(final User user) {
         if (!peopleHistory.containsKey(user)) {

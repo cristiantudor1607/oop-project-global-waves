@@ -1,12 +1,14 @@
 package app.statistics;
 
-import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-@Builder
-public class NoDataStatistics extends StatisticsTemplate{
-    private String message;
+public class NoDataStatistics extends StatisticsTemplate {
+    private final String message;
+
+    public NoDataStatistics(final String message) {
+        this.message = message;
+    }
 
     /**
      * If there are no statistics, it returns the user-specific "No data to show" message.

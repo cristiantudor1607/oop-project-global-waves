@@ -3,7 +3,6 @@ package app.notifications;
 import app.management.IDContainer;
 import app.properties.Observable;
 import app.properties.Observer;
-import app.users.User;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -40,11 +39,14 @@ public class Inbox implements Observer<Notification> {
         notifications.add(subject.getInfo());
     }
 
-    // TODO: Add doc
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Inbox inbox)) return false;
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Inbox inbox)) {
+            return false;
+        }
         return getId() == inbox.getId();
     }
 

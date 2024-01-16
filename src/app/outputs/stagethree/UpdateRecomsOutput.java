@@ -21,8 +21,8 @@ public class UpdateRecomsOutput extends CommandOutputFormatter {
             case DOESNT_EXIST -> "The username " + username + " doesn't exist.";
             case NOT_NORMAL_USER -> username + " is not a normal user.";
             case NO_RECOMS -> "No new recommendations were found";
-            case SUCCESS -> "The recommendations for user " + username +
-                    " have been updated successfully.";
+            case SUCCESS -> "The recommendations for user " + username
+                    + " have been updated successfully.";
         };
     }
 }

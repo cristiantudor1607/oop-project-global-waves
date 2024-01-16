@@ -4,7 +4,8 @@ import app.player.entities.Song;
 import app.users.User;
 import lombok.Getter;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 public class MoneyTracker {

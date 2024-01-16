@@ -1,7 +1,6 @@
 package app.statistics;
 
 import app.properties.NamePossessor;
-import app.properties.PlayableEntity;
 import app.utilities.HelperTool;
 
 import java.util.ArrayList;

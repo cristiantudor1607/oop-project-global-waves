@@ -1,12 +1,13 @@
 package app.management;
 
-import app.pages.*;
+import app.pages.HomePage;
+import app.pages.LikedContentPage;
+import app.pages.Page;
+import app.pages.PageHistory;
 import app.player.entities.Player;
 import app.player.entities.SearchBar;
 import app.users.User;
 import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
 
 @Getter
 public class UserInterface {

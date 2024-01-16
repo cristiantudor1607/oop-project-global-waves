@@ -13,9 +13,11 @@ public class MonetizationSummary {
     private int ranking;
     private final String mostProfitableSong;
 
+    private static final double HUNDRED = 100.0;
+
     public MonetizationSummary(final User artist) {
-        songRevenue = Math.round(artist.getSongRevenue() * 100.0) / 100.0;
-        merchRevenue = Math.round(artist.getMerchRevenue() * 100.0) / 100.0;
+        songRevenue = Math.round(artist.getSongRevenue() * HUNDRED) / HUNDRED;
+        merchRevenue = Math.round(artist.getMerchRevenue() * HUNDRED) / HUNDRED;
 
         Song song = artist.getMostProfitableSong();
         if (song == null) {

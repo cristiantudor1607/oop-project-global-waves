@@ -11,8 +11,6 @@ import java.util.Scanner;
  * Use this if you want to test on a specific input file
  */
 public final class Test {
-    private static final String test15 = "test15_etapa3_complex.json";
-
     /**
      * for coding style
      */
@@ -30,9 +28,8 @@ public final class Test {
         if (inputDir != null) {
             Arrays.sort(inputDir);
 
-//            Scanner scanner = new Scanner(System.in);
-//            String fileName = scanner.next();
-            String fileName = test15;
+            Scanner scanner = new Scanner(System.in);
+            String fileName = scanner.next();
             for (File file : inputDir) {
                 if (file.getName().equalsIgnoreCase(fileName)) {
                     Main.action(fileName, CheckerConstants.OUT_FILE);

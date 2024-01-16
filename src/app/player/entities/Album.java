@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Getter
-public class Album extends Playlist {
+public final class Album extends Playlist {
     private final User artistLink;
     private final String artist;
     private final String description;

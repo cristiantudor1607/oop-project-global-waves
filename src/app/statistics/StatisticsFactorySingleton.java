@@ -42,7 +42,7 @@ public final class StatisticsFactorySingleton {
      *             {@code HOST}.
      * @return The message, if the type is accepted, {@code null} otherwise
      */
-    public static String NoDataMessage(final String username, final UserType.Type type) {
+    public static String noDataMessage(final String username, final UserType.Type type) {
         return switch (type) {
             case USER -> "No data to show for user " + username + ".";
             case HOST -> "No data to show for host " + username + ".";
@@ -55,16 +55,14 @@ public final class StatisticsFactorySingleton {
         String username = user.getUsername();
         String userTypeMessage;
         if (user.isNormalUser()) {
-            userTypeMessage = NoDataMessage(username, UserType.Type.USER);
+            userTypeMessage = noDataMessage(username, UserType.Type.USER);
         } else if (user.isArtist()) {
-            userTypeMessage = NoDataMessage(username, UserType.Type.ARTIST);
+            userTypeMessage = noDataMessage(username, UserType.Type.ARTIST);
         } else {
-            userTypeMessage = NoDataMessage(username, UserType.Type.HOST);
+            userTypeMessage = noDataMessage(username, UserType.Type.HOST);
         }
 
-        return NoDataStatistics.builder()
-                .message(userTypeMessage)
-                .build();
+        return new NoDataStatistics(userTypeMessage);
     }
 
     private UserStatistics createUserStatistics(final User user) {

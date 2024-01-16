@@ -2,7 +2,7 @@ package app.outputs.stageone;
 
 import app.exitstats.stageone.CreationExit;
 import app.commands.stageone.CreatePlaylistInterrogator;
-import app.utilities.constants.StringConstants;
+import app.utilities.StringConstants;
 import app.parser.commands.templates.CommandOutputFormatter;
 import lombok.Getter;
 

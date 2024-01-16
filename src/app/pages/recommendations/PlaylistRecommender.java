@@ -4,7 +4,7 @@ import app.player.entities.Player;
 import app.player.entities.Playlist;
 import app.player.entities.Song;
 import app.properties.PlayableEntity;
-import app.users.AdminBot;
+import app.users.Accessor;
 import app.users.User;
 import app.utilities.SortAlphabeticallyByKey;
 import app.utilities.SortByIntegerValue;
@@ -16,17 +16,21 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class PlaylistRecommender extends Recommender {
-    private final AdminBot adminBot;
+    private final Accessor accessor;
     private static final int TRUNC_SIZE = 3;
     private static final int GENRE1 = 5;
     private static final int GENRE2 = 3;
     private static final int GENRE3 = 2;
 
+    private static final int SIZE1 = 1;
+    private static final int SIZE2 = 2;
+    private static final int SIZE3 = 3;
+
     private final User user;
     private final Map<String, Integer> genreMap;
 
     public PlaylistRecommender(final Player player) {
-        adminBot = new AdminBot();
+        accessor = new Accessor();
 
         user = player.getUser();
         genreMap = new HashMap<>();
@@ -74,7 +78,7 @@ public class PlaylistRecommender extends Recommender {
      * @return A map with the songs found
      */
     public Map<Song, Integer> mapSongsFromGenreByListens(final String genre) {
-        List<User> artists = adminBot.getArtistWithListens();
+        List<User> artists = accessor.getArtistWithListens();
 
         Map<Song, Integer> songsMap = new HashMap<>();
 
@@ -122,7 +126,7 @@ public class PlaylistRecommender extends Recommender {
 
         countGenres(user.getLikes());
 
-        List<Playlist> playlists = adminBot.getUserPlaylists(user.getUsername());
+        List<Playlist> playlists = accessor.getUserPlaylists(user.getUsername());
         if (playlists != null) {
             playlists.forEach(playlist -> {
                 countGenres(playlist.getSongs());
@@ -138,19 +142,19 @@ public class PlaylistRecommender extends Recommender {
         int size = topGenres.size();
         Map<Song, Integer> temp;
         List<Song> foundSongsForGenre;
-        if (size >= 1) {
+        if (size >= SIZE1) {
             temp = mapSongsFromGenreByListens(topGenres.get(0));
             foundSongsForGenre = takeFirstByListens(temp, GENRE1);
             playlistSongs.addAll(foundSongsForGenre);
         }
 
-        if (size >= 2) {
+        if (size >= SIZE2) {
             temp = mapSongsFromGenreByListens(topGenres.get(1));
             foundSongsForGenre = takeFirstByListens(temp, GENRE2);
             playlistSongs.addAll(foundSongsForGenre);
         }
 
-        if (size >= 3) {
+        if (size >= SIZE3) {
             temp = mapSongsFromGenreByListens(topGenres.get(2));
             foundSongsForGenre = takeFirstByListens(temp, GENRE3);
             playlistSongs.addAll(foundSongsForGenre);

@@ -5,7 +5,7 @@ import app.search.filters.Filter;
 import app.search.filters.NameFilter;
 import app.search.filters.OwnerFilter;
 import app.player.entities.Playlist;
-import app.users.AdminBot;
+import app.users.Accessor;
 import lombok.NonNull;
 
 import java.util.List;
@@ -44,9 +44,9 @@ public class PlaylistEngine extends SearchEngine<Playlist> {
      */
     @Override
     public List<Playlist> collectResults() {
-        AdminBot adminBot = new AdminBot();
+        Accessor accessor = new Accessor();
 
-        List<Playlist> matchedPlaylists = adminBot.getAvailablePlaylists(user);
+        List<Playlist> matchedPlaylists = accessor.getAvailablePlaylists(user);
 
         for (Filter<Playlist> filter : filters) {
             matchedPlaylists = applyFilter(matchedPlaylists, filter);

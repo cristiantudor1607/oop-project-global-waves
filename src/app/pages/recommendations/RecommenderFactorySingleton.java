@@ -3,10 +3,10 @@ package app.pages.recommendations;
 import app.player.entities.Player;
 import lombok.NonNull;
 
-public class RecommenderFactorySingleton {
-    private final static String RANDOM_SONG = "random_song";
-    private final static String RANDOM_PLAYLIST = "random_playlist";
-    private final static String FANS_PLAYLIST = "fans_playlist";
+public final class RecommenderFactorySingleton {
+    private static final String RANDOM_SONG = "random_song";
+    private static final String RANDOM_PLAYLIST = "random_playlist";
+    private static final String FANS_PLAYLIST = "fans_playlist";
 
     private static RecommenderFactorySingleton instance = null;
 

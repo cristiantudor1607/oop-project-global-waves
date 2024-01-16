@@ -1,6 +1,6 @@
 package app.commands.stagetwo;
 
-import app.utilities.constants.StringConstants;
+import app.utilities.StringConstants;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonNode;
 import app.outputs.stagetwo.PrintPageOutput;

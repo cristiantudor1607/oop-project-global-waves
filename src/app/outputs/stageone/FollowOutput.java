@@ -2,7 +2,7 @@ package app.outputs.stageone;
 
 import app.commands.stageone.FollowInterrogator;
 import app.exitstats.stageone.FollowExit;
-import app.utilities.constants.StringConstants;
+import app.utilities.StringConstants;
 import app.parser.commands.templates.CommandOutputFormatter;
 import lombok.Getter;
 

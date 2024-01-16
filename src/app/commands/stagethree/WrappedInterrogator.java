@@ -7,9 +7,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.Getter;
 
-import java.util.List;
-import java.util.Map;
-
 @Getter
 public class WrappedInterrogator extends CommandObject {
     @JsonIgnore

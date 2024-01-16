@@ -5,17 +5,16 @@ import app.player.entities.Playlist;
 import app.player.entities.Podcast;
 import app.player.entities.Song;
 import app.utilities.HelperTool;
-import app.utilities.SortByCreatorId;
 import app.utilities.SortByUniqueId;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class AdminBot extends Admin {
+public class Accessor extends Admin {
     private final HelperTool tool;
 
-    public AdminBot() {
+    public Accessor() {
         super();
         tool = HelperTool.getInstance();
     }

@@ -2,7 +2,7 @@ package app.outputs.stageone;
 
 import app.exitstats.stageone.SwitchVisibilityExit;
 import app.commands.stageone.VisibilityInterrogator;
-import app.utilities.constants.StringConstants;
+import app.utilities.StringConstants;
 import app.parser.commands.templates.CommandOutputFormatter;
 import lombok.Getter;
 

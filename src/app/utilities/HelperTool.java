@@ -1,12 +1,19 @@
 package app.utilities;
 
-import app.player.entities.*;
+import app.player.entities.Album;
+import app.player.entities.Episode;
+import app.player.entities.Playlist;
+import app.player.entities.Podcast;
+import app.player.entities.Song;
 import app.properties.NamePossessor;
 import app.users.User;
 
-import java.util.*;
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
-// TODO: Fa toate metodele statice
 public final class HelperTool {
     private static HelperTool instance = null;
     public static final int TRUNC_SIZE = 5;
@@ -164,21 +171,15 @@ public final class HelperTool {
     }
 
     /**
-     * Takes a map which stores named objects and a counter, and converts it to
-     * a list of entries, in order to be sorted.
-     * @param history The map to be converted
-     * @return A list containing all entries from the given map
+     * Converts a list of tuples {@code (NamePossessor, Integer) } into a list of tuples
+     * {@code (String, Integer)}.
+     *
+     * @param namedList A list with tuples where the objects have names defined
+     * @return The list with {@code (String, Integer)} tuples
+     * @param <T> This bound is required to extract the name.
+     *           Has to implement
+     *           the {@code getName} method by functional interface {@code NamePossessor}.
      */
-    public <T extends NamePossessor> List<Map.Entry<String, Integer>>
-    unrollHistoryData(final Map<T, Integer> history) {
-        List<Map.Entry<String, Integer>> list = new ArrayList<>();
-        for (Map.Entry<T, Integer> pair : history.entrySet()) {
-            list.add(new AbstractMap.SimpleEntry<>(pair.getKey().getName(), pair.getValue()));
-        }
-
-        return list;
-    }
-
     public <T extends NamePossessor> List<Map.Entry<String, Integer>>
     extractNames(final List<Map.Entry<T, Integer>> namedList) {
         List<Map.Entry<String, Integer>> list = new ArrayList<>();

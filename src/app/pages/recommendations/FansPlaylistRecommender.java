@@ -10,9 +10,11 @@ import app.users.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FansPlaylistRecommender extends Recommender{
+public class FansPlaylistRecommender extends Recommender {
     private final User user;
     private final User artist;
+
+    private static final int LIMIT_SIZE = 5;
 
     public FansPlaylistRecommender(final Player player) {
         user = player.getUser();
@@ -49,7 +51,7 @@ public class FansPlaylistRecommender extends Recommender{
 
             fanSongs = fanSongs.stream()
                     .filter(song -> !playlistSongs.contains(song))
-                    .limit(5)
+                    .limit(LIMIT_SIZE)
                     .toList();
             playlistSongs.addAll(fanSongs);
         });

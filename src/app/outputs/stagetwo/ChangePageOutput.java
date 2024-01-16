@@ -1,7 +1,7 @@
 package app.outputs.stagetwo;
 
 import app.commands.stagetwo.ChangePageInterrogator;
-import app.utilities.constants.StringConstants;
+import app.utilities.StringConstants;
 import app.parser.commands.templates.CommandOutputFormatter;
 import lombok.Getter;
 

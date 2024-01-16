@@ -1,4 +1,4 @@
-package app.utilities.constants;
+package app.utilities;
 
 public final class StringConstants {
     private StringConstants() { }

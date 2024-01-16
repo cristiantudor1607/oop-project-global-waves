@@ -1,12 +1,13 @@
-package app.utilities.constants;
+package app.notifications;
 
 public class NotificationConstants {
-    public static final String NEW_FOLLOWER = "New follower";
     public static final String NEW_ALBUM = "New Album";
     public static final String NEW_PODCAST = "New Podcast";
     public static final String NEW_MERCH = "New Merchandise";
     public static final String NEW_EVENT = "New Event";
     public static final String NEW_ANNOUNCEMENT = "New Announcement";
+
+    private NotificationConstants() { }
 
     /**
      * Generates a specific notification message. <br>

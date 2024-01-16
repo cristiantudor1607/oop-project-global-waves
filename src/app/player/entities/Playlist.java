@@ -3,7 +3,6 @@ package app.player.entities;
 import app.management.IDContainer;
 import app.properties.OwnedEntity;
 import app.properties.PlayableEntity;
-import app.properties.UniqueIdPossessor;
 import app.users.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,31 +31,79 @@ public class Playlist implements PlayableEntity, OwnedEntity {
         private User ownerLink;
         private List<Song> songs;
 
-        public Builder name(final String name) {
-            this.name = name;
+        /**
+         * Adds a name to the playlist.
+         * It can be any {@code NonNull String}.
+         * If there is a name already set, it will be overwritten.
+         *
+         * @param newName The name to be added.
+         * @return {@code this}, with the name set or overwritten.
+         */
+        public Builder name(final String newName) {
+            this.name = newName;
             return this;
         }
 
-        public Builder owner(final String owner) {
-            this.owner = owner;
+        /**
+         * Adds an owner to the playlist.
+         * It can be any {@code NonNull String}.
+         * If there is an owner already set, it will be overwritten.
+         *
+         * @param newOwner The owner to be added
+         * @return {@code this}, with the new owner added or overwritten.
+         */
+        public Builder owner(final String newOwner) {
+            this.owner = newOwner;
             return this;
         }
 
-        public Builder creationTime(final int creationTime) {
-            this.creationTime = creationTime;
+        /**
+         * Adds a new creationTime to the playlist.
+         * It should be used a positive integer, but the method doesn't check the validity,
+         * so a negative one can be used too.
+         * The behavior for negative integers is undefined.
+         * If there is a creationTime already set, it will be overwritten.
+         *
+         * @param newCreationTime The creationTime to be set
+         * @return {@code this}, with the creationTime set or overwritten.
+         */
+        public Builder creationTime(final int newCreationTime) {
+            this.creationTime = newCreationTime;
             return this;
         }
 
-        public Builder ownerLink(final User ownerLink) {
-            this.ownerLink = ownerLink;
+        /**
+         * Adds a new link to the owner.
+         * A NonNull link should be used.
+         * If there is an ownerLink already set, it will be overwritten.
+         *
+         * @param newOwnerLink The link to be set
+         * @return {@code this}, with the ownerLink set or overwritten.
+         */
+        public Builder ownerLink(final User newOwnerLink) {
+            this.ownerLink = newOwnerLink;
             return this;
         }
 
-        public Builder songs(final List<Song> songs) {
-            this.songs = songs;
+        /**
+         * Attaches a new list of songs to the playlist.
+         * The list can be empty, but it should not be {@code null}.
+         * If there is a list already attached, it will be detached.
+         *
+         * @param newSongs The list to be attached.
+         * @return {@code this}, with the list of songs attached.
+         */
+        public Builder songs(final List<Song> newSongs) {
+            this.songs = newSongs;
             return this;
         }
 
+        /**
+         * Creates a new playlists based on the fields set using {@code this} builder
+         * methods.
+         * No field was declared as mandatory, but all fields should be initialized.
+         * @return A new playlist
+         */
         public Playlist build() {
             return new Playlist(this);
         }

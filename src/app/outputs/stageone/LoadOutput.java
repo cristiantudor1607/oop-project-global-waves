@@ -2,7 +2,7 @@ package app.outputs.stageone;
 
 import app.exitstats.stageone.LoadExit;
 import app.commands.stageone.LoadInterrogator;
-import app.utilities.constants.StringConstants;
+import app.utilities.StringConstants;
 import app.parser.commands.templates.CommandOutputFormatter;
 import lombok.Getter;
 

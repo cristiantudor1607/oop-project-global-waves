@@ -22,7 +22,8 @@ public class CancelPremiumOutput extends CommandOutputFormatter {
      * @param atExit The exit code sent by manager
      * @return A user-specific message
      */
-    public String generateMessage(final String username, ChangeSubscriptionExit.Status atExit) {
+    public String generateMessage(final String username,
+                                  final ChangeSubscriptionExit.Status atExit) {
         return switch (atExit) {
             case DOESNT_EXIST -> "The username " + username + " doesn't exist.";
             case ALREADY_SUBS -> username + " is not a premium user.";

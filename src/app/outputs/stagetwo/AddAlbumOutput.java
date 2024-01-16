@@ -2,7 +2,7 @@ package app.outputs.stagetwo;
 
 import app.exitstats.stagetwo.AddAlbumExit;
 import app.commands.stagetwo.AddAlbumInterrogator;
-import app.utilities.constants.StringConstants;
+import app.utilities.StringConstants;
 import app.parser.commands.templates.CommandOutputFormatter;
 import lombok.Getter;
 

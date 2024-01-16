@@ -9,8 +9,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public final class FiltersMapper {
-    private FiltersMapper() { }
+public final class FilterMapper {
+    private FilterMapper() { }
 
     /**
      * Converts the JsonNode that contains the {@code filters} into a

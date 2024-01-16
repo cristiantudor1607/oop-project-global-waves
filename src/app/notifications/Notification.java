@@ -1,9 +1,7 @@
 package app.notifications;
 
-import app.pages.features.Merch;
 import app.player.entities.Album;
 import app.player.entities.Podcast;
-import app.utilities.constants.NotificationConstants;
 import lombok.Getter;
 
 @Getter

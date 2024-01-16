@@ -6,7 +6,7 @@ import app.search.filters.Filter;
 import app.search.filters.NameFilter;
 import app.search.filters.OwnerFilter;
 import app.player.entities.Album;
-import app.users.AdminBot;
+import app.users.Accessor;
 import lombok.NonNull;
 
 import java.util.List;
@@ -44,9 +44,9 @@ public class AlbumEngine extends SearchEngine<Album> {
      */
     @Override
     public List<Album> collectResults() {
-        AdminBot adminBot = new AdminBot();
+        Accessor accessor = new Accessor();
 
-        List<Album> matchedAlbums = adminBot.getAllAlbums();
+        List<Album> matchedAlbums = accessor.getAllAlbums();
 
         for (Filter<Album> filter : filters) {
             matchedAlbums = applyFilter(matchedAlbums, filter);

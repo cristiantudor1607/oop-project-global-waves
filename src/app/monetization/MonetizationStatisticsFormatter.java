@@ -5,7 +5,11 @@ import app.users.User;
 import app.utilities.SortAlphabeticallyByKey;
 import app.utilities.SortByRevenue;
 
-import java.util.*;
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MonetizationStatisticsFormatter {
     private final Library database;

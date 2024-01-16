@@ -1,7 +1,5 @@
 package app.player.entities;
 
-import app.users.User;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import fileio.input.EpisodeInput;
 import fileio.input.PodcastInput;
 import app.properties.OwnedEntity;
@@ -24,7 +22,6 @@ public class Podcast implements PlayableEntity, OwnedEntity {
         this.owner = owner;
         this.episodes = episodes;
     }
-
 
     public Podcast(final PodcastInput input) {
         name = input.getName();

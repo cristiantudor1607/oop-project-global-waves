@@ -2,7 +2,7 @@ package app.outputs.stageone;
 
 import app.exitstats.stageone.SelectExit;
 import app.commands.stageone.SelectInterrogator;
-import app.utilities.constants.StringConstants;
+import app.utilities.StringConstants;
 import app.parser.commands.templates.CommandOutputFormatter;
 import app.pages.Page;
 import app.properties.PlayableEntity;

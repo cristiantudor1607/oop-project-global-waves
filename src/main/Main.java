@@ -13,7 +13,7 @@ import app.parser.commands.templates.CommandObject;
 import app.parser.file.JsonLoader;
 import app.management.ActionManager;
 import app.management.Library;
-import app.utilities.FiltersMapper;
+import app.utilities.FilterMapper;
 
 import java.io.File;
 import java.io.IOException;
@@ -82,8 +82,6 @@ public final class Main {
         ObjectMapper objectMapper = new ObjectMapper();
         LibraryInput library = objectMapper.readValue(new File(LIBRARY_PATH), LibraryInput.class);
         ArrayNode outputs = objectMapper.createArrayNode();
-        // ERASE THIS
-        System.out.println("test: " + filePathInput);
 
         Library database = Library.getInstance();
         database.convertInputLibrary(library);
@@ -96,7 +94,7 @@ public final class Main {
             CommandObject newCommand = objectMapper.treeToValue(node, CommandObject.class);
             if (newCommand.hasFiltersField()) {
                 JsonNode filtersNode = node.get("filters");
-                newCommand.setFiltersField(FiltersMapper.convertToMap(filtersNode));
+                newCommand.setFiltersField(FilterMapper.convertToMap(filtersNode));
             }
 
             commandList.add(newCommand);

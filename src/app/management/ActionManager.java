@@ -64,41 +64,59 @@ import app.pages.features.Merch;
 import app.pages.recommendations.Recommender;
 import app.pages.recommendations.RecommenderFactorySingleton;
 import app.parser.commands.templates.CommandObject;
-import app.player.entities.*;
+import app.player.entities.Album;
+import app.player.entities.AudioFile;
+import app.player.entities.Episode;
+import app.player.entities.Player;
+import app.player.entities.Playlist;
+import app.player.entities.Podcast;
+import app.player.entities.SearchBar;
+import app.player.entities.Song;
 import app.statistics.StatisticsFactorySingleton;
 import app.statistics.StatisticsTemplate;
-import app.users.AdminBot;
+import app.users.Accessor;
 import app.pages.Page;
 import app.pages.ContentVisitor;
 import app.properties.PlayableEntity;
 import app.users.User;
-import app.utilities.*;
-import app.utilities.constants.StringConstants;
+import app.utilities.DateMapper;
+import app.utilities.HelperTool;
+import app.utilities.SortAlphabetical;
+import app.utilities.SortByArtistLikes;
+import app.utilities.SortByNumberOfLikes;
+import app.utilities.SortByPlaylistLikes;
+import app.utilities.SortByUniqueId;
+import app.utilities.StringConstants;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 
 
 @Getter @Setter
 public final class ActionManager {
     private static ActionManager instance;
-    private AdminBot adminBot;
+    private Accessor accessor;
     private HelperTool tool;
     private ContentVisitor contentVisitor;
     private int lastActionTime;
     private Map<String, UserInterface> userInterfaces;
 
     private ActionManager() {
-        adminBot = new AdminBot();
+        accessor = new Accessor();
         tool = HelperTool.getInstance();
         contentVisitor = new ContentVisitor();
         lastActionTime = 0;
 
         userInterfaces = new HashMap<>();
-        for (User user: adminBot.getDatabase().getUsers()) {
+        for (User user: accessor.getDatabase().getUsers()) {
             userInterfaces.put(user.getUsername(), new UserInterface(user));
         }
     }
@@ -265,7 +283,7 @@ public final class ActionManager {
      * @return true, if the user is online, false, otherwise
      */
     public boolean requestApprovalForAction(final CommandObject execQuery) {
-        User queriedUser = adminBot.getUserByUsername(execQuery.getUsername());
+        User queriedUser = accessor.getUserByUsername(execQuery.getUsername());
 
         return queriedUser.isOnline();
     }
@@ -418,11 +436,11 @@ public final class ActionManager {
         String playlistName = execQuery.getPlaylistName();
         int timestamp = execQuery.getTimestamp();
 
-        if (adminBot.checkPlaylistNameForUser(owner, playlistName)) {
+        if (accessor.checkPlaylistNameForUser(owner, playlistName)) {
             return CreationExit.Status.ALREADY_EXISTS;
         }
 
-        adminBot.createPlaylist(owner, playlistName, timestamp);
+        accessor.createPlaylist(owner, playlistName, timestamp);
 
         return CreationExit.Status.CREATED;
     }
@@ -443,7 +461,7 @@ public final class ActionManager {
         int id = execQuery.getPlaylistId();
         String owner = execQuery.getUsername();
 
-        Playlist ownerPlaylist = adminBot.getUserPlaylist(owner, id);
+        Playlist ownerPlaylist = accessor.getUserPlaylist(owner, id);
         if (ownerPlaylist == null) {
             return SwitchVisibilityExit.Status.TOO_HIGH;
         }
@@ -475,7 +493,7 @@ public final class ActionManager {
         int id = execQuery.getPlaylistId();
 
         Player ownerPlayer = getPlayerByUsername(ownerName);
-        Playlist ownerPlaylist = adminBot.getUserPlaylist(ownerName, id);
+        Playlist ownerPlaylist = accessor.getUserPlaylist(ownerName, id);
 
         if (ownerPlaylist == null) {
             return AddRemoveExit.Status.INVALID_PLAYLIST;
@@ -758,7 +776,7 @@ public final class ActionManager {
      * the success
      */
     public SwitchConnectionExit.Status requestSwitchConnection(final String username) {
-        User queriedUser = adminBot.getUserByUsername(username);
+        User queriedUser = accessor.getUserByUsername(username);
 
         if (queriedUser == null) {
             return SwitchConnectionExit.Status.INVALID_USERNAME;
@@ -792,7 +810,7 @@ public final class ActionManager {
      * otherwise
      */
     public AddUserExit.Status requestAddingUser(final AddUserInterrogator execQuery) {
-        boolean usernameExists = adminBot.checkUsername(execQuery.getUsername());
+        boolean usernameExists = accessor.checkUsername(execQuery.getUsername());
         if (usernameExists) {
             return AddUserExit.Status.USERNAME_TAKEN;
         }
@@ -808,15 +826,15 @@ public final class ActionManager {
         int age = execQuery.getAge();
         String city = execQuery.getCity();
 
-        User newUser = adminBot.createUser(username, age, city, newUserType);
-        adminBot.addUser(newUser);
+        User newUser = accessor.createUser(username, age, city, newUserType);
+        accessor.addUser(newUser);
         // Create an interface for the User
         if (newUser.isNormalUser()) {
             userInterfaces.put(username, new UserInterface(newUser));
         }
 
         if (newUser.isHost()) {
-            adminBot.movePodcastsFromDefaultToHost(newUser);
+            accessor.movePodcastsFromDefaultToHost(newUser);
         }
 
         return AddUserExit.Status.SUCCESS;
@@ -830,7 +848,7 @@ public final class ActionManager {
      */
     public String requestDeletingUser(final DeleteUserInterrogator execQuery) {
         String username = execQuery.getUsername();
-        User user = adminBot.getUserByUsername(username);
+        User user = accessor.getUserByUsername(username);
 
         // If getUserByUsername method returned null, it means that the user doesn't exist
         if (user == null) {
@@ -845,7 +863,7 @@ public final class ActionManager {
             return username + " can't be deleted.";
         }
 
-        if (adminBot.artistHasSongInPlaylists(username)) {
+        if (accessor.artistHasSongInPlaylists(username)) {
             return username + " can't be deleted.";
         }
 
@@ -853,7 +871,7 @@ public final class ActionManager {
             userInterfaces.remove(username);
         }
 
-        adminBot.removeUser(user);
+        accessor.removeUser(user);
 
         return username + " was successfully deleted.";
 
@@ -875,18 +893,18 @@ public final class ActionManager {
      * otherwise
      */
     public AddAlbumExit.Status requestAddingAlbum(final AddAlbumInterrogator execQuery) {
-        boolean usernameExist = adminBot.checkUsername(execQuery.getUsername());
+        boolean usernameExist = accessor.checkUsername(execQuery.getUsername());
         if (!usernameExist) {
             return AddAlbumExit.Status.INVALID_USERNAME;
         }
 
-        User artist = adminBot.getArtistByUsername(execQuery.getUsername());
+        User artist = accessor.getArtistByUsername(execQuery.getUsername());
         if (artist == null) {
             return AddAlbumExit.Status.NOT_ARTIST;
         }
 
         String albumName = execQuery.getAlbumName();
-        if (adminBot.checkAlbumNameForUser(artist, albumName)) {
+        if (accessor.checkAlbumNameForUser(artist, albumName)) {
             return AddAlbumExit.Status.SAME_NAME;
         }
 
@@ -903,7 +921,7 @@ public final class ActionManager {
         // Set the creation time for all songs on the album
         tool.setCreationTimestamp(songs, creationTime);
         // Add new songs to library
-        adminBot.addSongsToLibrary(artistName, songs);
+        accessor.addSongsToLibrary(artistName, songs);
         // Create the album object
         Album album = new Album.Builder(albumName, artistName, creationTime)
                 .description(description)
@@ -936,11 +954,11 @@ public final class ActionManager {
     public AddEventExit.Status requestAddingEvent(final AddEventInterrogator execQuery) {
         String username = execQuery.getUsername();
 
-        if (!adminBot.checkUsername(username)) {
+        if (!accessor.checkUsername(username)) {
             return AddEventExit.Status.DOESNT_EXIST;
         }
 
-        User artist = adminBot.getArtistByUsername(username);
+        User artist = accessor.getArtistByUsername(username);
         if (artist == null) {
             return AddEventExit.Status.NOT_ARTIST;
         }
@@ -978,11 +996,11 @@ public final class ActionManager {
     public AddMerchExit.Status requestAddingMerch(final AddMerchInterrogator execQuery) {
         String username = execQuery.getUsername();
 
-        if (!adminBot.checkUsername(username)) {
+        if (!accessor.checkUsername(username)) {
             return AddMerchExit.Status.DOESNT_EXIST;
         }
 
-        User artist = adminBot.getArtistByUsername(username);
+        User artist = accessor.getArtistByUsername(username);
         if (artist == null) {
             return AddMerchExit.Status.NOT_ARTIST;
         }
@@ -1019,17 +1037,17 @@ public final class ActionManager {
     public AddPodcastExit.Status requestAddingPodcast(final AddPodcastInterrogator execQuery) {
         String hostName = execQuery.getUsername();
 
-        if (!adminBot.checkUsername(hostName)) {
+        if (!accessor.checkUsername(hostName)) {
             return AddPodcastExit.Status.DOESNT_EXIST;
         }
 
-        User host = adminBot.getHostByUsername(hostName);
+        User host = accessor.getHostByUsername(hostName);
         if (host == null) {
             return AddPodcastExit.Status.NOT_HOST;
         }
 
         String podcastName = execQuery.getPodcastName();
-        if (adminBot.checkPodcastNameForUser(host, podcastName)) {
+        if (accessor.checkPodcastNameForUser(host, podcastName)) {
             return AddPodcastExit.Status.SAME_NAME;
         }
 
@@ -1039,7 +1057,7 @@ public final class ActionManager {
 
         List<Episode> episodes = execQuery.getEpisodes();
         Podcast podcast = new Podcast(podcastName, hostName, episodes);
-        adminBot.addPodcastToLibrary(hostName, podcast);
+        accessor.addPodcastToLibrary(hostName, podcast);
         host.addPodcast(podcast);
 
         tool.setHostLinks(episodes, host);
@@ -1064,11 +1082,11 @@ public final class ActionManager {
     requestAddingAnnouncement(final AddAnnouncementInterrogator execQuery) {
         String username = execQuery.getUsername();
 
-        if (!adminBot.checkUsername(username)) {
+        if (!accessor.checkUsername(username)) {
             return AddAnnouncementExit.Status.DOESNT_EXIST;
         }
 
-        User host = adminBot.getHostByUsername(username);
+        User host = accessor.getHostByUsername(username);
         if (host == null) {
             return AddAnnouncementExit.Status.NOT_HOST;
         }
@@ -1096,11 +1114,11 @@ public final class ActionManager {
         String username = execQuery.getUsername();
         String albumName = execQuery.getName();
 
-        if (!adminBot.checkUsername(username)) {
+        if (!accessor.checkUsername(username)) {
             return RemoveAlbumExit.Status.DOESNT_EXIST;
         }
 
-        User artist = adminBot.getArtistByUsername(username);
+        User artist = accessor.getArtistByUsername(username);
         if (artist == null) {
             return RemoveAlbumExit.Status.NOT_ARTIST;
         }
@@ -1128,7 +1146,7 @@ public final class ActionManager {
         artist.removeAlbum(album);
 
         // Remove the album from database
-        adminBot.removeAlbum(album);
+        accessor.removeAlbum(album);
 
         return RemoveAlbumExit.Status.SUCCESS;
     }
@@ -1144,11 +1162,11 @@ public final class ActionManager {
     public RemoveEventExit.Status requestRemovingEvent(final RemoveEventInterrogator execQuery) {
         String username = execQuery.getUsername();
 
-        if (!adminBot.checkUsername(username)) {
+        if (!accessor.checkUsername(username)) {
             return RemoveEventExit.Status.DOESNT_EXIST;
         }
 
-        User artist = adminBot.getArtistByUsername(username);
+        User artist = accessor.getArtistByUsername(username);
         if (artist == null) {
             return RemoveEventExit.Status.NOT_ARTIST;
         }
@@ -1176,11 +1194,11 @@ public final class ActionManager {
     requestRemovingAnnouncement(final RemoveAnnouncementInterrogator execQuery) {
         String username = execQuery.getUsername();
 
-        if (!adminBot.checkUsername(username)) {
+        if (!accessor.checkUsername(username)) {
             return RemoveAnnouncementExit.Status.DOESNT_EXIST;
         }
 
-        User host = adminBot.getHostByUsername(username);
+        User host = accessor.getHostByUsername(username);
         if (host == null) {
             return RemoveAnnouncementExit.Status.NOT_HOST;
         }
@@ -1209,11 +1227,11 @@ public final class ActionManager {
         String username = execQuery.getUsername();
         String podcastName = execQuery.getName();
 
-        if (!adminBot.checkUsername(username)) {
+        if (!accessor.checkUsername(username)) {
             return RemovePodcastExit.Status.DOESNT_EXIST;
         }
 
-        User host = adminBot.getHostByUsername(username);
+        User host = accessor.getHostByUsername(username);
         if (host == null) {
             return RemovePodcastExit.Status.NOT_HOST;
         }
@@ -1231,7 +1249,7 @@ public final class ActionManager {
         // Remove the podcast from the host point of view
         host.removePodcast(podcast);
         // Remove the podcast from the others point of view
-        adminBot.removePodcast(podcast);
+        accessor.removePodcast(podcast);
         return RemovePodcastExit.Status.SUCCESS;
     }
 
@@ -1340,7 +1358,7 @@ public final class ActionManager {
             return AdBreakExit.Status.NOT_PLAYING;
         }
 
-        Optional<Song> adOptional = adminBot.getFirstAd();
+        Optional<Song> adOptional = accessor.getFirstAd();
         if (adOptional.isEmpty()) {
             return AdBreakExit.Status.UNKNOWN;
         }
@@ -1414,7 +1432,7 @@ public final class ActionManager {
      */
     public UpdateRecomsInterrogator.Status
     requestUpdateRecoms(final UpdateRecomsInterrogator execQuery) {
-        User user = adminBot.getUserByUsername(execQuery.getUsername());
+        User user = accessor.getUserByUsername(execQuery.getUsername());
         if (user == null) {
             return UpdateRecomsInterrogator.Status.DOESNT_EXIST;
         }
@@ -1455,7 +1473,7 @@ public final class ActionManager {
     public LoadRecomsInterrogator.Status
     requestLoadRecoms(final LoadRecomsInterrogator execQuery) {
         String username = execQuery.getUsername();
-        User user = adminBot.getUserByUsername(username);
+        User user = accessor.getUserByUsername(username);
         if (user == null) {
             return LoadRecomsInterrogator.Status.DOESNT_EXIST;
         } else if (user.isOffline()) {
@@ -1542,8 +1560,8 @@ public final class ActionManager {
         }
 
         boolean changedPage = ui.getPageHistory().visitPreviousPage();
-        return !changedPage ? "There are no pages left to go back." :
-                "The user " + username + " has navigated successfully to"
+        return !changedPage ? "There are no pages left to go back."
+                : "The user " + username + " has navigated successfully to"
                 + " the previous page.";
     }
 
@@ -1560,8 +1578,8 @@ public final class ActionManager {
         }
 
         boolean changedPage = ui.getPageHistory().visitNextPage();
-        return !changedPage ? "There are no pages left to go forward." :
-                "The user " + username + " has navigated successfully to"
+        return !changedPage ? "There are no pages left to go forward."
+                : "The user " + username + " has navigated successfully to"
                 + " the next page.";
     }
 
@@ -1582,7 +1600,7 @@ public final class ActionManager {
      * @return A list of strings, containing the names of the playlists
      */
     public List<Playlist> requestUserPlaylists(final String owner) {
-        return adminBot.getUserPlaylists(owner);
+        return accessor.getUserPlaylists(owner);
     }
 
     /**
@@ -1591,7 +1609,7 @@ public final class ActionManager {
      * @return A list of strings, containing the names of the songs
      */
     public List<String> requestLikedSongs(final String username) {
-        User user = adminBot.getUserByUsername(username);
+        User user = accessor.getUserByUsername(username);
         List<String> names = new ArrayList<>();
 
         for (Song s : user.getLikes()) {
@@ -1606,7 +1624,7 @@ public final class ActionManager {
      * @return A list of strings containing the names of the songs
      */
     public List<String> requestTopFiveSongs() {
-        List<Song> songs = adminBot.getAllSongs();
+        List<Song> songs = accessor.getAllSongs();
         songs.sort(new SortByNumberOfLikes().reversed()
                 .thenComparing(new SortByUniqueId()));
         tool.truncateResults(songs);
@@ -1622,7 +1640,7 @@ public final class ActionManager {
      * @return A list of strings containing the names of the playlists
      */
     public List<String> requestTopFivePlaylists() {
-        List<Playlist> playlists = adminBot.getPublicPlaylists();
+        List<Playlist> playlists = accessor.getPublicPlaylists();
         tool.sortPlaylistsByFollowers(playlists);
         tool.truncateResults(playlists);
 
@@ -1638,7 +1656,7 @@ public final class ActionManager {
      * @return A list that contains the usernames of the online users
      */
     public List<String> requestOnlineUsers() {
-        List<User> onlineUsers = adminBot.getOnlineUsers();
+        List<User> onlineUsers = accessor.getOnlineUsers();
 
         return tool.getUsernames(onlineUsers);
     }
@@ -1649,7 +1667,7 @@ public final class ActionManager {
      * @return A list that contains the usernames of the users
      */
     public List<String> requestAllUsers() {
-        List<User> allUsers = adminBot.getAllUsers();
+        List<User> allUsers = accessor.getAllUsers();
 
         return tool.getUsernames(allUsers);
     }
@@ -1660,7 +1678,7 @@ public final class ActionManager {
      * @return A list of albums, if the user is an artist, null otherwise
      */
     public List<Album> requestUserAlbums(final String username) {
-        return adminBot.getArtistAlbums(username);
+        return accessor.getArtistAlbums(username);
     }
 
     /**
@@ -1669,7 +1687,7 @@ public final class ActionManager {
      * @return A list of podcasts, if the user is a host, null otherwise
      */
     public List<Podcast> requestUserPodcasts(final String username) {
-        return adminBot.getHostPodcasts(username);
+        return accessor.getHostPodcasts(username);
     }
 
     /**
@@ -1677,7 +1695,7 @@ public final class ActionManager {
      * @return A list that contains the names of the albums
      */
     public List<String> requestTopFiveAlbums() {
-        List<Album> albums = adminBot.getAllAlbums();
+        List<Album> albums = accessor.getAllAlbums();
 
         albums.sort(new SortByPlaylistLikes().reversed()
                 .thenComparing(new SortAlphabetical()));
@@ -1694,7 +1712,7 @@ public final class ActionManager {
      * @return A list that contains the usernames of the artists
      */
     public List<String> requestTopFiveArtists() {
-        List<User> artists = new ArrayList<>(adminBot.getArtists());
+        List<User> artists = new ArrayList<>(accessor.getArtists());
         artists.sort(new SortByArtistLikes().reversed());
         tool.truncateResults(artists);
 
@@ -1711,7 +1729,7 @@ public final class ActionManager {
      * user doesn't exist
      */
     public StatisticsTemplate requestWrap(final String username) {
-        User user = adminBot.getUserByUsername(username);
+        User user = accessor.getUserByUsername(username);
         return user == null ? null : StatisticsFactorySingleton
                 .getInstance().createStatistics(user);
     }

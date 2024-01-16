@@ -9,7 +9,7 @@ import app.pages.Page;
 import app.statistics.StatisticsFactorySingleton;
 import app.statistics.StatisticsUtils;
 import app.utilities.SortByIntegerValue;
-import app.utilities.constants.NotificationConstants;
+import app.notifications.NotificationConstants;
 import lombok.Getter;
 
 import java.util.AbstractMap;
@@ -91,6 +91,11 @@ public class Host extends User {
         return !peopleHistory.isEmpty() || !episodeHistory.isEmpty();
     }
 
+    /**
+     * Tracks the specified user number of listeners from artist pov. If {@code this}
+     * isn't an artist, it does nothing.
+     * @param user The user to be tracked.
+     */
     @Override
     public void trackFan(final User user) {
         if (!peopleHistory.containsKey(user)) {
